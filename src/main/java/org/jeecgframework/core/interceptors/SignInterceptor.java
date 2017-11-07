@@ -1,14 +1,16 @@
 package org.jeecgframework.core.interceptors;
 
 import com.alibaba.fastjson.JSONObject;
+
 import org.jeecgframework.core.common.exception.BusinessException;
 import org.jeecgframework.core.util.StringUtil;
-import org.jeecgframework.web.cgform.util.SignatureUtil;
+import org.jeecgframework.p3.core.util.SignatureUtil;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.util.HashMap;
 import java.util.Map;
 

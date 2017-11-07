@@ -132,13 +132,13 @@ public class AuthInterceptor implements HandlerInterceptor {
 			Client client = ClientManager.getInstance().getClient(ContextHolderUtils.getSession().getId());
 			TSUser currLoginUser = client!=null?client.getUser():null;
 			if (client != null && currLoginUser!=null ) {
-				//onlinecoding的访问地址有规律可循，数据权限链接篡改
+				/*//onlinecoding的访问地址有规律可循，数据权限链接篡改
 				if(requestPath.equals("cgAutoListController.do?datagrid")) {
 					requestPath += "&configId=" +  request.getParameter("configId");
 				}
 				if(requestPath.equals("cgAutoListController.do?list")) {
 					requestPath += "&id=" +  request.getParameter("id");
-				}
+				}*/
 
 				if(requestPath.endsWith("?olstylecode=")) {
 					requestPath = requestPath.replace("?olstylecode=", "");

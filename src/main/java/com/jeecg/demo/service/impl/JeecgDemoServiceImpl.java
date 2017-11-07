@@ -16,7 +16,6 @@ import org.jeecgframework.core.util.ApplicationContextUtil;
 import org.jeecgframework.core.util.DateUtils;
 import org.jeecgframework.core.util.MyClassLoader;
 import org.jeecgframework.core.util.StringUtil;
-import org.jeecgframework.web.cgform.enhance.CgformEnhanceJavaInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.stereotype.Service;
@@ -124,29 +123,6 @@ public class JeecgDemoServiceImpl extends CommonServiceImpl implements JeecgDemo
  		return sql;
  	}
  	
- 	/**
-	 * 执行JAVA增强
-	 */
- 	private void executeJavaExtend(String cgJavaType,String cgJavaValue,Map<String,Object> data) throws Exception {
- 		if(StringUtil.isNotEmpty(cgJavaValue)){
-			Object obj = null;
-			try {
-				if("class".equals(cgJavaType)){
-					//因新增时已经校验了实例化是否可以成功，所以这块就不需要再做一次判断
-					obj = MyClassLoader.getClassByScn(cgJavaValue).newInstance();
-				}else if("spring".equals(cgJavaType)){
-					obj = ApplicationContextUtil.getContext().getBean(cgJavaValue);
-				}
-				if(obj instanceof CgformEnhanceJavaInter){
-					CgformEnhanceJavaInter javaInter = (CgformEnhanceJavaInter) obj;
-					javaInter.execute("jeecg_demo",data);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new Exception("执行JAVA增强出现异常！");
-			} 
-		}
- 	}
  	/**
  	 * JDBC批量添加
  	 */

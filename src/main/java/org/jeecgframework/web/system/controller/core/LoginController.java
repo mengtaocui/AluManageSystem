@@ -419,35 +419,13 @@ public class LoginController extends BaseController{
 
 			Map<String, TSFunction> loginActionlist = new HashMap<String, TSFunction>();
 
-			 /*String hql="from TSFunction t where t.id in  (select d.TSFunction.id from TSRoleFunction d where d.TSRole.id in(select t.TSRole.id from TSRoleUser t where t.TSUser.id ='"+
-	           user.getId()+"' ))";
-	           String hql2="from TSFunction t where t.id in  ( select b.tsRole.id from TSRoleOrg b where b.tsDepart.id in(select a.tsDepart.id from TSUserOrg a where a.tsUser.id='"+
-	           user.getId()+"'))";
-	           List<TSFunction> list = systemService.findHql(hql);
-	           log.info("role functions:  "+list.size());
-	           for(TSFunction function:list){
-	              loginActionlist.put(function.getId(),function);
-	           }
-	           List<TSFunction> list2 = systemService.findHql(hql2);
-	           log.info("org functions: "+list2.size());
-	           for(TSFunction function:list2){
-	              loginActionlist.put(function.getId(),function);
-	           }*/
-
 	           StringBuilder hqlsb1=new StringBuilder("select distinct f from TSFunction f,TSRoleFunction rf,TSRoleUser ru  ").append("where ru.TSRole.id=rf.TSRole.id and rf.TSFunction.id=f.id and ru.TSUser.id=? ");
 
 	           StringBuilder hqlsb2=new StringBuilder("select distinct c from TSFunction c,TSRoleFunction rf,TSRoleOrg b,TSUserOrg a ")
 	           							.append("where a.tsDepart.id=b.tsDepart.id and b.tsRole.id=rf.TSRole.id and rf.TSFunction.id=c.id and a.tsUser.id=?");
-	           //TODO hql执行效率慢 为耗时最多地方
 
-	           SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	           log.info("================================开始时间:"+sdf.format(new Date())+"==============================");
-	           long start = System.currentTimeMillis();
 	           List<TSFunction> list1 = systemService.findHql(hqlsb1.toString(),user.getId());
 	           List<TSFunction> list2 = systemService.findHql(hqlsb2.toString(),user.getId());
-	           long end = System.currentTimeMillis();
-	           log.info("================================结束时间:"+sdf.format(new Date())+"==============================");
-	           log.info("================================耗时:"+(end-start)+"ms==============================");
 	           for(TSFunction function:list1){
 		              loginActionlist.put(function.getId(),function);
 		       }
@@ -529,13 +507,6 @@ public class LoginController extends BaseController{
 	public ModelAndView hplushome(HttpServletRequest request) {
 
 		SysThemesEnum sysTheme = SysThemesUtil.getSysTheme(request);
-		//ACE ACE2 DIY时需要在home.jsp头部引入依赖的js及css文件
-		/*if("ace".equals(sysTheme.getStyle())||"diy".equals(sysTheme.getStyle())||"acele".equals(sysTheme.getStyle())){
-			request.setAttribute("show", "1");
-		} else {//default及shortcut不需要引入依赖文件，所有需要屏蔽
-			request.setAttribute("show", "0");
-		}*/
-
 		return new ModelAndView("main/hplushome");
 	}
 	/**

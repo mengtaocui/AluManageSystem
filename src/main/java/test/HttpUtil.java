@@ -1,7 +1,6 @@
 package test;
 
 import com.alibaba.fastjson.JSONObject;
-import org.jeecgframework.web.cgform.util.SignatureUtil;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -12,6 +11,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.jeecgframework.p3.core.util.SignatureUtil;
 
 public class HttpUtil {
 

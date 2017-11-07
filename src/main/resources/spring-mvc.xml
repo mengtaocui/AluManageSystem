@@ -121,15 +121,6 @@
 						<value>systemController.do?saveFiles</value>
 						<value>repairController.do?deleteAndRepair</value>
 						<value>userController.do?userOrgSelect</value>
-						<!--移动图表-->
-						<value>cgDynamGraphController.do?design</value>
-						<value>cgDynamGraphController.do?datagrid</value>
-						<!--online表单对外接口-->
-						<!--<value>cgFormDataController.do?getFormInfo</value>
-						<value>cgFormDataController.do?deleteFormInfo</value>
-						<value>cgFormDataController.do?addFormInfo</value>
-						<value>cgFormDataController.do?updateFormInfo</value>-->
-
 						<!-- 菜单样式图标预览 -->
 						<value>webpage/common/functionIconStyleList.jsp</value>
 						<value>timeTaskController.do?remoteTask</value>
@@ -146,8 +137,6 @@
 		</mvc:interceptor>
 	</mvc:interceptors>
 
-	<!-- 智能表单配置引入 -->
-	<import resource="classpath*:org/jeecgframework/web/cgform/common/spring-mvc-cgform.xml" />
 	<!--集成cxf webservice接口
 	<import resource="classpath:cxf-servlet.xml" />
 	-->
