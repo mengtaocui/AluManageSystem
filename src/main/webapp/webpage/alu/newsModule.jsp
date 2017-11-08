@@ -13,11 +13,14 @@
 				<tr>
 					<td align="right">
 						<label class="Validform_label">
-							类型id:
+							类型:
 						</label>
 					</td>
 					<td class="value">
-						<input class="inputxt" id="newsTypeId" name="newsTypeId" ignore="ignore"  value="${newsModulePage.newsTypeId}" datatype="n" />
+						<t:dictSelect field="newsTypeId" id="newsTypeId" extendJson="{datatype:'*'}" dictTable="t_news_type" dictField="id" 
+						dictText="name" dictCondition=" where delete_flag=0" defaultVal="${newsModulePage.newsTypeId}"  hasLabel="false"></t:dictSelect>
+						<%-- <input class="inputxt" id="newsTypeId" name="newsTypeId" ignore="ignore"  value="${newsModulePage.newsTypeId}" datatype="n" /> --%>
+						<input type="hidden" id="newsTypeName" name="newsTypeName" value="${newsModulePage.newsTypeName}"/>
 						<span class="Validform_checktip"></span>
 					</td>
 				</tr>
@@ -28,63 +31,8 @@
 						</label>
 					</td>
 					<td class="value">
-						<input class="inputxt" id="name" name="name" ignore="ignore"  value="${newsModulePage.name}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							创建人:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="crtBy" name="crtBy" ignore="ignore"  value="${newsModulePage.crtBy}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							创建时间:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="crtTime" name="crtTime" ignore="ignore"  value="${newsModulePage.crtTime}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							最近一次修改人:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="lastUpdateBy" name="lastUpdateBy" ignore="ignore"  value="${newsModulePage.lastUpdateBy}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							最近一次修改时间:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="lastUpdateTime" name="lastUpdateTime" ignore="ignore"  value="${newsModulePage.lastUpdateTime}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							0未删除，1已删除:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="deleteFlag" name="deleteFlag" ignore="ignore"  value="${newsModulePage.deleteFlag}" datatype="n" />
-						<span class="Validform_checktip"></span>
+						<input class="inputxt" id="name" name="name" datatype="s2-100"  value="${newsModulePage.name}" />
+						<span class="Validform_checktip">请输入模块名称</span>
 					</td>
 				</tr>
 			</table>

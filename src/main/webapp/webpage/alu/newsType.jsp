@@ -17,8 +17,8 @@
 						</label>
 					</td>
 					<td class="value">
-						<input class="inputxt" id="name" name="name" ignore="ignore"  value="${newsTypePage.name}" />
-						<span class="Validform_checktip"></span>
+						<input class="inputxt" id="name" name="name"  value="${newsTypePage.name}" datatype="s2-100"/>
+						<span class="Validform_checktip">请输入类型名称</span>
 					</td>
 				</tr>
 				<tr>
@@ -28,51 +28,7 @@
 						</label>
 					</td>
 					<td class="value">
-						<input class="inputxt" id="detail" name="detail" ignore="ignore"  value="${newsTypePage.detail}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							创建人:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="crtBy" name="crtBy" ignore="ignore"  value="${newsTypePage.crtBy}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							创建时间:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="crtTime" name="crtTime" ignore="ignore"  value="${newsTypePage.crtTime}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							最近一次修改人:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="lastUpdateBy" name="lastUpdateBy" ignore="ignore"  value="${newsTypePage.lastUpdateBy}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							最近一次修改时间:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="lastUpdateTime" name="lastUpdateTime" ignore="ignore"  value="${newsTypePage.lastUpdateTime}" />
+					    <textarea rows="20" cols="20" class="inputxt" id="detail" name="detail" style="width:292px;height:46px;">${newsTypePage.detail}</textarea>
 						<span class="Validform_checktip"></span>
 					</td>
 				</tr>

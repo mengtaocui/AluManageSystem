@@ -6,11 +6,12 @@ CKEDITOR.editorConfig = function( config ) {
 
 	config.enterMode = CKEDITOR.ENTER_BR;// CKEDITOR.ENTER_P;CKEDITOR.ENTER_DIV
 	config.fullPage= true;
+	config.height = 300;
 	config.allowedContent= true;
 	config.font_defaultLabel = '宋体';
 	config.fontSize_defaultLabel = '12px';
 	config.tabSpaces = 2;
-
+	config.filebrowserUploadUrl="newsController/upload.do";
 	config.language = "zh-cn";
 	config.image_previewText = ' '; // 预览区域显示内容
 	config.font_names = '宋体/宋体;黑体/黑体;仿宋/仿宋_GB2312;楷体/楷体_GB2312;隶书/隶书;幼圆/幼圆;微软雅黑/微软雅黑;'
