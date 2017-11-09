@@ -70,7 +70,7 @@ public class NewsModuleEntity extends BaseEntity implements java.io.Serializable
 		this.name = name;
 	}
 
-	@Column(name ="news_type_name",nullable=true,length=500)
+	@Column(name ="NEWS_TYPE_NAME",nullable=true,length=500)
 	public java.lang.String getNewsTypeName() {
 		return newsTypeName;
 	}

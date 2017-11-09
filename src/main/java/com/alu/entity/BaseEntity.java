@@ -114,7 +114,7 @@ public abstract class BaseEntity {
 	public void setDeleteFlag(java.lang.Integer deleteFlag){
 		this.deleteFlag = deleteFlag;
 	}
-	@Column(name ="crt_by_user_name",nullable=true,length=500)
+	@Column(name ="CRT_BY_USER_NAME",nullable=true,length=500)
 	public java.lang.String getCrtByUserName() {
 		return crtByUserName;
 	}
@@ -122,7 +122,7 @@ public abstract class BaseEntity {
 	public void setCrtByUserName(java.lang.String crtByUserName) {
 		this.crtByUserName = crtByUserName;
 	}
-	@Column(name ="last_update_by_user_name",nullable=true,length=500)
+	@Column(name ="LAST_UPDATE_BY_USER_NAME",nullable=true,length=500)
 	public java.lang.String getLastUpdateByUserName() {
 		return lastUpdateByUserName;
 	}

@@ -53,7 +53,7 @@ import com.alu.service.NewsServiceI;
 /**   
  * @Title: Controller
  * @Description: 新闻
- * @author zhangdaihao
+ * @author cuimengtao
  * @date 2017-11-07 17:15:48
  * @version V1.0   
  *
@@ -197,6 +197,7 @@ public class NewsController extends BaseController {
 			news.setCrtByUserName(curUser.getUserName());
 			news.setCrtTime(DateUtils.formatDateTime());
 			news.setDeleteFlag(Constant.UN_DELETE);
+			news.setCheckStatus(Constant.APPLY_WAIT);
 			newsService.save(news);
 			systemService.addLog(message, Globals.Log_Type_INSERT, Globals.Log_Leavel_INFO);
 		}
@@ -223,6 +224,26 @@ public class NewsController extends BaseController {
 	public List<NewsEntity> list() {
 		List<NewsEntity> listNewss=newsService.getList(NewsEntity.class);
 		return listNewss;
+	}
+	
+	/**
+	 * 审核新闻
+	 * @param id
+	 * @param type
+	 * @return
+	 */
+	@RequestMapping(params = "handleApply", method = RequestMethod.POST)
+	@ResponseBody
+	public AjaxJson handleApply(String id, Integer type) {
+		AjaxJson aj = new AjaxJson();
+		NewsEntity news = systemService.getEntity(NewsEntity.class, id);
+		TSUser curUser = ResourceUtil.getSessionUser();
+		news.setCheckBy(curUser.getId());
+		news.setCheckByUserName(curUser.getUserName());
+		news.setCheckStatus(type);
+		newsService.updateEntitie(news);
+		systemService.addLog("审核新闻："+news.getTitle(), Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
+		return aj;
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)

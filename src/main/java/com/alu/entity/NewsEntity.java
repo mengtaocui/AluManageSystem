@@ -41,9 +41,12 @@ public class NewsEntity extends BaseEntity implements java.io.Serializable {
 	private java.lang.String content;
 	/**浏览次数*/
 	private java.lang.Integer browseCount;
-	
+	/**审核状态*/
+	private Integer checkStatus;
 	/**审核人*/
 	private java.lang.String checkBy;
+	/**审核人账号*/
+	private java.lang.String checkByUserName;
 	
 	/**
 	 *方法: 取得java.lang.String
@@ -158,5 +161,20 @@ public class NewsEntity extends BaseEntity implements java.io.Serializable {
 	public void setNewsModuleName(java.lang.String newsModuleName) {
 		this.newsModuleName = newsModuleName;
 	}
-	
+	@Column(name ="checkStatus",nullable=true,length=32)
+	public Integer getCheckStatus() {
+		return checkStatus;
+	}
+
+	public void setCheckStatus(Integer checkStatus) {
+		this.checkStatus = checkStatus;
+	}
+	@Column(name ="check_by_user_name",nullable=true,length=255)
+	public java.lang.String getCheckByUserName() {
+		return checkByUserName;
+	}
+
+	public void setCheckByUserName(java.lang.String checkByUserName) {
+		this.checkByUserName = checkByUserName;
+	}
 }

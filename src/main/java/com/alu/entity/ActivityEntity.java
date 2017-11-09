@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.SequenceGenerator;
 
 /**   
@@ -28,9 +29,7 @@ import javax.persistence.SequenceGenerator;
 @DynamicUpdate(true)
 @DynamicInsert(true)
 @SuppressWarnings("serial")
-public class ActivityEntity implements java.io.Serializable {
-	/**id*/
-	private java.lang.String id;
+public class ActivityEntity extends BaseEntity implements java.io.Serializable {
 	/**活动名称*/
 	private java.lang.String name;
 	/**活动地点*/
@@ -45,41 +44,13 @@ public class ActivityEntity implements java.io.Serializable {
 	private java.lang.String applyEndTime;
 	/**浏览次数*/
 	private java.lang.Integer browseCount;
-	/**0未审核，1通过审核，未通过*/
-	private java.lang.Integer status;
-	/**创建人*/
-	private java.lang.String crtBy;
-	/**创建时间*/
-	private java.lang.String crtTime;
-	/**最近一次修改人*/
-	private java.lang.String lastUpdateBy;
-	/**最近一次修改时间*/
-	private java.lang.String lastUpdateTime;
+	/**审核状态*/
+	private Integer checkStatus;
 	/**审核人*/
 	private java.lang.String checkBy;
-	/**0未删除，1已删除*/
-	private java.lang.Integer deleteFlag;
+	/**审核人账号*/
+	private java.lang.String checkByUserName;
 	
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  id
-	 */
-	
-	@Id
-	@GeneratedValue(generator = "paymentableGenerator")
-	@GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
-	@Column(name ="ID",nullable=false,length=32)
-	public java.lang.String getId(){
-		return this.id;
-	}
-
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  id
-	 */
-	public void setId(java.lang.String id){
-		this.id = id;
-	}
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  活动名称
@@ -192,86 +163,7 @@ public class ActivityEntity implements java.io.Serializable {
 	public void setBrowseCount(java.lang.Integer browseCount){
 		this.browseCount = browseCount;
 	}
-	/**
-	 *方法: 取得java.lang.Integer
-	 *@return: java.lang.Integer  0未审核，1通过审核，未通过
-	 */
-	@Column(name ="STATUS",nullable=true,precision=3,scale=0)
-	public java.lang.Integer getStatus(){
-		return this.status;
-	}
-
-	/**
-	 *方法: 设置java.lang.Integer
-	 *@param: java.lang.Integer  0未审核，1通过审核，未通过
-	 */
-	public void setStatus(java.lang.Integer status){
-		this.status = status;
-	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  创建人
-	 */
-	@Column(name ="CRT_BY",nullable=true,length=255)
-	public java.lang.String getCrtBy(){
-		return this.crtBy;
-	}
-
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  创建人
-	 */
-	public void setCrtBy(java.lang.String crtBy){
-		this.crtBy = crtBy;
-	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  创建时间
-	 */
-	@Column(name ="CRT_TIME",nullable=true,length=255)
-	public java.lang.String getCrtTime(){
-		return this.crtTime;
-	}
-
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  创建时间
-	 */
-	public void setCrtTime(java.lang.String crtTime){
-		this.crtTime = crtTime;
-	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  最近一次修改人
-	 */
-	@Column(name ="LAST_UPDATE_BY",nullable=true,length=255)
-	public java.lang.String getLastUpdateBy(){
-		return this.lastUpdateBy;
-	}
-
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  最近一次修改人
-	 */
-	public void setLastUpdateBy(java.lang.String lastUpdateBy){
-		this.lastUpdateBy = lastUpdateBy;
-	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  最近一次修改时间
-	 */
-	@Column(name ="LAST_UPDATE_TIME",nullable=true,length=255)
-	public java.lang.String getLastUpdateTime(){
-		return this.lastUpdateTime;
-	}
-
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  最近一次修改时间
-	 */
-	public void setLastUpdateTime(java.lang.String lastUpdateTime){
-		this.lastUpdateTime = lastUpdateTime;
-	}
+	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  审核人
@@ -288,20 +180,21 @@ public class ActivityEntity implements java.io.Serializable {
 	public void setCheckBy(java.lang.String checkBy){
 		this.checkBy = checkBy;
 	}
-	/**
-	 *方法: 取得java.lang.Integer
-	 *@return: java.lang.Integer  0未删除，1已删除
-	 */
-	@Column(name ="DELETE_FLAG",nullable=true,precision=3,scale=0)
-	public java.lang.Integer getDeleteFlag(){
-		return this.deleteFlag;
+
+	@Column(name ="checkStatus",nullable=true,length=32)
+	public Integer getCheckStatus() {
+		return checkStatus;
 	}
 
-	/**
-	 *方法: 设置java.lang.Integer
-	 *@param: java.lang.Integer  0未删除，1已删除
-	 */
-	public void setDeleteFlag(java.lang.Integer deleteFlag){
-		this.deleteFlag = deleteFlag;
+	public void setCheckStatus(Integer checkStatus) {
+		this.checkStatus = checkStatus;
+	}
+	@Column(name ="check_by_user_name",nullable=true,length=32)
+	public java.lang.String getCheckByUserName() {
+		return checkByUserName;
+	}
+
+	public void setCheckByUserName(java.lang.String checkByUserName) {
+		this.checkByUserName = checkByUserName;
 	}
 }

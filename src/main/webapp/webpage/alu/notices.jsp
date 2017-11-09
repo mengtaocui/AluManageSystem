@@ -5,6 +5,11 @@
  <head>
   <title>公告</title>
   <t:base type="jquery,easyui,tools,DatePicker"></t:base>
+  <style type="text/css">
+  	input{
+  		width: 157px;
+  	}
+  </style>
  </head>
  <body style="overflow-y: hidden" scroll="no">
   <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="noticesController.do?save">
@@ -13,7 +18,7 @@
 				<tr>
 					<td align="right">
 						<label class="Validform_label">
-							新闻标题:
+							标题:
 						</label>
 					</td>
 					<td class="value">
@@ -24,91 +29,28 @@
 				<tr>
 					<td align="right">
 						<label class="Validform_label">
-							新闻内容:
+							过期时间:
 						</label>
 					</td>
 					<td class="value">
-						<input class="inputxt" id="content" name="content" ignore="ignore"  value="${noticesPage.content}" />
+						<input class="inputxt easyui-datetimebox" readonly="readonly" id="pastDueDate" name="pastDueDate" required="required"  value="${noticesPage.pastDueDate}" />
 						<span class="Validform_checktip"></span>
 					</td>
 				</tr>
 				<tr>
 					<td align="right">
 						<label class="Validform_label">
-							浏览次数:
+							内容:
 						</label>
 					</td>
 					<td class="value">
-						<input class="inputxt" id="browseCount" name="browseCount" ignore="ignore"  value="${noticesPage.browseCount}" datatype="n" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							创建人:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="crtBy" name="crtBy" ignore="ignore"  value="${noticesPage.crtBy}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							创建时间:
-						</label>
-					</td>
-					<td class="value">
-						<input class="Wdate" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  style="width: 150px" id="crtTime" name="crtTime" ignore="ignore"    value="<fmt:formatDate value='${noticesPage.crtTime}' type="date" pattern="yyyy-MM-dd hh:mm:ss"/>" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							最近一次修改人:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="lastUpdateBy" name="lastUpdateBy" ignore="ignore"  value="${noticesPage.lastUpdateBy}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							最近一次修改时间:
-						</label>
-					</td>
-					<td class="value">
-						<input class="Wdate" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  style="width: 150px" id="lastUpdateTime" name="lastUpdateTime" ignore="ignore"    value="<fmt:formatDate value='${noticesPage.lastUpdateTime}' type="date" pattern="yyyy-MM-dd hh:mm:ss"/>" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							审核人:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="checkBy" name="checkBy" ignore="ignore"  value="${noticesPage.checkBy}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							0未删除，1已删除:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="deleteFlag" name="deleteFlag" ignore="ignore"  value="${noticesPage.deleteFlag}" datatype="n" />
+					    <textarea  class="inputxt" id="content" style="width:400px;height:80px" name="content" ignore="ignore" >${noticesPage.content}</textarea>
 						<span class="Validform_checktip"></span>
 					</td>
 				</tr>
 			</table>
 		</t:formvalid>
+		<script>
+			
+		</script>
  </body>
