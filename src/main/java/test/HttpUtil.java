@@ -120,7 +120,7 @@ public class HttpUtil {
 
 		String sign=SignatureUtil.sign(param,key);
 		System.out.println("  -- sign   -- "+ sign);
-		JSONObject resp=HttpUtil.httpRequest("http://localhost:8080/jeecg/api/cgFormDataController.do?addFormInfo","POST","body="+body,sign);
+		JSONObject resp=HttpUtil.httpRequest("http://localhost:8080/aluManageSystem/cgFormDataController.do?addFormInfo","POST","body="+body,sign);
 		System.out.println(resp.toJSONString());
 	}
 }

@@ -16,7 +16,7 @@
    <t:dgCol title="创建时间" field="crtTime"   width="120"></t:dgCol>
    <t:dgCol title="审核人" field="checkBy"   width="100"></t:dgCol>
    <t:dgCol title="操作" field="opt" width="130"></t:dgCol>
-   <t:dgFunOpt funname="handleApplyPass(id)"  exp="checkStatus#eq#1" title="查看相册" urlStyle="background-color: #269abc;" urlclass="ace_button"  urlfont="fa-check"></t:dgFunOpt>
+   <t:dgFunOpt funname="lookPhoto(id)"  exp="checkStatus#eq#1" title="查看相册" urlStyle="background-color: #269abc;" urlclass="ace_button"  urlfont="fa-check"></t:dgFunOpt>
    <t:dgFunOpt funname="handleApplyPass(id)" exp="checkStatus#eq#0" title="通过" urlStyle="background-color: #449d44;" urlclass="ace_button"  urlfont="fa-check"></t:dgFunOpt>
    <t:dgFunOpt funname="handleApplyRefuse(id)" exp="checkStatus#eq#0" title="拒绝" urlStyle="background-color: #f0ad4e;" urlclass="ace_button"  urlfont="fa-close"></t:dgFunOpt>
    <t:dgDelOpt title="删除" url="activityController.do?del&id={id}" urlclass="ace_button" urlStyle="background-color:#ec4758;"   urlfont="fa-trash-o"/>
@@ -27,11 +27,16 @@
   </div>
  </div>
  <script>
- function saveObj() {
+ 	
+ 	function lookPhoto(id){
+ 		createdetailwindow('活动相册','activitySpaceController.do?addorupdate&activityId='+id, 900, 600);
+ 	}
+ 
+ 	function saveObj() {
 		$('#detail', iframe.document).click();
 		$('#btn_sub', iframe.document).click();
 	}
- function handleApplyPass(id){
+ 	function handleApplyPass(id){
 		handleApply(id, 1, '通过');
 	}
 	

@@ -1,6 +1,8 @@
 package com.alu.controller;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import org.jeecgframework.core.util.MyBeanUtils;
 import org.jeecgframework.core.util.ResourceUtil;
 import org.jeecgframework.core.util.StringUtil;
 import org.jeecgframework.tag.core.easyui.TagUtil;
+import org.jeecgframework.tag.vo.datatable.SortDirection;
 import org.jeecgframework.web.system.pojo.base.TSUser;
 import org.jeecgframework.web.system.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +43,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.alu.common.AuTools;
 import com.alu.common.Constant;
 import com.alu.entity.ActivityEntity;
+import com.alu.entity.ActivitySpaceEntity;
 import com.alu.entity.NoticesEntity;
 import com.alu.service.ActivityServiceI;
 
@@ -111,6 +115,11 @@ public class ActivityController extends BaseController {
 			cq.le("startTime", request.getParameter("startTime_end2"));
 			cq.le("endTime", request.getParameter("startTime_end2"));
 		}
+		
+		//降序排列
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("crtTime", SortDirection.desc);
+		cq.setOrder(map);
 		
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, activity, request.getParameterMap());
 		this.activityService.getDataGridReturn(cq, true);
