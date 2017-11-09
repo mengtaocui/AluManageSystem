@@ -17,9 +17,9 @@
    <t:dgCol title="最近一次修改时间" field="lastUpdateTime"   width="120"></t:dgCol>
    <t:dgCol title="审核人" field="checkByUserName"   width="120"></t:dgCol>
    <t:dgCol title="操作" field="opt" width="130"></t:dgCol>
-   <t:dgDelOpt title="删除" url="newsController.do?del&id={id}" urlclass="ace_button"   urlfont="fa-trash-o"/>
    <t:dgFunOpt funname="handleApplyPass(id)" exp="checkStatus#eq#0" title="通过" urlStyle="background-color: #449d44;" urlclass="ace_button"  urlfont="fa-check"></t:dgFunOpt>
    <t:dgFunOpt funname="handleApplyRefuse(id)" exp="checkStatus#eq#0" title="拒绝" urlStyle="background-color: #f0ad4e;" urlclass="ace_button"  urlfont="fa-close"></t:dgFunOpt>
+   <t:dgDelOpt title="删除" url="newsController.do?del&id={id}" urlclass="ace_button" urlStyle="background-color:#ec4758;"    urlfont="fa-trash-o"/>
    <t:dgToolBar title="录入" icon="icon-add" url="newsController.do?addorupdate" funname="add" width="900" height="600" ></t:dgToolBar>
    <t:dgToolBar title="编辑" icon="icon-edit" url="newsController.do?addorupdate" funname="update" width="900" height="600"></t:dgToolBar>
    <t:dgToolBar title="查看" icon="icon-search" url="newsController.do?addorupdate" funname="detail" width="900" height="600"></t:dgToolBar>

@@ -2,7 +2,6 @@ package org.jeecgframework.web.system.listener;
 
 import javax.servlet.ServletContextEvent;
 
-import org.jeecgframework.web.system.service.DynamicDataSourceServiceI;
 import org.jeecgframework.web.system.service.MutiLangServiceI;
 import org.jeecgframework.web.system.service.SystemService;
 import org.springframework.web.context.WebApplicationContext;
@@ -27,7 +26,6 @@ public class InitListener  implements javax.servlet.ServletContextListener {
 		SystemService systemService = (SystemService) webApplicationContext.getBean("systemService");
 //		MenuInitService menuInitService = (MenuInitService) webApplicationContext.getBean("menuInitService");
 		MutiLangServiceI mutiLangService = (MutiLangServiceI) webApplicationContext.getBean("mutiLangService");
-		DynamicDataSourceServiceI dynamicDataSourceService = (DynamicDataSourceServiceI) webApplicationContext.getBean("dynamicDataSourceService");
 		
 		/**
 		 * 第一部分：对数据字典进行缓存
@@ -52,7 +50,6 @@ public class InitListener  implements javax.servlet.ServletContextListener {
 		/**
 		 * 第四部分：加载配置的数据源信息
 		 */
-		dynamicDataSourceService.initDynamicDataSource();
 	}
 
 }

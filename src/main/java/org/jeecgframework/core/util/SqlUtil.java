@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.jeecgframework.web.system.pojo.base.DynamicDataSourceEntity;
-
 /**
  * Created by 张忠亮 on 2015/6/8.
  */
@@ -118,15 +116,13 @@ public class SqlUtil {
      * @param rows
      * @return
      */
-    @SuppressWarnings("rawtypes")
+    /*@SuppressWarnings("rawtypes")
 	public static String jeecgCreatePageSql(String dbKey,String sql,Map params, int page, int rows){
         int beginNum = (page - 1) * rows;
         String[] sqlParam = new String[3];
         sqlParam[0] = sql;
         sqlParam[1] = beginNum+"";
         sqlParam[2] = rows+"";
-        DynamicDataSourceEntity dynamicSourceEntity = ResourceUtil.dynamicDataSourceMap.get(dbKey);
-        String databaseType = dynamicSourceEntity.getDbType();
         if(DATABSE_TYPE_MYSQL.equalsIgnoreCase(databaseType)){
             sql = MessageFormat.format(MYSQL_SQL, sqlParam);
         }else if(DATABSE_TYPE_POSTGRE.equalsIgnoreCase(databaseType)){
@@ -144,7 +140,7 @@ public class SqlUtil {
             }
         }
         return sql;
-    }
+    }*/
     
     private static int getAfterSelectInsertPoint(String sql) {
         int selectIndex = sql.toLowerCase().indexOf("select");

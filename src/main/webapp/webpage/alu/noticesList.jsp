@@ -15,10 +15,10 @@
    <t:dgCol title="最近一次修改人" field="lastUpdateByUserName"   width="120"></t:dgCol>
    <t:dgCol title="最近一次修改时间" field="lastUpdateTime" formatter="yyyy-MM-dd hh:mm:ss"  width="120"></t:dgCol>
    <t:dgCol title="审核人" field="checkByUserName"   width="120"></t:dgCol>
-   <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
-   <t:dgDelOpt title="删除" url="noticesController.do?del&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/>
+   <t:dgCol title="操作" field="opt" width="130"></t:dgCol>
    <t:dgFunOpt funname="handleApplyPass(id)" exp="checkStatus#eq#0" title="通过" urlStyle="background-color: #449d44;" urlclass="ace_button"  urlfont="fa-check"></t:dgFunOpt>
    <t:dgFunOpt funname="handleApplyRefuse(id)" exp="checkStatus#eq#0" title="拒绝" urlStyle="background-color: #f0ad4e;" urlclass="ace_button"  urlfont="fa-close"></t:dgFunOpt>
+   <t:dgDelOpt title="删除" url="noticesController.do?del&id={id}" urlclass="ace_button" urlStyle="background-color:#ec4758;"  urlfont="fa-trash-o"/>
    <t:dgToolBar title="录入" icon="icon-add" url="noticesController.do?addorupdate" funname="add"></t:dgToolBar>
    <t:dgToolBar title="编辑" icon="icon-edit" url="noticesController.do?addorupdate" funname="update"></t:dgToolBar>
    <t:dgToolBar title="查看" icon="icon-search" url="noticesController.do?addorupdate" funname="detail"></t:dgToolBar>

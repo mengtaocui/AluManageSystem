@@ -48,7 +48,7 @@
 						</label>
 					</td>
 					<td class="value">
-						<input class="inputxt" id="title" name="title" ignore="ignore"  value="${newsPage.title}" />
+						<input class="inputxt" id="title" name="title" datatype="*"  value="${newsPage.title}" />
 						<span class="Validform_checktip"></span>
 					</td>
 				</tr>
@@ -66,7 +66,7 @@
 				</tr>
 			</table>
 		</t:formvalid>
-		   <!-- 配置文件 -->
+		<!-- 配置文件 -->
 	    <script type="text/javascript" src="plug-in/ckeditor/ckeditor.js"></script>
 	    <!-- 实例化编辑器 -->
 	    <script type="text/javascript">

@@ -17,7 +17,7 @@
 						</label>
 					</td>
 					<td class="value">
-						<input class="inputxt" id="name" name="name"  value="${newsTypePage.name}" datatype="s2-100"/>
+						<input class="inputxt" id="name" name="name"  value="${newsTypePage.name}" datatype="*"/>
 						<span class="Validform_checktip">请输入类型名称</span>
 					</td>
 				</tr>

@@ -14,7 +14,6 @@ import org.apache.commons.lang.StringUtils;
 import org.jeecgframework.core.constant.DataBaseConstant;
 import org.jeecgframework.web.system.manager.ClientManager;
 import org.jeecgframework.web.system.pojo.base.Client;
-import org.jeecgframework.web.system.pojo.base.DynamicDataSourceEntity;
 import org.jeecgframework.web.system.pojo.base.TSIcon;
 import org.jeecgframework.web.system.pojo.base.TSRoleFunction;
 import org.jeecgframework.web.system.pojo.base.TSType;
@@ -48,7 +47,6 @@ public class ResourceUtil {
 	/**
 	 * 动态数据源【缓存】
 	 */
-	public static Map<String, DynamicDataSourceEntity> dynamicDataSourceMap = new HashMap<String, DynamicDataSourceEntity>(); 
 	
 	private static final ResourceBundle bundle = java.util.ResourceBundle.getBundle("sysConfig");
 	

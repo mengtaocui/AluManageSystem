@@ -12,7 +12,7 @@
    <t:dgCol title="最近一次修改人" field="lastUpdateByUserName"   width="120"></t:dgCol>
    <t:dgCol title="最近一次修改时间" field="lastUpdateTime"   width="120"></t:dgCol>
    <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
-   <t:dgDelOpt title="删除" url="newsTypeController.do?del&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/>
+   <t:dgDelOpt title="删除" url="newsTypeController.do?del&id={id}" urlclass="ace_button" urlStyle="background-color:#ec4758;"   urlfont="fa-trash-o"/>
    <t:dgToolBar title="录入" icon="icon-add" url="newsTypeController.do?addorupdate" funname="add"></t:dgToolBar>
    <t:dgToolBar title="编辑" icon="icon-edit" url="newsTypeController.do?addorupdate" funname="update"></t:dgToolBar>
   </t:datagrid>

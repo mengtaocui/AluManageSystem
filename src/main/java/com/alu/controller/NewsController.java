@@ -73,33 +73,6 @@ public class NewsController extends BaseController {
 	@Autowired
 	private Validator validator;
 	
-
-    @RequestMapping(value="/upload",method=RequestMethod.POST)
-    public void upload(HttpServletRequest request,
-    		HttpServletResponse response,
-           @RequestParam("upload") MultipartFile upload) throws Exception {
-
-       //如果文件不为空，写入上传路径
-       if(!upload.isEmpty()) {
-           //上传文件路径
-           String path = request.getServletContext().getRealPath("/images/");
-           //上传文件名
-           String fileName = upload.getOriginalFilename();
-           File filepath = new File(path,fileName);
-           //判断路径是否存在，如果不存在就创建一个
-           if (!filepath.getParentFile().exists()) { 
-               filepath.getParentFile().mkdirs();
-           }
-           //将上传文件保存到一个目标文件当中
-           upload.transferTo(new File(path + File.separator + fileName));
-           PrintWriter out = response.getWriter();   
-           String callback =request.getParameter("CKEditorFuncNum");   
-           out.println("<script type=\"text/javascript\">");  
-           out.println("window.parent.CKEDITOR.tools.callFunction("+ callback + ",'" +"images/"+ fileName + "','')");   
-           out.println("</script>"); 
-       }
-    }
-
 	/**
 	 * 新闻列表 页面跳转
 	 * 

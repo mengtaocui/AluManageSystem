@@ -22,7 +22,7 @@
 						</label>
 					</td>
 					<td class="value">
-						<input class="inputxt" id="title" name="title" ignore="ignore"  value="${noticesPage.title}" />
+						<input class="inputxt" id="title" name="title" datatype="*"  value="${noticesPage.title}" />
 						<span class="Validform_checktip"></span>
 					</td>
 				</tr>
