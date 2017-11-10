@@ -40,39 +40,86 @@
   <script src="plug-in/ace/js/html5shiv.js"></script>
   <script src="plug-in/ace/js/respond.js"></script>
   <![endif]-->
+   <link rel="stylesheet" href="plug-in/swiper3.4.1/swiper.min.css">
+  <style>
+  	input{
+  		outline: none;
+  	}
+  	#login-box,.widget-body,.widget-main{
+  		background-color: rgba(0, 0, 0, 0.2) !important;
+  	}
+  	.input-icon.input-icon-right > input {
+	    padding-left: 6px;
+	    padding-right: 24px;
+	    outline: none;
+	    box-shadow: 301px 34px 5px #ffffff inset !important;
+	}
+	.color-white{
+		color: #ffffff;
+	}
+	.login-layout{
+		background-color: #fff !important;
+	}
+	.banner{
+	    position: absolute;
+	    top: 0px;
+	    left: 0px;
+	    width: 100%;
+	    height: 100%;
+	}
+	.banner-img{
+		width: 100%;
+	    height: 100%;
+	}
+	.main-container{
+		position: absolute;
+	    top: 170px;
+	    left: 50%;
+	    z-index: 1;
+	}
+  </style>
 
 </head>
 <body class="login-layout light-login">
-<div class="main-container">
-  <div class="main-content">
+<!-- Swiper banner-->
+	<div class="swiper-container banner">
+	    <div class="swiper-wrapper">
+	        <div class="swiper-slide"><img src="images/s1.jpg" class="banner-img"></div>
+	        <div class="swiper-slide"><img src="images/s2.jpg" class="banner-img"></div>
+	        <!-- <div class="swiper-slide">Slide 3</div>
+	        <div class="swiper-slide">Slide 4</div>
+	        <div class="swiper-slide">Slide 5</div>
+	        <div class="swiper-slide">Slide 6</div>
+	        <div class="swiper-slide">Slide 7</div>
+	        <div class="swiper-slide">Slide 8</div>
+	        <div class="swiper-slide">Slide 9</div>
+	        <div class="swiper-slide">Slide 10</div> -->
+	    </div>
+	    <!-- Add Pagination -->
+	    <div class="swiper-pagination"></div>
+	    <!-- Add Arrows -->
+	    <div class="swiper-button-next"></div>
+	    <div class="swiper-button-prev"></div>
+	</div>
+ <div class="main-container">
+   <div class="main-content">
     <div class="row">
       <div class="col-sm-10 col-sm-offset-1">
         <div class="login-container">
-          <div class="center">
-            <h1 id="id-text2" class="grey">
-              <i class="ace-icon fa fa-leaf green"></i>
-               JEECG 演示系统
-            </h1>
-            <h4 class="blue" id="id-company-text">www.jeecg.org</h4>
-          </div>
           <div class="space-6"></div>
           <div class="position-relative">
             <div id="login-box" class="login-box visible widget-box no-border">
               <div class="widget-body">
-                <!--update-begin--Author:zhangliang  Date:20170628 for：TASK #2116 【性能问题】优化登录逻辑---------------------->
                 <form id="loinForm" class="form-horizontal"    method="post">
-                <!--update-end--Author:zhangliang  Date:20170628 for：TASK #2116 【性能问题】优化登录逻辑---------------------->
-                <!-- add-begin--Author:zhoujf  Date:20170602 for:单点登录 -->
                 <input type="hidden" id="ReturnURL"  name="ReturnURL" value="${ReturnURL }"/>
-                <!-- add-end--Author:zhoujf  Date:20170602 for:单点登录 -->
                 <div class="widget-main">
                  <div class="alert alert-warning alert-dismissible" role="alert" id="errMsgContiner">
 				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				  <div id="showErrMsg"></div>
 				</div>
-                  <h4 class="header blue lighter bigger">
-                    <i class="ace-icon fa fa-coffee green"></i>
-                	    用户登录
+                  <h4 class="header color-white  lighter bigger">
+                    <i class="ace-icon fa fa-coffee color-white"></i>
+                	    校友系统
                   </h4>
                   <div class="space-6"></div>
                       <label class="block clearfix">
@@ -99,7 +146,7 @@
                       <div class="clearfix">
                         <label class="inline">
                           <input type="checkbox" class="ace" id="on_off"  name="remember" value="yes"/>
-                          <span class="lbl">记住用户名</span>
+                          <span class="lbl color-white">记住用户名</span>
                         </label>
                         <button type="button" id="but_login"  onclick="checkUser()" class="width-35 pull-right btn btn-sm btn-primary">
                           <i class="ace-icon fa fa-key"></i>
@@ -107,34 +154,9 @@
                         </button>
                       </div>
                       <div class="space-4"></div>
-
-                </div>
-                <div class="toolbar clearfix">
-                  <div style="float: right">
-                    <a href="#"  class="forgot-password-link">
-                    	  语言
-                      <i class="ace-icon fa fa-arrow-right"></i>
-                      <t:dictSelect id="langCode" field="langCode" typeGroupCode="lang" hasLabel="false" extendJson="{style:'padding:2px; width:80px;'}" defaultVal="zh-cn"></t:dictSelect>
-                    </a>
-                  </div>
                 </div>
                 </form>
               </div>
-            </div>
-            <div class="center"><h4 class="blue" id="id-company-text">&copy; JEECG版权所有 v_3.7.1</h4></div>
-            <div class="navbar-fixed-top align-right">
-              <br />
-              &nbsp;
-              <a id="btn-login-dark" class="blue" href="#" onclick="darkStyle()">Dark</a>
-              &nbsp;
-              <span class="blue">/</span>
-              &nbsp;
-              <a id="btn-login-blur" class="blue" href="#" onclick="blurStyle()">Blur</a>
-              &nbsp;
-              <span class="blue">/</span>
-              &nbsp;
-              <a id="btn-login-light" class="blue" href="#" onclick="lightStyle()">Light</a>
-              &nbsp; &nbsp; &nbsp;
             </div>
               </div>
             </div>
@@ -154,7 +176,17 @@
 <!-- add-begin--Author:gengjiajia  Date:20160727 for:TASK #1217 【IE兼容】jeecg h+首页兼容性问题,不兼容的浏览器直接切换套shortcut风格 -->
 <script type="text/javascript" src="plug-in/login/js/login.js"></script>
 <!-- add-end--Author:gengjiajia  Date:20160727 for:TASK #1217 【IE兼容】jeecg h+首页兼容性问题,不兼容的浏览器直接切换套shortcut风格 -->
+<script src="plug-in/swiper3.4.1/swiper.min.js"></script>
 <script type="text/javascript">
+	/* 轮播图 */
+	var swiper = new Swiper('.swiper-container', {
+	    pagination: '.swiper-pagination',
+	    paginationClickable: true,
+	    nextButton: '.swiper-button-next',
+	    prevButton: '.swiper-button-prev',
+	    autoplay: 3000,
+	    spaceBetween: 30
+	});
 	$(function(){
 		optErrMsg();
 	});
@@ -303,27 +335,6 @@ function reloadRandCodeImage() {
     var img = document.getElementById("randCodeImage");
     img.src='randCodeImage?a=' + date.getTime();
 }
-
-  function darkStyle(){
-    $('body').attr('class', 'login-layout');
-    $('#id-text2').attr('class', 'red');
-    $('#id-company-text').attr('class', 'blue');
-    e.preventDefault();
-  }
-  function lightStyle(){
-    $('body').attr('class', 'login-layout light-login');
-    $('#id-text2').attr('class', 'grey');
-    $('#id-company-text').attr('class', 'blue');
-
-    e.preventDefault();
-  }
-  function blurStyle(){
-    $('body').attr('class', 'login-layout blur-login');
-    $('#id-text2').attr('class', 'white');
-    $('#id-company-text').attr('class', 'light-blue');
-
-    e.preventDefault();
-  }
 //设置cookie
   function setCookie()
   {

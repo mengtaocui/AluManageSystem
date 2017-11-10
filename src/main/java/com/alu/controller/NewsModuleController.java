@@ -192,12 +192,6 @@ public class NewsModuleController extends BaseController {
 		return new ModelAndView("alu/newsModule");
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
-	@ResponseBody
-	public List<NewsModuleEntity> list() {
-		List<NewsModuleEntity> listNewsModules=newsModuleService.getList(NewsModuleEntity.class);
-		return listNewsModules;
-	}
 	
 	@RequestMapping(params = "getByTypeId", method = RequestMethod.GET)
 	@ResponseBody
@@ -207,57 +201,5 @@ public class NewsModuleController extends BaseController {
 		salesDc.add(Restrictions.eq("deleteFlag", Constant.UN_DELETE));
 		List<NewsModuleEntity> listNewsModules = newsModuleService.findByDetached(salesDc);
 		return listNewsModules;
-	}
-	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public ResponseEntity<?> get(@PathVariable("id") String id) {
-		NewsModuleEntity task = newsModuleService.get(NewsModuleEntity.class, id);
-		if (task == null) {
-			return new ResponseEntity(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity(task, HttpStatus.OK);
-	}
-
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public ResponseEntity<?> create(@RequestBody NewsModuleEntity newsModule, UriComponentsBuilder uriBuilder) {
-		//调用JSR303 Bean Validator进行校验，如果出错返回含400错误码及json格式的错误信息.
-		Set<ConstraintViolation<NewsModuleEntity>> failures = validator.validate(newsModule);
-		if (!failures.isEmpty()) {
-			return new ResponseEntity(BeanValidators.extractPropertyAndMessage(failures), HttpStatus.BAD_REQUEST);
-		}
-
-		//保存
-		newsModuleService.save(newsModule);
-
-		//按照Restful风格约定，创建指向新任务的url, 也可以直接返回id或对象.
-		String id = newsModule.getId();
-		URI uri = uriBuilder.path("/rest/newsModuleController/" + id).build().toUri();
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(uri);
-
-		return new ResponseEntity(headers, HttpStatus.CREATED);
-	}
-
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> update(@RequestBody NewsModuleEntity newsModule) {
-		//调用JSR303 Bean Validator进行校验，如果出错返回含400错误码及json格式的错误信息.
-		Set<ConstraintViolation<NewsModuleEntity>> failures = validator.validate(newsModule);
-		if (!failures.isEmpty()) {
-			return new ResponseEntity(BeanValidators.extractPropertyAndMessage(failures), HttpStatus.BAD_REQUEST);
-		}
-
-		//保存
-		newsModuleService.saveOrUpdate(newsModule);
-
-		//按Restful约定，返回204状态码, 无内容. 也可以返回200状态码.
-		return new ResponseEntity(HttpStatus.NO_CONTENT);
-	}
-
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable("id") String id) {
-		newsModuleService.deleteEntityById(NewsModuleEntity.class, id);
 	}
 }

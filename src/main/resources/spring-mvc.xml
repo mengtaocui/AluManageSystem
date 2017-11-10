@@ -113,8 +113,6 @@
 						<value>loginController.do?login</value>
 						<value>loginController.do?logout</value>
 						<value>loginController.do?changeDefaultOrg</value>
-                        <value>loginController.do?login2</value>
-						<value>loginController.do?login3</value>
 						<value>loginController.do?checkuser</value>
 						<value>loginController.do?checkuser=</value>
 						<value>repairController.do?repair</value>

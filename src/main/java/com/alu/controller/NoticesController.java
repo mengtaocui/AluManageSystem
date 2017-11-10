@@ -197,13 +197,6 @@ public class NoticesController extends BaseController {
 		return new ModelAndView("alu/notices");
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
-	@ResponseBody
-	public List<NoticesEntity> list() {
-		List<NoticesEntity> listNoticess=noticesService.getList(NoticesEntity.class);
-		return listNoticess;
-	}
-	
 	/**
 	 * 审核公告
 	 * @param id
@@ -224,55 +217,4 @@ public class NoticesController extends BaseController {
 		return aj;
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public ResponseEntity<?> get(@PathVariable("id") String id) {
-		NoticesEntity task = noticesService.get(NoticesEntity.class, id);
-		if (task == null) {
-			return new ResponseEntity(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity(task, HttpStatus.OK);
-	}
-
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public ResponseEntity<?> create(@RequestBody NoticesEntity notices, UriComponentsBuilder uriBuilder) {
-		//调用JSR303 Bean Validator进行校验，如果出错返回含400错误码及json格式的错误信息.
-		Set<ConstraintViolation<NoticesEntity>> failures = validator.validate(notices);
-		if (!failures.isEmpty()) {
-			return new ResponseEntity(BeanValidators.extractPropertyAndMessage(failures), HttpStatus.BAD_REQUEST);
-		}
-
-		//保存
-		noticesService.save(notices);
-
-		//按照Restful风格约定，创建指向新任务的url, 也可以直接返回id或对象.
-		String id = notices.getId();
-		URI uri = uriBuilder.path("/rest/noticesController/" + id).build().toUri();
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(uri);
-
-		return new ResponseEntity(headers, HttpStatus.CREATED);
-	}
-
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> update(@RequestBody NoticesEntity notices) {
-		//调用JSR303 Bean Validator进行校验，如果出错返回含400错误码及json格式的错误信息.
-		Set<ConstraintViolation<NoticesEntity>> failures = validator.validate(notices);
-		if (!failures.isEmpty()) {
-			return new ResponseEntity(BeanValidators.extractPropertyAndMessage(failures), HttpStatus.BAD_REQUEST);
-		}
-
-		//保存
-		noticesService.saveOrUpdate(notices);
-
-		//按Restful约定，返回204状态码, 无内容. 也可以返回200状态码.
-		return new ResponseEntity(HttpStatus.NO_CONTENT);
-	}
-
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable("id") String id) {
-		noticesService.deleteEntityById(NoticesEntity.class, id);
-	}
 }

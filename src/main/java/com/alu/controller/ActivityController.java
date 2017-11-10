@@ -201,13 +201,6 @@ public class ActivityController extends BaseController {
 		return new ModelAndView("alu/activity");
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
-	@ResponseBody
-	public List<ActivityEntity> list() {
-		List<ActivityEntity> listActivitys=activityService.getList(ActivityEntity.class);
-		return listActivitys;
-	}
-	
 	/**
 	 * 审核活动
 	 * @param id
@@ -226,57 +219,5 @@ public class ActivityController extends BaseController {
 		activityService.updateEntitie(activity);
 		systemService.addLog("审核活动："+activity.getName(), Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
 		return aj;
-	}
-	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public ResponseEntity<?> get(@PathVariable("id") String id) {
-		ActivityEntity task = activityService.get(ActivityEntity.class, id);
-		if (task == null) {
-			return new ResponseEntity(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity(task, HttpStatus.OK);
-	}
-
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public ResponseEntity<?> create(@RequestBody ActivityEntity activity, UriComponentsBuilder uriBuilder) {
-		//调用JSR303 Bean Validator进行校验，如果出错返回含400错误码及json格式的错误信息.
-		Set<ConstraintViolation<ActivityEntity>> failures = validator.validate(activity);
-		if (!failures.isEmpty()) {
-			return new ResponseEntity(BeanValidators.extractPropertyAndMessage(failures), HttpStatus.BAD_REQUEST);
-		}
-
-		//保存
-		activityService.save(activity);
-
-		//按照Restful风格约定，创建指向新任务的url, 也可以直接返回id或对象.
-		String id = activity.getId();
-		URI uri = uriBuilder.path("/rest/activityController/" + id).build().toUri();
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(uri);
-
-		return new ResponseEntity(headers, HttpStatus.CREATED);
-	}
-
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> update(@RequestBody ActivityEntity activity) {
-		//调用JSR303 Bean Validator进行校验，如果出错返回含400错误码及json格式的错误信息.
-		Set<ConstraintViolation<ActivityEntity>> failures = validator.validate(activity);
-		if (!failures.isEmpty()) {
-			return new ResponseEntity(BeanValidators.extractPropertyAndMessage(failures), HttpStatus.BAD_REQUEST);
-		}
-
-		//保存
-		activityService.saveOrUpdate(activity);
-
-		//按Restful约定，返回204状态码, 无内容. 也可以返回200状态码.
-		return new ResponseEntity(HttpStatus.NO_CONTENT);
-	}
-
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable("id") String id) {
-		activityService.deleteEntityById(ActivityEntity.class, id);
 	}
 }

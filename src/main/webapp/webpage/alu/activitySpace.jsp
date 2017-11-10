@@ -33,12 +33,14 @@
   		display: block;
 	    color: #FFFFFF;
 	    font-size: 18px;
-	    margin-top: 60px;
+	    margin-top: 40%;
 	    text-align: center;
   	}
   	.del_a{
-  		margin-top: 60px;
-    	margin-left: 70px;
+ 		position: absolute;
+	    top: 2px;
+	    right: 2px;
+        z-index: 1;
   	}
   	.upload_wrap{
   		position: relative;
@@ -101,7 +103,7 @@
 			$('#file').click();
 		}
 			
-	    initFileArea()
+	    initFileArea();
 		function preview(file) {
 			var prevDiv = $('#preview');
 			if (file.files && file.files[0]) {
@@ -153,14 +155,26 @@
 			    	if(data){
 			    		var str = '';
 			    		$('#content').html(' ');
+			    		var shadeStr = '';
+			    		
 			    		for(var i=0; i<data.length; i++){
+			    			
+			    			if(data[i].checkStatus == 2){
+			    				shadeStr = '<div class="box_shade">'+
+						   			      	 '<span class="check_font" style="color: #d58512;">审核未通过</span>'+
+						  			       '</div>';
+			    			}
+			    			if(data[i].checkStatus == 0){
+			    				shadeStr = '<div class="box_shade">'+
+						   			      	 '<span class="check_font">等待审核</span>'+
+						  			       '</div>';
+			    			}
+			    			console.log(shadeStr);
 			    			str += '<div class="box_wrap">'+
-			    			    '<div class="box_shade">'+
-			    			    '<span class="check_font">审核中</span>'+
-			    			    '<a href="#" class="ace_button del_a" style="background-color:#ec4758;"> <i class=" fa fa-trash-o"></i> 删除</a>'+
-			    			    '</div>'+
-			    				'<img style="max-width: 100%;" alt="" src="sysController/readPic.do?picPath='+data[i].filePath+'">'+
-			    			'</div>';
+				    			       '<a href="javascript:delFile(\''+data[i].id+'\')" class="ace_button del_a" style="background-color:#ec4758;"><i class=" fa fa-trash-o"></i></a>'+
+				    			       shadeStr +
+				    				   '<img style="max-width: 100%;" alt="" src="sysController/readPic.do?picPath='+data[i].filePath+'">'+
+			    			       '</div>';
 			    		}
 			    		$('#content').html(str);
 			    	}
@@ -171,6 +185,34 @@
 			});
 		}
 		
+		function delFile(fileId){
+			layer.open({
+				title:'提示信息',
+				content:'您确定要删除 吗',
+				icon:7,
+				yes:function(index){
+					if(fileId){
+						$.ajax({
+							url: 'activitySpaceController.do?del&id='+fileId,
+							type: 'POST',
+							dataType: 'json',
+							success: function(data){
+								layer.msg('删除成功');
+								initFileArea();
+							},
+							error: function(data){
+								layer.msg('删除失败，请联系技术人员');
+							}
+						});
+					}
+					layer.close(index);
+				},
+				btn:['确定','取消'],
+				btn2:function(index){
+					layer.close(index);
+				}
+			});
+		}
 		
 	</script>  
  </body>
