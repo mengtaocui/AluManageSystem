@@ -1,0 +1,166 @@
+package com.alu.controller;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.jeecgframework.core.common.controller.BaseController;
+import org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery;
+import org.jeecgframework.core.common.model.json.AjaxJson;
+import org.jeecgframework.core.common.model.json.DataGrid;
+import org.jeecgframework.core.constant.Globals;
+import org.jeecgframework.core.util.StringUtil;
+import org.jeecgframework.tag.core.easyui.TagUtil;
+import org.jeecgframework.web.system.pojo.base.TSDepart;
+import org.jeecgframework.web.system.service.SystemService;
+import org.jeecgframework.core.util.MyBeanUtils;
+
+import com.alu.entity.InvitationEntity;
+import com.alu.service.InvitationServiceI;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.jeecgframework.core.beanvalidator.BeanValidators;
+
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+
+import java.net.URI;
+
+import org.springframework.http.MediaType;
+import org.springframework.web.util.UriComponentsBuilder;
+
+/**   
+ * @Title: Controller
+ * @Description: 帖子
+ * @author cuimengtao
+ * @date 2017-11-15 09:27:59
+ * @version V1.0   
+ *
+ */
+@Controller
+@RequestMapping("/invitationController")
+public class InvitationController extends BaseController {
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger = Logger.getLogger(InvitationController.class);
+
+	@Autowired
+	private InvitationServiceI invitationService;
+	@Autowired
+	private SystemService systemService;
+	@Autowired
+	private Validator validator;
+	
+
+
+	/**
+	 * 帖子列表 页面跳转
+	 * 
+	 * @return
+	 */
+	@RequestMapping(params = "list")
+	public ModelAndView list(HttpServletRequest request) {
+		return new ModelAndView("alu/invitationList");
+	}
+
+	/**
+	 * easyui AJAX请求数据
+	 * 
+	 * @param request
+	 * @param response
+	 * @param dataGrid
+	 * @param user
+	 */
+
+	@RequestMapping(params = "datagrid")
+	public void datagrid(InvitationEntity invitation,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
+		CriteriaQuery cq = new CriteriaQuery(InvitationEntity.class, dataGrid);
+		//查询条件组装器
+		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, invitation, request.getParameterMap());
+		this.invitationService.getDataGridReturn(cq, true);
+		TagUtil.datagrid(response, dataGrid);
+	}
+
+	/**
+	 * 删除帖子
+	 * 
+	 * @return
+	 */
+	@RequestMapping(params = "del")
+	@ResponseBody
+	public AjaxJson del(InvitationEntity invitation, HttpServletRequest request) {
+		String message = null;
+		AjaxJson j = new AjaxJson();
+		invitation = systemService.getEntity(InvitationEntity.class, invitation.getId());
+		message = "帖子删除成功";
+		invitationService.delete(invitation);
+		systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
+		
+		j.setMsg(message);
+		return j;
+	}
+
+
+	/**
+	 * 添加帖子
+	 * 
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping(params = "save")
+	@ResponseBody
+	public AjaxJson save(InvitationEntity invitation, HttpServletRequest request) {
+		String message = null;
+		AjaxJson j = new AjaxJson();
+		if (StringUtil.isNotEmpty(invitation.getId())) {
+			message = "帖子更新成功";
+			InvitationEntity t = invitationService.get(InvitationEntity.class, invitation.getId());
+			try {
+				MyBeanUtils.copyBeanNotNull2Bean(invitation, t);
+				invitationService.saveOrUpdate(t);
+				systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
+			} catch (Exception e) {
+				e.printStackTrace();
+				message = "帖子更新失败";
+			}
+		} else {
+			message = "帖子添加成功";
+			invitationService.save(invitation);
+			systemService.addLog(message, Globals.Log_Type_INSERT, Globals.Log_Leavel_INFO);
+		}
+		j.setMsg(message);
+		return j;
+	}
+
+	/**
+	 * 帖子列表页面跳转
+	 * 
+	 * @return
+	 */
+	@RequestMapping(params = "addorupdate")
+	public ModelAndView addorupdate(InvitationEntity invitation, HttpServletRequest req) {
+		if (StringUtil.isNotEmpty(invitation.getId())) {
+			invitation = invitationService.getEntity(InvitationEntity.class, invitation.getId());
+			req.setAttribute("invitationPage", invitation);
+		}
+		return new ModelAndView("alu/invitation");
+	}
+}

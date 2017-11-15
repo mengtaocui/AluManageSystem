@@ -1,34 +1,38 @@
 package com.alu.controller;
-import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
 
 import org.apache.log4j.Logger;
-import org.jeecgframework.core.beanvalidator.BeanValidators;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.jeecgframework.core.common.controller.BaseController;
 import org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery;
 import org.jeecgframework.core.common.model.json.AjaxJson;
 import org.jeecgframework.core.common.model.json.DataGrid;
 import org.jeecgframework.core.constant.Globals;
 import org.jeecgframework.core.util.DateUtils;
-import org.jeecgframework.core.util.MyBeanUtils;
 import org.jeecgframework.core.util.ResourceUtil;
 import org.jeecgframework.core.util.StringUtil;
 import org.jeecgframework.tag.core.easyui.TagUtil;
 import org.jeecgframework.tag.vo.datatable.SortDirection;
+import org.jeecgframework.web.system.pojo.base.TSDepart;
 import org.jeecgframework.web.system.pojo.base.TSUser;
 import org.jeecgframework.web.system.service.SystemService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.jeecgframework.core.util.MyBeanUtils;
+
+import com.alu.common.AuTools;
+import com.alu.common.Constant;
+import com.alu.entity.ActivityEntity;
+import com.alu.entity.DonateEntity;
+import com.alu.service.DonateServiceI;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,49 +41,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.jeecgframework.core.beanvalidator.BeanValidators;
 
-import com.alu.common.AuTools;
-import com.alu.common.Constant;
-import com.alu.entity.ActivityEntity;
-import com.alu.entity.ActivitySpaceEntity;
-import com.alu.entity.NoticesEntity;
-import com.alu.service.ActivityServiceI;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+
+import java.net.URI;
+
+import org.springframework.http.MediaType;
+import org.springframework.web.util.UriComponentsBuilder;
 
 /**   
  * @Title: Controller
- * @Description: 活动
- * @author zhangdaihao
- * @date 2017-11-07 17:16:35
+ * @Description: 捐赠
+ * @author cuimengtao
+ * @date 2017-11-15 09:25:42
  * @version V1.0   
  *
  */
 @Controller
-@RequestMapping("/activityController")
-public class ActivityController extends BaseController {
+@RequestMapping("/donateController")
+public class DonateController extends BaseController {
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger = Logger.getLogger(ActivityController.class);
+	private static final Logger logger = Logger.getLogger(DonateController.class);
 
 	@Autowired
-	private ActivityServiceI activityService;
+	private DonateServiceI donateService;
 	@Autowired
 	private SystemService systemService;
 	@Autowired
 	private Validator validator;
 	
-
-
 	/**
-	 * 活动列表 页面跳转
+	 * 捐赠列表 页面跳转
 	 * 
 	 * @return
 	 */
 	@RequestMapping(params = "list")
 	public ModelAndView list(HttpServletRequest request) {
-		return new ModelAndView("alu/activityList");
+		return new ModelAndView("alu/donateList");
 	}
 
 	/**
@@ -92,11 +98,11 @@ public class ActivityController extends BaseController {
 	 */
 
 	@RequestMapping(params = "datagrid")
-	public void datagrid(ActivityEntity activity,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
-		CriteriaQuery cq = new CriteriaQuery(ActivityEntity.class, dataGrid);
+	public void datagrid(DonateEntity donate,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
+		CriteriaQuery cq = new CriteriaQuery(DonateEntity.class, dataGrid);
 		//查询条件组装器
-		activity.setName(AuTools.createLikeStr(activity.getName()));
-		activity.setPlaces(AuTools.createLikeStr(activity.getPlaces()));
+		donate.setName(AuTools.createLikeStr(donate.getName()));
+		donate.setPlaces(AuTools.createLikeStr(donate.getPlaces()));
 		
 		//报名截止时间
 		if(StringUtil.isNotEmpty(request.getParameter("applyEndTime_begin1"))){
@@ -122,25 +128,25 @@ public class ActivityController extends BaseController {
 		cq.setOrder(map);
 		//过滤掉删除的
 		cq.eq("deleteFlag", Constant.UN_DELETE);
-		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, activity, request.getParameterMap());
-		this.activityService.getDataGridReturn(cq, true);
+		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, donate, request.getParameterMap());
+		this.donateService.getDataGridReturn(cq, true);
 		TagUtil.datagrid(response, dataGrid);
 	}
 
 	/**
-	 * 删除活动
+	 * 删除捐赠
 	 * 
 	 * @return
 	 */
 	@RequestMapping(params = "del")
 	@ResponseBody
-	public AjaxJson del(ActivityEntity activity, HttpServletRequest request) {
+	public AjaxJson del(DonateEntity donate, HttpServletRequest request) {
 		String message = null;
 		AjaxJson j = new AjaxJson();
-		activity = systemService.getEntity(ActivityEntity.class, activity.getId());
-		message = "活动删除成功";
-		activity.setDeleteFlag(Constant.IS_DELETE);
-		activityService.updateEntitie(activity);
+		donate = systemService.getEntity(DonateEntity.class, donate.getId());
+		message = "捐赠删除成功";
+		donate.setDeleteFlag(Constant.IS_DELETE);
+		donateService.updateEntitie(donate);
 		systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
 		
 		j.setMsg(message);
@@ -149,39 +155,39 @@ public class ActivityController extends BaseController {
 
 
 	/**
-	 * 添加活动
+	 * 添加捐赠
 	 * 
 	 * @param ids
 	 * @return
 	 */
 	@RequestMapping(params = "save")
 	@ResponseBody
-	public AjaxJson save(ActivityEntity activity, HttpServletRequest request) {
+	public AjaxJson save(DonateEntity donate, HttpServletRequest request) {
 		String message = null;
 		AjaxJson j = new AjaxJson();
 		TSUser curUser = ResourceUtil.getSessionUser();
-		if (StringUtil.isNotEmpty(activity.getId())) {
-			message = "活动更新成功";
-			ActivityEntity t = activityService.get(ActivityEntity.class, activity.getId());
+		if (StringUtil.isNotEmpty(donate.getId())) {
+			message = "捐赠更新成功";
+			DonateEntity t = donateService.get(DonateEntity.class, donate.getId());
 			try {
-				activity.setLastUpdateBy(curUser.getId());
-				activity.setLastUpdateByUserName(curUser.getUserName());
-				activity.setLastUpdateTime(DateUtils.formatDateTime());
-				MyBeanUtils.copyBeanNotNull2Bean(activity, t);
-				activityService.saveOrUpdate(t);
+				donate.setLastUpdateBy(curUser.getId());
+				donate.setLastUpdateByUserName(curUser.getUserName());
+				donate.setLastUpdateTime(DateUtils.formatDateTime());
+				MyBeanUtils.copyBeanNotNull2Bean(donate, t);
+				donateService.saveOrUpdate(t);
 				systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
 			} catch (Exception e) {
 				e.printStackTrace();
-				message = "活动更新失败";
+				message = "捐赠更新失败";
 			}
 		} else {
-			message = "活动添加成功";
-			activity.setCrtBy(curUser.getId());
-			activity.setCrtByUserName(curUser.getUserName());
-			activity.setCrtTime(DateUtils.formatDateTime());
-			activity.setCheckStatus(Constant.APPLY_WAIT);
-			activity.setDeleteFlag(Constant.UN_DELETE);
-			activityService.save(activity);
+			message = "捐赠添加成功";
+			donate.setCrtBy(curUser.getId());
+			donate.setCrtByUserName(curUser.getUserName());
+			donate.setCrtTime(DateUtils.formatDateTime());
+			donate.setCheckStatus(Constant.APPLY_WAIT);
+			donate.setDeleteFlag(Constant.UN_DELETE);
+			donateService.save(donate);
 			systemService.addLog(message, Globals.Log_Type_INSERT, Globals.Log_Leavel_INFO);
 		}
 		j.setMsg(message);
@@ -189,21 +195,21 @@ public class ActivityController extends BaseController {
 	}
 
 	/**
-	 * 活动列表页面跳转
+	 * 捐赠列表页面跳转
 	 * 
 	 * @return
 	 */
 	@RequestMapping(params = "addorupdate")
-	public ModelAndView addorupdate(ActivityEntity activity, HttpServletRequest req) {
-		if (StringUtil.isNotEmpty(activity.getId())) {
-			activity = activityService.getEntity(ActivityEntity.class, activity.getId());
-			req.setAttribute("activityPage", activity);
+	public ModelAndView addorupdate(DonateEntity donate, HttpServletRequest req) {
+		if (StringUtil.isNotEmpty(donate.getId())) {
+			donate = donateService.getEntity(DonateEntity.class, donate.getId());
+			req.setAttribute("donatePage", donate);
 		}
-		return new ModelAndView("alu/activity");
+		return new ModelAndView("alu/donate");
 	}
 	
 	/**
-	 * 审核活动
+	 * 审核捐赠项目
 	 * @param id
 	 * @param type
 	 * @return
@@ -212,13 +218,13 @@ public class ActivityController extends BaseController {
 	@ResponseBody
 	public AjaxJson handleApply(String id, Integer type) {
 		AjaxJson aj = new AjaxJson();
-		ActivityEntity activity = systemService.getEntity(ActivityEntity.class, id);
+		DonateEntity activity = systemService.getEntity(DonateEntity.class, id);
 		TSUser curUser = ResourceUtil.getSessionUser();
 		activity.setCheckBy(curUser.getId());
 		activity.setCheckByUserName(curUser.getUserName());
 		activity.setCheckStatus(type);
-		activityService.updateEntitie(activity);
-		systemService.addLog("审核活动："+activity.getName(), Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
+		donateService.updateEntitie(activity);
+		systemService.addLog("审核捐赠项目："+activity.getName(), Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
 		return aj;
 	}
 }

@@ -10,23 +10,23 @@ import org.hibernate.annotations.DynamicUpdate;
 
 /**   
  * @Title: Entity
- * @Description: 活动
- * @author zhangdaihao
- * @date 2017-11-07 17:16:36
+ * @Description: 捐赠
+ * @author cuimengtao
+ * @date 2017-11-15 09:25:42
  * @version V1.0   
  *
  */
 @Entity
-@Table(name = "t_activity", schema = "")
+@Table(name = "t_donate", schema = "")
 @DynamicUpdate(true)
 @DynamicInsert(true)
 @SuppressWarnings("serial")
-public class ActivityEntity extends BaseEntity implements java.io.Serializable {
-	/**活动名称*/
+public class DonateEntity extends BaseEntity implements java.io.Serializable {
+	/**捐赠项目名称*/
 	private java.lang.String name;
-	/**活动地点*/
+	/**募捐地点*/
 	private java.lang.String places;
-	/**活动详情*/
+	/**详情*/
 	private java.lang.String detail;
 	/**开始时间*/
 	private java.lang.String startTime;
@@ -45,7 +45,7 @@ public class ActivityEntity extends BaseEntity implements java.io.Serializable {
 	
 	/**
 	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  活动名称
+	 *@return: java.lang.String  捐赠项目名称
 	 */
 	@Column(name ="NAME",nullable=true,length=255)
 	public java.lang.String getName(){
@@ -54,14 +54,14 @@ public class ActivityEntity extends BaseEntity implements java.io.Serializable {
 
 	/**
 	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  活动名称
+	 *@param: java.lang.String  捐赠项目名称
 	 */
 	public void setName(java.lang.String name){
 		this.name = name;
 	}
 	/**
 	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  活动地点
+	 *@return: java.lang.String  募捐地点
 	 */
 	@Column(name ="PLACES",nullable=true,length=255)
 	public java.lang.String getPlaces(){
@@ -70,14 +70,14 @@ public class ActivityEntity extends BaseEntity implements java.io.Serializable {
 
 	/**
 	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  活动地点
+	 *@param: java.lang.String  募捐地点
 	 */
 	public void setPlaces(java.lang.String places){
 		this.places = places;
 	}
 	/**
 	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  活动详情
+	 *@return: java.lang.String  详情
 	 */
 	@Column(name ="DETAIL",nullable=true,length=4000)
 	public java.lang.String getDetail(){
@@ -86,7 +86,7 @@ public class ActivityEntity extends BaseEntity implements java.io.Serializable {
 
 	/**
 	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  活动详情
+	 *@param: java.lang.String  详情
 	 */
 	public void setDetail(java.lang.String detail){
 		this.detail = detail;
@@ -155,7 +155,6 @@ public class ActivityEntity extends BaseEntity implements java.io.Serializable {
 	public void setBrowseCount(java.lang.Integer browseCount){
 		this.browseCount = browseCount;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  审核人
@@ -172,7 +171,6 @@ public class ActivityEntity extends BaseEntity implements java.io.Serializable {
 	public void setCheckBy(java.lang.String checkBy){
 		this.checkBy = checkBy;
 	}
-
 	@Column(name ="checkStatus",nullable=true,length=32)
 	public Integer getCheckStatus() {
 		return checkStatus;

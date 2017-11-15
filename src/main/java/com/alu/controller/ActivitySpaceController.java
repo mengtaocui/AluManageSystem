@@ -104,6 +104,12 @@ public class ActivitySpaceController extends BaseController {
 	public void datagrid(ActivitySpaceEntity activitySpace,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
 		CriteriaQuery cq = new CriteriaQuery(ActivitySpaceEntity.class, dataGrid);
 		//查询条件组装器
+		//降序排列
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("crtTime", SortDirection.desc);
+		cq.setOrder(map);
+		//过滤掉删除的
+		cq.eq("deleteFlag", Constant.UN_DELETE);
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, activitySpace, request.getParameterMap());
 		this.activitySpaceService.getDataGridReturn(cq, true);
 		TagUtil.datagrid(response, dataGrid);
