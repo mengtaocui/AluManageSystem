@@ -5,6 +5,12 @@
  <head>
   <title>捐赠记录</title>
   <t:base type="jquery,easyui,tools,DatePicker"></t:base>
+  <style type="text/css">
+  	.detail{
+  		width: 450px !important;
+    	height: 50px !important;
+  	}
+  </style>
  </head>
  <body style="overflow-y: hidden" scroll="no">
   <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="donateRecordController.do?save">
@@ -13,12 +19,14 @@
 				<tr>
 					<td align="right">
 						<label class="Validform_label">
-							捐赠项目id:
+							捐赠项目:
 						</label>
 					</td>
 					<td class="value">
-						<input class="inputxt" id="donateId" name="donateId" ignore="ignore"  value="${donateRecordPage.donateId}" />
+						<t:dictSelect field="donateId" id="donateId" extendJson="{datatype:'*'}" dictTable="t_donate" dictField="id" 
+						dictText="name" dictCondition=" where delete_flag=0"  defaultVal="${donateRecordPage.donateId}"  hasLabel="false"></t:dictSelect>
 						<span class="Validform_checktip"></span>
+						<input type="hidden" id="donateName" name="donateName" value="${donateRecordPage.donateName}"/>
 					</td>
 				</tr>
 				<tr>
@@ -46,55 +54,11 @@
 				<tr>
 					<td align="right">
 						<label class="Validform_label">
-							处理人:
+							备注:
 						</label>
 					</td>
 					<td class="value">
-						<input class="inputxt" id="crtBy" name="crtBy" ignore="ignore"  value="${donateRecordPage.crtBy}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							捐赠时间:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="crtTime" name="crtTime" ignore="ignore"  value="${donateRecordPage.crtTime}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							最近一次修改人:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="lastUpdateBy" name="lastUpdateBy" ignore="ignore"  value="${donateRecordPage.lastUpdateBy}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							最近一次修改时间:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="lastUpdateTime" name="lastUpdateTime" ignore="ignore"  value="${donateRecordPage.lastUpdateTime}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							0未删除，1已删除:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="deleteFlag" name="deleteFlag" ignore="ignore"  value="${donateRecordPage.deleteFlag}" datatype="n" />
+						<textarea class="inputxt detail" id="remark" name="remark">${donateRecordPage.remark}</textarea>
 						<span class="Validform_checktip"></span>
 					</td>
 				</tr>

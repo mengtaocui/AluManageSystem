@@ -18,7 +18,7 @@ CKEDITOR.editorConfig = function( config ) {
 			+ config.font_names;
 	config.skin = 'moonocolor';
 	config.toolbarGroups = [
-	        { name: 'document',    groups: [ 'mode', 'document', 'doctools' ] },
+	        /*{ name: 'document',    groups: [ 'mode', 'document', 'doctools' ] },*/
 	        { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
             { name: 'insert' },{name:'font'},{ name: 'tools' },
             { name: 'others' },{ name: 'editing',     groups: [ 'find', 'selection' ] },

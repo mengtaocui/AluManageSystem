@@ -34,6 +34,7 @@ public class ActivitySpaceEntity extends IdEntity implements java.io.Serializabl
 
 	/**活动id*/
 	private java.lang.String activityId;
+	private String activityName;
 	private String filePath;
 	private String crtTime;
 	private String crtBy;
@@ -165,5 +166,13 @@ public class ActivitySpaceEntity extends IdEntity implements java.io.Serializabl
 
 	public void setCheckByUserName(java.lang.String checkByUserName) {
 		this.checkByUserName = checkByUserName;
+	}
+	@Column(name ="ACTIVITY_NAME",nullable=true,length=255)
+	public String getActivityName() {
+		return activityName;
+	}
+
+	public void setActivityName(String activityName) {
+		this.activityName = activityName;
 	}
 }

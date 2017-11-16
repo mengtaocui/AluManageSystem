@@ -9,7 +9,7 @@
  <body style="overflow-y: hidden" scroll="no">
   <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="invitationController.do?save">
 			<input id="id" name="id" type="hidden" value="${invitationPage.id }">
-			<table style="width: 600px;" cellpadding="0" cellspacing="1" class="formtable">
+			<table style="width: 100%;" cellpadding="0" cellspacing="1" class="formtable">
 				<tr>
 					<td align="right">
 						<label class="Validform_label">
@@ -28,87 +28,25 @@
 						</label>
 					</td>
 					<td class="value">
-						<input class="inputxt" id="content" name="content" ignore="ignore"  value="${invitationPage.content}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							浏览次数:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="browseCount" name="browseCount" ignore="ignore"  value="${invitationPage.browseCount}" datatype="n" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							创建人:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="crtBy" name="crtBy" ignore="ignore"  value="${invitationPage.crtBy}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							创建时间:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="crtTime" name="crtTime" ignore="ignore"  value="${invitationPage.crtTime}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							最近一次修改人:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="lastUpdateBy" name="lastUpdateBy" ignore="ignore"  value="${invitationPage.lastUpdateBy}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							最近一次修改时间:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="lastUpdateTime" name="lastUpdateTime" ignore="ignore"  value="${invitationPage.lastUpdateTime}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							审核人:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="checkBy" name="checkBy" ignore="ignore"  value="${invitationPage.checkBy}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							0未删除，1已删除:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="deleteFlag" name="deleteFlag" ignore="ignore"  value="${invitationPage.deleteFlag}" datatype="n" />
+						<!-- 加载编辑器的容器 -->
+					    <textarea id="contentDetail" name="contentDetail" cols="20" rows="2" class="ckeditor">${invitationPage.content}</textarea>
+						<input type="hidden" id="content" onclick="OnSave()" name="content"/>
 						<span class="Validform_checktip"></span>
 					</td>
 				</tr>
 			</table>
 		</t:formvalid>
+		<!-- 配置文件 -->
+	    <script type="text/javascript" src="plug-in/ckeditor/ckeditor.js"></script>
+	    <script type="text/javascript">
+		    CKEDITOR.replace('contentDetail');
+			function OnSave(){  
+		        if(CKEDITOR.instances.contentDetail.getData()==""){  
+			        alert("内容不能为空！");  
+			        return false;  
+		        }else {  
+		        	$("#content").val(CKEDITOR.instances.contentDetail.getData());
+		        }  
+		    } 
+		</script>
  </body>

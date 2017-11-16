@@ -50,6 +50,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.alu.common.AuTools;
 import com.alu.common.Constant;
 import com.alu.entity.ActivitySpaceEntity;
 import com.alu.entity.NewsModuleEntity;
@@ -104,6 +105,14 @@ public class ActivitySpaceController extends BaseController {
 	public void datagrid(ActivitySpaceEntity activitySpace,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
 		CriteriaQuery cq = new CriteriaQuery(ActivitySpaceEntity.class, dataGrid);
 		//查询条件组装器
+		activitySpace.setActivityName(AuTools.createLikeStr(activitySpace.getActivityName()));
+		
+		if(StringUtil.isNotEmpty(request.getParameter("crtTime_begin1"))){
+			cq.ge("crtTime", request.getParameter("crtTime_begin1"));
+		}
+		if(StringUtil.isNotEmpty(request.getParameter("crtTime_end2"))){
+			cq.le("crtTime", request.getParameter("crtTime_end2"));
+		}
 		//降序排列
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("crtTime", SortDirection.desc);
@@ -164,7 +173,7 @@ public class ActivitySpaceController extends BaseController {
     @ResponseBody
     public AjaxJson upload(HttpServletRequest request,
     		HttpServletResponse response,
-           @RequestParam("upload") MultipartFile upload, @RequestParam("activityId") String activityId) throws Exception {
+           @RequestParam("upload") MultipartFile upload, @RequestParam("activityId") String activityId, @RequestParam("activityName") String activityName) throws Exception {
     	AjaxJson aj = new AjaxJson();
        //如果文件不为空，写入上传路径
        if(!upload.isEmpty()) {
@@ -189,12 +198,13 @@ public class ActivitySpaceController extends BaseController {
            ActivitySpaceEntity activitySpace = new ActivitySpaceEntity();
            
            activitySpace.setActivityId(activityId);
+           activitySpace.setActivityName(new String(activityName.getBytes("iso-8859-1"), "utf-8"));
            activitySpace.setCheckStatus(Constant.APPLY_WAIT);
            activitySpace.setCrtBy(curUser.getId());
            activitySpace.setCrtByUserName(curUser.getUserName());
            activitySpace.setCrtTime(DateUtils.formatDateTime());
            activitySpace.setDeleteFlag(Constant.UN_DELETE);
-           activitySpace.setFilePath(fileName);
+           activitySpace.setFilePath("sysController/readPic.do?picPath="+fileName);
            
            activitySpaceService.save(activitySpace);
        }
@@ -263,8 +273,9 @@ public class ActivitySpaceController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(params = "addorupdate")
-	public ModelAndView addorupdate(String activityId, HttpServletRequest req) {
+	public ModelAndView addorupdate(String activityId, String activityName, HttpServletRequest req) {
 		req.setAttribute("activityId", activityId);
+		req.setAttribute("activityName", activityName);
 		return new ModelAndView("alu/activitySpace");
 	}
 }

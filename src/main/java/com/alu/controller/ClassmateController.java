@@ -12,12 +12,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.jeecgframework.core.common.controller.BaseController;
 import org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery;
 import org.jeecgframework.core.common.model.json.AjaxJson;
 import org.jeecgframework.core.common.model.json.DataGrid;
 import org.jeecgframework.core.constant.Globals;
 import org.jeecgframework.core.util.DateUtils;
+import org.jeecgframework.core.util.ListUtils;
 import org.jeecgframework.core.util.ResourceUtil;
 import org.jeecgframework.core.util.StringUtil;
 import org.jeecgframework.tag.core.easyui.TagUtil;
@@ -30,6 +33,7 @@ import org.jeecgframework.core.util.MyBeanUtils;
 import com.alu.common.AuTools;
 import com.alu.common.Constant;
 import com.alu.entity.ClassmateEntity;
+import com.alu.entity.NewsModuleEntity;
 import com.alu.service.ClassmateServiceI;
 
 import org.springframework.http.ResponseEntity;
@@ -49,6 +53,7 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 
 import org.springframework.http.MediaType;
@@ -196,6 +201,25 @@ public class ClassmateController extends BaseController {
 		if (StringUtil.isNotEmpty(classmate.getId())) {
 			classmate = classmateService.getEntity(ClassmateEntity.class, classmate.getId());
 			req.setAttribute("classmatePage", classmate);
+		}else{
+			if(StringUtil.isNotEmpty(classmate.getName()) && StringUtil.isNotEmpty(classmate.getPhone())){
+				
+				DetachedCriteria salesDc = DetachedCriteria.forClass(ClassmateEntity.class);
+				try {
+					salesDc.add(Restrictions.eq("name", 
+							new String(classmate.getName().getBytes("ISO-8859-1"), "UTF-8")
+							));
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+				salesDc.add(Restrictions.eq("phone", classmate.getPhone()));
+				salesDc.add(Restrictions.eq("deleteFlag", Constant.UN_DELETE));
+				
+				List<ClassmateEntity> list = classmateService.findByDetached(salesDc);
+				
+				if(!ListUtils.isNullOrEmpty(list))
+					req.setAttribute("classmatePage", list.get(0));
+			}
 		}
 		return new ModelAndView("alu/classmate");
 	}

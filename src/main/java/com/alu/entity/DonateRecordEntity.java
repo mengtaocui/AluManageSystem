@@ -36,6 +36,7 @@ public class DonateRecordEntity extends BaseEntity implements java.io.Serializab
 	private java.lang.String donatePersonName;
 	/**捐赠人手机号*/
 	private java.lang.String donatePersonPhone;
+	private String remark;
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  捐赠项目id
@@ -91,6 +92,14 @@ public class DonateRecordEntity extends BaseEntity implements java.io.Serializab
 
 	public void setDonateName(java.lang.String donateName) {
 		this.donateName = donateName;
+	}
+	@Column(name ="REMARK",nullable=true,length=255)
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	
 }

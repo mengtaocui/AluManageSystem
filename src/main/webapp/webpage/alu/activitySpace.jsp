@@ -121,6 +121,7 @@
 		function uploadFile(){
 			var formData = new FormData();
 			formData.append('upload', $('#file')[0].files[0]);
+			formData.append('activityName', '${activityName}');
 			formData.append('activityId', '${activityId}');
 			$.ajax({
 			    url: 'activitySpaceController/upload.do',
@@ -158,7 +159,7 @@
 			    		var shadeStr = '';
 			    		
 			    		for(var i=0; i<data.length; i++){
-			    			
+			    			shadeStr = '';
 			    			if(data[i].checkStatus == 2){
 			    				shadeStr = '<div class="box_shade">'+
 						   			      	 '<span class="check_font" style="color: #d58512;">审核未通过</span>'+
@@ -169,11 +170,10 @@
 						   			      	 '<span class="check_font">等待审核</span>'+
 						  			       '</div>';
 			    			}
-			    			console.log(shadeStr);
 			    			str += '<div class="box_wrap">'+
 				    			       '<a href="javascript:delFile(\''+data[i].id+'\')" class="ace_button del_a" style="background-color:#ec4758;"><i class=" fa fa-trash-o"></i></a>'+
 				    			       shadeStr +
-				    				   '<img style="max-width: 100%;" alt="" src="sysController/readPic.do?picPath='+data[i].filePath+'">'+
+				    				   '<img style="max-width: 100%;" alt="" src="'+data[i].filePath+'">'+
 			    			       '</div>';
 			    		}
 			    		$('#content').html(str);

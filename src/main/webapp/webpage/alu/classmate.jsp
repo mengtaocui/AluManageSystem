@@ -189,6 +189,10 @@
         $('#yearPeriod').on('change', function(){
         	initGrade();
         });
+        
+        if(location.href.indexOf("load=detail")!=-1){
+    		$("a").attr("href","javascript:void(0);");
+    	}
     })
     
  	//根据学院和年届返回班级

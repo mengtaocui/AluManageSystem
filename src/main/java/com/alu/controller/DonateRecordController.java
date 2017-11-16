@@ -109,7 +109,7 @@ public class DonateRecordController extends BaseController {
 		donateRecord.setCrtByUserName(AuTools.createLikeStr(donateRecord.getCrtByUserName()));
 		
 		
-		//报名截止时间
+		
 		if(StringUtil.isNotEmpty(request.getParameter("crtTime_begin1"))){
 			cq.ge("crtTime", request.getParameter("crtTime_begin1"));
 		}
