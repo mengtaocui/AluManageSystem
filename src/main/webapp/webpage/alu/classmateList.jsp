@@ -7,14 +7,13 @@
    <t:dgCol title="编号" field="id" hidden="true"></t:dgCol>
    <t:dgCol title="学院" field="collegeId"  dictionary="t_college,id,name"  width="120" query="true"></t:dgCol>
    <t:dgCol title="年届" field="yearPeriod" dictionary="nianJie"   width="50" query="true"></t:dgCol>
-   <t:dgCol title="班级" field="gradeId" dictionary="t_grade,id,name"  width="120" query="true"></t:dgCol>
+   <t:dgCol title="班级" field="gradeId"  showLen="12" dictionary="t_grade,id,name"  width="120" query="true"></t:dgCol>
    <t:dgCol title="姓名" field="name"   width="120" query="true"></t:dgCol>
-   <t:dgCol title="性别" field="sex"   dictionary="sex" width="120" query="true"></t:dgCol>
-   <t:dgCol title="学号" field="stuNo"   width="120" query="true"></t:dgCol>
+   <t:dgCol title="性别" field="sex"   dictionary="sex" width="40" ></t:dgCol>
+   <t:dgCol title="学号" field="stuNo"  hidden="true"   width="120" ></t:dgCol>
    <t:dgCol title="电话" field="phone"   width="120" query="true"></t:dgCol>
-   <t:dgCol title="邮箱" field="email"   width="120" query="true"></t:dgCol>
-   <t:dgCol title="头像" field="headPortrait" image="true" imageSize="120,120" width="120"></t:dgCol>
-   <t:dgCol title="创建时间" field="crtTime"   width="120" formatter="yyyy-MM-dd hh:mm:ss" query="true" queryMode="group"></t:dgCol>
+   <t:dgCol title="邮箱" field="email"   width="120" ></t:dgCol>
+   <t:dgCol title="头像" field="headPortrait" image="true" imageSize="60,60" width="80"></t:dgCol>
    <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
    <t:dgDelOpt title="删除" url="classmateController.do?del&id={id}" urlStyle="background-color:#ec4758;"  urlclass="ace_button"  urlfont="fa-trash-o"/>
    <t:dgToolBar title="录入" icon="icon-add" url="classmateController.do?addorupdate" funname="add" width="800" height="570"></t:dgToolBar>

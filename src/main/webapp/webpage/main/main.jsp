@@ -132,10 +132,10 @@ a:hover {
 </head>
 <body class="easyui-layout" style="overflow-y: hidden" scroll="no">
 <!-- 顶部-->
-<div region="north" border="false" title=" JEECG Framework  <t:mutiLang langKey="system.version.number"/>" style="BACKGROUND: #E6E6FA; height: 85px; padding: 1px; overflow: hidden;">
+<div region="north" border="false" title=" 校友管理系统  <t:mutiLang langKey="system.version.number"/>" style="BACKGROUND: #E6E6FA; height: 85px; padding: 1px; overflow: hidden;">
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 <tr>
-    <td align="left" style="vertical-align: text-bottom;"><img src="plug-in/login/images/head.png;"> <img src="plug-in/login/images/foot.png"></td>
+    <td align="left" style="vertical-align: text-bottom;">校友管理系统</td>
     <td align="right" nowrap>
         <table>
             <tr>
@@ -166,18 +166,18 @@ a:hover {
                         <t:mutiLang langKey="common.change.password"/>
                     </div>
 					<div class="menu-sep"></div>
-                    <div onclick="openwindow('<t:mutiLang langKey="common.ssms.getSysInfos"/>','tSSmsController.do?getSysInfos')">
+                   <%--  <div onclick="openwindow('<t:mutiLang langKey="common.ssms.getSysInfos"/>','tSSmsController.do?getSysInfos')">
                         <t:mutiLang langKey="common.ssms.getSysInfos"/>
-                    </div>
+                    </div> --%>
                     <div class="menu-sep"></div>
                     <div onclick="add('<t:mutiLang langKey="common.change.style"/>','userController.do?changestyle','',550,200)">
                         <t:mutiLang langKey="common.my.style"/>
                     </div>
                     
                     <div class="menu-sep" ></div>
-                    <div onclick="window.open('http://yun.jeecg.org')">
+                   <!--  <div onclick="window.open('http://yun.jeecg.org')">
                          	云应用中心
-                    </div>
+                    </div> -->
                     
                     <div onclick="clearLocalstorage()">
                         <t:mutiLang langKey="common.clear.localstorage"/>
@@ -240,9 +240,8 @@ a:hover {
     <div align="center" style="color: #CC99FF; padding-top: 2px">&copy;
         <t:mutiLang langKey="common.copyright"/>
         <span class="tip">
-            <a href="http://www.jeecg.org" title=" JEECG Framework  <t:mutiLang langKey="system.version.number"/>"> JEECG Framework  <t:mutiLang langKey="system.version.number"/></a>
+            <a href="javascript:void(0);" title=" 校友管理系统  <t:mutiLang langKey="system.version.number"/>"> 校友管理系统  <t:mutiLang langKey="system.version.number"/></a>
             <t:mutiLang langKey="common.copyright"/>:
-            <a href="#" title=" JEECG Framework  <t:mutiLang langKey="system.version.number"/>">JEECG Framework  <t:mutiLang langKey="system.version.number"/></a>
         </span>
     </div>
 </div>

@@ -10,7 +10,7 @@
    <t:dgCol title="新闻标题" field="title"  width="150" query="true"></t:dgCol>
    <t:dgCol title="新闻内容" field="content" hidden="true"  width="120"></t:dgCol>
    <t:dgCol title="浏览次数" field="browseCount"   width="70"></t:dgCol>
-   <t:dgCol title="审核状态" field="checkStatus" replace="等待审核_0,已通过_1,被拒绝_2"   width="120"></t:dgCol>
+   <t:dgCol title="审核状态" field="checkStatus" replace="等待审核_0,已通过_1,被拒绝_2" query="true"  width="120"></t:dgCol>
    <t:dgCol title="创建人" field="crtByUserName"   width="120"></t:dgCol>
    <t:dgCol title="创建时间" field="crtTime"   width="120" formatter="yyyy-MM-dd hh:mm:ss" query="true" queryMode="group"></t:dgCol>
    <t:dgCol title="最近一次修改人" field="lastUpdateByUserName"   width="120"></t:dgCol>

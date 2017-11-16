@@ -1049,7 +1049,9 @@ a:hover.l-btn-disabled {
   padding: 0;
   overflow: hidden;
 }
-
+.datagrid-cell{
+	text-align: center;
+}
 /*update-begin--Author:xuelin  Date:20170613 for：TASK #2100 【列表样式美化】【样式专题】Jeecg平台任务 ---4列表页面，按钮和列表的字体 参考jqgrid-------------------- */
 .datagrid-cell,
 .datagrid-cell-group,

@@ -184,7 +184,7 @@
 	    paginationClickable: true,
 	    nextButton: '.swiper-button-next',
 	    prevButton: '.swiper-button-prev',
-	    autoplay: 3000,
+	    autoplay: 30000,
 	    spaceBetween: 30
 	});
 	$(function(){

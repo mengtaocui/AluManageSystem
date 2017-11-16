@@ -239,12 +239,12 @@
 										 <t:mutiLang langKey="common.profile"/>
 									</a>
 								</li>
-								<li>
+				<%-- 				<li>
 									<a href="javascript:openwindow('<t:mutiLang langKey="common.ssms.getSysInfos"/>','tSSmsController.do?getSysInfos')">
 										<i class="ace-icon fa fa-user"></i>
 										 <t:mutiLang langKey="common.ssms.getSysInfos"/>
 									</a>
-								</li>
+								</li> --%>
 								<li>
 									<a href="javascript:add('<t:mutiLang langKey="common.change.style"/>','userController.do?changestyle','',550,250)">
 										<i class="ace-icon fa fa-user"></i>

@@ -231,12 +231,12 @@
 										 <t:mutiLang langKey="common.profile"/>
 									</a>
 								</li>
-								<li>
+						<%-- 		<li>
 									<a href="javascript:openwindow('<t:mutiLang langKey="common.ssms.getSysInfos"/>','tSSmsController.do?getSysInfos')">
 										<i class="icon-cog"></i>
 										 <t:mutiLang langKey="common.ssms.getSysInfos"/>
 									</a>
-								</li>
+								</li> --%>
 								<li>
 									<a href="javascript:add('<t:mutiLang langKey="common.change.style"/>','userController.do?changestyle','',550,250)">
 										<i class="icon-cog"></i>
@@ -244,12 +244,12 @@
 									</a>
 								</li>
 								
-								<li>
+								<!-- <li>
 									<a href="http://yun.jeecg.org" target="_blank">
 										<i class="icon-cloud"></i>
 										 云应用中心
 									</a>
-								</li>
+								</li> -->
 								
 								<li>
 									<a href="javascript:clearLocalstorage()">

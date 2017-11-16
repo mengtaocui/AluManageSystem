@@ -999,6 +999,9 @@ a:hover.l-btn-disabled {
   margin: 0;
   padding: 0;
 }
+.datagrid-cell{
+	text-align: center;
+}
 .datagrid-cell,
 .datagrid-cell-group,
 .datagrid-header-rownumber,

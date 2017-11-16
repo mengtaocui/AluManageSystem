@@ -57,7 +57,7 @@
 	<ul class="dropdown-menu">
 		<li onclick="openwindow('<t:mutiLang langKey="common.profile"/>','userController.do?userinfo')"><a href="javascript:;"><i class="icon-user"></i> <t:mutiLang langKey="common.profile"/></a></li>
 		<li onclick="add('<t:mutiLang langKey="common.change.password"/>','userController.do?changepassword')"><a href="javascript:;"><i class="icon-pencil"></i> <t:mutiLang langKey="common.change.password"/></a></li>
-		<li onclick="openwindow('<t:mutiLang langKey="common.ssms.getSysInfos"/>','tSSmsController.do?getSysInfos')"><a href="javascript:;"><i class="icon-pencil"></i> <t:mutiLang langKey="common.ssms.getSysInfos"/></a></li>
+		<%-- <li onclick="openwindow('<t:mutiLang langKey="common.ssms.getSysInfos"/>','tSSmsController.do?getSysInfos')"><a href="javascript:;"><i class="icon-pencil"></i> <t:mutiLang langKey="common.ssms.getSysInfos"/></a></li> --%>
 		<li onclick="add('<t:mutiLang langKey="common.change.style"/>','userController.do?changestyle')"><a href="javascript:;"><i class="icon-retweet"></i> <t:mutiLang langKey="common.change.style"/></a></li>
 	</ul>
 	</li>

@@ -8469,7 +8469,7 @@ span.input-icon {
   padding-right: 6px;
 }
 .input-icon.input-icon-right > input {
-  padding-left: 6px;
+  padding-left: 26px !important;
   padding-right: 24px;
 }
 .input-icon > .ace-icon {
@@ -8485,8 +8485,7 @@ span.input-icon {
   font-size: 16px;
 }
 .input-icon.input-icon-right > .ace-icon {
-  left: auto;
-  right: 3px;
+  left: 3px;
 }
 .input-icon > input:focus + .ace-icon {
   color: #579;

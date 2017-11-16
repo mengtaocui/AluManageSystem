@@ -1737,7 +1737,7 @@ public class DataGridTag extends JeecgTag {
 			for (DataGridColumn col : columnList) {
 				if (col.isQuery()) {
 					sb.append("<span style=\"display:-moz-inline-box;display:inline-block;\">");
-					sb.append("<span style=\"vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;text-overflow:ellipsis;-o-text-overflow:ellipsis; overflow: hidden;white-space:nowrap; \" title=\""+col.getTitle()+"\">"+col.getTitle()+"：</span>");
+					sb.append("<span style=\"vertical-align:middle;display:-moz-inline-box;display:inline-block;padding-left: 3px;text-overflow:ellipsis;-o-text-overflow:ellipsis; overflow: hidden;white-space:nowrap; \" title=\""+col.getTitle()+"\">"+col.getTitle()+"：</span>");
 					if("single".equals(col.getQueryMode())){
 						if(!StringUtil.isEmpty(col.getReplace())){
 							sb.append("<select name=\""+col.getField().replaceAll("_","\\.")+"\" WIDTH=\"100\" style=\"width: 104px\"> ");
@@ -2935,7 +2935,7 @@ public class DataGridTag extends JeecgTag {
 				for (DataGridColumn col : columnList) {
 					if (col.isQuery()) {
 						sb.append("<span style=\"display:-moz-inline-box;display:inline-block;\">");
-						sb.append("<span style=\"vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 80px;text-align:right;text-overflow:ellipsis;-o-text-overflow:ellipsis; overflow: hidden;white-space:nowrap; \" title=\""+col.getTitle()+"\">"+col.getTitle()+"：</span>");
+						sb.append("<span style=\"vertical-align:middle;display:-moz-inline-box;display:inline-block;padding-left: 3px;text-overflow:ellipsis;-o-text-overflow:ellipsis; overflow: hidden;white-space:nowrap; \" title=\""+col.getTitle()+"\">"+col.getTitle()+"：</span>");
 						if("single".equals(col.getQueryMode())){
 							if(!StringUtil.isEmpty(col.getReplace())){
 								sb.append("<select name=\""+col.getField().replaceAll("_","\\.")+"\" WIDTH=\"100\" style=\"width: 104px\"> ");

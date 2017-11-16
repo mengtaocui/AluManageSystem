@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="plug-in/easyui/portal/portal.css">
 </c:if>
 <!-- add-begin--Author:jg_renjie  Date:20150610 for：今天需要提醒的【系统信息】 -->	
-<script type="text/javascript" src="plug-in/login/js/getMsgs.js"></script>
+<!-- <script type="text/javascript" src="plug-in/login/js/getMsgs.js"></script> -->
 <!-- add-begin--Author:jg_renjie  Date:20150610 for：今天需要提醒的【系统信息】	 -->
 
 <script type="text/javascript" src="plug-in/Highcharts-2.2.5/js/highcharts.src.js"></script>
