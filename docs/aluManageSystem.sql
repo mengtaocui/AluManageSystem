@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50631
 File Encoding         : 65001
 
-Date: 2017-11-10 11:13:28
+Date: 2017-11-16 13:58:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -140,6 +140,7 @@ CREATE TABLE `t_activity` (
 -- ----------------------------
 -- Records of t_activity
 -- ----------------------------
+INSERT INTO `t_activity` VALUES ('402881bf5fbecfaf015fbeeda0990002', '郊游', '上海', '<html>\r\n<head>\r\n	<title></title>\r\n</head>\r\n<body>&nbsp;</body>\r\n</html>\r\n', '2017-11-17 17:05:42', '2017-11-30 17:05:50', '2017-11-20 17:05:56', null, '1', '8a8ab0b246dc81120146dc8181950052', '2017-11-15 17:06:05', 'admin', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '0');
 
 -- ----------------------------
 -- Table structure for t_activity_space
@@ -148,6 +149,7 @@ DROP TABLE IF EXISTS `t_activity_space`;
 CREATE TABLE `t_activity_space` (
   `id` varchar(32) NOT NULL COMMENT 'id',
   `activity_id` varchar(32) DEFAULT NULL COMMENT '活动id',
+  `activity_name` varchar(255) DEFAULT NULL,
   `file_path` text COMMENT '附件id',
   `check_status` tinyint(4) DEFAULT NULL COMMENT '0未审核，1通过审核，未通过',
   `crt_time` varchar(255) DEFAULT NULL,
@@ -163,6 +165,9 @@ CREATE TABLE `t_activity_space` (
 -- ----------------------------
 -- Records of t_activity_space
 -- ----------------------------
+INSERT INTO `t_activity_space` VALUES ('402881bf5fc2d2e8015fc2d398770002', '402881bf5fbecfaf015fbeeda0990002', '郊游', 'sysController/readPic.do?picPath=402881bf5fc2d398015fc2d398710000gif.gif', '1', '2017-11-16 11:16:07', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-16', '8a8ab0b246dc81120146dc8181950052', 'admin', '0');
+INSERT INTO `t_activity_space` VALUES ('402881bf5fc2d4a8015fc2d535dc0002', '402881bf5fbecfaf015fbeeda0990002', '郊游', 'sysController/readPic.do?picPath=402881bf5fc2d535015fc2d535d70000gif.gif', '2', '2017-11-16 11:17:53', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-16', '8a8ab0b246dc81120146dc8181950052', 'admin', '0');
+INSERT INTO `t_activity_space` VALUES ('402881bf5fc2da5e015fc2db2e900001', '402881bf5fbecfaf015fbeeda0990002', '郊游', 'sysController/readPic.do?picPath=402881bf5fc2db2e015fc2db2e7a0000gif.gif', '0', '2017-11-16 11:24:25', '8a8ab0b246dc81120146dc8181950052', 'admin', null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for t_classmate
@@ -170,8 +175,13 @@ CREATE TABLE `t_activity_space` (
 DROP TABLE IF EXISTS `t_classmate`;
 CREATE TABLE `t_classmate` (
   `ID` varchar(32) NOT NULL,
+  `college_id` varchar(32) DEFAULT NULL,
+  `college_name` varchar(255) DEFAULT NULL,
+  `year_period` varchar(50) DEFAULT NULL COMMENT '年届',
   `grade_id` varchar(32) DEFAULT NULL COMMENT '班级id',
+  `grade_name` varchar(255) DEFAULT NULL,
   `name` varchar(50) DEFAULT NULL COMMENT '姓名',
+  `sex` tinyint(1) DEFAULT NULL,
   `stu_no` varchar(200) DEFAULT NULL COMMENT '学号',
   `phone` varchar(50) DEFAULT NULL COMMENT '电话',
   `address` varchar(1000) DEFAULT NULL COMMENT '地址',
@@ -179,8 +189,10 @@ CREATE TABLE `t_classmate` (
   `descri` varchar(4000) DEFAULT NULL COMMENT '简介',
   `head_portrait` varchar(4000) DEFAULT NULL COMMENT '头像',
   `crt_by` varchar(255) DEFAULT NULL COMMENT '创建人',
+  `crt_by_user_name` varchar(255) DEFAULT NULL,
   `crt_time` varchar(255) DEFAULT NULL COMMENT '创建时间',
   `last_update_by` varchar(255) DEFAULT NULL COMMENT '最近一次修改人',
+  `last_update_by_user_name` varchar(255) DEFAULT NULL,
   `last_update_time` varchar(255) DEFAULT NULL COMMENT '最近一次修改时间',
   `delete_flag` tinyint(255) DEFAULT NULL COMMENT '0未删除，1已删除',
   PRIMARY KEY (`ID`)
@@ -189,30 +201,30 @@ CREATE TABLE `t_classmate` (
 -- ----------------------------
 -- Records of t_classmate
 -- ----------------------------
-INSERT INTO `t_classmate` VALUES ('10', '1', '刘文斌', '13700007', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('11', '1', '李泽鹏', '13700008', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('12', '1', '擎天柱', '13700009', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('13', '1', '黑寡妇', '13700010', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('14', '1', '李云龙', '13700011', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('15', '1', '楚云飞', '13700012', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('16', '1', '李建腾', '13700013', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('17', '1', '张三丰', '13700014', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('18', '1', '张无忌', '13700015', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('19', '1', '王老五', '13700016', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('20', '1', '王三四', '13700017', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('21', '1', '王柳柳', '13700018', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('22', '1', '张大大', '13700019', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('23', '1', '张老三', '13700020', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('24', '1', '李四光', '13700021', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('25', '1', '刘虎祥', '13700022', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('26', '1', '王思聪', '13700023', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('27', '1', '王健林', '13700024', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('4', '1', '刘小星', '13700002', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('6', '1', '颉小强', '13700003', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('63', '1', '朱钰飒', '1370001908', '15193133963', '甘肃省兰州市永登县产业孵化大厦', '139933656265@163.com', '我是朱飒大家好！我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('7', '1', '常小明', '13700004', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('8', '1', '刘作贤', '13700005', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
-INSERT INTO `t_classmate` VALUES ('9', '1', '岳文燕', '13700006', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null);
+INSERT INTO `t_classmate` VALUES ('10', null, null, null, '1', null, '刘文斌', '1', '13700007', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null, null, '0');
+INSERT INTO `t_classmate` VALUES ('11', '402881bf5fbdb432015fbdb52d750001', '计算机学院 ', '1990', '402881bf5fbe80af015fbeae7f98000d', '90年1班', '李泽鹏', '0', '13700008', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 15:57:44', '0');
+INSERT INTO `t_classmate` VALUES ('12', null, null, null, '1', null, '擎天柱', '0', '13700009', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null, null, '0');
+INSERT INTO `t_classmate` VALUES ('13', null, null, null, '1', null, '黑寡妇', '0', '13700010', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null, null, '0');
+INSERT INTO `t_classmate` VALUES ('14', null, null, null, '1', null, '李云龙', '0', '13700011', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null, null, '0');
+INSERT INTO `t_classmate` VALUES ('15', null, null, null, '1', null, '楚云飞', '0', '13700012', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null, null, '0');
+INSERT INTO `t_classmate` VALUES ('16', null, null, null, '1', null, '李建腾', '0', '13700013', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null, null, '0');
+INSERT INTO `t_classmate` VALUES ('17', null, null, null, '1', null, '张三丰', '0', '13700014', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null, null, '0');
+INSERT INTO `t_classmate` VALUES ('18', null, null, null, '1', null, '张无忌', '1', '13700015', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null, null, '0');
+INSERT INTO `t_classmate` VALUES ('19', null, null, null, '1', null, '王老五', '0', '13700016', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null, null, '0');
+INSERT INTO `t_classmate` VALUES ('20', null, null, null, '1', null, '王三四', '1', '13700017', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null, null, '0');
+INSERT INTO `t_classmate` VALUES ('21', null, null, null, '1', null, '王柳柳', '0', '13700018', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null, null, '0');
+INSERT INTO `t_classmate` VALUES ('22', null, null, null, '1', null, '张大大', '0', '13700019', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null, null, '0');
+INSERT INTO `t_classmate` VALUES ('23', null, null, null, '1', null, '张老三', '0', '13700020', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null, null, '0');
+INSERT INTO `t_classmate` VALUES ('24', null, null, null, '1', null, '李四光', '0', '13700021', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null, null, '0');
+INSERT INTO `t_classmate` VALUES ('25', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1991', '41', '1991届公共卫生学院预防医学2班', '刘虎祥', '0', '13700022', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 16:13:01', '0');
+INSERT INTO `t_classmate` VALUES ('26', null, null, null, '1', null, '王思聪', '0', '13700023', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null, null, '0');
+INSERT INTO `t_classmate` VALUES ('27', null, null, null, '1', null, '王健林', '0', '13700024', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null, null, '0');
+INSERT INTO `t_classmate` VALUES ('4', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '1', '1990届公共卫生学院预防医学1班', '刘小星', '0', '13700002', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'sysController/readPic.do?picPath=402881bf5fc2a7d9015fc2a7d92b0000gif.gif', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-16 10:28:22', '0');
+INSERT INTO `t_classmate` VALUES ('6', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '1', '1990届公共卫生学院预防医学1班', '颉小强', '0', '13700003', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'sysController/readPic.do?picPath=402881bf5fbef20d015fbef7f9b20003gif.gif', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 17:17:24', '0');
+INSERT INTO `t_classmate` VALUES ('63', null, null, null, '1', null, '朱钰飒', '0', '1370001908', '15193133963', '甘肃省兰州市永登县产业孵化大厦', '139933656265@163.com', '我是朱飒大家好！我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null, null, '0');
+INSERT INTO `t_classmate` VALUES ('7', null, null, null, '1', null, '常小明', '0', '13700004', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null, null, '0');
+INSERT INTO `t_classmate` VALUES ('8', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '1', '1990届公共卫生学院预防医学1班', '刘作贤', '0', '13700005', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 15:56:16', '0');
+INSERT INTO `t_classmate` VALUES ('9', null, null, null, '1', null, '岳文燕', '0', '13700006', '13993356265', '甘肃省兰州市永登县产业孵化大厦', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for t_college
@@ -221,12 +233,15 @@ DROP TABLE IF EXISTS `t_college`;
 CREATE TABLE `t_college` (
   `id` varchar(32) NOT NULL,
   `name` varchar(50) DEFAULT NULL COMMENT '学院名称',
-  `status` tinyint(4) DEFAULT NULL COMMENT '0未审核，1通过审核，未通过',
+  `checkStatus` tinyint(4) DEFAULT NULL COMMENT '0未审核，1通过审核，未通过',
   `crt_by` varchar(255) DEFAULT NULL COMMENT '创建人',
+  `crt_by_user_name` varchar(255) DEFAULT NULL,
   `crt_time` varchar(255) DEFAULT NULL COMMENT '创建时间',
   `last_update_by` varchar(255) DEFAULT NULL COMMENT '最近一次修改人',
+  `last_update_by_user_name` varchar(255) DEFAULT NULL,
   `last_update_time` varchar(255) DEFAULT NULL COMMENT '最近一次修改时间',
   `check_by` varchar(32) DEFAULT NULL COMMENT '审核人',
+  `check_by_user_name` varchar(255) DEFAULT NULL,
   `delete_flag` tinyint(255) DEFAULT NULL COMMENT '0未删除，1已删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -234,7 +249,9 @@ CREATE TABLE `t_college` (
 -- ----------------------------
 -- Records of t_college
 -- ----------------------------
-INSERT INTO `t_college` VALUES ('1', '公共卫生学院', null, null, null, null, null, null, null);
+INSERT INTO `t_college` VALUES ('402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院', '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-12 11:20:59', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 11:21:10', null, null, '0');
+INSERT INTO `t_college` VALUES ('402881bf5fbdb432015fbdb52d750001', '计算机学院', '2', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-10-15 11:24:48', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '0');
+INSERT INTO `t_college` VALUES ('402881bf5fbdb432015fbdb5639d0003', '生物工程学院', '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 11:25:02', null, null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for t_data
@@ -267,12 +284,15 @@ CREATE TABLE `t_donate` (
   `end_time` varchar(255) DEFAULT NULL COMMENT '结束时间',
   `apply_end_time` varchar(255) DEFAULT NULL COMMENT '报名截止时间',
   `browse_count` int(4) DEFAULT NULL COMMENT '浏览次数',
-  `status` tinyint(4) DEFAULT NULL COMMENT '0未审核，1通过审核，未通过',
+  `checkStatus` tinyint(4) DEFAULT NULL COMMENT '0未审核，1通过审核，未通过',
   `crt_by` varchar(255) DEFAULT NULL COMMENT '创建人',
+  `crt_by_user_name` varchar(255) DEFAULT NULL,
   `crt_time` varchar(255) DEFAULT NULL COMMENT '创建时间',
   `last_update_by` varchar(255) DEFAULT NULL COMMENT '最近一次修改人',
+  `last_update_by_user_name` varchar(255) DEFAULT NULL,
   `last_update_time` varchar(255) DEFAULT NULL COMMENT '最近一次修改时间',
   `check_by` varchar(32) DEFAULT NULL COMMENT '审核人',
+  `check_by_user_name` varchar(255) DEFAULT NULL,
   `delete_flag` tinyint(255) DEFAULT NULL COMMENT '0未删除，1已删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -280,7 +300,7 @@ CREATE TABLE `t_donate` (
 -- ----------------------------
 -- Records of t_donate
 -- ----------------------------
-INSERT INTO `t_donate` VALUES ('2', '四维空间', '四维空间1号室', '兰州新区', '2017-11-01 上午 11:10', '2017-11-01 上午 11:10', '2017-11-01 上午 11:10', '2', null, 'admintest', '2017-11-01 11:10:16', '2017-11-01 11:10:16', '0', null, null);
+INSERT INTO `t_donate` VALUES ('2', '四维空间', '四维空间1号室', '<html>\r\n<head>\r\n	<title></title>\r\n</head>\r\n<body>兰州新区fadsasdf<img alt=\"\" src=\"sysController/readPic.do?picPath=402881bf5fbf1482015fbf1482f80000gif.gif\" style=\"width: 200px; height: 200px;\" /></body>\r\n</html>\r\n', '2017-11-01 上午 11:10', '2017-11-01 上午 11:10', '2017-11-01 上午 11:10', '2', '0', 'admintest', null, '2017-11-01 11:10:16', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 17:48:35', null, null, '0');
 
 -- ----------------------------
 -- Table structure for t_donate_record
@@ -289,11 +309,15 @@ DROP TABLE IF EXISTS `t_donate_record`;
 CREATE TABLE `t_donate_record` (
   `id` varchar(32) NOT NULL COMMENT 'id',
   `donate_id` varchar(32) DEFAULT NULL COMMENT '捐赠项目id',
+  `donate_name` varchar(255) DEFAULT NULL,
   `donate_person_name` varchar(255) DEFAULT NULL COMMENT '捐赠人姓名',
   `donate_person_phone` varchar(255) DEFAULT NULL COMMENT '捐赠人手机号',
+  `remark` varchar(500) DEFAULT NULL,
   `crt_by` varchar(255) DEFAULT NULL COMMENT '处理人',
+  `crt_by_user_name` varchar(255) DEFAULT NULL,
   `crt_time` varchar(255) DEFAULT NULL COMMENT '捐赠时间',
   `last_update_by` varchar(255) DEFAULT NULL COMMENT '最近一次修改人',
+  `last_update_by_user_name` varchar(255) DEFAULT NULL,
   `last_update_time` varchar(255) DEFAULT NULL COMMENT '最近一次修改时间',
   `delete_flag` tinyint(255) DEFAULT NULL COMMENT '0未删除，1已删除',
   PRIMARY KEY (`id`)
@@ -302,7 +326,8 @@ CREATE TABLE `t_donate_record` (
 -- ----------------------------
 -- Records of t_donate_record
 -- ----------------------------
-INSERT INTO `t_donate_record` VALUES ('2', '四维空间', null, null, 'admintest', '2017-11-01 11:10:16', '2017-11-01 11:10:16', '0', null);
+INSERT INTO `t_donate_record` VALUES ('2', '四维空间', null, null, null, null, 'admintest', null, '2017-11-01 11:10:16', '2017-11-01 11:10:16', null, '0', null);
+INSERT INTO `t_donate_record` VALUES ('402881bf5fc26aa1015fc26f4bd40001', '2', '四维空间 ', '刘小星', '13993356265', '捐了好多钱', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-16 09:26:34', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-16 10:28:52', '0');
 
 -- ----------------------------
 -- Table structure for t_grade
@@ -311,15 +336,20 @@ DROP TABLE IF EXISTS `t_grade`;
 CREATE TABLE `t_grade` (
   `id` varchar(32) NOT NULL,
   `name` varchar(100) DEFAULT NULL COMMENT '班级名称',
+  `college_id` varchar(32) DEFAULT NULL COMMENT '学院id',
+  `college_name` varchar(255) DEFAULT NULL,
   `year_period` varchar(50) DEFAULT NULL COMMENT '年届',
   `qq` varchar(50) DEFAULT NULL COMMENT '班级QQ群',
   `stu_count` tinyint(3) DEFAULT NULL COMMENT '人数',
-  `status` tinyint(4) DEFAULT NULL COMMENT '0未审核，1通过审核，未通过',
+  `checkStatus` tinyint(4) DEFAULT NULL COMMENT '0未审核，1通过审核，未通过',
   `crt_by` varchar(255) DEFAULT NULL COMMENT '创建人',
+  `crt_by_user_name` varchar(255) DEFAULT NULL,
   `crt_time` varchar(255) DEFAULT NULL COMMENT '创建时间',
   `last_update_by` varchar(255) DEFAULT NULL COMMENT '最近一次修改人',
+  `last_update_by_user_name` varchar(255) DEFAULT NULL,
   `last_update_time` varchar(255) DEFAULT NULL COMMENT '最近一次修改时间',
   `check_by` varchar(32) DEFAULT NULL COMMENT '审核人',
+  `check_by_user_name` varchar(255) DEFAULT NULL,
   `delete_flag` tinyint(255) DEFAULT NULL COMMENT '0未删除，1已删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -327,10 +357,12 @@ CREATE TABLE `t_grade` (
 -- ----------------------------
 -- Records of t_grade
 -- ----------------------------
-INSERT INTO `t_grade` VALUES ('1', '1990届公共卫生学院预防医学1班', '1', '2038104071', null, null, null, null, null, null, null, null);
-INSERT INTO `t_grade` VALUES ('28', '1990届公共卫生学院预防医学2班', '1', '2038104076', null, null, null, null, null, null, null, null);
-INSERT INTO `t_grade` VALUES ('40', '1991届公共卫生学院预防医学1班', '1025', '260060549', null, null, null, null, null, null, null, null);
-INSERT INTO `t_grade` VALUES ('41', '1991届公共卫生学院预防医学2班', '1025', '2038104076', null, null, null, null, null, null, null, null);
+INSERT INTO `t_grade` VALUES ('1', '1990届公共卫生学院预防医学1班', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '2038104071', null, '0', null, null, '2017-10-15 13:50:06', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 14:23:30', null, null, '0');
+INSERT INTO `t_grade` VALUES ('28', '1990届公共卫生学院预防医学2班', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '2038104076', null, '1', null, null, '2017-09-15 13:50:06', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 14:23:39', '8a8ab0b246dc81120146dc8181950052', 'admin', '0');
+INSERT INTO `t_grade` VALUES ('40', '1991届公共卫生学院预防医学1班', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1991', '260060549', null, '2', null, null, '2017-10-25 13:50:06', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 14:23:47', '8a8ab0b246dc81120146dc8181950052', 'admin', '0');
+INSERT INTO `t_grade` VALUES ('402881bf5fbe2817015fbe3a35e30006', 'S201', '402881bf5fbdb432015fbdb52d750001', '', '1991', '', null, '2', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-18 13:50:06', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '1');
+INSERT INTO `t_grade` VALUES ('402881bf5fbe80af015fbeae7f98000d', '90年1班', '402881bf5fbdb432015fbdb52d750001', '计算机学院 ', '1990', '', null, '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 15:57:07', null, null, null, null, null, '0');
+INSERT INTO `t_grade` VALUES ('41', '1991届公共卫生学院预防医学2班', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1991', '2038104076', null, '0', null, null, '2017-11-15 13:50:06', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 14:23:57', null, null, '0');
 
 -- ----------------------------
 -- Table structure for t_invitation
@@ -339,13 +371,17 @@ DROP TABLE IF EXISTS `t_invitation`;
 CREATE TABLE `t_invitation` (
   `id` varchar(32) NOT NULL,
   `title` varchar(500) DEFAULT NULL COMMENT '帖子标题',
-  `content` text COMMENT '新闻内容',
+  `content` text COMMENT '内容',
   `browse_count` int(4) DEFAULT NULL COMMENT '浏览次数',
+  `checkStatus` tinyint(1) DEFAULT NULL,
   `crt_by` varchar(500) DEFAULT NULL COMMENT '创建人',
+  `crt_by_user_name` varchar(255) DEFAULT NULL,
   `crt_time` varchar(500) DEFAULT NULL COMMENT '创建时间',
   `last_update_by` varchar(500) DEFAULT NULL COMMENT '最近一次修改人',
+  `last_update_by_user_name` varchar(255) DEFAULT NULL,
   `last_update_time` varchar(500) DEFAULT NULL COMMENT '最近一次修改时间',
   `check_by` varchar(32) DEFAULT NULL COMMENT '审核人',
+  `check_by_user_name` varchar(255) DEFAULT NULL,
   `delete_flag` tinyint(4) DEFAULT NULL COMMENT '0未删除，1已删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -353,6 +389,7 @@ CREATE TABLE `t_invitation` (
 -- ----------------------------
 -- Records of t_invitation
 -- ----------------------------
+INSERT INTO `t_invitation` VALUES ('402881bf5fc34aaf015fc353face000b', 'fasdf', '<html>\r\n<head>\r\n	<title></title>\r\n</head>\r\n<body>阿斯顿发生</body>\r\n</html>\r\n', null, '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-16 13:36:21', null, null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for t_news
@@ -384,6 +421,7 @@ CREATE TABLE `t_news` (
 -- Records of t_news
 -- ----------------------------
 INSERT INTO `t_news` VALUES ('402881bf5fa38f68015fa3ea30950024', '402881bf5fa38f68015fa3e2e8920001', '校史概况 ', '402881bf5fa38f68015fa3e46f2a0013', '历史 ', '学院历史', '<html>\r\n<head>\r\n	<title></title>\r\n</head>\r\n<body><span style=\"color: rgb(34, 34, 34); font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 18px; text-indent: 28px; background-color: rgb(255, 255, 255);\">&nbsp; &nbsp; &nbsp; <img alt=\"\" src=\"sysController/readPic.do?picPath=402881bf5fa3e8e1015fa3e8e10a0000jpg.jpg\" style=\"width: 840px; height: 472px;\" /><br />\r\n&nbsp; &nbsp; &nbsp; &nbsp;新中国成立后，为了学习和借鉴苏联社会主义建设的经验，在急需大批俄语人才的情况下，由时任上海市市长陈毅同志倡导，经中共中央华东局、上海市委决定，以华东人民革命大学第四部为基础，在上海创办一所培养俄语人才的学校，&ldquo;华东人民革命大学附设上海俄文学校&rdquo;由此于1949年12月宣告成立，这是新中国成立伊始兴办的第一所高等外语学校。上海市委任命多年从事俄语新闻和文学翻译出版工作、在文化界颇有知名度的时代出版社社长姜椿芳同志为第一任校长，最初校舍位于宝山路（原暨南大学二院）。&nbsp;当时的上海俄文学校还只是一所专业结构单一、以学习俄语和俄罗斯苏联文学为主的外语类高校，培养的学生主要是俄语口笔译人员和俄语教学师资。<br />\r\n<img alt=\"\" src=\"sysController/readPic.do?picPath=402881bf5fa3e8e1015fa3e9d3490001jpg.jpg\" style=\"width: 840px; height: 472px;\" />&nbsp; &nbsp; &nbsp; 陈毅市长对我校十分关心，多次亲临指导，要求我校领导把眼光放远一些，除俄语外，还要培养其他语种专业人才。根据陈毅同志的指示，为配合国家外交外贸工作需要，学校于1950年增设英语班，更名为&ldquo;华东人民革命大学附设外文专修学校&rdquo;，校址迁至东体育会路（原暨南大学一院），即现虹口校区校址。1951年4月，学校又建立东方语言文学系，增设缅甸语、越南语和印尼语专业。1952年3月，南京华东军区政治部附设外文专修学校学员150余人并入我校。至1952年8月，学校已初具规模，设俄语、英语、缅甸语、越南语和印度尼西亚语5个语种。</span></body>\r\n</html>\r\n', null, '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:12:34', null, null, null, null, null, '0');
+INSERT INTO `t_news` VALUES ('402881bf5fc26aa1015fc286c0920005', '', '', null, '', '', '', null, '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-16 09:52:11', null, null, null, null, null, '1');
 
 -- ----------------------------
 -- Table structure for t_news_module
@@ -620,8 +658,9 @@ CREATE TABLE `t_s_base_user` (
 -- ----------------------------
 -- Records of t_s_base_user
 -- ----------------------------
-INSERT INTO `t_s_base_user` VALUES ('402880e74d75c4dd014d75d44af30005', null, null, 'deec3ebf23191eee', 'demo', null, '1', 'demo', 'demo', '402880e6487e661a01487e6b504e0001', '0');
+INSERT INTO `t_s_base_user` VALUES ('402880e74d75c4dd014d75d44af30005', null, null, 'c44b01947c9e6e3f', 'demo1', null, '1', 'demo', 'demo1', '402880e6487e661a01487e6b504e0001', '0');
 INSERT INTO `t_s_base_user` VALUES ('402881875988e889015988ec36770001', null, null, 'f68bb6f881b0ebe0', '7777', null, '1', 'demo', '777', null, '1');
+INSERT INTO `t_s_base_user` VALUES ('402881bf5fa38f68015fa3fbdde20037', null, null, 'deec3ebf23191eee', 'demo', null, '1', null, 'demo', '8a8ab0b246dc81120146dc8180a20016', '0');
 INSERT INTO `t_s_base_user` VALUES ('4028ef81538330cd01538333b7bc0001', null, null, 'fa83c6e9a2006c62', '李四', null, '1', '经理角色', 'lisi', '402880e447e9a9570147e9b762e30009', '0');
 INSERT INTO `t_s_base_user` VALUES ('4028ef81563ae5be01563ae92d7f0002', null, null, 'bff95c03433b66af', '999', null, '1', 'demo', '999', null, '1');
 INSERT INTO `t_s_base_user` VALUES ('8a8ab0b246dc81120146dc8181950052', null, null, 'c44b01947c9e6e3f', '管理员', null, '1', '超级管理员', 'admin', '8a8ab0b246dc81120146dc8180ba0017', '0');
@@ -902,18 +941,29 @@ INSERT INTO `t_s_function` VALUES ('40284a815c1bac76015c1bc02abe0003', null, '1'
 INSERT INTO `t_s_function` VALUES ('402880e74d76e784014d76fa7e970024', null, '1', '数据报表', '2', 'cgReportController.do?list&id=user_msg', '8a8ab0b246dc81120146dc8180d4001b', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', null, null, null, 'admin', '2016-03-14 11:37:27', null, '管理员');
 INSERT INTO `t_s_function` VALUES ('402880e74d76e784014d76fd1bd60030', null, '1', '图形报表', '3', 'graphReportController.do?list&isIframe&id=yhcztj', '8a8ab0b246dc81120146dc8180d4001b', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', null, null, null, 'admin', '2016-03-14 11:37:16', null, '管理员');
 INSERT INTO `t_s_function` VALUES ('402881855c0190fa015c019342b20003', null, '1', '综合报表', '4', 'jeecgListDemoController.do?broswerStatisticTabs', '8a8ab0b246dc81120146dc8180d4001b', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', '', 'admin', '管理员', null, null, '2017-05-13 19:30:47', null);
-INSERT INTO `t_s_function` VALUES ('402881bf5f95cd47015f95cf64330001', null, '0', '新闻公告', '1', '', null, '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', 'fa-tasks', 'admin', '管理员', 'admin', '2017-11-07 17:56:20', '2017-11-07 17:28:38', '管理员');
+INSERT INTO `t_s_function` VALUES ('402881bf5f95cd47015f95cf64330001', null, '0', '新闻公告', '4', '', null, '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', 'fa-tasks', 'admin', '管理员', 'admin', '2017-11-16 13:43:23', '2017-11-07 17:28:38', '管理员');
 INSERT INTO `t_s_function` VALUES ('402881bf5f95cd47015f95d110b10004', null, '1', '类型管理', '3', 'newsTypeController.do?list', '402881bf5f95cd47015f95cf64330001', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', '', 'admin', '管理员', 'admin', '2017-11-08 09:48:51', '2017-11-07 17:30:27', '管理员');
 INSERT INTO `t_s_function` VALUES ('402881bf5f994a01015f994fb0c80003', null, '1', '模块管理', '4', 'newsModuleController.do?list', '402881bf5f95cd47015f95cf64330001', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', '', 'admin', '管理员', 'admin', '2017-11-08 09:48:36', '2017-11-08 09:47:38', '管理员');
 INSERT INTO `t_s_function` VALUES ('402881bf5f9a4ee9015f9a5030b40001', null, '1', '新闻管理', '2', 'newsController.do?list', '402881bf5f95cd47015f95cf64330001', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', '', 'admin', '管理员', 'admin', '2017-11-08 18:00:03', '2017-11-08 14:27:48', '管理员');
 INSERT INTO `t_s_function` VALUES ('402881bf5f9ae82c015f9b11a5a4000a', null, '1', '系统公告', '1', 'noticesController.do?list', '402881bf5f95cd47015f95cf64330001', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', '', 'admin', '管理员', 'admin', '2017-11-09 09:18:12', '2017-11-08 17:59:06', '管理员');
-INSERT INTO `t_s_function` VALUES ('402881bf5f9eaf97015f9ebb133c000c', null, '0', '活动管理', '3', '', null, '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', 'fa-cutlery', 'admin', '管理员', null, null, '2017-11-09 11:03:01', null);
+INSERT INTO `t_s_function` VALUES ('402881bf5f9eaf97015f9ebb133c000c', null, '0', '活动管理', '2', '', null, '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', 'fa-cutlery', 'admin', '管理员', 'admin', '2017-11-16 13:42:55', '2017-11-09 11:03:01', '管理员');
 INSERT INTO `t_s_function` VALUES ('402881bf5f9eaf97015f9ebbe3d6000e', null, '1', '活动列表', '1', 'activityController.do?list', '402881bf5f9eaf97015f9ebb133c000c', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', '', 'admin', '管理员', null, null, '2017-11-09 11:03:55', null);
+INSERT INTO `t_s_function` VALUES ('402881bf5fbd5ecd015fbd8ceb510002', null, '0', '校友管理', '1', '', null, '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', 'fa-female', 'admin', '管理员', 'admin', '2017-11-15 10:41:02', '2017-11-15 10:40:50', '管理员');
+INSERT INTO `t_s_function` VALUES ('402881bf5fbd5ecd015fbd8dacc10005', null, '1', '学院管理', '3', 'collegeController.do?list', '402881bf5fbd5ecd015fbd8ceb510002', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', '', 'admin', '管理员', 'admin', '2017-11-15 17:21:33', '2017-11-15 10:41:40', '管理员');
+INSERT INTO `t_s_function` VALUES ('402881bf5fbd5ecd015fbd8dd3d40007', null, '1', '班级管理', '2', 'gradeController.do?list', '402881bf5fbd5ecd015fbd8ceb510002', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', '', 'admin', '管理员', 'admin', '2017-11-15 10:44:16', '2017-11-15 10:41:50', '管理员');
+INSERT INTO `t_s_function` VALUES ('402881bf5fbd5ecd015fbd8e190d0009', null, '1', '校友管理', '1', 'classmateController.do?list', '402881bf5fbd5ecd015fbd8ceb510002', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', '', 'admin', '管理员', 'admin', '2017-11-15 17:21:14', '2017-11-15 10:42:07', '管理员');
+INSERT INTO `t_s_function` VALUES ('402881bf5fbd5ecd015fbd9231490017', null, '0', '资料管理', '7', '', null, '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', 'fa-archive', 'admin', '管理员', 'admin', '2017-11-16 13:47:07', '2017-11-15 10:46:36', '管理员');
+INSERT INTO `t_s_function` VALUES ('402881bf5fbd5ecd015fbd92960c0019', null, '1', '活动照片审核', '1', 'activitySpaceController.do?list', '402881bf5fbd5ecd015fbd9231490017', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', '', 'admin', '管理员', 'admin', '2017-11-16 10:46:27', '2017-11-15 10:47:01', '管理员');
+INSERT INTO `t_s_function` VALUES ('402881bf5fbd5ecd015fbd93fd9e001b', null, '0', '捐赠管理', '5', '', null, '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', ' fa-credit-card', 'admin', '管理员', null, null, '2017-11-15 10:48:33', null);
+INSERT INTO `t_s_function` VALUES ('402881bf5fbd5ecd015fbd949c55001d', null, '1', '捐赠项目管理', '1', 'donateController.do?list', '402881bf5fbd5ecd015fbd93fd9e001b', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', '', 'admin', '管理员', null, null, '2017-11-15 10:49:14', null);
+INSERT INTO `t_s_function` VALUES ('402881bf5fbd5ecd015fbd94f8e9001f', null, '1', '捐赠记录管理', '2', 'donateRecordController.do?list', '402881bf5fbd5ecd015fbd93fd9e001b', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', '', 'admin', '管理员', null, null, '2017-11-15 10:49:38', null);
+INSERT INTO `t_s_function` VALUES ('402881bf5fbd5ecd015fbd963ff10021', null, '0', '社区管理', '4', '', null, '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', 'fa-simplybuilt', 'admin', '管理员', 'admin', '2017-11-16 13:43:10', '2017-11-15 10:51:01', '管理员');
+INSERT INTO `t_s_function` VALUES ('402881bf5fbd5ecd015fbd96f7840023', null, '1', '帖子管理', '1', 'invitationController.do?list', '402881bf5fbd5ecd015fbd963ff10021', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', '', 'admin', '管理员', 'admin', '2017-11-16 13:42:35', '2017-11-15 10:51:48', '管理员');
 INSERT INTO `t_s_function` VALUES ('402881c746de1ea60146de207d770001', null, '1', 'language.manage', '4', 'mutiLangController.do?mutiLang', '8a8ab0b246dc81120146dc8180d2001a', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', '', null, null, 'admin', '2017-03-10 11:54:58', null, '管理员');
 INSERT INTO `t_s_function` VALUES ('402885814e3d2d09014e3d2e77800001', null, '1', '数据日志', '4', 'systemController.do?dataLogList', '8a8ab0b246dc81120146dc8180d9001d', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc81810d002f', '0', null, null, null, null, null, null, null);
 INSERT INTO `t_s_function` VALUES ('8a8ab0b246dc81120146dc8180d2001a', null, '0', 'system.manage', '9', '', null, '8a8ab0b246dc81120146dc8180860006', '8a8ab0b246dc81120146dc8180dd001e', '0', 'fa-home', null, null, 'admin', '2016-01-14 11:30:31', null, '管理员');
-INSERT INTO `t_s_function` VALUES ('8a8ab0b246dc81120146dc8180d4001b', null, '0', 'common.query.statistics', '3', '', null, '8a8ab0b246dc81120146dc8180890008', '8a8ab0b246dc81120146dc8180dd001e', '0', 'fa-bar-chart-o', null, null, 'admin', '2017-02-25 16:57:28', null, '管理员');
-INSERT INTO `t_s_function` VALUES ('8a8ab0b246dc81120146dc8180d9001d', null, '0', 'system.monitor', '6', '', null, '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', 'fa-headphones', null, null, 'admin', '2016-01-14 11:21:59', null, '管理员');
+INSERT INTO `t_s_function` VALUES ('8a8ab0b246dc81120146dc8180d4001b', null, '0', 'common.query.statistics', '6', '', null, '8a8ab0b246dc81120146dc8180890008', '8a8ab0b246dc81120146dc8180dd001e', '0', 'fa-bar-chart-o', null, null, 'admin', '2017-11-16 13:47:01', null, '管理员');
+INSERT INTO `t_s_function` VALUES ('8a8ab0b246dc81120146dc8180d9001d', null, '0', 'system.monitor', '8', '', null, '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', 'fa-headphones', null, null, 'admin', '2017-11-16 13:47:15', null, '管理员');
 INSERT INTO `t_s_function` VALUES ('8a8ab0b246dc81120146dc8180df001f', null, '1', 'user.manage', '1', 'userController.do?user', '8a8ab0b246dc81120146dc8180d2001a', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180dd001e', '0', null, null, null, null, null, null, null);
 INSERT INTO `t_s_function` VALUES ('8a8ab0b246dc81120146dc8180e30021', null, '1', 'role.manage', '2', 'roleController.do?role', '8a8ab0b246dc81120146dc8180d2001a', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180e10020', '0', null, null, null, null, null, null, null);
 INSERT INTO `t_s_function` VALUES ('8a8ab0b246dc81120146dc8180e70023', null, '1', 'menu.manage', '0', 'functionController.do?function', '8a8ab0b246dc81120146dc8180d2001a', '8a8ab0b246dc81120146dc8180460000', '8a8ab0b246dc81120146dc8180e50022', '0', '', null, null, 'admin', '2017-03-10 11:54:35', null, '管理员');
@@ -1528,6 +1578,250 @@ INSERT INTO `t_s_log` VALUES ('402881bf5fa38f68015fa3e6004a0020', 'Chrome', '公
 INSERT INTO `t_s_log` VALUES ('402881bf5fa38f68015fa3e620a20021', 'Chrome', '审核公告：系统维护', '4', '本地', '2017-11-10 11:08:09', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
 INSERT INTO `t_s_log` VALUES ('402881bf5fa38f68015fa3e6d48e0023', 'Chrome', '公告添加成功', '3', '本地', '2017-11-10 11:08:55', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
 INSERT INTO `t_s_log` VALUES ('402881bf5fa38f68015fa3ea30ad0025', 'Chrome', '新闻添加成功', '3', '本地', '2017-11-10 11:12:35', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fa38f68015fa3f452fe002d', 'Chrome', 'admin', '2', '本地', '2017-11-10 11:23:39', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fa38f68015fa3f48ddd002e', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-10 11:23:54', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fa38f68015fa3f6f59c002f', 'Chrome', 'admin', '2', '本地', '2017-11-10 11:26:32', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fa38f68015fa3f7af290030', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-10 11:27:19', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fa38f68015fa3f9b4770032', 'Chrome', '错误异常: MySQLIntegrityConstraintViolationException,错误描述：Column \'dev_flag\' cannot be null', '6', '本地', '2017-11-10 11:29:32', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fa38f68015fa3f9c6530033', 'Chrome', 'admin', '2', '本地', '2017-11-10 11:29:36', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fa38f68015fa3fae9fe0034', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-10 11:30:51', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fa38f68015fa3fb7c040036', 'Chrome', '错误异常: MySQLIntegrityConstraintViolationException,错误描述：Column \'dev_flag\' cannot be null', '6', '本地', '2017-11-10 11:31:28', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fa38f68015fa3fbde9f003a', 'Chrome', '用户: demo添加成功', '3', '本地', '2017-11-10 11:31:54', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fa38f68015fa3fbfea0003b', 'Chrome', 'admin', '2', '本地', '2017-11-10 11:32:02', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fa38f68015fa3fc211b003c', 'Chrome', '用户: demo[中国人寿总公司]common.login.success', '1', '本地', '2017-11-10 11:32:11', '1', '402881bf5fa38f68015fa3fbdde20037', 'demo', 'demo');
+INSERT INTO `t_s_log` VALUES ('402881bf5fa38f68015fa4597f32003d', 'Chrome', '用户: demo[中国人寿总公司]common.login.success', '1', '本地', '2017-11-10 13:14:10', '1', '402881bf5fa38f68015fa3fbdde20037', 'demo', 'demo');
+INSERT INTO `t_s_log` VALUES ('402881bf5fa38f68015fa45bd663003e', 'Chrome', 'demo', '2', '本地', '2017-11-10 13:16:43', '1', '402881bf5fa38f68015fa3fbdde20037', 'demo', 'demo');
+INSERT INTO `t_s_log` VALUES ('402881bf5fa38f68015fa461e81e003f', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-10 13:23:21', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3baa5c0000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-15 09:12:05', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3d9b550001', 'Chrome', '类型分组: 请假类别 被删除 成功', '4', '本地', '2017-11-15 09:14:12', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3db95d0002', 'Chrome', '类型: 图片被删除 成功', '4', '本地', '2017-11-15 09:14:20', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3dc4bc0003', 'Chrome', '类型: 关注引导被删除 成功', '4', '本地', '2017-11-15 09:14:23', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3dce070004', 'Chrome', '类型: 内容区被删除 成功', '4', '本地', '2017-11-15 09:14:25', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3dd6120005', 'Chrome', '类型: 原文引导被删除 成功', '4', '本地', '2017-11-15 09:14:27', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3ddd5e0006', 'Chrome', '类型: 标题被删除 成功', '4', '本地', '2017-11-15 09:14:29', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3de9fc0007', 'Chrome', '类型: 分隔线被删除 成功', '4', '本地', '2017-11-15 09:14:32', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3e00cb0008', 'Chrome', '类型: 互推账号被删除 成功', '4', '本地', '2017-11-15 09:14:38', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3e08c20009', 'Chrome', '类型: 其他被删除 成功', '4', '本地', '2017-11-15 09:14:40', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3e10dc000a', 'Chrome', '类型: 我的样式被删除 成功', '4', '本地', '2017-11-15 09:14:42', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3e1b7e000b', 'Chrome', '类型分组: 微信模板类型 被删除 成功', '4', '本地', '2017-11-15 09:14:45', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3e3510000c', 'Chrome', '类型: 2D饼图被删除 成功', '4', '本地', '2017-11-15 09:14:52', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3e3d08000d', 'Chrome', '类型: 3D饼图被删除 成功', '4', '本地', '2017-11-15 09:14:54', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3e4502000e', 'Chrome', '类型: 2D柱状图被删除 成功', '4', '本地', '2017-11-15 09:14:56', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3e4cca000f', 'Chrome', '类型: 3D柱状图被删除 成功', '4', '本地', '2017-11-15 09:14:58', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3e553f0010', 'Chrome', '类型: 条状图被删除 成功', '4', '本地', '2017-11-15 09:15:00', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3e632e0011', 'Chrome', '类型: 面积图被删除 成功', '4', '本地', '2017-11-15 09:15:03', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3e6bf10012', 'Chrome', '类型: 折线图被删除 成功', '4', '本地', '2017-11-15 09:15:06', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3e9ad80013', 'Chrome', '类型分组: 动态图表类型 被删除 成功', '4', '本地', '2017-11-15 09:15:18', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3ed5880014', 'Chrome', '类型: 辞工被删除 成功', '4', '本地', '2017-11-15 09:15:33', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3ede290015', 'Chrome', '类型: 急辞工被删除 成功', '4', '本地', '2017-11-15 09:15:35', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3ee7120016', 'Chrome', '类型: 辞退被删除 成功', '4', '本地', '2017-11-15 09:15:37', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3ef0260017', 'Chrome', '类型: 开除被删除 成功', '4', '本地', '2017-11-15 09:15:39', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3ef7c40018', 'Chrome', '类型: 自动离职被删除 成功', '4', '本地', '2017-11-15 09:15:41', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3f01750019', 'Chrome', '类型分组: 离职方式 被删除 成功', '4', '本地', '2017-11-15 09:15:44', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3f2d67001a', 'Chrome', '类型: 签约客户被删除 成功', '4', '本地', '2017-11-15 09:15:55', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3f34d3001b', 'Chrome', '类型: 普通客户被删除 成功', '4', '本地', '2017-11-15 09:15:57', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3f3bf5001c', 'Chrome', '类型分组: 客户类型 被删除 成功', '4', '本地', '2017-11-15 09:15:59', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3f53ec001d', 'Chrome', '类型: 待提交被删除 成功', '4', '本地', '2017-11-15 09:16:05', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3f5b9c001e', 'Chrome', '类型: 处理中被删除 成功', '4', '本地', '2017-11-15 09:16:07', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3f6385001f', 'Chrome', '类型: 已完成被删除 成功', '4', '本地', '2017-11-15 09:16:09', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3f6e820020', 'Chrome', '类型分组: 业务BPM流转状态 被删除 成功', '4', '本地', '2017-11-15 09:16:12', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3f81dc0021', 'Chrome', '类型: 优质订单被删除 成功', '4', '本地', '2017-11-15 09:16:17', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3f89410022', 'Chrome', '类型: 普通订单被删除 成功', '4', '本地', '2017-11-15 09:16:19', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3f919e0023', 'Chrome', '类型分组: 订单类型 被删除 成功', '4', '本地', '2017-11-15 09:16:21', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3fc2110024', 'Chrome', '类型: 短信提醒被删除 成功', '4', '本地', '2017-11-15 09:16:33', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3fc8530025', 'Chrome', '类型: 邮件提醒被删除 成功', '4', '本地', '2017-11-15 09:16:35', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3fcef60026', 'Chrome', '类型: 系统提醒被删除 成功', '4', '本地', '2017-11-15 09:16:36', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3fd7110027', 'Chrome', '类型分组: 消息类别 被删除 成功', '4', '本地', '2017-11-15 09:16:39', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3fe73e0028', 'Chrome', '类型: 短信提醒模板被删除 成功', '4', '本地', '2017-11-15 09:16:43', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3fefcf0029', 'Chrome', '类型: 邮件提醒模板被删除 成功', '4', '本地', '2017-11-15 09:16:45', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd3ff5fb002a', 'Chrome', '类型分组: 消息模板分类 被删除 成功', '4', '本地', '2017-11-15 09:16:46', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd4179bb002b', 'Chrome', '语言 更新成功', '5', '本地', '2017-11-15 09:18:26', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd418fba002c', 'Chrome', 'admin', '2', '本地', '2017-11-15 09:18:31', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd3145015fbd419e34002d', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-15 09:18:35', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd6549e40000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-15 09:57:33', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd8530040001', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-15 10:32:23', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd8ceba40003', 'Chrome', '菜单 录入成功', '3', '本地', '2017-11-15 10:40:50', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd8d187d0004', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-15 10:41:02', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd8dacf20006', 'Chrome', '菜单 录入成功', '3', '本地', '2017-11-15 10:41:40', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd8dd3fe0008', 'Chrome', '菜单 录入成功', '3', '本地', '2017-11-15 10:41:50', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd8e1926000a', 'Chrome', '菜单 录入成功', '3', '本地', '2017-11-15 10:42:07', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd8fcca6000f', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-15 10:43:59', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9011330010', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-15 10:44:16', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9068a00011', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-15 10:44:39', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9141b90013', 'Chrome', '菜单 录入成功', '3', '本地', '2017-11-15 10:45:34', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd918f7d0014', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-15 10:45:54', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd91cb0d0015', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-15 10:46:09', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd91f5d80016', 'Chrome', '菜单删除成功', '4', '本地', '2017-11-15 10:46:20', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9231690018', 'Chrome', '菜单 录入成功', '3', '本地', '2017-11-15 10:46:36', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd929631001a', 'Chrome', '菜单 录入成功', '3', '本地', '2017-11-15 10:47:01', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd93fdce001c', 'Chrome', '菜单 录入成功', '3', '本地', '2017-11-15 10:48:33', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd949c6c001e', 'Chrome', '菜单 录入成功', '3', '本地', '2017-11-15 10:49:14', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd94f9130020', 'Chrome', '菜单 录入成功', '3', '本地', '2017-11-15 10:49:38', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9640600022', 'Chrome', '菜单 录入成功', '3', '本地', '2017-11-15 10:51:02', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd96f7a90024', 'Chrome', '菜单 录入成功', '3', '本地', '2017-11-15 10:51:49', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd97871d002c', 'Chrome', 'admin', '2', '本地', '2017-11-15 10:52:25', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd979b15002d', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-15 10:52:30', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd99af98002f', 'Chrome', '类型分组: 年届被添加成功', '3', '本地', '2017-11-15 10:54:47', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9a26e30031', 'Chrome', '类型: 1990被添加成功', '3', '本地', '2017-11-15 10:55:17', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9a462d0033', 'Chrome', '类型: 1991被添加成功', '3', '本地', '2017-11-15 10:55:25', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9a693f0035', 'Chrome', '类型: 1992被添加成功', '3', '本地', '2017-11-15 10:55:34', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9aa7960037', 'Chrome', '类型: 1993被添加成功', '3', '本地', '2017-11-15 10:55:50', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9ae0510039', 'Chrome', '类型: 1994被添加成功', '3', '本地', '2017-11-15 10:56:05', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9afdea003b', 'Chrome', '类型: 1995被添加成功', '3', '本地', '2017-11-15 10:56:12', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9b20b1003d', 'Chrome', '类型: 1996被添加成功', '3', '本地', '2017-11-15 10:56:21', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9b5954003f', 'Chrome', '类型: 1997被添加成功', '3', '本地', '2017-11-15 10:56:36', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9b7de00041', 'Chrome', '类型: 1998被添加成功', '3', '本地', '2017-11-15 10:56:45', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9ba0d20043', 'Chrome', '类型: 1999被添加成功', '3', '本地', '2017-11-15 10:56:54', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9bbf080045', 'Chrome', '类型: 2000被添加成功', '3', '本地', '2017-11-15 10:57:02', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9c04cf0047', 'Chrome', '类型: 2001被添加成功', '3', '本地', '2017-11-15 10:57:20', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9c3e2a0049', 'Chrome', '类型: 2002被添加成功', '3', '本地', '2017-11-15 10:57:34', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9c5518004b', 'Chrome', '类型: 2003被添加成功', '3', '本地', '2017-11-15 10:57:40', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9c6f16004d', 'Chrome', '类型: 2004被添加成功', '3', '本地', '2017-11-15 10:57:47', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9c8997004f', 'Chrome', '类型: 2005被添加成功', '3', '本地', '2017-11-15 10:57:54', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9ca4240051', 'Chrome', '类型: 2006被添加成功', '3', '本地', '2017-11-15 10:58:00', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9cc3a60053', 'Chrome', '类型: 2007被添加成功', '3', '本地', '2017-11-15 10:58:08', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9cdd4d0055', 'Chrome', '类型: 2008被添加成功', '3', '本地', '2017-11-15 10:58:15', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9cf93e0057', 'Chrome', '类型: 2009被添加成功', '3', '本地', '2017-11-15 10:58:22', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9d15870059', 'Chrome', '类型: 2010被添加成功', '3', '本地', '2017-11-15 10:58:29', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9d3ae5005b', 'Chrome', '类型: 2011被添加成功', '3', '本地', '2017-11-15 10:58:39', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9d52fb005d', 'Chrome', '类型: 2012被添加成功', '3', '本地', '2017-11-15 10:58:45', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9d6b6e005f', 'Chrome', '类型: 2013被添加成功', '3', '本地', '2017-11-15 10:58:51', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9d82550061', 'Chrome', '类型: 2014被添加成功', '3', '本地', '2017-11-15 10:58:57', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9d973f0063', 'Chrome', '类型: 2015被添加成功', '3', '本地', '2017-11-15 10:59:03', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbd5ecd015fbd9db0d40065', 'Chrome', '类型: 2016被添加成功', '3', '本地', '2017-11-15 10:59:09', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbda822015fbda8b97a0000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-15 11:11:12', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbda822015fbda96c190001', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'this_.CRT_BY_USER_NAME\' in \'field list\'', '6', '本地', '2017-11-15 11:11:58', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbdabe0015fbdafb38b0000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-15 11:18:49', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbdabe0015fbdafcaa80001', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'this_.CRT_BY_USER_NAME\' in \'field list\'', '6', '本地', '2017-11-15 11:18:55', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbdabe0015fbdb03fdc0002', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'this_.LAST_UPDATE_BY_USER_NAME\' in \'field list\'', '6', '本地', '2017-11-15 11:19:25', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbdabe0015fbdb0bc5f0003', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'this_.LAST_UPDATE_BY_USER_NAME\' in \'field list\'', '6', '本地', '2017-11-15 11:19:57', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbdabe0015fbdb0fae70005', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'LAST_UPDATE_BY_USER_NAME\' in \'field list\'', '6', '本地', '2017-11-15 11:20:13', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbdabe0015fbdb0fb540006', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'this_.LAST_UPDATE_BY_USER_NAME\' in \'field list\'', '6', '本地', '2017-11-15 11:20:13', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbdabe0015fbdb1b12e0008', 'Chrome', '学院添加成功', '3', '本地', '2017-11-15 11:21:00', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbdabe0015fbdb1c68a0009', 'Chrome', '学院更新成功', '5', '本地', '2017-11-15 11:21:05', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbdabe0015fbdb1dad7000a', 'Chrome', '学院更新成功', '5', '本地', '2017-11-15 11:21:11', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbdb432015fbdb4dd250000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-15 11:24:28', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbdb432015fbdb52d8f0002', 'Chrome', '学院添加成功', '3', '本地', '2017-11-15 11:24:48', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbdb432015fbdb563c40004', 'Chrome', '学院添加成功', '3', '本地', '2017-11-15 11:25:02', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbdb432015fbdb6c5bd0005', 'Chrome', '审核学院：计算机学院', '4', '本地', '2017-11-15 11:26:33', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbdb432015fbdb70cd20006', 'Chrome', '审核学院：计算机学院', '4', '本地', '2017-11-15 11:26:51', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbdb432015fbdb73cc60007', 'Chrome', '学院删除成功', '4', '本地', '2017-11-15 11:27:03', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe2817015fbe2870920000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-15 13:30:42', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe2817015fbe2882760001', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'this_.check_by_user_name\' in \'field list\'', '6', '本地', '2017-11-15 13:30:47', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe2817015fbe2b99f10002', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'this_.check_by_user_name\' in \'field list\'', '6', '本地', '2017-11-15 13:34:09', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe2817015fbe39b2ca0004', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'checkStatus\' in \'field list\'', '6', '本地', '2017-11-15 13:49:33', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe2817015fbe39b3160005', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'this_.checkStatus\' in \'field list\'', '6', '本地', '2017-11-15 13:49:33', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe2817015fbe3a36130007', 'Chrome', '班级添加成功', '3', '本地', '2017-11-15 13:50:07', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe2817015fbe46a8da0008', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-15 14:03:43', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe570f015fbe57aaca0000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-15 14:22:17', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe570f015fbe58ca100001', 'Chrome', '班级更新成功', '5', '本地', '2017-11-15 14:23:31', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe570f015fbe58eb010002', 'Chrome', '班级更新成功', '5', '本地', '2017-11-15 14:23:39', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe570f015fbe590aa70003', 'Chrome', '班级更新成功', '5', '本地', '2017-11-15 14:23:47', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe570f015fbe5931e30004', 'Chrome', '班级更新成功', '5', '本地', '2017-11-15 14:23:57', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe570f015fbe5baf330005', 'Chrome', '审核班级：1991届公共卫生学院预防医学1班', '4', '本地', '2017-11-15 14:26:41', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe570f015fbe5c24060006', 'Chrome', '审核班级：1990届公共卫生学院预防医学2班', '4', '本地', '2017-11-15 14:27:10', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe570f015fbe5c4cb10007', 'Chrome', '审核班级：S201', '4', '本地', '2017-11-15 14:27:21', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe570f015fbe5c673f0008', 'Chrome', '班级删除成功', '4', '本地', '2017-11-15 14:27:28', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe6dd5015fbe72ea280000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-15 14:52:03', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe80af015fbe8309ec0000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-15 15:09:40', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe80af015fbe9891260001', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-15 15:33:11', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe80af015fbe9a91e60002', 'Chrome', '错误异常: UnsatisfiedServletRequestParameterException,错误描述：Parameter conditions \"del\" not met for actual request parameters: collegeId={402881bf5fbdb432015fbdb52d750001}, yearPeriod={}', '6', '本地', '2017-11-15 15:35:22', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe80af015fbe9a9ad70003', 'Chrome', '错误异常: UnsatisfiedServletRequestParameterException,错误描述：Parameter conditions \"del\" not met for actual request parameters: collegeId={402881bf5fbdb432015fbdb52d750001}, yearPeriod={1990}', '6', '本地', '2017-11-15 15:35:24', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe80af015fbe9b0f830004', 'Chrome', '错误异常: UnsatisfiedServletRequestParameterException,错误描述：Parameter conditions \"del\" not met for actual request parameters: collegeId={402881bf5fbdabe0015fbdb1b0a60007}, yearPeriod={}', '6', '本地', '2017-11-15 15:35:54', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe80af015fbe9b1b490005', 'Chrome', '错误异常: UnsatisfiedServletRequestParameterException,错误描述：Parameter conditions \"del\" not met for actual request parameters: collegeId={402881bf5fbdabe0015fbdb1b0a60007}, yearPeriod={1990}', '6', '本地', '2017-11-15 15:35:57', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe80af015fbe9b26890006', 'Chrome', '错误异常: UnsatisfiedServletRequestParameterException,错误描述：Parameter conditions \"del\" not met for actual request parameters: collegeId={402881bf5fbdabe0015fbdb1b0a60007}, yearPeriod={1997}', '6', '本地', '2017-11-15 15:36:00', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe80af015fbe9ba1400007', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-15 15:36:31', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe80af015fbe9bc1490008', 'Chrome', '错误异常: UnsatisfiedServletRequestParameterException,错误描述：Parameter conditions \"del\" not met for actual request parameters: collegeId={402881bf5fbdabe0015fbdb1b0a60007}, yearPeriod={}', '6', '本地', '2017-11-15 15:36:39', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe80af015fbe9c397f0009', 'Chrome', '错误异常: UnsatisfiedServletRequestParameterException,错误描述：Parameter conditions \"del\" not met for actual request parameters: collegeId={402881bf5fbdabe0015fbdb1b0a60007}, yearPeriod={1990}', '6', '本地', '2017-11-15 15:37:10', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe80af015fbe9c42c7000a', 'Chrome', '错误异常: UnsatisfiedServletRequestParameterException,错误描述：Parameter conditions \"del\" not met for actual request parameters: collegeId={402881bf5fbdb432015fbdb52d750001}, yearPeriod={1990}', '6', '本地', '2017-11-15 15:37:13', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe80af015fbe9e873b000b', 'Chrome', '校友更新成功', '5', '本地', '2017-11-15 15:39:41', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe80af015fbeadb855000c', 'Chrome', '校友更新成功', '5', '本地', '2017-11-15 15:56:17', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe80af015fbeae7fbc000e', 'Chrome', '班级添加成功', '3', '本地', '2017-11-15 15:57:08', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe80af015fbeaf0d14000f', 'Chrome', '校友更新成功', '5', '本地', '2017-11-15 15:57:44', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbe80af015fbebd0e6c0010', 'Chrome', '校友更新成功', '5', '本地', '2017-11-15 16:13:02', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbecfaf015fbed19b0c0000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-15 16:35:29', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbecfaf015fbed1ba4f0001', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'this_.SEX\' in \'field list\'', '6', '本地', '2017-11-15 16:35:37', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbecfaf015fbeeda0d70003', 'Chrome', '活动添加成功', '3', '本地', '2017-11-15 17:06:05', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbecfaf015fbeedaba80004', 'Chrome', '审核活动：郊游', '4', '本地', '2017-11-15 17:06:08', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbecfaf015fbef6b0bc0005', 'Chrome', '校友更新成功', '5', '本地', '2017-11-15 17:15:59', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbecfaf015fbef7ff640006', 'Chrome', '校友更新成功', '5', '本地', '2017-11-15 17:17:25', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbecfaf015fbef91d2a0007', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-15 17:18:38', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbecfaf015fbef927aa0008', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-15 17:18:41', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbecfaf015fbefa6c400009', 'Chrome', '校友更新成功', '5', '本地', '2017-11-15 17:20:04', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbecfaf015fbefb7fce000a', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-15 17:21:14', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbecfaf015fbefbc8d2000b', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-15 17:21:33', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbecfaf015fbefd6fad000c', 'Chrome', 'admin', '2', '本地', '2017-11-15 17:23:21', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbecfaf015fbefd8350000d', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-15 17:23:26', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbecfaf015fbefe5775000e', 'Chrome', '语言 更新成功', '5', '本地', '2017-11-15 17:24:20', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbecfaf015fbefe9800000f', 'Chrome', '语言 更新成功', '5', '本地', '2017-11-15 17:24:37', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbf0f21015fbf0f84260000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-15 17:43:06', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbf0f21015fbf0f9feb0001', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'this_.CRT_BY_USER_NAME\' in \'field list\'', '6', '本地', '2017-11-15 17:43:13', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbf0f21015fbf11361e0002', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'this_.check_by_user_name\' in \'field list\'', '6', '本地', '2017-11-15 17:44:57', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbf0f21015fbf114fe60003', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'this_.check_by_user_name\' in \'field list\'', '6', '本地', '2017-11-15 17:45:04', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fbf0f21015fbf148c960004', 'Chrome', '捐赠更新成功', '5', '本地', '2017-11-15 17:48:36', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc25b98015fc25c89f20000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 09:06:05', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc25b98015fc25c8b7e0001', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 09:06:06', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc26aa1015fc26c2fb60000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 09:23:11', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc26aa1015fc26f4bf10002', 'Chrome', '捐赠记录添加成功', '3', '本地', '2017-11-16 09:26:35', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc26aa1015fc27025ad0003', 'Chrome', '捐赠记录更新成功', '5', '本地', '2017-11-16 09:27:30', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc26aa1015fc2869d660004', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 09:52:03', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc26aa1015fc286c0d80006', 'Chrome', '新闻添加成功', '3', '本地', '2017-11-16 09:52:12', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc26aa1015fc286dd140007', 'Chrome', '新闻删除成功', '4', '本地', '2017-11-16 09:52:19', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc26aa1015fc28d5f150008', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 09:59:26', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc26aa1015fc28dba1a0009', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 09:59:49', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc26aa1015fc28e1178000a', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 10:00:11', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc26aa1015fc28e6161000b', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 10:00:32', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc26aa1015fc28eb4f3000c', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 10:00:53', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc26aa1015fc28f38b9000d', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 10:01:27', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2a29b015fc2a426a70000', 'Chrome', '错误异常: MissingServletRequestParameterException,错误描述：Required MultipartFile parameter \'upload\' is not present', '6', '本地', '2017-11-16 10:24:19', '3', null, 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2a29b015fc2a7df760001', 'Chrome', '校友更新成功', '5', '本地', '2017-11-16 10:28:23', '1', null, 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2a29b015fc2a834780002', 'Chrome', '捐赠记录更新成功', '5', '本地', '2017-11-16 10:28:44', '1', null, 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2a29b015fc2a854060003', 'Chrome', '捐赠记录更新成功', '5', '本地', '2017-11-16 10:28:52', '1', null, 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2abba015fc2ac2e050000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 10:33:05', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2ad6d015fc2adbffe0000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 10:34:48', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2ad6d015fc2b424f00001', 'Chrome', '类型: 图片被更新成功', '5', '本地', '2017-11-16 10:41:47', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2ad6d015fc2b44a1e0002', 'Chrome', '类型: 视频被更新成功', '5', '本地', '2017-11-16 10:41:56', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2ad6d015fc2b4654f0004', 'Chrome', '类型: 文档被添加成功', '3', '本地', '2017-11-16 10:42:03', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2b63b015fc2b79ca90000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 10:45:34', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2b63b015fc2b86a640001', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-16 10:46:27', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2b63b015fc2b8777b0002', 'Chrome', 'admin', '2', '本地', '2017-11-16 10:46:30', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2b63b015fc2b888a60003', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 10:46:34', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2bd4b015fc2bdee420000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 10:52:28', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2c091015fc2c1db780000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 10:56:45', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2c37c015fc2c3cda10000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 10:58:53', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2c37c015fc2c3f05a0001', 'Chrome', '错误异常: UnsupportedEncodingException,错误描述：ison-8859-1', '6', '本地', '2017-11-16 10:59:02', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2c48a015fc2c4c3320000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 10:59:56', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2c48a015fc2c95dea0002', 'Chrome', '错误异常: QueryException,错误描述：could not resolve property: attachmentId of: com.alu.entity.ActivitySpaceEntity', '6', '本地', '2017-11-16 11:04:58', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2d2e8015fc2d33ee90000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 11:15:45', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2d2e8015fc2d3748a0001', 'Chrome', '活动文件删除成功', '4', '本地', '2017-11-16 11:15:59', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2d4a8015fc2d4e7320000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 11:17:34', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2d4a8015fc2d50d290001', 'Chrome', '审核活动文件', '4', '本地', '2017-11-16 11:17:43', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2d4a8015fc2d6528b0003', 'Chrome', '审核活动文件', '4', '本地', '2017-11-16 11:19:07', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc2da5e015fc2dae3cc0000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 11:24:06', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc34b12a50000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 13:26:38', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc34b1faa0001', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'this_.CRT_BY_USER_NAME\' in \'field list\'', '6', '本地', '2017-11-16 13:26:41', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc350a7610002', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'this_.CRT_BY_USER_NAME\' in \'field list\'', '6', '本地', '2017-11-16 13:32:44', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc35103560003', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'this_.CRT_BY_USER_NAME\' in \'field list\'', '6', '本地', '2017-11-16 13:33:07', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc3517d170004', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'this_.CRT_BY_USER_NAME\' in \'field list\'', '6', '本地', '2017-11-16 13:33:38', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc3526d000006', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'CRT_BY_USER_NAME\' in \'field list\'', '6', '本地', '2017-11-16 13:34:40', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc3526d4e0007', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'this_.CRT_BY_USER_NAME\' in \'field list\'', '6', '本地', '2017-11-16 13:34:40', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc3539f380009', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'checkStatus\' in \'field list\'', '6', '本地', '2017-11-16 13:35:58', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc3539f78000a', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：Unknown column \'this_.checkStatus\' in \'field list\'', '6', '本地', '2017-11-16 13:35:58', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc353faf5000c', 'Chrome', '帖子添加成功', '3', '本地', '2017-11-16 13:36:22', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc359ab68000d', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-16 13:42:35', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc359fabf000e', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-16 13:42:55', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc35a3562000f', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-16 13:43:10', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc35a675f0010', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-16 13:43:23', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc35ae9f60011', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-16 13:43:56', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc35b42e50012', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-16 13:44:19', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc35b5e610013', 'Chrome', 'admin', '2', '本地', '2017-11-16 13:44:26', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc35b6e550014', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-16 13:44:30', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc35d6218001e', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-16 13:46:38', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc35d821a001f', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-16 13:46:46', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc35dbaa60020', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-16 13:47:01', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc35dd2d10021', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-16 13:47:07', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc35df43f0022', 'Chrome', '菜单 更新成功', '5', '本地', '2017-11-16 13:47:15', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fc34aaf015fc35e57bf0023', 'Chrome', '语言 更新成功', '5', '本地', '2017-11-16 13:47:41', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
 
 -- ----------------------------
 -- Table structure for t_s_muti_lang
@@ -1741,7 +2035,7 @@ INSERT INTO `t_s_muti_lang` VALUES ('402880e64705eca90147060dc6b6001b', 'common.
 INSERT INTO `t_s_muti_lang` VALUES ('402880e64705eca90147060e11f3001d', 'common.histogram', '柱状图', 'zh-cn', '2014-07-05 18:24:51', '402880e64705a8ce014705af94280052', 'admin', '2014-07-04 23:17:44', '297e201046d3660a0146d36d7b7a01e7', '管理员');
 INSERT INTO `t_s_muti_lang` VALUES ('402880e64705eca90147060fa1ba001f', 'class.count.statistics', 'Class size statistics', 'en', '2014-07-05 18:26:33', '402880e64705a8ce014705af94280052', 'admin', '2014-07-04 23:17:44', '297e201046d3660a0146d36d7b7a01e7', '管理员');
 INSERT INTO `t_s_muti_lang` VALUES ('402880e64705eca90147060fdf3a0021', 'class.count.statistics', '班级人数统计', 'zh-cn', '2014-07-05 18:26:49', '402880e64705a8ce014705af94280052', 'admin', '2014-07-04 23:17:44', '297e201046d3660a0146d36d7b7a01e7', '管理员');
-INSERT INTO `t_s_muti_lang` VALUES ('402880e64705eca90147061123451230', 'common.query.statistics', '统计报表', 'zh-cn', '2014-07-05 18:33:40', '402880e64705a8ce014705af94280052', 'admin', '2015-10-15 10:28:26', 'admin', '管理员');
+INSERT INTO `t_s_muti_lang` VALUES ('402880e64705eca90147061123451230', 'common.query.statistics', '校友统计', 'zh-cn', '2014-07-05 18:33:40', '402880e64705a8ce014705af94280052', 'admin', '2017-11-16 13:47:41', 'admin', '管理员');
 INSERT INTO `t_s_muti_lang` VALUES ('402880e64705eca90147061123451231', 'common.query.statistics', 'Statistics Report', 'en', '2014-07-05 18:33:40', '402880e64705a8ce014705af94280052', 'admin', '2015-10-15 10:28:57', 'admin', '管理员');
 INSERT INTO `t_s_muti_lang` VALUES ('402880e64705eca90147061123451232', 'common.schedule.task', '定时任务', 'zh-cn', '2014-07-05 18:33:40', '402880e64705a8ce014705af94280052', 'admin', '2014-07-05 18:33:40', '402880e64705a8ce014705af94280052', 'admin');
 INSERT INTO `t_s_muti_lang` VALUES ('402880e64705eca90147061123451233', 'common.schedule.task', 'Timed Task', 'en', '2014-07-05 18:33:40', '402880e64705a8ce014705af94280052', 'admin', '2014-07-05 18:33:40', '402880e64705a8ce014705af94280052', 'admin');
@@ -1991,7 +2285,7 @@ INSERT INTO `t_s_muti_lang` VALUES ('402881c347203fcc0147204d69020009', 'input.e
 INSERT INTO `t_s_muti_lang` VALUES ('402881c347203fcc0147204d9ef9000b', 'input.error', 'Input error', 'en', '2014-07-10 20:44:23', '8a8ab0b246dc81120146dc8181950052', 'admin', '2014-07-10 20:44:23', 'admin', '管理员');
 INSERT INTO `t_s_muti_lang` VALUES ('402881c347205fc0014720704aa50001', 'menuname.rang4to15', '菜单名称范围4~15位字符,且不为空', 'zh-cn', '2014-07-10 21:22:15', '8a8ab0b246dc81120146dc8181950052', 'admin', '2014-07-10 21:22:15', 'admin', '管理员');
 INSERT INTO `t_s_muti_lang` VALUES ('402881c347205fc0014720718d360003', 'menuname.rang4to15', 'Menu name should be 4-15 characters and should not empty', 'en', '2014-07-10 21:23:38', '8a8ab0b246dc81120146dc8181950052', 'admin', '2014-07-10 21:23:38', 'admin', '管理员');
-INSERT INTO `t_s_muti_lang` VALUES ('402881c347205fc001472082f5130005', 'jeect.platform', 'Jeecg 快速开发平台', 'zh-cn', '2014-07-10 21:42:39', '8a8ab0b246dc81120146dc8181950052', 'admin', '2014-07-10 21:42:39', 'admin', '管理员');
+INSERT INTO `t_s_muti_lang` VALUES ('402881c347205fc001472082f5130005', 'jeect.platform', '校友系统', 'zh-cn', '2014-07-10 21:42:39', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 09:18:26', 'admin', '管理员');
 INSERT INTO `t_s_muti_lang` VALUES ('402881c347205fc00147208321e10007', 'jeect.platform', 'Jeecg Quckly Platform', 'en', '2014-07-10 21:42:50', '8a8ab0b246dc81120146dc8181950052', 'admin', '2014-07-10 21:42:50', 'admin', '管理员');
 INSERT INTO `t_s_muti_lang` VALUES ('402881c347205fcc0014720704aa5000', 'menuname.rang2to15', '菜单名称范围2~15位字符,且不为空', 'zh-cn', '2014-07-10 21:22:15', '8a8ab0b246dc81120146dc8181950052', 'admin', '2014-07-10 21:22:15', 'admin', '管理员');
 INSERT INTO `t_s_muti_lang` VALUES ('402881c347205fcd0014720718d36000', 'menuname.rang2to15', 'Menu name should be 2-15 characters and should not empty', 'en', '2014-07-10 21:23:38', '8a8ab0b246dc81120146dc8181950052', 'admin', '2014-07-10 21:23:38', 'admin', '管理员');
@@ -2457,9 +2751,9 @@ INSERT INTO `t_s_muti_lang` VALUES ('8a8ab0af476afe8501476b2761320072', 'common.
 INSERT INTO `t_s_muti_lang` VALUES ('8a8ab0af476afe8501476b2791440074', 'common.customer.engine.table', 'Customer Engine Table', 'en', '2014-07-25 09:34:20', '8a8ab0b246dc81120146dc8181950052', 'admin', '2014-07-25 09:34:20', 'admin', '管理员');
 INSERT INTO `t_s_muti_lang` VALUES ('8a8ab0af476afe8501476b27d3790076', 'common.news', '新闻', 'zh-cn', '2014-07-25 09:34:37', '8a8ab0b246dc81120146dc8181950052', 'admin', '2014-07-25 09:34:37', 'admin', '管理员');
 INSERT INTO `t_s_muti_lang` VALUES ('8a8ab0af476afe8501476b27f9b30078', '新闻', 'News', 'en', '2014-07-25 09:34:47', '8a8ab0b246dc81120146dc8181950052', 'admin', '2014-07-25 09:34:47', 'admin', '管理员');
-INSERT INTO `t_s_muti_lang` VALUES ('8a8ab0af476afe8501476b28e56e007a', 'common.male', '男性', 'zh-cn', '2014-07-25 09:35:48', '8a8ab0b246dc81120146dc8181950052', 'admin', '2014-07-25 09:35:48', 'admin', '管理员');
+INSERT INTO `t_s_muti_lang` VALUES ('8a8ab0af476afe8501476b28e56e007a', 'common.male', '男', 'zh-cn', '2014-07-25 09:35:48', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 17:24:20', 'admin', '管理员');
 INSERT INTO `t_s_muti_lang` VALUES ('8a8ab0af476afe8501476b28fa30007c', 'common.male', 'Male', 'en', '2014-07-25 09:35:53', '8a8ab0b246dc81120146dc8181950052', 'admin', '2014-07-25 09:35:53', 'admin', '管理员');
-INSERT INTO `t_s_muti_lang` VALUES ('8a8ab0af476afe8501476b291a73007e', 'common.female', '女性', 'zh-cn', '2014-07-25 09:36:01', '8a8ab0b246dc81120146dc8181950052', 'admin', '2014-07-25 09:36:01', 'admin', '管理员');
+INSERT INTO `t_s_muti_lang` VALUES ('8a8ab0af476afe8501476b291a73007e', 'common.female', '女', 'zh-cn', '2014-07-25 09:36:01', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 17:24:37', 'admin', '管理员');
 INSERT INTO `t_s_muti_lang` VALUES ('8a8ab0af476afe8501476b29466c0080', 'common.female', 'Female', 'en', '2014-07-25 09:36:12', '8a8ab0b246dc81120146dc8181950052', 'admin', '2014-07-25 09:36:12', 'admin', '管理员');
 INSERT INTO `t_s_muti_lang` VALUES ('8a8ab0ba487c37d001487c488a4d0006', 'common.datasource.manage', '多数据源管理', 'zh-cn', '2014-09-16 10:26:41', '8a8ab0b246dc81120146dc8181950052', 'admin', '2014-09-16 10:30:20', 'admin', '管理员');
 INSERT INTO `t_s_muti_lang` VALUES ('8a8ab0ba487c37d001487c491f480008', 'common.datasource.manage', 'Multiple DataSource Manage', 'en', '2014-09-16 10:27:20', '8a8ab0b246dc81120146dc8181950052', 'admin', '2014-09-16 10:30:56', 'admin', '管理员');
@@ -6337,28 +6631,16 @@ CREATE TABLE `t_s_role_function` (
 -- ----------------------------
 -- Records of t_s_role_function
 -- ----------------------------
-INSERT INTO `t_s_role_function` VALUES ('402880ec5cc39343015cc3ac24dd0003', null, '8a8ab0b246dc81120146dc8180df001f', '402880e74d75c4dd014d75d3c5f40001', null);
-INSERT INTO `t_s_role_function` VALUES ('402880ef5aff3ede015aff44230f0003', null, '8a8ab0b246dc81120146dc81811d0032', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('402880ef5aff3ede015aff4423120005', null, '8a8ab0b246dc81120146dc8181100030', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402880ef5aff3ede015aff4423120009', null, '8a8ab0b246dc81120146dc8180df001f', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402880ef5aff3ede015aff442313000d', null, '8a8ab0b246dc81120146dc8180e70023', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402880ef5aff3ede015aff442313000e', null, '8a8ab0b246dc81120146dc8180ee0025', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('402880ef5aff3ede015aff442313000f', null, '402885814e3d2d09014e3d2e77800001', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402880ef5aff3ede015aff4423130011', null, '8a8ab0b246dc81120146dc8180f60028', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('402880ef5aff3ede015aff4423130012', null, '8a8ab0b246dc81120146dc8180d9001d', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402880ef5aff3ede015aff4423140016', null, '402881c746de1ea60146de207d770001', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('402880f25b18e3ab015b196f88ff0023', null, '8a8ab0b246dc81120146dc8180d2001a', '402880e74d75c4dd014d75d3c5f40001', null);
 INSERT INTO `t_s_role_function` VALUES ('402880f35b6686ba015b6693c3e90001', null, '8a8ab0b246dc81120146dc8180f30027', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402880f95e54d7aa015e54ddac040018', null, '8a8ab0b246dc81120146dc8180d2001a', '402881875b19f141015b19fb1d490019', null);
 INSERT INTO `t_s_role_function` VALUES ('402881855afb59f7015afc6123c7000e', null, '8a8ab0b246dc81120146dc8180d2001a', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881855afbcdf7015afc6123c7000e', null, '8a8ab0b246dc81120146dc8180e30021', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('402881855b04244f015b0426380e0005', null, '8a8ab0b246dc81120146dc8180d4001b', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('402881855b04244f015b0426380e0006', null, '402880e74d76e784014d76fd1bd60030', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('402881855b04244f015b0426380e0007', null, '402880e74d76e784014d76fa7e970024', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('402881855b04244f015b0426380f000a', null, '8a8ab0b246dc81120146dc8180fe002b', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('402881855c0190fa015c019363070005', null, '402881855c0190fa015c019342b20003', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881855c1c1c38015c1c2096780005', null, '40284a815c1bac76015c1bc02abe0003', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('402881875b246b3f015b246ce6d70003', null, '8a8ab0b246dc81120146dc8180e70023', '402880e74d75c4dd014d75d3c5f40001', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5f95cd47015f95d2eb6f0008', null, '402881bf5f95cd47015f95cf64330001', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5f95cd47015f95d2ebb80009', null, '402881bf5f95cd47015f95d110b10004', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5f994a01015f994fd8c90005', null, '402881bf5f994a01015f994fb0c80003', '8a8ab0b246dc81120146dc8181870050', null);
@@ -6366,6 +6648,33 @@ INSERT INTO `t_s_role_function` VALUES ('402881bf5f9a4ee9015f9a506f5d0003', null
 INSERT INTO `t_s_role_function` VALUES ('402881bf5f9ae82c015f9b11dbfe000c', null, '402881bf5f9ae82c015f9b11a5a4000a', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5f9eaf97015f9ebc0ea20010', null, '402881bf5f9eaf97015f9ebbe3d6000e', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5f9eaf97015f9ebc0ea70011', null, '402881bf5f9eaf97015f9ebb133c000c', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fa38f68015fa3f441fa0026', null, '402881bf5f9eaf97015f9ebb133c000c', '402880e74d75c4dd014d75d3c5f40001', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fa38f68015fa3f441fe0027', null, '402881bf5f9eaf97015f9ebbe3d6000e', '402880e74d75c4dd014d75d3c5f40001', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fa38f68015fa3f441fe0028', null, '402881bf5f9a4ee9015f9a5030b40001', '402880e74d75c4dd014d75d3c5f40001', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fa38f68015fa3f441fe0029', null, '402881bf5f95cd47015f95cf64330001', '402880e74d75c4dd014d75d3c5f40001', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fa38f68015fa3f441fe002a', null, '402881bf5f9ae82c015f9b11a5a4000a', '402880e74d75c4dd014d75d3c5f40001', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fa38f68015fa3f441fe002b', null, '402881bf5f95cd47015f95d110b10004', '402880e74d75c4dd014d75d3c5f40001', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fa38f68015fa3f441fe002c', null, '402881bf5f994a01015f994fb0c80003', '402880e74d75c4dd014d75d3c5f40001', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fbd5ecd015fbd8e5381000b', null, '402881bf5fbd5ecd015fbd8dd3d40007', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fbd5ecd015fbd8e5385000c', null, '402881bf5fbd5ecd015fbd8dacc10005', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fbd5ecd015fbd8e5385000d', null, '402881bf5fbd5ecd015fbd8ceb510002', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fbd5ecd015fbd8e5385000e', null, '402881bf5fbd5ecd015fbd8e190d0009', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fbd5ecd015fbd97323c0025', null, '402881bf5fbd5ecd015fbd94f8e9001f', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fbd5ecd015fbd97323e0026', null, '402881bf5fbd5ecd015fbd96f7840023', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fbd5ecd015fbd97323e0027', null, '402881bf5fbd5ecd015fbd949c55001d', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fbd5ecd015fbd97323e0028', null, '402881bf5fbd5ecd015fbd92960c0019', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fbd5ecd015fbd97323f0029', null, '402881bf5fbd5ecd015fbd963ff10021', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fbd5ecd015fbd97323f002a', null, '402881bf5fbd5ecd015fbd93fd9e001b', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fbd5ecd015fbd97323f002b', null, '402881bf5fbd5ecd015fbd9231490017', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fc34aaf015fc35cfec90015', null, '8a8ab0b246dc81120146dc81811d0032', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fc34aaf015fc35cfecf0016', null, '8a8ab0b246dc81120146dc8181100030', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fc34aaf015fc35cfecf0017', null, '402880e74d76e784014d76fd1bd60030', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fc34aaf015fc35cfecf0018', null, '402881855c0190fa015c019342b20003', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fc34aaf015fc35cfecf0019', null, '402885814e3d2d09014e3d2e77800001', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fc34aaf015fc35cfecf001a', null, '8a8ab0b246dc81120146dc8180d4001b', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fc34aaf015fc35cfecf001b', null, '8a8ab0b246dc81120146dc8180d9001d', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fc34aaf015fc35cfed0001c', null, '402880e74d76e784014d76fa7e970024', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fc34aaf015fc35cfed0001d', null, '8a8ab0b246dc81120146dc8180fe002b', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881e45e5bc4e3015e5bc767790010', null, '8a8ab0b246dc81120146dc8180d2001a', '8a8ab0b246dc81120146dc81818b0051', null);
 
 -- ----------------------------
@@ -6407,6 +6716,7 @@ INSERT INTO `t_s_role_user` VALUES ('402881855c1c4ab8015c1c4d36ca0002', '8a8ab0b
 INSERT INTO `t_s_role_user` VALUES ('402881855c1c4ab8015c1c4d512f0005', '8a8ab0b246dc81120146dc81818b0051', '8a8ab0b246dc81120146dc81819d0053');
 INSERT INTO `t_s_role_user` VALUES ('402881875988e889015988ec36940003', '402880e74d75c4dd014d75d3c5f40001', '402881875988e889015988ec36770001');
 INSERT INTO `t_s_role_user` VALUES ('402881875b19f141015b19fe80f8002d', '402881875b19f141015b19fb1d490019', '4028ef81538330cd01538333b7bc0001');
+INSERT INTO `t_s_role_user` VALUES ('402881bf5fa38f68015fa3fbde880039', '402880e74d75c4dd014d75d3c5f40001', '402881bf5fa38f68015fa3fbdde20037');
 INSERT INTO `t_s_role_user` VALUES ('4028ef815500fa15015500fbc3c50002', '8a8ab0b246dc81120146dc8181870050', '8a8ab0b246dc81120146dc8181a10054');
 INSERT INTO `t_s_role_user` VALUES ('4028ef81563ae5be01563ae92de10004', '402880e74d75c4dd014d75d3c5f40001', '4028ef81563ae5be01563ae92d7f0002');
 INSERT INTO `t_s_role_user` VALUES ('8a8c82a35de421ab015de4228d5c0005', '402881875b19f141015b19fb1d490019', '8a8c82a35de421ab015de4228d400003');
@@ -6441,13 +6751,35 @@ INSERT INTO `t_s_type` VALUES ('2c90ac564c9d1734014c9db20b0d002f', 'N', '否', n
 INSERT INTO `t_s_type` VALUES ('40284a815c1c18f7015c1c270f2b000c', '1', '是', null, '40284a815c1c18f7015c1c26c0bc000a', '2017-05-18 23:22:21', '管理员');
 INSERT INTO `t_s_type` VALUES ('40284a815c1c18f7015c1c272ecf000e', '0', '否', null, '40284a815c1c18f7015c1c26c0bc000a', '2017-05-18 23:22:29', '管理员');
 INSERT INTO `t_s_type` VALUES ('402880884883eff4014884180bf80029', '1', '蔷薇七村', null, '402880884883eff401488415cbb60027', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('402880cd4dbd4baa014dbd9c184f0003', 'WXTP', '图片', null, 'jglongjbtstypegourp2015060400001', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('402880ec5cc40078015cc41b28ce0005', 'bdfl_include', '导入表单', null, '402881e54dcb624a014dcbf4912b000e', '2017-06-20 14:05:33', '管理员');
-INSERT INTO `t_s_type` VALUES ('402881a151f1af7c0151f1bb1b520004', 'cigong', '辞工', null, '402881a151f1af7c0151f1b9d7f50002', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('402881a151f1af7c0151f1bc55b10006', 'jicigong', '急辞工', null, '402881a151f1af7c0151f1b9d7f50002', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('402881a151f1af7c0151f1bca0680008', 'citui', '辞退', null, '402881a151f1af7c0151f1b9d7f50002', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('402881a151f1af7c0151f1bcbf62000a', 'kaichu', '开除', null, '402881a151f1af7c0151f1b9d7f50002', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('402881a151f1af7c0151f1bce839000c', 'zidonglizhi', '自动离职', null, '402881a151f1af7c0151f1b9d7f50002', '2016-09-04 22:19:12', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9a26c30030', '1990', '1990', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:55:17', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9a45ab0032', '1991', '1991', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:55:25', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9a692f0034', '1992', '1992', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:55:34', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9aa7660036', '1993', '1993', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:55:50', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9ae0410038', '1994', '1994', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:56:05', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9afd11003a', '1995', '1995', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:56:12', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9b207a003c', '1996', '1996', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:56:21', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9b593a003e', '1997', '1997', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:56:36', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9b7dbd0040', '1998', '1998', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:56:45', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9ba0a80042', '1999', '1999', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:56:54', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9bbef30044', '2000', '2000', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:57:02', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9c04b20046', '2001', '2001', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:57:20', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9c3e1a0048', '2002', '2002', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:57:34', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9c54f8004a', '2003', '2003', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:57:40', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9c6ef9004c', '2004', '2004', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:57:47', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9c8970004e', '2005', '2005', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:57:54', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9ca4020050', '2006', '2006', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:58:00', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9cc3800052', '2007', '2007', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:58:08', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9cdd390054', '2008', '2008', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:58:15', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9cf92a0056', '2009', '2009', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:58:22', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9d156c0058', '2010', '2010', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:58:29', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9d3ad5005a', '2011', '2011', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:58:39', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9d52e3005c', '2012', '2012', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:58:45', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9d6b51005e', '2013', '2013', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:58:51', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9d82290060', '2014', '2014', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:58:57', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9d97110062', '2015', '2015', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:59:03', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fbd5ecd015fbd9db0c40064', '2016', '2016', null, '402881bf5fbd5ecd015fbd99af82002e', '2017-11-15 10:59:09', '管理员');
+INSERT INTO `t_s_type` VALUES ('402881bf5fc2ad6d015fc2b465320003', '2', '文档', null, '8a8ab0b246dc81120146dc8181ca005e', '2017-11-16 10:42:03', '管理员');
 INSERT INTO `t_s_type` VALUES ('402881e44df713f5014df73ef09a003d', 'table', 'form.db.type.table', null, '402881e44df713f5014df738349c002f', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('402881e44df713f5014df73f1436003f', 'sql', 'form.db.type.sql', null, '402881e44df713f5014df738349c002f', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('402881e44df713f5014df73f3f830041', 'clazz', 'form.db.type.clazz', null, '402881e44df713f5014df738349c002f', '2016-09-04 22:19:12', '管理员');
@@ -6477,37 +6809,18 @@ INSERT INTO `t_s_type` VALUES ('4028838850d2666a0150d26850210007', 'url', '网�
 INSERT INTO `t_s_type` VALUES ('4028838850d2666a0150d268ae510009', '*6-16', '6到16位任意字符', null, '4028838850c35b6a0150c37251e00002', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('4028838850d2666a0150d268e229000b', 'n6-16', '6到16位数字', null, '4028838850c35b6a0150c37251e00002', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('4028838850d2666a0150d26912e2000d', 's6-18', '6到18位字符串', null, '4028838850c35b6a0150c37251e00002', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('402889f647f797e30147f79ec3760005', '1', '待提交', null, '402889f647f797e30147f79e7ca60003', '2017-02-23 15:17:53', '管理员');
-INSERT INTO `t_s_type` VALUES ('402889f647f797e30147f79f28de0007', '2', '处理中', null, '402889f647f797e30147f79e7ca60003', '2017-02-23 15:17:53', '管理员');
-INSERT INTO `t_s_type` VALUES ('402889f647f797e30147f79fa724000b', '3', '已完成', null, '402889f647f797e30147f79e7ca60003', '2017-02-23 15:17:53', '管理员');
 INSERT INTO `t_s_type` VALUES ('4028a9815c8cf888015c8d00af2b0002', 'd', '金额', null, '4028838850c35b6a0150c37251e00002', '2017-06-09 21:17:31', '管理员');
-INSERT INTO `t_s_type` VALUES ('4028b881533ac16a01533adf65370003', 'Pie2D', '2D饼图', null, '4028b881533ac16a01533adb50460001', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('4028b881533ac16a01533ae0363d0005', 'Pie3D', '3D饼图', null, '4028b881533ac16a01533adb50460001', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('4028b881533ac16a01533ae2d2a50007', 'Column2D', '2D柱状图', null, '4028b881533ac16a01533adb50460001', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('4028b881533ac16a01533ae305340009', 'Column3D', '3D柱状图', null, '4028b881533ac16a01533adb50460001', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('4028b881533ac16a01533ae45759000b', 'Bar2D', '条状图', null, '4028b881533ac16a01533adb50460001', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('4028b881533ac16a01533ae4c6de000d', 'Area2D', '面积图', null, '4028b881533ac16a01533adb50460001', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('4028b881533ac16a01533ae50a67000f', 'LineBasic2D', '折线图', null, '4028b881533ac16a01533adb50460001', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('4028ef8154753f2601547546bb620007', '1', '单选', null, '4028ef8154753f2601547546249f0005', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('4028ef8154753f2601547546d3d60009', '2', '多选', null, '4028ef8154753f2601547546249f0005', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('4028f6815dcbc85f015dcbd4ea110001', 'USE_SQL_RULES', '自定义SQL表达式', null, 'f852d85d47ed64a40147ed70894c0003', '2017-08-10 19:08:34', '管理员');
 INSERT INTO `t_s_type` VALUES ('8a1c7ee54e3e2ca9014e3e520bdc0010', 'spring', 'java.enhance.type.spring', null, '8a1c7ee54e3e2ca9014e3e4b78f90009', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('8a1c7ee54e3e2ca9014e3e524b560012', 'class', 'java.enhance.type.class', null, '8a1c7ee54e3e2ca9014e3e4b78f90009', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('8a71b40e4a38319b014a3859a2c1001a', '1', 'common.smsAlertsModel', null, '8a71b40e4a38319b014a3858fca40018', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('8a71b40e4a38319b014a385a01d1001c', '2', 'common.emailAlertsModel', null, '8a71b40e4a38319b014a3858fca40018', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('8a71b40e4a38319b014a385d30300020', '1', 'common.smsAlerts', null, '8a71b40e4a38319b014a385cb115001e', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('8a71b40e4a38319b014a385d86c30022', '2', 'common.emailAlerts', null, '8a71b40e4a38319b014a385cb115001e', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('8a71b40e4a38319b014a385dc1370024', '3', 'common.sysAlerts', null, '8a71b40e4a38319b014a385cb115001e', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('8a71b40e4a38319b014a3860603f0028', '1', 'common.didNotSend', null, '8a71b40e4a38319b014a386022bd0026', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('8a71b40e4a38319b014a38608d98002a', '2', 'common.sendSuccess', null, '8a71b40e4a38319b014a386022bd0026', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('8a71b40e4a38319b014a3860b181002c', '3', 'common.failToSend', null, '8a71b40e4a38319b014a386022bd0026', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('8a8ab0b246dc81120146dc8181f30060', '2', 'menu.icon', null, '8a8ab0b246dc81120146dc8181aa0056', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('8a8ab0b246dc81120146dc8181f70061', '1', 'system.icon', null, '8a8ab0b246dc81120146dc8181aa0056', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('8a8ab0b246dc81120146dc8181fa0062', 'files', 'common.attachment', null, '8a8ab0b246dc81120146dc8181ca005e', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('8a8ab0b246dc81120146dc8181fe0063', '1', 'lang.excellent.order', null, '8a8ab0b246dc81120146dc8181b10057', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('8a8ab0b246dc81120146dc8182010064', '2', 'lang.normal.order', null, '8a8ab0b246dc81120146dc8181b10057', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('8a8ab0b246dc81120146dc8182050065', '1', 'lang.contract.customer', null, '8a8ab0b246dc81120146dc8181b50058', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('8a8ab0b246dc81120146dc8182080066', '2', 'lang.normal.customer', null, '8a8ab0b246dc81120146dc8181b50058', '2016-09-04 22:19:12', '管理员');
+INSERT INTO `t_s_type` VALUES ('8a8ab0b246dc81120146dc8181fa0062', '0', '图片', null, '8a8ab0b246dc81120146dc8181ca005e', null, null);
 INSERT INTO `t_s_type` VALUES ('8a8ab0b246dc81120146dc81820b0067', '1', 'lang.special.servcie', null, '8a8ab0b246dc81120146dc8181b90059', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('8a8ab0b246dc81120146dc8182100068', '2', 'lang.normal.service', null, '8a8ab0b246dc81120146dc8181b90059', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('8a8ab0b246dc81120146dc8182130069', 'single', 'common.single.condition.query', null, '8a8ab0b246dc81120146dc8181bc005a', '2016-09-04 22:19:12', '管理员');
@@ -6522,7 +6835,7 @@ INSERT INTO `t_s_type` VALUES ('8a8ab0b246dc81120146dc81822f0071', 'act', 'commo
 INSERT INTO `t_s_type` VALUES ('8a8ab0b246dc81120146dc8182320072', 't_s', 'common.system.table', null, '8a8ab0b246dc81120146dc8181c6005d', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('8a8ab0b246dc81120146dc8182350073', 't_b', 'common.business.table', null, '8a8ab0b246dc81120146dc8181c6005d', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('8a8ab0b246dc81120146dc8182390074', 't_p', 'common.customer.engine.table', null, '8a8ab0b246dc81120146dc8181c6005d', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('8a8ab0b246dc81120146dc81823c0075', 'news', 'common.news', null, '8a8ab0b246dc81120146dc8181ca005e', '2016-09-04 22:19:12', '管理员');
+INSERT INTO `t_s_type` VALUES ('8a8ab0b246dc81120146dc81823c0075', '1', '视频', null, '8a8ab0b246dc81120146dc8181ca005e', null, null);
 INSERT INTO `t_s_type` VALUES ('8a8ab0b246dc81120146dc8182400076', '0', 'common.male', null, '8a8ab0b246dc81120146dc8181cd005f', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('8a8ab0b246dc81120146dc8182430077', '1', 'common.female', null, '8a8ab0b246dc81120146dc8181cd005f', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('8a8ab0ba487c527201487c7863ec001b', 'oracle', 'common.oracle', null, '8a8ab0ba487c527201487c7732790019', '2016-09-04 22:19:12', '管理员');
@@ -6543,14 +6856,6 @@ INSERT INTO `t_s_type` VALUES ('ff80808151399d0d015139b29550000a', 'permoney', '
 INSERT INTO `t_s_type` VALUES ('ff80808151399d0d015139b2a6e5000c', 'money', '元', null, '4028ab8c5134f1ed0151350f08d90003', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('ff80808151399d0d015139b2bab4000e', 'age', '岁', null, '4028ab8c5134f1ed0151350f08d90003', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_type` VALUES ('ff80808151399d0d015139b2c9ce0010', 'class', '课时', null, '4028ab8c5134f1ed0151350f08d90003', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('jglongjbtstype201506041030000001', 'WXGZYD', '关注引导', null, 'jglongjbtstypegourp2015060400001', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('jglongjbtstype201506041030000002', 'WXNRQ', '内容区', null, 'jglongjbtstypegourp2015060400001', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('jglongjbtstype201506041030000003', 'WXYWYD', '原文引导', null, 'jglongjbtstypegourp2015060400001', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('jglongjbtstype201506041030000004', 'WXBT', '标题', null, 'jglongjbtstypegourp2015060400001', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('jglongjbtstype201506041030000005', 'WXFGX', '分隔线', null, 'jglongjbtstypegourp2015060400001', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('jglongjbtstype201506041030000006', 'WXHTZH', '互推账号', null, 'jglongjbtstypegourp2015060400001', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('jglongjbtstype201506041030000007', 'WXQT', '其他', null, 'jglongjbtstypegourp2015060400001', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_type` VALUES ('jglongjbtstype201506041030000008', 'WXWDYS', '我的样式', null, 'jglongjbtstypegourp2015060400001', '2016-09-04 22:19:12', '管理员');
 
 -- ----------------------------
 -- Table structure for t_s_typegroup
@@ -6573,25 +6878,18 @@ INSERT INTO `t_s_typegroup` VALUES ('297e201047e95ee30147e9ba56ce0009', 'orgtype
 INSERT INTO `t_s_typegroup` VALUES ('2c90ac564c9d1734014c9db1a167002b', 'sf_yn', '是否YN', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_typegroup` VALUES ('40284a815c1c18f7015c1c26c0bc000a', 'dev_flag', '开发权限', '2017-05-18 23:22:01', '管理员');
 INSERT INTO `t_s_typegroup` VALUES ('402880884883eff401488415cbb60027', 'smsTplType', '模板类型', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_typegroup` VALUES ('402881a151f1af7c0151f1b9d7f50002', 'outType', '离职方式', '2016-09-04 22:19:12', '管理员');
+INSERT INTO `t_s_typegroup` VALUES ('402881bf5fbd5ecd015fbd99af82002e', 'nianJie', '年届', '2017-11-15 10:54:47', '管理员');
 INSERT INTO `t_s_typegroup` VALUES ('402881e44df713f5014df738349c002f', 'formDbType', 'form.db.type', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_typegroup` VALUES ('402881e54dcb624a014dcbf4912b000e', 'bdfl', '表单分类', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_typegroup` VALUES ('402881e55af64f07015af68356550004', 'widgetType', '控件类型', '2017-03-22 22:54:47', '管理员');
 INSERT INTO `t_s_typegroup` VALUES ('402881e64ca6fd1b014ca7044c370004', 'tblx', '图表类型', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_typegroup` VALUES ('402881e946e71f5f0146e73619bb0002', 'lang', 'common.mutilang', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_typegroup` VALUES ('4028838850c35b6a0150c37251e00002', 'dataType', '校验规则', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_typegroup` VALUES ('402889f647f797e30147f79e7ca60003', 'bpm_status', '业务BPM流转状态', '2017-02-23 15:17:53', '管理员');
 INSERT INTO `t_s_typegroup` VALUES ('4028ab8c5134f1ed0151350f08d90003', 'units', '常用单位', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_typegroup` VALUES ('4028b881533ac16a01533adb50460001', 'graphType', '动态图表类型', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_typegroup` VALUES ('4028ef8154753f2601547546249f0005', 'pop_retype', 'POP返回类型', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_typegroup` VALUES ('4028efa25219c9f0015219d1d2720004', 'leaveType', '请假类别', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_typegroup` VALUES ('8a1c7ee54e3e2ca9014e3e4b78f90009', 'enhanceType', 'java.enhance.type', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_typegroup` VALUES ('8a71b40e4a38319b014a3858fca40018', 'msgTplType', '消息模板分类', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_typegroup` VALUES ('8a71b40e4a38319b014a385cb115001e', 'msgType', '消息类别', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_typegroup` VALUES ('8a71b40e4a38319b014a386022bd0026', 'msgStatus', '消息发送状态', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_typegroup` VALUES ('8a8ab0b246dc81120146dc8181aa0056', 'icontype', 'common.icon.type', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_typegroup` VALUES ('8a8ab0b246dc81120146dc8181b10057', 'order', 'lang.order.type', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_typegroup` VALUES ('8a8ab0b246dc81120146dc8181b50058', 'custom', 'lang.customer.type', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_typegroup` VALUES ('8a8ab0b246dc81120146dc8181b90059', 'service', 'lang.service.item.type', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_typegroup` VALUES ('8a8ab0b246dc81120146dc8181bc005a', 'searchmode', 'common.query.module', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_typegroup` VALUES ('8a8ab0b246dc81120146dc8181c0005b', 'yesorno', 'common.logic.condition', '2016-09-04 22:19:12', '管理员');
@@ -6601,7 +6899,6 @@ INSERT INTO `t_s_typegroup` VALUES ('8a8ab0b246dc81120146dc8181ca005e', 'fieltyp
 INSERT INTO `t_s_typegroup` VALUES ('8a8ab0b246dc81120146dc8181cd005f', 'sex', 'common.sex.type', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_typegroup` VALUES ('8a8ab0ba487c527201487c7732790019', 'dbtype', 'common.dbtype', '2016-09-04 22:19:12', '管理员');
 INSERT INTO `t_s_typegroup` VALUES ('f852d85d47ed64a40147ed70894c0003', 'rulecon', '规则条件', '2016-09-04 22:19:12', '管理员');
-INSERT INTO `t_s_typegroup` VALUES ('jglongjbtstypegourp2015060400001', 'weixin', '微信模板类型', '2016-09-04 22:19:12', '管理员');
 
 -- ----------------------------
 -- Table structure for t_s_user
@@ -6633,6 +6930,7 @@ CREATE TABLE `t_s_user` (
 -- ----------------------------
 INSERT INTO `t_s_user` VALUES ('402880e74d75c4dd014d75d44af30005', '', '', '', null, '管理员', '2017-07-25 16:22:11', 'admin', '管理员', '2015-05-21 17:35:56', 'admin', '20170502\\4afbfbedab64034f9015f1bca8c379310b551dab.jpg', null, '0');
 INSERT INTO `t_s_user` VALUES ('402881875988e889015988ec36770001', '', '', '', null, '管理员', '2017-01-10 23:08:33', 'admin', '管理员', '2017-01-10 23:08:18', 'admin', null, null, '0');
+INSERT INTO `t_s_user` VALUES ('402881bf5fa38f68015fa3fbdde20037', '', '', '', null, null, null, null, '管理员', '2017-11-10 11:31:53', 'admin', null, null, '0');
 INSERT INTO `t_s_user` VALUES ('4028ef81538330cd01538333b7bc0001', 'zhangdaiscott@163.com', '13426432323', '991', null, '管理员', '2017-03-29 20:16:01', 'admin', '管理员', '2016-03-17 14:11:58', 'admin', null, null, '0');
 INSERT INTO `t_s_user` VALUES ('4028ef81563ae5be01563ae92d7f0002', '', '', '', null, '管理员', '2016-07-30 16:26:20', 'admin', '管理员', '2016-07-30 16:26:15', 'admin', null, null, '0');
 INSERT INTO `t_s_user` VALUES ('8a8ab0b246dc81120146dc8181950052', '', '', '', 'images/renfang/qm/licf.gif', '管理员', '2017-11-07 17:34:38', 'admin', null, '2016-07-20 16:26:15', null, 'upload/files\\20170612\\e1fe9925bc315c60addea1b98eb1cb1349547719.jpg', '这家伙很你好', '1');
@@ -6665,6 +6963,7 @@ INSERT INTO `t_s_user_org` VALUES ('402881855c1c4ab8015c1c4d51140004', '8a8ab0b2
 INSERT INTO `t_s_user_org` VALUES ('402881875988e889015988ec36880002', '402881875988e889015988ec36770001', '8a8ab0b246dc81120146dc8180ba0017');
 INSERT INTO `t_s_user_org` VALUES ('402881875988e889015988ec64590005', '402881875988e889015988ec36770001', '8a8ab0b246dc81120146dc8180a20016');
 INSERT INTO `t_s_user_org` VALUES ('402881875b19f141015b19fe80e5002c', '4028ef81538330cd01538333b7bc0001', '402880e447e9a9570147e9b762e30009');
+INSERT INTO `t_s_user_org` VALUES ('402881bf5fa38f68015fa3fbde740038', '402881bf5fa38f68015fa3fbdde20037', '8a8ab0b246dc81120146dc8180a20016');
 INSERT INTO `t_s_user_org` VALUES ('4028ef815500fa15015500fbc3290001', '8a8ab0b246dc81120146dc8181a10054', '8a8ab0b246dc81120146dc8180a20016');
 INSERT INTO `t_s_user_org` VALUES ('4028ef81563ae5be01563ae92dc20003', '4028ef81563ae5be01563ae92d7f0002', '8a8ab0b246dc81120146dc8180a20016');
 INSERT INTO `t_s_user_org` VALUES ('8a8c82a35de421ab015de4228d520004', '8a8c82a35de421ab015de4228d400003', '8a8ab0b246dc81120146dc8180ba0017');
