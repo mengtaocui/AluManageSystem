@@ -22,6 +22,7 @@ import org.jeecgframework.core.common.controller.BaseController;
 import org.jeecgframework.core.common.model.json.AjaxJson;
 import org.jeecgframework.core.constant.Globals;
 import org.jeecgframework.core.enums.SysThemesEnum;
+import org.jeecgframework.core.util.BrowserUtils;
 import org.jeecgframework.core.util.ContextHolderUtils;
 import org.jeecgframework.core.util.IpUtil;
 import org.jeecgframework.core.util.ListtoMenu;
@@ -262,13 +263,16 @@ public class LoginController extends BaseController{
             modelMap.put("portrait", user.getPortrait());
 
             modelMap.put("currentOrgName", ClientManager.getInstance().getClient().getUser().getCurrentDepart().getDepartname());
-
-			
 			SysThemesEnum sysTheme = SysThemesUtil.getSysTheme(request);
+			if(BrowserUtils.isIE(request)){
+				sysTheme.setDesc("经典风格");
+				sysTheme.setIndexPath("main/main");
+				sysTheme.setStyle("deafult");
+				sysTheme.setThemes("default");
+			}
 			if("ace".equals(sysTheme.getStyle())||"diy".equals(sysTheme.getStyle())||"acele".equals(sysTheme.getStyle())||"hplus".equals(sysTheme.getStyle())){
 				request.setAttribute("menuMap", getFunctionMap(user));
 			}
-
 			Cookie cookie = new Cookie("JEECGINDEXSTYLE", sysTheme.getStyle());
 			//设置cookie有效期为一个月
 			cookie.setMaxAge(3600*24*30);
@@ -304,7 +308,6 @@ public class LoginController extends BaseController{
 				}
 				return null;
 			}
-
 			return sysTheme.getIndexPath();
 		} else {
 
@@ -313,7 +316,6 @@ public class LoginController extends BaseController{
 			if(StringUtils.isNotEmpty(returnURL)){
 				request.setAttribute("ReturnURL", returnURL);
 			}
-
 			return "login/login";
 		}
 

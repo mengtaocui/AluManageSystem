@@ -21,6 +21,7 @@ import org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery;
 import org.jeecgframework.core.common.model.json.AjaxJson;
 import org.jeecgframework.core.common.model.json.DataGrid;
 import org.jeecgframework.core.constant.Globals;
+import org.jeecgframework.core.util.BrowserUtils;
 import org.jeecgframework.core.util.DateUtils;
 import org.jeecgframework.core.util.FileUtils;
 import org.jeecgframework.core.util.MyBeanUtils;
@@ -276,6 +277,7 @@ public class ActivitySpaceController extends BaseController {
 	public ModelAndView addorupdate(String activityId, String activityName, HttpServletRequest req) {
 		req.setAttribute("activityId", activityId);
 		req.setAttribute("activityName", activityName);
+		System.out.println(BrowserUtils.isIE(req)+"*******************************************");
 		return new ModelAndView("alu/activitySpace");
 	}
 }

@@ -1104,7 +1104,7 @@ public class UserController extends BaseController {
 				//设置cookie有效期为一个月
 				cookie.setMaxAge(3600*24*30);
 				response.addCookie(cookie);
-				logger.debug(" ----- 首页样式: indexStyle ----- "+indexStyle);
+				logger.debug(" ----- 首页样式: 在· ----- "+indexStyle);
 				j.setSuccess(Boolean.TRUE);
 				j.setMsg("样式修改成功，请刷新页面");
 			}

@@ -40,8 +40,11 @@
   <script src="plug-in/ace/js/html5shiv.js"></script>
   <script src="plug-in/ace/js/respond.js"></script>
   <![endif]-->
-  <link rel="stylesheet" href="plug-in/swiper3.4.1/idangerous.swiper2.7.6.css">
+   <link rel="stylesheet" href="plug-in/swiper3.4.1/idangerous.swiper2.7.6.css">
   <style>
+    body{
+    	overflow: hidden;
+    }
   	input{
   		outline: none;
   	}
@@ -57,7 +60,6 @@
 	.color-white{
 		color: #ffffff;
 	}
-	
 	.login-layout{
 		background-color: #fff !important;
 	}
@@ -67,7 +69,6 @@
 	    left: 0px;
 	    width: 100%;
 	    height: 100%;
-	    overflow: hidden;
 	}
 	.banner-img{
 		width: 100%;
@@ -79,56 +80,12 @@
 	    left: 50%;
 	    z-index: 1;
 	}
-	.arrow-right {
-	    background: url(images/arrows.png) no-repeat left bottom;
-	    position: absolute;
-	    right: 10px;
-	    top: 50%;
-	    margin-top: -15px;
-	    width: 17px;
-	    height: 30px;
-		z-index: 1;
-	}
-	.arrow-left {
-	    background: url(images/arrows.png) no-repeat left top;
-	    position: absolute;
-	    left: 10px;
-	    top: 50%;
-	    margin-top: -15px;
-	    width: 17px;
-	    height: 30px;
-		z-index: 1;
-	}
-	.pagination {
-	  position: absolute;
-	  z-index: 20;
-	  bottom: 10px;
-	  width: 100%;
-	  text-align: center;
-	}
-	.swiper-pagination-switch {
-	  display: inline-block;
-	  width: 8px;
-	  height: 8px;
-	  border-radius: 8px;
-	  background: #555;
-	  margin: 0 5px;
-	  opacity: 0.8;
-	  border: 1px solid #fff;
-	  cursor: pointer;
-	}
-	.swiper-active-switch {
-	  background: #fff;
-	}
   </style>
 
-    
 </head>
 <body class="login-layout light-login">
 <!-- Swiper banner-->
 	<div class="swiper-container banner">
-	    <a class="arrow-left" href="#"></a>
- 		<a class="arrow-right" href="#"></a>
 	    <div class="swiper-wrapper">
 	        <div class="swiper-slide"><img src="images/s1.jpg" class="banner-img"></div>
 	        <div class="swiper-slide"><img src="images/s2.jpg" class="banner-img"></div>
@@ -141,7 +98,11 @@
 	        <div class="swiper-slide">Slide 9</div>
 	        <div class="swiper-slide">Slide 10</div> -->
 	    </div>
-	   <div class="pagination"></div>
+	    <!-- Add Pagination -->
+	    <div class="swiper-pagination"></div>
+	    <!-- Add Arrows -->
+	    <div class="swiper-button-next"></div>
+	    <div class="swiper-button-prev"></div>
 	</div>
  <div class="main-container">
    <div class="main-content">
@@ -159,7 +120,7 @@
 				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				  <div id="showErrMsg"></div>
 				</div>
-                  <h4 class="header color-white  lighter bigger font_color">
+                  <h4 class="header color-white  lighter bigger">
                     <i class="ace-icon fa fa-coffee color-white"></i>
                 	    校友系统
                   </h4>
@@ -167,14 +128,14 @@
                       <label class="block clearfix">
 								<span class="block input-icon input-icon-right">
 								<!-- update-start--Author:yugwu  Date:20170901 for:TASK #2324 【改进】登录记住用户名不起作用---- -->
-									<input type="text"  name="userName" iscookie="true" class="form-control info" placeholder="请输入用户名"  id="userName" value="admin"/>
+									<input type="text"  name="userName" iscookie="true" class="form-control" placeholder="请输入用户名"  id="userName" value="admin"/>
 								<!-- update-end--Author:yugwu  Date:20170901 for:TASK #2324 【改进】登录记住用户名不起作用---- -->
 									<i class="ace-icon fa fa-user"></i>
 								</span>
                       </label>
                       <label class="block clearfix">
 								<span class="block input-icon input-icon-right">
-									<input type="password" name="password" class="form-control info" placeholder="请输入密码" id="password" value="123456"/>
+									<input type="password" name="password" class="form-control" placeholder="请输入密码" id="password" value="123456"/>
 									<i class="ace-icon fa fa-lock"></i>
 								</span>
                       </label>
@@ -220,22 +181,15 @@
 <!-- add-end--Author:gengjiajia  Date:20160727 for:TASK #1217 【IE兼容】jeecg h+首页兼容性问题,不兼容的浏览器直接切换套shortcut风格 -->
 <script src="plug-in/swiper3.4.1/idangerous.swiper2.7.6.js"></script>
 <script type="text/javascript">
-	var mySwiper = new Swiper('.swiper-container',{
-		autoplay : 30000,//可选选项，自动滑动
-		loop : true,//可选选项，开启循环
-		mousewheelControl : true,
-		pagination : '.pagination',
-		paginationClickable :true
+	/* 轮播图 */
+	var swiper = new Swiper('.swiper-container', {
+	    pagination: '.swiper-pagination',
+	    paginationClickable: true,
+	    nextButton: '.swiper-button-next',
+	    prevButton: '.swiper-button-prev',
+	    autoplay: 30000,
+	    spaceBetween: 30
 	});
-	$('.arrow-left').on('click', function(e){
-		e.preventDefault()
-		mySwiper.swipePrev()
-	  });
-	$('.arrow-right').on('click', function(e){
-		e.preventDefault()
-		mySwiper.swipeNext()
-	});
-	
 	$(function(){
 		optErrMsg();
 	});

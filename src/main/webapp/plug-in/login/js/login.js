@@ -300,12 +300,12 @@ function onfocus() {
 }
 
 function hideTop() {
-	$('#alertMessage').animate({
+	/*$('#alertMessage').animate({
 		opacity : 0,
 		right : '-20'
 	}, 500, function() {
 		$(this).hide();
-	});
+	});*/
 }
 //加载信息
 function loading(name, overlay) {
