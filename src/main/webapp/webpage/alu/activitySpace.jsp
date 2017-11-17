@@ -71,9 +71,6 @@
   </style>
  </head>
  <body style="overflow-x: hidden" scroll="no">
-<!--  	<div class="main-wrap">
- 		
- 	</div> -->
  	<div class="main-wrap">
 		<div class="box_wrap" style="float:left;margin-right:3px">
 			<div class="upload_wrap">

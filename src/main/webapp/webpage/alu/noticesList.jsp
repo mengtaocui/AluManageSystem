@@ -12,10 +12,10 @@
    <t:dgCol title="审核状态" field="checkStatus" replace="等待审核_0,已通过_1,被拒绝_2"  query="true"  width="120"></t:dgCol>
    <t:dgCol title="创建人" field="crtByUserName"   width="120"></t:dgCol>
    <t:dgCol title="创建时间" field="crtTime" formatter="yyyy-MM-dd hh:mm:ss"  width="120" query="true" queryMode="group"></t:dgCol>
-   <t:dgCol title="最近一次修改人" field="lastUpdateByUserName"   width="120"></t:dgCol>
-   <t:dgCol title="最近一次修改时间" field="lastUpdateTime" formatter="yyyy-MM-dd hh:mm:ss"  width="120"></t:dgCol>
+   <t:dgCol title="最近一次修改人" hidden="true" field="lastUpdateByUserName"   width="120"></t:dgCol>
+   <t:dgCol title="最近一次修改时间" hidden="true" field="lastUpdateTime" formatter="yyyy-MM-dd hh:mm:ss"  width="120"></t:dgCol>
    <t:dgCol title="审核人" field="checkByUserName"   width="120"></t:dgCol>
-   <t:dgCol title="操作" field="opt" width="130"></t:dgCol>
+   <t:dgCol title="操作" field="opt" width="150"></t:dgCol>
    <t:dgFunOpt funname="handleApplyPass(id)" exp="checkStatus#eq#0" title="通过" urlStyle="background-color: #449d44;" urlclass="ace_button"  urlfont="fa-check"></t:dgFunOpt>
    <t:dgFunOpt funname="handleApplyRefuse(id)" exp="checkStatus#eq#0" title="拒绝" urlStyle="background-color: #f0ad4e;" urlclass="ace_button"  urlfont="fa-close"></t:dgFunOpt>
    <t:dgDelOpt title="删除" url="noticesController.do?del&id={id}" urlclass="ace_button" urlStyle="background-color:#ec4758;"  urlfont="fa-trash-o"/>
