@@ -1736,7 +1736,7 @@ public class DataGridTag extends JeecgTag {
 		if("group".equals(getQueryMode())){
 			for (DataGridColumn col : columnList) {
 				if (col.isQuery()) {
-					sb.append("<span style=\"display:-moz-inline-box;display:inline-block;\">");
+					sb.append("<span style=\"display:-moz-inline-box;margin-right: 15px;display:inline-block;\">");
 					sb.append("<span style=\"vertical-align:middle;display:-moz-inline-box;display:inline-block;padding-left: 3px;text-overflow:ellipsis;-o-text-overflow:ellipsis; overflow: hidden;white-space:nowrap; \" title=\""+col.getTitle()+"\">"+col.getTitle()+"：</span>");
 					if("single".equals(col.getQueryMode())){
 						if(!StringUtil.isEmpty(col.getReplace())){
@@ -2934,7 +2934,7 @@ public class DataGridTag extends JeecgTag {
 			if("group".equals(getQueryMode())){
 				for (DataGridColumn col : columnList) {
 					if (col.isQuery()) {
-						sb.append("<span style=\"display:-moz-inline-box;display:inline-block;\">");
+						sb.append("<span style=\"display:-moz-inline-box;margin-right: 15px;display:inline-block;\">");
 						sb.append("<span style=\"vertical-align:middle;display:-moz-inline-box;display:inline-block;padding-left: 3px;text-overflow:ellipsis;-o-text-overflow:ellipsis; overflow: hidden;white-space:nowrap; \" title=\""+col.getTitle()+"\">"+col.getTitle()+"：</span>");
 						if("single".equals(col.getQueryMode())){
 							if(!StringUtil.isEmpty(col.getReplace())){

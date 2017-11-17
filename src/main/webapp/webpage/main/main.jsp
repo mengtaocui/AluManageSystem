@@ -31,78 +31,6 @@ a:hover {
 <SCRIPT type="text/javascript">
 
 	$(function() {
-		$('#layout_jeecg_onlineDatagrid').datagrid({
-			url : 'systemController.do?datagridOnline&field=ip,logindatetime,user.userName,',
-			title : '',
-			iconCls : '',
-			fit : true,
-			fitColumns : true,
-			pagination : true,
-			pageSize : 10,
-			pageList : [ 10 ],
-			nowarp : false,
-			border : false,
-			idField : 'id',
-			sortName : 'logindatetime',
-			sortOrder : 'desc',
-			frozenColumns : [ [ {
-				title : '<t:mutiLang langKey="common.code"/>',
-				field : 'id',
-				width : 150,
-				hidden : true
-			} ] ],
-			columns : [ [ {
-				title : '<t:mutiLang langKey="common.login.name"/>',
-				field : 'user.userName',
-				width : 100,
-				align : 'center',
-				sortable : true,
-				formatter : function(value, rowData, rowIndex) {
-					return formatString('<span title="{0}">{1}</span>', value, value);
-				}
-			}, {
-				title : 'IP',
-				field : 'ip',
-				width : 150,
-				align : 'center',
-				sortable : true,
-				formatter : function(value, rowData, rowIndex) {
-					return formatString('<span title="{0}">{1}</span>', value, value);
-				}
-			}, {
-				title : '<t:mutiLang langKey="common.login.time"/>',
-				field : 'logindatetime',
-				width : 150,
-				sortable : true,
-				formatter : function(value, rowData, rowIndex) {
-					return formatString('<span title="{0}">{1}</span>', value, value);
-				},
-				hidden : true
-			} ] ],
-			onClickRow : function(rowIndex, rowData) {
-			},
-			onLoadSuccess : function(data) {
-				$('#layout_jeecg_onlinePanel').panel('setTitle', '( ' + data.total + ' )' + ' <t:mutiLang langKey="lang.user.online"/>');
-			},
-			onLoadError : function(data) {
-			}
-		}).datagrid('getPager').pagination({
-			showPageList : false,
-			showRefresh : false,
-			beforePageText : '',
-			afterPageText : '/{pages}',
-			displayMsg : ''
-		});		
-		
-		$('#layout_jeecg_onlinePanel').panel({
-			tools : [ {
-				iconCls : 'icon-reload',
-				handler : function() {
-					$('#layout_jeecg_onlineDatagrid').datagrid('load', {});
-				}
-			} ]
-		});
-		
 		$('#layout_east_calendar').calendar({
 			fit : true,
 			current : new Date(),
@@ -124,75 +52,62 @@ a:hover {
 		window.clearTimeout(onlineInterval);
 	}
 	function easyPanelExpand(){
-		onlineInterval = window.setInterval(function() {
+		/* onlineInterval = window.setInterval(function() {
 			$('#layout_jeecg_onlineDatagrid').datagrid('load', {});
-		}, 1000 * 20);
+		}, 1000 * 20); */
 	}
 </SCRIPT>
 </head>
 <body class="easyui-layout" style="overflow-y: hidden" scroll="no">
 <!-- 顶部-->
-<div region="north" border="false" title=" 校友管理系统  <t:mutiLang langKey="system.version.number"/>" style="BACKGROUND: #E6E6FA; height: 85px; padding: 1px; overflow: hidden;">
-<table width="100%" border="0" cellpadding="0" cellspacing="0">
-<tr>
-    <td align="left" style="vertical-align: text-bottom;">校友管理系统</td>
-    <td align="right" nowrap>
-        <table>
+
+<div region="north" border="false" style="width: 100%;overflow: hidden;">
+	<div class="panel-header panel-header-noborder"  style="width: 100%;height: 30px;overflow: hidden;position: relative;">
+		<table style="width: 100%;height: 100%;">
             <tr>
-                <td valign="top" height="50">
+                <td><div class="panel-title"> 校友管理系统  1.0</div></td>
+                <td width="150px">
                     <span style="color: #CC33FF"><t:mutiLang langKey="common.user"/>:</span>
                     <span style="color: #666633">${userName }</span>
-                    <span style="color: #CC33FF"><t:mutiLang langKey="current.org"/>:</span>
-                    <span style="color: #666633">${currentOrgName }</span>
                     <span style="color: #CC33FF"><t:mutiLang langKey="common.role"/>:</span>
                     <span style="color: #666633">${roleName }</span>
                 </td>
-            </tr>
-            <tr>
-                <div style="position: absolute; right: 0px; bottom: 0px;">
-                    <a href="javascript:void(0);" class="easyui-menubutton" menu="#layout_north_kzmbMenu" iconCls="icon-help">
-                        <t:mutiLang langKey="common.control.panel"/>
-                    </a>
-                    <a href="javascript:void(0);" class="easyui-menubutton" menu="#layout_north_zxMenu" iconCls="icon-back">
-                        <t:mutiLang langKey="common.logout"/>
-                    </a>
-                </div>
-                <div id="layout_north_kzmbMenu" style="width: 100px; display: none;">
-                    <div onclick="openwindow('<t:mutiLang langKey="common.profile"/>','userController.do?userinfo')">
-                        <t:mutiLang langKey="common.profile"/>
-                    </div>
-                    <div class="menu-sep"></div>
-                    <div onclick="add('<t:mutiLang langKey="common.change.password"/>','userController.do?changepassword','', 550, 200)">
-                        <t:mutiLang langKey="common.change.password"/>
-                    </div>
-					<div class="menu-sep"></div>
-                   <%--  <div onclick="openwindow('<t:mutiLang langKey="common.ssms.getSysInfos"/>','tSSmsController.do?getSysInfos')">
-                        <t:mutiLang langKey="common.ssms.getSysInfos"/>
-                    </div> --%>
-                    <div class="menu-sep"></div>
-                    <div onclick="add('<t:mutiLang langKey="common.change.style"/>','userController.do?changestyle','',550,200)">
-                        <t:mutiLang langKey="common.my.style"/>
-                    </div>
-                    
-                    <div class="menu-sep" ></div>
-                   <!--  <div onclick="window.open('http://yun.jeecg.org')">
-                         	云应用中心
-                    </div> -->
-                    
-                    <div onclick="clearLocalstorage()">
-                        <t:mutiLang langKey="common.clear.localstorage"/>
-                    </div>
-                </div>
-                <div id="layout_north_zxMenu" style="width: 100px; display: none;">
-                    <div class="menu-sep"></div>
-                    <div onclick="exit('loginController.do?logout','<t:mutiLang langKey="common.exit.confirm"/>',1);"><t:mutiLang langKey="common.exit"/></div>
-                </div>
+                <td width="180px" style="position: relative;">
+                	<div style="position: absolute; right: 0px; bottom: 0px;">
+	                    <a href="javascript:void(0);" class="easyui-menubutton" menu="#layout_north_kzmbMenu" iconCls="icon-help">
+	                                                 	控制面板
+	                    </a>
+	                    <a href="javascript:void(0);" class="easyui-menubutton" menu="#layout_north_zxMenu" iconCls="icon-back">
+	                                                          注销
+	                    </a>
+	                </div>
+	                <div id="layout_north_kzmbMenu" style="width: 100px; display: none;">
+	                    <div onclick="openwindow('<t:mutiLang langKey="common.profile"/>','userController.do?userinfo')">
+	                        <t:mutiLang langKey="common.profile"/>
+	                    </div>
+	                    <div class="menu-sep"></div>
+	                    <div onclick="add('<t:mutiLang langKey="common.change.password"/>','userController.do?changepassword','', 550, 200)">
+	                        <t:mutiLang langKey="common.change.password"/>
+	                    </div>
+						<div class="menu-sep"></div>
+	                    <div class="menu-sep"></div>
+	                    <div onclick="add('<t:mutiLang langKey="common.change.style"/>','userController.do?changestyle','',550,200)">
+	                        <t:mutiLang langKey="common.my.style"/>
+	                    </div>
+	                    
+	                    <div class="menu-sep" ></div>
+	                    <div onclick="clearLocalstorage()">
+	                        <t:mutiLang langKey="common.clear.localstorage"/>
+	                    </div>
+	                </div>
+	                <div id="layout_north_zxMenu" style="width: 100px; display: none;">
+	                    <div class="menu-sep"></div>
+	                    <div onclick="exit('loginController.do?logout','<t:mutiLang langKey="common.exit.confirm"/>',1);"><t:mutiLang langKey="common.exit"/></div>
+	                </div>
+                </td>
             </tr>
         </table>
-    </td>
-    <td align="right">&nbsp;&nbsp;&nbsp;</td>
-</tr>
-</table>
+	</div>
 </div>
 <!-- 左侧-->
 <div region="west" split="true" href="loginController.do?left" title="<t:mutiLang langKey="common.navegation"/>" style="width: 200px; padding: 1px;"></div>
@@ -210,15 +125,6 @@ a:hover {
 <!-- 右侧 -->
 <div collapsed="true" region="east" iconCls="icon-reload" title="<t:mutiLang langKey="common.assist.tools"/>" split="true" style="width: 190px;"
 	data-options="onCollapse:function(){easyPanelCollapase()},onExpand:function(){easyPanelExpand()}">
-    <!--<div id="tabs" class="easyui-tabs" border="false" style="height: 240px">
-        <div title="<t:mutiLang langKey="common.calendar"/>" style="padding: 0px; overflow: hidden; color: red;">
-            <div id="layout_east_calendar"></div>
-        </div>
-    </div>
-    <div id="layout_jeecg_onlinePanel" data-options="fit:true,border:false" title=<t:mutiLang langKey="common.online.user"/>>
-        <table id="layout_jeecg_onlineDatagrid"></table>
-    </div>
-    -->
     
     <div class="easyui-layout" fit="true" border="false">
 		<div region="north" border="false" style="height:180px;overflow: hidden;">
@@ -229,19 +135,17 @@ a:hover {
 			</div>
 		</div>
 		<div region="center" border="false" style="overflow: hidden;">
-			<div id="layout_jeecg_onlinePanel" fit="true" border="false" title='<t:mutiLang langKey="common.online.user"/>'>
+			<%-- <div id="layout_jeecg_onlinePanel" fit="true" border="false" title='<t:mutiLang langKey="common.online.user"/>'>
 				<table id="layout_jeecg_onlineDatagrid"></table>
-			</div>
+			</div> --%>
 		</div>
 	</div>
 </div>
 <!-- 底部 -->
 <div region="south" border="false" style="height: 25px; overflow: hidden;">
     <div align="center" style="color: #CC99FF; padding-top: 2px">&copy;
-        <t:mutiLang langKey="common.copyright"/>
         <span class="tip">
             <a href="javascript:void(0);" title=" 校友管理系统  <t:mutiLang langKey="system.version.number"/>"> 校友管理系统  <t:mutiLang langKey="system.version.number"/></a>
-            <t:mutiLang langKey="common.copyright"/>:
         </span>
     </div>
 </div>

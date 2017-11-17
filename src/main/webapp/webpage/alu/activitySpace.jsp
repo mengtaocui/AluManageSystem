@@ -170,11 +170,11 @@
 						   			      	 '<span class="check_font">等待审核</span>'+
 						  			       '</div>';
 			    			}
-			    			str += '<div class="box_wrap">'+
+			    			str += '<span class="box_wrap">'+
 				    			       '<a href="javascript:delFile(\''+data[i].id+'\')" class="ace_button del_a" style="background-color:#ec4758;"><i class=" fa fa-trash-o"></i></a>'+
 				    			       shadeStr +
 				    				   '<img style="max-width: 100%;" alt="" src="'+data[i].filePath+'">'+
-			    			       '</div>';
+			    			       '</span>';
 			    		}
 			    		$('#content').html(str);
 			    	}

@@ -264,7 +264,7 @@
 								<li>
 									<a href="javascript:logout()">
 										<i class="ace-icon fa fa-power-off"></i>
-										 <t:mutiLang langKey="common.logout"/>
+										 注销
 									</a>
 								</li>
 							</ul>

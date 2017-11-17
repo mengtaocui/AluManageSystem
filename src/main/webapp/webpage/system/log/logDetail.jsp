@@ -17,7 +17,7 @@
 	<div class="form"><label class="form"> <%-- <t:mutiLang langKey="common.logtype"/> --%>日志类型: </label>
 	   <!-- 以后再统一由数据字典维护  fangwenrong-->
 	   <c:if test="${tsLog.operatetype==1}"><t:mutiLang langKey="common.login"/></c:if>
-	   <c:if test="${tsLog.operatetype==2}"><t:mutiLang langKey="common.logout"/></c:if>
+	   <c:if test="${tsLog.operatetype==2}">注销</c:if>
 	   <c:if test="${tsLog.operatetype==3}"><t:mutiLang langKey="common.insert"/></c:if>
 	   <c:if test="${tsLog.operatetype==4}"><t:mutiLang langKey="common.delete"/></c:if>
 	   <c:if test="${tsLog.operatetype==5}"><t:mutiLang langKey="common.update"/></c:if>

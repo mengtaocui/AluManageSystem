@@ -22,7 +22,7 @@
         <select name="loglevel" id="loglevel" onchange="logListsearch();">
             <option value="0"><t:mutiLang langKey="select.loglevel"/></option>
             <option value="1"><t:mutiLang langKey="common.login"/></option>
-            <option value="2"><t:mutiLang langKey="common.logout"/></option>
+            <option value="2">注销</option>
             <option value="3"><t:mutiLang langKey="common.insert"/></option>
             <option value="4"><t:mutiLang langKey="common.delete"/></option>
             <option value="5"><t:mutiLang langKey="common.update"/></option>

@@ -31,75 +31,6 @@ a:hover {
 <SCRIPT type="text/javascript">
 
 	$(function() {
-		$('#layout_jeecg_onlineDatagrid').datagrid({
-			url : 'systemController.do?datagridOnline&field=ip,logindatetime,user.userName,',
-			title : '',
-			iconCls : '',
-			fit : true,
-			fitColumns : true,
-			pagination : true,
-			pageSize : 10,
-			pageList : [ 10 ],
-			nowarp : false,
-			border : false,
-			idField : 'id',
-			sortName : 'logindatetime',
-			sortOrder : 'desc',
-			frozenColumns : [ [ {
-				title : '<t:mutiLang langKey="common.code"/>',
-				field : 'id',
-				width : 150,
-				hidden : true
-			} ] ],
-			columns : [ [ {
-				title : '<t:mutiLang langKey="common.login.name"/>',
-				field : 'user.userName',
-				width : 130,
-				align : 'center',
-				sortable : true,
-				formatter : function(value, rowData, rowIndex) {
-					return formatString('<span title="{0}">{1}</span>', value, value);
-				}
-			}, {
-				title : 'IP',
-				field : 'ip',
-				width : 150,
-				align : 'center',
-				sortable : true,
-				formatter : function(value, rowData, rowIndex) {
-					return formatString('<span title="{0}">{1}</span>', value, value);
-				}
-			}, {
-				title : '<t:mutiLang langKey="common.login.time"/>',
-				field : 'logindatetime',
-				width : 150,
-				sortable : true,
-				formatter : function(value, rowData, rowIndex) {
-					return formatString('<span title="{0}">{1}</span>', value, value);
-				},
-				hidden : true
-			} ] ],
-			onClickRow : function(rowIndex, rowData) {
-			},
-			onLoadSuccess : function(data) {
-				$('#layout_jeecg_onlinePanel').panel('setTitle', '( ' + data.total + ' )' + ' <t:mutiLang langKey="lang.user.online"/>');
-			}
-		}).datagrid('getPager').pagination({
-			showPageList : false,
-			showRefresh : false,
-			beforePageText : '',
-			afterPageText : '/{pages}',
-			displayMsg : ''
-		});		
-		
-		$('#layout_jeecg_onlinePanel').panel({
-			tools : [ {
-				iconCls : 'icon-reload',
-				handler : function() {
-					$('#layout_jeecg_onlineDatagrid').datagrid('load', {});
-				}
-			} ]
-		});
 		
 		$('#layout_east_calendar').calendar({
 			fit : true,
@@ -122,9 +53,9 @@ a:hover {
 		window.clearTimeout(onlineInterval);
 	}
 	function easyPanelExpand(){
-		onlineInterval = window.setInterval(function() {
+		/* onlineInterval = window.setInterval(function() {
 			$('#layout_jeecg_onlineDatagrid').datagrid('load', {});
-		}, 1000 * 20);
+		}, 1000 * 20); */
 	}
 
     function panelCollapase(){
@@ -170,6 +101,7 @@ a:hover {
 </head>
 <body class="easyui-layout" style="overflow-y: hidden" scroll="no">
 <!-- 顶部-->
+
 <div region="north" border="false" title="" style="BACKGROUND: #A8D7E9; height: 100px; padding: 1px; overflow: hidden;">
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 <tr>
@@ -199,10 +131,10 @@ a:hover {
                     <div style="float: left; margin-left: 18px;">
                         <div style="right: 0px; bottom: 0px;">
                             <a href="javascript:void(0);" class="easyui-menubutton" menu="#layout_north_kzmbMenu" iconCls="icon-comturn" style="color: #FFFFFF">
-                                <t:mutiLang langKey="common.control.panel"/>
+                                                                                控制面板
                             </a>&nbsp;&nbsp;
                             <a href="javascript:void(0);" class="easyui-menubutton" menu="#layout_north_zxMenu" iconCls="icon-exit" style="color: #FFFFFF">
-                                <t:mutiLang langKey="common.logout"/>
+                              	  注销
                             </a>
                         </div>
                         <div id="layout_north_kzmbMenu" style="width: 100px; display: none;">
@@ -278,16 +210,6 @@ a:hover {
 <!-- 右侧 -->
 <div collapsed="true" region="east" iconCls="icon-reload" title="<t:mutiLang langKey="common.assist.tools"/>" split="true" style="width: 190px;"
 	data-options="onCollapse:function(){easyPanelCollapase()},onExpand:function(){easyPanelExpand()}">
-	<!--
-    <div id="tabs" class="easyui-tabs" border="false" style="height: 240px">
-        <div title='<t:mutiLang langKey="common.calendar"/>' style="padding: 0px; overflow: hidden; color: red;">
-            <div id="layout_east_calendar"></div>
-        </div>
-    </div>
-    <div id="layout_jeecg_onlinePanel" data-options="fit:true,border:false" title=<t:mutiLang langKey="common.online.user"/>>
-        <table id="layout_jeecg_onlineDatagrid"></table>
-    </div>
-    -->
     <div class="easyui-layout" fit="true" border="false">
 		<div region="north" border="false" style="height:180px;overflow: hidden;">
 			<div id="tabs" class="easyui-tabs" border="false" style="height: 240px">
