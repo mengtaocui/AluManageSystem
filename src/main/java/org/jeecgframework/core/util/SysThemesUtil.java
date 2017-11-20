@@ -33,6 +33,8 @@ public class SysThemesUtil {
 			}
 		} catch (Exception e) {
 		}
+		if(BrowserUtils.isIE(request) && BrowserUtils.getIEversion(request) < 10.0 && "hplus".equals(indexStyle))
+			return SysThemesEnum.toEnum("default");
 		return SysThemesEnum.toEnum(indexStyle);
 	}
 

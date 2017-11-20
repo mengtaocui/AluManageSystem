@@ -264,12 +264,6 @@ public class LoginController extends BaseController{
 
             modelMap.put("currentOrgName", ClientManager.getInstance().getClient().getUser().getCurrentDepart().getDepartname());
 			SysThemesEnum sysTheme = SysThemesUtil.getSysTheme(request);
-			if(BrowserUtils.isIE(request)){
-				sysTheme.setDesc("经典风格");
-				sysTheme.setIndexPath("main/main");
-				sysTheme.setStyle("deafult");
-				sysTheme.setThemes("default");
-			}
 			if("ace".equals(sysTheme.getStyle())||"diy".equals(sysTheme.getStyle())||"acele".equals(sysTheme.getStyle())||"hplus".equals(sysTheme.getStyle())){
 				request.setAttribute("menuMap", getFunctionMap(user));
 			}
@@ -277,7 +271,7 @@ public class LoginController extends BaseController{
 			//设置cookie有效期为一个月
 			cookie.setMaxAge(3600*24*30);
 			response.addCookie(cookie);
-
+			
 			Cookie zIndexCookie = new Cookie("ZINDEXNUMBER", "1990");
 			zIndexCookie.setMaxAge(3600*24);//一天
 			response.addCookie(zIndexCookie);

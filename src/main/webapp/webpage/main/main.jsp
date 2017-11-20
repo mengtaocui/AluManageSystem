@@ -28,6 +28,15 @@ a:hover {
 }
 /*update-end--Author:zhangguoming  Date:20140622 for：左侧树调整：加大宽度、更换节点图标、修改选中颜色*/
 </style>
+<!--[if IE]> 
+<style>
+	.changeStyle{
+		display:none;
+	}
+</style>
+<![endif]-->
+
+
 <SCRIPT type="text/javascript">
 
 	$(function() {
@@ -65,7 +74,7 @@ a:hover {
 	<div class="panel-header panel-header-noborder"  style="width: 100%;height: 30px;overflow: hidden;position: relative;">
 		<table style="width: 100%;height: 100%;">
             <tr>
-                <td><div class="panel-title"> 校友管理系统  1.0</div></td>
+                <td><div class="panel-title">校友管理系统  1.0</div></td>
                 <td width="150px">
                     <span style="color: #CC33FF"><t:mutiLang langKey="common.user"/>:</span>
                     <span style="color: #666633">${userName }</span>
@@ -91,7 +100,7 @@ a:hover {
 	                    </div>
 						<div class="menu-sep"></div>
 	                    <div class="menu-sep"></div>
-	                    <div onclick="add('<t:mutiLang langKey="common.change.style"/>','userController.do?changestyle','',550,200)">
+	                    <div class="changeStyle" onclick="add('<t:mutiLang langKey="common.change.style"/>','userController.do?changestyle','',550,200)">
 	                        <t:mutiLang langKey="common.my.style"/>
 	                    </div>
 	                    

@@ -9,7 +9,7 @@
    <t:dgCol title="活动" query="true" url="activityController.do?addorupdate&load=detail&id={activityId}&_=1510794388831" field="activityName"   width="120"></t:dgCol>
    <t:dgCol title="照片" field="filePath" image="true"   width="120" imageSize="60,60"></t:dgCol>
    <t:dgCol title="审核状态" query="true" field="checkStatus" replace="等待审核_0,已通过_1,被拒绝_2"   width="120"></t:dgCol>
-   <t:dgCol title="审核人" field="checkBy"   width="120"></t:dgCol>
+   <t:dgCol title="审核人" field="checkByUserName"   width="120"></t:dgCol>
    <t:dgCol title="创建时间" field="crtTime"   width="120" formatter="yyyy-MM-dd hh:mm:ss" query="true" queryMode="group"></t:dgCol>
    <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
    <t:dgFunOpt funname="handleApplyPass(id)" exp="checkStatus#eq#0" title="通过" urlStyle="background-color: #449d44;" urlclass="ace_button"  urlfont="fa-check"></t:dgFunOpt>
