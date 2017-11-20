@@ -1,0 +1,24 @@
+var myChart = echarts.init(document.getElementById('main'));
+
+echarts.util.mapData.params.params.beijing = {
+    getGeoJson: function (callback) {
+        $.getJSON('./beijing.json', function (data) {
+            // 压缩后的地图数据必须使用 decode 函数转换
+            callback(echarts.util.mapData.params.decode(data));
+        });
+    }
+};
+
+myChart.setOption({
+    series : [
+        {
+            name:'北京地图',
+            type:'map',
+            mapType: 'beijing'
+        }
+    ]
+});
+
+
+
+
