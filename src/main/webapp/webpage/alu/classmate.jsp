@@ -7,7 +7,7 @@
   <t:base type="jquery,easyui,tools,DatePicker"></t:base>
   <style type="text/css">
   	.detail{
-  		width: 450px !important;
+  		width: 590px !important;
     	height: 50px !important;
   	}
   	.header_img{
@@ -33,7 +33,7 @@
  <body style="overflow-y: hidden" scroll="no">
   <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="classmateController.do?save">
 			<input id="id" name="id" type="hidden" value="${classmatePage.id }">
-			<table style="width: 600px;" cellpadding="0" cellspacing="1" class="formtable">
+			<table style="width: 100%;height:600px" cellpadding="0" cellspacing="1" class="formtable">
 				<tr>
 					<td align="right">
 						<label class="Validform_label">
@@ -46,8 +46,6 @@
 						<input type="hidden" id="collegeName" name="collegeName"   value="${classmatePage.collegeName}" />
 						<span class="Validform_checktip"></span>
 					</td>
-				</tr>
-				<tr>
 					<td align="right">
 						<label class="Validform_label">
 							年届:
@@ -71,9 +69,40 @@
 						<span class="Validform_checktip Validform_wrong"></span>
 						<input type="hidden" id="gradeName" name="gradeName"  value="${classmatePage.gradeName}" />
 					</td>
+					<td align="right">
+						<label class="Validform_label">
+							学号:
+						</label>
+					</td>
+					<td class="value">
+						<input class="inputxt" id="stuNo" name="stuNo" ignore="ignore"  value="${classmatePage.stuNo}" />
+						<span class="Validform_checktip"></span>
+					</td>
 				</tr>
 				<tr>
 					<td align="right">
+						<label class="Validform_label">
+							单位性质:
+						</label>
+					</td>
+					<td class="value">
+						<t:dictSelect field="companyNature" defaultVal="${classmatePage.companyNature}" typeGroupCode="dwxz" hasLabel="false" extendJson="{datatype:'*'}"></t:dictSelect>
+						<%-- <input class="inputxt" id="companyNature" name="companyNature" ignore="ignore"  value="${classmatePage.companyNature}" /> --%>
+						<span class="Validform_checktip"></span>
+					</td>
+					<td align="right">
+						<label class="Validform_label">
+							教育阶段:
+						</label>
+					</td>
+					<td class="value">
+						<t:dictSelect field="educationStage" defaultVal="${classmatePage.educationStage}" typeGroupCode="jyjd" hasLabel="false" extendJson="{datatype:'*'}"></t:dictSelect>
+						<%-- <input class="inputxt" id="educationStage" name="educationStage" ignore="ignore"  value="${classmatePage.companyNature}" /> --%>
+						<span class="Validform_checktip"></span>
+					</td>
+				</tr>
+				<tr>
+				   <td align="right">
 						<label class="Validform_label">
 							姓名:
 						</label>
@@ -82,8 +111,6 @@
 						<input class="inputxt" id="name" name="name" datatype="*"  value="${classmatePage.name}" />
 						<span class="Validform_checktip"></span>
 					</td>
-				</tr>
-				<tr>
 					<td align="right">
 						<label class="Validform_label">
 							性别:
@@ -101,17 +128,6 @@
 				<tr>
 					<td align="right">
 						<label class="Validform_label">
-							学号:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="stuNo" name="stuNo" ignore="ignore"  value="${classmatePage.stuNo}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
 							电话:
 						</label>
 					</td>
@@ -119,8 +135,6 @@
 						<input class="inputxt" id="phone" name="phone" ignore="ignore"  value="${classmatePage.phone}" />
 						<span class="Validform_checktip"></span>
 					</td>
-				</tr>
-				<tr>
 					<td align="right">
 						<label class="Validform_label">
 							邮箱:
@@ -137,7 +151,7 @@
 							头像:
 						</label>
 					</td>
-					<td class="value">
+					<td class="value" colspan="3">
 					    
 				    	<div id="preview"><img alt="" src="${classmatePage.headPortrait}" class="header_img"></div>
 				    	<input type="file" style="display:none" onchange="preview(this)" id="head_file"/>
@@ -156,11 +170,36 @@
 				<tr>
 					<td align="right">
 						<label class="Validform_label">
-							地址:
+							所在省份:
 						</label>
 					</td>
 					<td class="value">
-					    <textarea class="inputxt detail" id="address" name="address" ignore="ignore">${classmatePage.address}</textarea>
+						 <t:dictSelect field="provinceId" id="provinceId"  extendJson="{datatype:'*'}" dictTable="t_s_region" dictField="id" 
+						dictText="name" dictCondition=" where pid=1" defaultVal="${classmatePage.provinceId}"  hasLabel="false"></t:dictSelect>
+						<input type="hidden" id="provinceName" name="provinceName"   value="${classmatePage.provinceName}" />
+						<span class="Validform_checktip"></span>
+					</td>
+					<td align="right">
+						<label class="Validform_label">
+							所在城市:
+						</label>
+					</td>
+					<td class="value">
+						<select name="cityId" datatype="*" id="cityId"> 
+							<option value="" selected="selected">---请选择--- </option>
+						</select>
+						<input type="hidden" id="cityName" name="cityName"   value="${classmatePage.cityName}" />
+						<span class="Validform_checktip"></span>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							详细地址:
+						</label>
+					</td>
+					<td class="value" colspan="3">
+					    <textarea class="inputxt detail" style="margin-top:10px" id="address" name="address" ignore="ignore">${classmatePage.address}</textarea>
 						<span class="Validform_checktip"></span>
 					</td>
 				</tr>
@@ -170,7 +209,7 @@
 							简介:
 						</label>
 					</td>
-					<td class="value">
+					<td class="value" colspan="3">
 						<textarea class="inputxt detail" id="descri" name="descri">${classmatePage.descri}</textarea>
 						<span class="Validform_checktip"></span>
 					</td>
@@ -182,6 +221,7 @@
     	if('${classmatePage.id }'){
     		//需要对班级赋值
     		initGrade();
+    		initCity();
     	}
     	$('#collegeId').on('change', function(){
         	initGrade();
@@ -190,10 +230,42 @@
         	initGrade();
         });
         
+        $('#provinceId').on('change', function(){
+        	initCity();
+		}); 
+        
+        
+        
         if(location.href.indexOf("load=detail")!=-1){
     		$("a").attr("href","javascript:void(0);");
     	}
     })
+    
+    function initCity(){
+    	$.ajax({
+			url: 'sysController.do?getCityByPid&pid='+$('#provinceId').val(),
+			type: 'GET',
+			dataType: 'json',
+			success: function(data){
+				$('#cityId').html(' ');
+				var str = null;
+				for(var i=0; i<data.length; i++){
+					if("${classmatePage.cityId}" == data[i].id){
+						str += '<option selected="selected" value="'+data[i].id+'">'+data[i].name+' </option> ';
+					}else{
+						str += '<option value="'+data[i].id+'">'+data[i].name+' </option> ';
+					}
+					
+				}
+				str = '<option value="">---请选择---</option> '+str;
+				$('#cityId').html(str);
+			},
+			error: function(data){
+				tip_old('网络异常，新闻模块加载失败');
+			}
+		});
+    }
+    
     
  	//根据学院和年届返回班级
  	function initGrade(){

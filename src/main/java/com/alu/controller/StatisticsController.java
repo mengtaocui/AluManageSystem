@@ -46,6 +46,7 @@ import com.alu.entity.ActivityEntity;
 import com.alu.entity.ActivitySpaceEntity;
 import com.alu.entity.NoticesEntity;
 import com.alu.service.ActivityServiceI;
+import com.alu.service.StatisticsServiceI;
 
 /**   
  * @Title: Controller
@@ -69,7 +70,8 @@ public class StatisticsController extends BaseController {
 	private SystemService systemService;
 	@Autowired
 	private Validator validator;
-	
+	@Autowired
+	private StatisticsServiceI statisticsService;
 
 
 	/**
@@ -112,143 +114,44 @@ public class StatisticsController extends BaseController {
 		return new ModelAndView("alu/statisticsByCompanyNature");
 	}
 	
+	
 	/**
-	 * easyui AJAX请求数据
-	 * 
-	 * @param request
-	 * @param response
-	 * @param dataGrid
-	 * @param user
-	 */
-
-	@RequestMapping(params = "datagrid")
-	public void datagrid(ActivityEntity activity,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
-		CriteriaQuery cq = new CriteriaQuery(ActivityEntity.class, dataGrid);
-		//查询条件组装器
-		activity.setName(AuTools.createLikeStr(activity.getName()));
-		activity.setPlaces(AuTools.createLikeStr(activity.getPlaces()));
-		
-		//报名截止时间
-		if(StringUtil.isNotEmpty(request.getParameter("applyEndTime_begin1"))){
-			cq.ge("applyEndTime", request.getParameter("applyEndTime_begin1"));
-		}
-		if(StringUtil.isNotEmpty(request.getParameter("applyEndTime_end2"))){
-			cq.le("applyEndTime", request.getParameter("applyEndTime_end2"));
-		}
-		
-		//开始时间
-		if(StringUtil.isNotEmpty(request.getParameter("startTime_begin1"))){
-			cq.ge("startTime", request.getParameter("startTime_begin1"));
-			cq.ge("endTime", request.getParameter("startTime_begin1"));
-		}
-		if(StringUtil.isNotEmpty(request.getParameter("startTime_end2"))){
-			cq.le("startTime", request.getParameter("startTime_end2"));
-			cq.le("endTime", request.getParameter("startTime_end2"));
-		}
-		
-		//降序排列
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("crtTime", SortDirection.desc);
-		cq.setOrder(map);
-		//过滤掉删除的
-		cq.eq("deleteFlag", Constant.UN_DELETE);
-		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, activity, request.getParameterMap());
-		this.activityService.getDataGridReturn(cq, true);
-		TagUtil.datagrid(response, dataGrid);
-	}
-
-	/**
-	 * 删除活动
-	 * 
+	 * 获取按年届统计校友人数的数据
 	 * @return
 	 */
-	@RequestMapping(params = "del")
+	@RequestMapping(params = "getStatisticsByYearPeriodData", method = RequestMethod.GET)
 	@ResponseBody
-	public AjaxJson del(ActivityEntity activity, HttpServletRequest request) {
-		String message = null;
-		AjaxJson j = new AjaxJson();
-		activity = systemService.getEntity(ActivityEntity.class, activity.getId());
-		message = "活动删除成功";
-		activity.setDeleteFlag(Constant.IS_DELETE);
-		activityService.updateEntitie(activity);
-		systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
-		
-		j.setMsg(message);
-		return j;
-	}
-
-
-	/**
-	 * 添加活动
-	 * 
-	 * @param ids
-	 * @return
-	 */
-	@RequestMapping(params = "save")
-	@ResponseBody
-	public AjaxJson save(ActivityEntity activity, HttpServletRequest request) {
-		String message = null;
-		AjaxJson j = new AjaxJson();
-		TSUser curUser = ResourceUtil.getSessionUser();
-		if (StringUtil.isNotEmpty(activity.getId())) {
-			message = "活动更新成功";
-			ActivityEntity t = activityService.get(ActivityEntity.class, activity.getId());
-			try {
-				activity.setLastUpdateBy(curUser.getId());
-				activity.setLastUpdateByUserName(curUser.getUserName());
-				activity.setLastUpdateTime(DateUtils.formatDateTime());
-				MyBeanUtils.copyBeanNotNull2Bean(activity, t);
-				activityService.saveOrUpdate(t);
-				systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
-			} catch (Exception e) {
-				e.printStackTrace();
-				message = "活动更新失败";
-			}
-		} else {
-			message = "活动添加成功";
-			activity.setCrtBy(curUser.getId());
-			activity.setCrtByUserName(curUser.getUserName());
-			activity.setCrtTime(DateUtils.formatDateTime());
-			activity.setCheckStatus(Constant.APPLY_WAIT);
-			activity.setDeleteFlag(Constant.UN_DELETE);
-			activityService.save(activity);
-			systemService.addLog(message, Globals.Log_Type_INSERT, Globals.Log_Leavel_INFO);
-		}
-		j.setMsg(message);
-		return j;
-	}
-
-	/**
-	 * 活动列表页面跳转
-	 * 
-	 * @return
-	 */
-	@RequestMapping(params = "addorupdate")
-	public ModelAndView addorupdate(ActivityEntity activity, HttpServletRequest req) {
-		if (StringUtil.isNotEmpty(activity.getId())) {
-			activity = activityService.getEntity(ActivityEntity.class, activity.getId());
-			req.setAttribute("activityPage", activity);
-		}
-		return new ModelAndView("alu/activity");
+	public List getStatisticsByYearPeriodData() {
+		return statisticsService.getStatisticsByYearPeriodData();
 	}
 	
 	/**
-	 * 审核活动
-	 * @param id
-	 * @param type
+	 * 获取按省份统计校友人数的数据
 	 * @return
 	 */
-	@RequestMapping(params = "handleApply", method = RequestMethod.POST)
+	@RequestMapping(params = "getStatisticsByProvinceData", method = RequestMethod.GET)
 	@ResponseBody
-	public AjaxJson handleApply(String id, Integer type) {
-		AjaxJson aj = new AjaxJson();
-		ActivityEntity activity = systemService.getEntity(ActivityEntity.class, id);
-		TSUser curUser = ResourceUtil.getSessionUser();
-		activity.setCheckBy(curUser.getId());
-		activity.setCheckByUserName(curUser.getUserName());
-		activity.setCheckStatus(type);
-		activityService.updateEntitie(activity);
-		systemService.addLog("审核活动："+activity.getName(), Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
-		return aj;
+	public List getStatisticsByProvinceData() {
+		return statisticsService.getStatisticsByProvinceData();
+	}
+	
+	/**
+	 * 获取按单位性质统计校友人数的数据
+	 * @return
+	 */
+	@RequestMapping(params = "getStatisticsByCompanyNatureData", method = RequestMethod.GET)
+	@ResponseBody
+	public List getStatisticsByCompanyNatureData() {
+		return statisticsService.getStatisticsByCompanyNatureData();
+	}
+	
+	/**
+	 * 获取按教育阶段统计校友人数的数据
+	 * @return
+	 */
+	@RequestMapping(params = "getStatisticsByEducationStageData", method = RequestMethod.GET)
+	@ResponseBody
+	public List getStatisticsByEducationStageData() {
+		return statisticsService.getStatisticsByEducationStageData();
 	}
 }

@@ -5,99 +5,177 @@
  <head>
   <title>活动</title>
   <t:base type="jquery,easyui,tools,DatePicker"></t:base>
+  <script type="text/javascript" src="plug-in/echarts-2.2.7/build/dist/echarts-all.js"></script>
   <style type="text/css">
-  	input{
-  		width: 157px;
+    html,body,#main-wrap,table{
+        width: 100%;
+    	height: 100%;
+    	background:#ffffff;
+    }
+    *{
+    	margin:0px;
+        padding: 0px;
+    }
+  	#main_pie,#main_bar,#main{
+  		background:#F7F7F7;
+  	}
+  	#main{
+  		margin: 0px auto;
+  	}
+  	.chart_head{
+	  	 padding: 20px 0px;
+	     text-align: center;
+	     font-size: 17px;
   	}
   </style>
  </head>
  <body style="overflow-y: hidden" scroll="no">
-  <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="activityController.do?save">
-			<input id="id" name="id" type="hidden" value="${activityPage.id }">
-			<table style="width: 100%;" cellpadding="0" cellspacing="1" class="formtable">
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							活动名称:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="name" name="name" datatype="*"  value="${activityPage.name}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							活动地点:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="places" name="places"   value="${activityPage.places}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							开始时间:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt easyui-datetimebox" id="startTime" name="startTime" required="required"  value="${activityPage.startTime}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							结束时间:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt easyui-datetimebox" id="endTime" name="endTime" required="required"  value="${activityPage.endTime}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							报名截止时间:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt easyui-datetimebox" id="applyEndTime" name="applyEndTime" required="required"  value="${activityPage.applyEndTime}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr style="height:260px">
-					<td align="right">
-						<label class="Validform_label">
-							活动详情:
-						</label>
-					</td>
-					<td class="value">
-						<!-- 加载编辑器的容器 -->
-					    <textarea id="contentDetail" name="contentDetail" cols="20" rows="2" class="ckeditor">${activityPage.detail}</textarea>
-						<input type="hidden" id="detail" onclick="OnSave()" name="detail"/>
-						<%-- <input class="inputxt" id="detail" name="detail" ignore="ignore"  value="${activityPage.detail}" /> --%>
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-			</table>
-		</t:formvalid>
-		<!-- 配置文件 -->
-	    <script type="text/javascript" src="plug-in/ckeditor/ckeditor.js"></script>
-	    <!-- 实例化编辑器 -->
-	    <script type="text/javascript">
-		    CKEDITOR.replace('contentDetail');
-			function OnSave(){  
-		        if(CKEDITOR.instances.contentDetail.getData()==""){  
-			        alert("内容不能为空！");  
-			        return false;  
-		        }else {  
-		        	$("#detail").val(CKEDITOR.instances.contentDetail.getData());
-		        }  
-		    } 
-		</script>
+ 	<p class="chart_head">按教育阶段统计校友人数</p>
+	<div class="main-wrap">
+	     <table>
+	     	<tr>
+	     		<td id="pie_td">
+	     			<div id="main_pie" style="width: 600px;height:400px;"></div>
+	     		</td>
+	     		<td>
+	     			<div id="main_bar" style="width: 600px;height:400px;"></div>
+	     		</td>
+	     	</tr>
+	     	<tr>
+	     		<td colspan="2" id="line_td">
+	     			<div id="main" style="width: 600px;height:400px;"></div>
+	     		</td>
+	     	</tr>
+	     </table>
+	     
+	</div>
+  <script type="text/javascript">
+    var xArr = new Array(), yArr = new Array(), dataObj = null;
+  	$(function(){
+  		$('#main_pie').css({'width':($('#pie_td').width()*0.8),'height':$('#line_td').height()*0.8}); 
+  		$('#main_bar').css({'width':($('#pie_td').width()*0.8),'height':$('#line_td').height()*0.8});
+  		$('#main').css({'width':($('#line_td').width()*0.9),'height':$('#line_td').height()*0.8}); 
+  		
+  		$.ajax({
+  			url: 'statisticsController.do?getStatisticsByEducationStageData',
+  			type: 'GET',
+  			async: false,
+  			dataType: 'json',
+  			success: function(data){
+  				if(data && data.length > 0){
+  					dataObj = data;
+  					for(var i=0; i<data.length; i++){
+  						xArr.push(data[i].name);
+  						yArr.push(data[i].value);
+  					}
+  					
+  				}
+  			},
+  			error: function(data){
+  				
+  			}
+  		});
+  		
+  		initPie();
+  		initBar();
+  		initLine();
+  	})
+  	
+  	function initPie(){
+  		var myChart = echarts.init(document.getElementById('main_pie'));
+        var option = {
+        	    tooltip : {
+        	        trigger: 'item',
+        	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+        	    },
+        	    legend: {
+        	        data:xArr,
+        	        show: false
+        	    },
+        	    calculable : true,
+        	    series : [
+        	        {
+        	            name:'人数',
+        	            type:'pie',
+        	            radius : '55%',
+        	            center: ['50%', '60%'],
+        	            data:dataObj
+        	        }
+        	    ]
+        	};
+        	                    
+        myChart.setOption(option);
+  	}
+  	
+  	
+  	function initBar(){
+        var myChart = echarts.init(document.getElementById('main_bar'));
+        var option = {
+        	    tooltip : {
+        	        trigger: 'axis'
+        	    },
+        	    legend: {
+        	        data:['人数'],
+        	        show:false
+        	    },
+        	    calculable : true,
+        	    xAxis : [
+        	        {
+        	            type : 'category',
+        	            data :xArr
+        	        }
+        	    ],
+        	    yAxis : [
+        	        {
+        	            type : 'value'
+        	        }
+        	    ],
+        	    series : [
+        	        {
+        	            name:'人数',
+        	            type:'bar',
+        	            data:yArr
+        	        }
+        	    ]
+        	};
+        myChart.setOption(option);
+  	}
+  	
+  	function initLine(){
+        var myChart = echarts.init(document.getElementById('main'));
+        var option = {
+        	    tooltip : {
+        	        trigger: 'axis'
+        	    },
+        	    legend: {
+        	        data:['人数'],
+        	        show:false
+        	    },
+        	    calculable : true,
+        	    xAxis : [
+        	        {
+        	            type : 'category',
+        	            boundaryGap : false,
+        	            data :xArr
+        	        }
+        	    ],
+        	    yAxis : [
+        	        {
+        	            type : 'value',
+        	            axisLabel : {
+        	                formatter: '{value} 人'
+        	            }
+        	        }
+        	    ],
+        	    series : [
+        	        {
+        	            name:'人数',
+        	            type:'line',
+        	            data:yArr
+        	        }
+        	    ]
+        	};
+        myChart.setOption(option);
+  	}
+    </script>
  </body>

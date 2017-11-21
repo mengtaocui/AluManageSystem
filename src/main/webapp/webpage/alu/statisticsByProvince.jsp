@@ -5,99 +5,160 @@
  <head>
   <title>活动</title>
   <t:base type="jquery,easyui,tools,DatePicker"></t:base>
+  <script type="text/javascript" src="plug-in/echarts-2.2.7/build/dist/echarts-all.js"></script>
   <style type="text/css">
-  	input{
-  		width: 157px;
+    html,body,.main-wrap{
+        width: 100%;
+    	height: 100%;
+    	background:#ffffff;
+    }
+    table{
+    	width:100%;
+    	height: 90%;
+    }
+    *{
+    	margin:0px;
+        padding: 0px;
+    }
+  	#main_pie,#main_bar,#main{
+  		background:#F7F7F7;
+  	}
+  	#main_map,#main{
+  		margin: 0px auto;
+  	}
+  	.chart_head{
+	  	 padding: 20px 0px;
+	     text-align: center;
+	     font-size: 17px;
   	}
   </style>
  </head>
  <body style="overflow-y: hidden" scroll="no">
-  <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="activityController.do?save">
-			<input id="id" name="id" type="hidden" value="${activityPage.id }">
-			<table style="width: 100%;" cellpadding="0" cellspacing="1" class="formtable">
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							活动名称:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="name" name="name" datatype="*"  value="${activityPage.name}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							活动地点:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="places" name="places"   value="${activityPage.places}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							开始时间:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt easyui-datetimebox" id="startTime" name="startTime" required="required"  value="${activityPage.startTime}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							结束时间:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt easyui-datetimebox" id="endTime" name="endTime" required="required"  value="${activityPage.endTime}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
-							报名截止时间:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt easyui-datetimebox" id="applyEndTime" name="applyEndTime" required="required"  value="${activityPage.applyEndTime}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr style="height:260px">
-					<td align="right">
-						<label class="Validform_label">
-							活动详情:
-						</label>
-					</td>
-					<td class="value">
-						<!-- 加载编辑器的容器 -->
-					    <textarea id="contentDetail" name="contentDetail" cols="20" rows="2" class="ckeditor">${activityPage.detail}</textarea>
-						<input type="hidden" id="detail" onclick="OnSave()" name="detail"/>
-						<%-- <input class="inputxt" id="detail" name="detail" ignore="ignore"  value="${activityPage.detail}" /> --%>
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-			</table>
-		</t:formvalid>
-		<!-- 配置文件 -->
-	    <script type="text/javascript" src="plug-in/ckeditor/ckeditor.js"></script>
-	    <!-- 实例化编辑器 -->
-	    <script type="text/javascript">
-		    CKEDITOR.replace('contentDetail');
-			function OnSave(){  
-		        if(CKEDITOR.instances.contentDetail.getData()==""){  
-			        alert("内容不能为空！");  
-			        return false;  
-		        }else {  
-		        	$("#detail").val(CKEDITOR.instances.contentDetail.getData());
-		        }  
-		    } 
-		</script>
+    <p class="chart_head">按所在省份统计校友人数</p>
+	<div class="main-wrap">
+	     <table>
+	     	<tr>
+	     		<td id="map_td">
+	     			<div id="main_map" style="width: 600px;height:400px;"></div>
+	     		</td>
+	     		<td id="line_td">
+	     			<div id="main" style="width: 600px;height:400px;"></div>
+	     		</td>
+	     	</tr>
+	     </table>
+	     
+	</div>
+  <script type="text/javascript">
+    var xArr = new Array(), yArr = new Array(), dataObj = new Array();
+  	$(function(){
+  		$('#main_map').css({'width':($('#map_td').width()*0.9),'height':$('#line_td').height()}); 
+  		$('#main').css({'width':($('#line_td').width()*0.9),'height':$('#line_td').height()*0.8}); 
+  		
+  		$.ajax({
+  			url: 'statisticsController.do?getStatisticsByProvinceData',
+  			type: 'GET',
+  			async: false,
+  			dataType: 'json',
+  			success: function(data){
+  				if(data && data.length > 0){
+  					for(var i=0; i<data.length; i++){
+  						var pname = data[i].name.trim();
+  						pname = pname.substring(0, pname.length-1);
+  						xArr.push(pname);
+  						yArr.push(data[i].value);
+  						
+  						dataObj.push({'name':pname, 'value': data[i].value});
+  					}
+  					
+  				}
+  			},
+  			error: function(data){
+  				
+  			}
+  		});
+  		
+  		initMap();
+  		initLine();
+  	})
+  	
+  	function initMap(){
+  		console.log(dataObj);
+  		var myChart = echarts.init(document.getElementById('main_map'));
+        var option = {
+        	    tooltip : {
+        	        trigger: 'item'
+        	    },
+        	    legend: {
+        	        orient: 'vertical',
+        	        x:'left',
+        	        data:['人数'],
+        	        show: false
+        	    },
+        	    dataRange: {
+        	        min: 0,
+        	        max: 2500,
+        	        x: 'left',
+        	        y: 'bottom',
+        	        text:['高','低'],           // 文本，默认为数值文本
+        	        calculable : true
+        	    },
+        	    roamController: {
+        	        show: true,
+        	        x: 'right',
+        	        mapTypeControl: {
+        	            'china': true
+        	        }
+        	    },
+        	    series : [
+        	        {
+        	            name: '人数',
+        	            type: 'map',
+        	            mapType: 'china',
+        	            roam: false,
+        	            itemStyle:{
+        	                normal:{label:{show:true}},
+        	                emphasis:{label:{show:true}}
+        	            },
+        	            data:dataObj
+        	        }
+        	    ]
+        	};
+        	                    
+        	                    
+        myChart.setOption(option);
+  	}
+  	
+  	
+  	
+  	function initLine(){
+        var myChart = echarts.init(document.getElementById('main'));
+        var option = {
+        	    legend: {
+        	        data:['人数'],
+        	       show: false
+        	    },
+        	    calculable : true,
+        	    xAxis : [
+        	        {
+        	            type : 'value',
+        	            boundaryGap : [0, 0.01]
+        	        }
+        	    ],
+        	    yAxis : [
+        	        {
+        	            type : 'category',
+        	            data : xArr
+        	        }
+        	    ],
+        	    series : [
+        	        {
+        	            name:'人数',
+        	            type:'bar',
+        	            data:yArr
+        	        }
+        	    ]
+        	};
+        myChart.setOption(option);
+  	}
+    </script>
  </body>

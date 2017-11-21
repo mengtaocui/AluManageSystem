@@ -37,6 +37,8 @@ public class ClassmateEntity extends BaseEntity implements java.io.Serializable 
 	/**班级id*/
 	private java.lang.String gradeId;
 	private java.lang.String gradeName;
+	private String companyNature;
+	private String educationStage;
 	/**姓名*/
 	private java.lang.String name;
 	private Integer sex; 
@@ -44,6 +46,10 @@ public class ClassmateEntity extends BaseEntity implements java.io.Serializable 
 	private java.lang.String stuNo;
 	/**电话*/
 	private java.lang.String phone;
+	private String provinceId;
+	private String provinceName;
+	private String cityId;
+	private String cityName;
 	/**地址*/
 	private java.lang.String address;
 	/**邮箱*/
@@ -223,6 +229,55 @@ public class ClassmateEntity extends BaseEntity implements java.io.Serializable 
 
 	public void setSex(Integer sex) {
 		this.sex = sex;
+	}
+	@Column(name ="PROVINCEID",nullable=true,length=100)
+	public String getProvinceId() {
+		return provinceId;
+	}
+
+	public void setProvinceId(String provinceId) {
+		this.provinceId = provinceId;
+	}
+	@Column(name ="PROVINCENAME",nullable=true,length=100)
+	public String getProvinceName() {
+		return provinceName;
+	}
+
+	public void setProvinceName(String provinceName) {
+		this.provinceName = provinceName;
+	}
+	@Column(name ="CITYID",nullable=true,length=100)
+	public String getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
+	@Column(name ="CITYNAME",nullable=true,length=100)
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+	@Column(name ="COMPANYNATURE",nullable=true,length=100)
+	public String getCompanyNature() {
+		return companyNature;
+	}
+
+	public void setCompanyNature(String companyNature) {
+		this.companyNature = companyNature;
+	}
+
+	@Column(name ="EDUCATIONSTAGE",nullable=true,length=100)
+	public String getEducationStage() {
+		return educationStage;
+	}
+
+	public void setEducationStage(String educationStage) {
+		this.educationStage = educationStage;
 	}
 	
 }

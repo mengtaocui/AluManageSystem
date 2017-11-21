@@ -16,6 +16,8 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
 import org.apache.log4j.Logger;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.jeecgframework.core.beanvalidator.BeanValidators;
 import org.jeecgframework.core.common.controller.BaseController;
 import org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery;
@@ -53,6 +55,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.alu.common.AuTools;
 import com.alu.common.Constant;
 import com.alu.entity.NewsEntity;
+import com.alu.entity.NewsModuleEntity;
+import com.alu.entity.RegionEntity;
 import com.alu.service.NewsServiceI;
 
 /**   
@@ -71,7 +75,8 @@ public class SysController extends BaseController {
 	 */
 	private static final Logger logger = Logger.getLogger(SysController.class);
 
-
+	@Autowired
+	private SystemService systemService;
 	/**
 	 * ckEditor上传文件
 	 * @param request
@@ -187,4 +192,11 @@ public class SysController extends BaseController {
             e.printStackTrace();  
         }  
     }
+    
+    @RequestMapping(params = "getCityByPid", method = RequestMethod.GET)
+	@ResponseBody
+	public List<RegionEntity> getCityByPid(String pid) {
+		List<RegionEntity> list = systemService.findByProperty(RegionEntity.class, "pid", pid);
+		return list;
+	}
 }
