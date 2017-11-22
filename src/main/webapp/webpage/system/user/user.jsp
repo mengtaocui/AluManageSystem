@@ -111,26 +111,16 @@
 			</tr>
 		</c:if>
 		<tr>
-			<td align="right"><label class="Validform_label"> <t:mutiLang langKey="common.department"/>: </label></td>
+			<td align="right"><label class="Validform_label">学院: </label></td>
 			<td class="value">
-                <%--<select class="easyui-combobox" data-options="multiple:true, editable: false" id="orgSelect" datatype="*">--%>
-                <%--<select class="easyui-combotree" data-options="url:'departController.do?getOrgTree', multiple:true, cascadeCheck:false"
-                        id="orgSelect" name="orgSelect" datatype="select1">
-                update-end--Author:zhangguoming  Date:20140826 for：将combobox修改为combotree
-                    <c:forEach items="${departList}" var="depart">
-                        <option value="${depart.id }">${depart.departname}</option>
-                    </c:forEach>
-                </select> --%>
-                <%--  <t:departSelect departId="${tsDepart.id }" departName="${tsDepart.departname }"></t:departSelect>--%>
-                
-                <input id="departname" name="departname" type="text" readonly="readonly" class="inputxt" datatype="*" value="${departname}">
-                <input id="orgIds" name="orgIds" type="hidden" value="${orgIds}">
-                <a href="#" class="easyui-linkbutton" plain="true" icon="icon-search" id="departSearch" onclick="openDepartmentSelect()">选择</a>
-                <a href="#" class="easyui-linkbutton" plain="true" icon="icon-redo" id="departRedo" onclick="callbackClean()">清空</a>
-                <span class="Validform_checktip"><t:mutiLang langKey="please.muti.department"/></span>
+               <t:dictSelect field="collegeId" id="collegeId"  extendJson="{datatype:'*'}" dictTable="t_college" dictField="id" 
+						dictText="name" dictCondition=" where delete_flag=0" defaultVal="${classmatePage.collegeId}"  hasLabel="false"></t:dictSelect>
+						<input type="hidden" id="collegeName" name="collegeName"   value="${classmatePage.collegeName}" />
+                <input id="roleid" name="roleid" type="hidden" value="8a8ab0b246dc81120146dc81818b0051">
+                <span class="Validform_checktip"></span>
             </td>
 		</tr>
-		<tr>
+		<%-- <tr>
 			<td align="right"><label class="Validform_label"> <t:mutiLang langKey="common.role"/>: </label></td>
 			<td class="value" nowrap>
                 <input id="roleid" name="roleid" type="hidden" value="${id}"/>
@@ -138,7 +128,7 @@
                 <t:choose hiddenName="roleid" hiddenid="id" textname="roleName" url="userController.do?roles" name="roleList" icon="icon-search" title="common.role.list" isclear="true" isInit="true"></t:choose>
                 <span class="Validform_checktip"><t:mutiLang langKey="role.muti.select"/></span>
             </td>
-		</tr>
+		</tr> --%>
 		<tr>
 			<td align="right" nowrap><label class="Validform_label">  <t:mutiLang langKey="common.phone"/>: </label></td>
 			<td class="value">
@@ -160,14 +150,6 @@
                 <span class="Validform_checktip"></span>
             </td>
 		</tr>
-        <tr>
-            <td align="right"><label class="Validform_label"> <t:mutiLang langKey="common.common.dev"/>: </label></td>
-            <td class="value">
-
-                <t:dictSelect id="devFlag" field="devFlag" typeGroupCode="dev_flag" hasLabel="false" defaultVal="${user.devFlag}" type="radio"></t:dictSelect>
-                <span class="Validform_checktip"></span>
-            </td>
-        </tr>
 	</table>
 </t:formvalid>
 </body>

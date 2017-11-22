@@ -29,7 +29,7 @@ import javax.persistence.SequenceGenerator;
 @DynamicUpdate(true)
 @DynamicInsert(true)
 @SuppressWarnings("serial")
-public class NewsModuleEntity extends BaseEntity implements java.io.Serializable {
+public class NewsModuleEntity extends SimpleBaseEntity implements java.io.Serializable {
 	/**类型id*/
 	private java.lang.String newsTypeId;
 	/**类型名称*/

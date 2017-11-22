@@ -122,7 +122,10 @@ public class StatisticsController extends BaseController {
 	@RequestMapping(params = "getStatisticsByYearPeriodData", method = RequestMethod.GET)
 	@ResponseBody
 	public List getStatisticsByYearPeriodData() {
-		return statisticsService.getStatisticsByYearPeriodData();
+		TSUser curUser = ResourceUtil.getSessionUser();
+		if(!"admin".equals(curUser.getUserKey()))
+			return statisticsService.getStatisticsByYearPeriodData(curUser.getCollegeId());
+		return statisticsService.getStatisticsByYearPeriodData(null);
 	}
 	
 	/**
@@ -132,7 +135,10 @@ public class StatisticsController extends BaseController {
 	@RequestMapping(params = "getStatisticsByProvinceData", method = RequestMethod.GET)
 	@ResponseBody
 	public List getStatisticsByProvinceData() {
-		return statisticsService.getStatisticsByProvinceData();
+		TSUser curUser = ResourceUtil.getSessionUser();
+		if(!"admin".equals(curUser.getUserKey()))
+			return statisticsService.getStatisticsByProvinceData(curUser.getCollegeId());
+		return statisticsService.getStatisticsByProvinceData(null);
 	}
 	
 	/**
@@ -142,7 +148,10 @@ public class StatisticsController extends BaseController {
 	@RequestMapping(params = "getStatisticsByCompanyNatureData", method = RequestMethod.GET)
 	@ResponseBody
 	public List getStatisticsByCompanyNatureData() {
-		return statisticsService.getStatisticsByCompanyNatureData();
+		TSUser curUser = ResourceUtil.getSessionUser();
+		if(!"admin".equals(curUser.getUserKey()))
+			return statisticsService.getStatisticsByCompanyNatureData(curUser.getCollegeId());
+		return statisticsService.getStatisticsByCompanyNatureData(null);
 	}
 	
 	/**
@@ -152,6 +161,9 @@ public class StatisticsController extends BaseController {
 	@RequestMapping(params = "getStatisticsByEducationStageData", method = RequestMethod.GET)
 	@ResponseBody
 	public List getStatisticsByEducationStageData() {
-		return statisticsService.getStatisticsByEducationStageData();
+		TSUser curUser = ResourceUtil.getSessionUser();
+		if(!"admin".equals(curUser.getUserKey()))
+			return statisticsService.getStatisticsByEducationStageData(curUser.getCollegeId());
+		return statisticsService.getStatisticsByEducationStageData(null);
 	}
 }

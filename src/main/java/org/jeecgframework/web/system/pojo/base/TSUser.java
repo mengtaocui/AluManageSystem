@@ -20,7 +20,8 @@ import javax.persistence.Table;
 public class TSUser extends TSBaseUser implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private String signatureFile;// 签名文件
-
+	private String collegeId;
+	private String collegeName;
 	@Excel(name = "手机" ,width = 20)
 	private String mobilePhone;// 手机
 	@Excel(name = "办公电话",width = 20)
@@ -42,16 +43,7 @@ public class TSUser extends TSBaseUser implements java.io.Serializable {
 	private java.lang.String updateName;
 	/**头像*/
 	private java.lang.String portrait;
-	/**开发权限标志*/
-	private java.lang.String devFlag;
-	@Column(name = "dev_flag", length = 2)
-	public String getDevFlag() {
-		return devFlag;
-	}
 
-	public void setDevFlag(String devFlag) {
-		this.devFlag = devFlag;
-	}
 	@Column(name = "signatureFile", length = 100)
 	public String getSignatureFile() {
 		return this.signatureFile;
@@ -191,4 +183,21 @@ public class TSUser extends TSBaseUser implements java.io.Serializable {
 	public void setPortrait(String portrait) {
 		this.portrait = portrait;
 	}
+	@Column(name = "COLLEGEID", length = 100)
+	public String getCollegeId() {
+		return collegeId;
+	}
+
+	public void setCollegeId(String collegeId) {
+		this.collegeId = collegeId;
+	}
+	@Column(name = "COLLEGENAME", length = 100)
+	public String getCollegeName() {
+		return collegeName;
+	}
+
+	public void setCollegeName(String collegeName) {
+		this.collegeName = collegeName;
+	}
+	
 }

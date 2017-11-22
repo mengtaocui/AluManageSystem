@@ -30,12 +30,8 @@ import javax.persistence.SequenceGenerator;
 @DynamicInsert(true)
 @SuppressWarnings("serial")
 public class GradeEntity extends BaseEntity implements java.io.Serializable {
-	
 	/**班级名称*/
 	private java.lang.String name;
-	/**学院id*/
-	private String collegeId;
-	private String collegeName;
 	/**年届*/
 	private java.lang.String yearPeriod;
 	/**班级QQ群*/
@@ -147,23 +143,5 @@ public class GradeEntity extends BaseEntity implements java.io.Serializable {
 
 	public void setCheckByUserName(java.lang.String checkByUserName) {
 		this.checkByUserName = checkByUserName;
-	}
-
-	@Column(name ="COLLEGE_ID",nullable=true,length=100)
-	public String getCollegeId() {
-		return collegeId;
-	}
-
-	public void setCollegeId(String collegeId) {
-		this.collegeId = collegeId;
-	}
-
-	@Column(name ="COLLEGE_NAME",nullable=true,length=100)
-	public String getCollegeName() {
-		return collegeName;
-	}
-
-	public void setCollegeName(String collegeName) {
-		this.collegeName = collegeName;
 	}
 }

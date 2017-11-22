@@ -1,5 +1,7 @@
 package com.alu.controller;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +21,7 @@ import org.jeecgframework.core.util.DateUtils;
 import org.jeecgframework.core.util.ResourceUtil;
 import org.jeecgframework.core.util.StringUtil;
 import org.jeecgframework.tag.core.easyui.TagUtil;
+import org.jeecgframework.tag.vo.datatable.SortDirection;
 import org.jeecgframework.web.system.pojo.base.TSDepart;
 import org.jeecgframework.web.system.pojo.base.TSUser;
 import org.jeecgframework.web.system.service.SystemService;
@@ -102,12 +105,24 @@ public class InvitationController extends BaseController {
 		//查询条件组装器
 		invitation.setTitle(AuTools.createLikeStr(invitation.getTitle()));
 		
-		//报名截止时间
 		if(StringUtil.isNotEmpty(request.getParameter("crtTime_begin1"))){
 			cq.ge("crtTime", request.getParameter("crtTime_begin1"));
 		}
 		if(StringUtil.isNotEmpty(request.getParameter("crtTime_end2"))){
 			cq.le("crtTime", request.getParameter("crtTime_end2"));
+		}
+		
+		//降序排列
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("crtTime", SortDirection.desc);
+		cq.setOrder(map);
+		//过滤掉删除的
+		cq.eq("deleteFlag", Constant.UN_DELETE);
+		
+		//学院管理员只能查询自己所在学院的数据,超级管理员可以查看所有学院的数据
+		TSUser curUser = ResourceUtil.getSessionUser();
+		if(!"admin".equals(curUser.getUserKey())){
+			cq.eq("collegeId", curUser.getCollegeId());
 		}
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, invitation, request.getParameterMap());
 		this.invitationService.getDataGridReturn(cq, true);
@@ -163,6 +178,8 @@ public class InvitationController extends BaseController {
 			}
 		} else {
 			message = "帖子添加成功";
+			invitation.setCollegeId(curUser.getCollegeId());
+			invitation.setCollegeName(curUser.getCollegeName());
 			invitation.setCrtBy(curUser.getId());
 			invitation.setCrtByUserName(curUser.getUserName());
 			invitation.setCrtTime(DateUtils.formatDateTime());

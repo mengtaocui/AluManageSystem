@@ -6,8 +6,8 @@ import java.util.Map;
 import org.jeecgframework.core.common.service.CommonService;
 
 public interface StatisticsServiceI extends CommonService{
-	List<Map<String, Object>> getStatisticsByYearPeriodData();
-	List<Map<String, Object>> getStatisticsByProvinceData();
-	List<Map<String, Object>> getStatisticsByEducationStageData();
-	List<Map<String, Object>> getStatisticsByCompanyNatureData();
+	List<Map<String, Object>> getStatisticsByYearPeriodData(String collegeId);
+	List<Map<String, Object>> getStatisticsByProvinceData(String collegeId);
+	List<Map<String, Object>> getStatisticsByEducationStageData(String collegeId);
+	List<Map<String, Object>> getStatisticsByCompanyNatureData(String collegeId);
 }

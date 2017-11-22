@@ -112,6 +112,14 @@ public class NewsModuleController extends BaseController {
 		
 		//过滤掉删除的
 		cq.eq("deleteFlag", Constant.UN_DELETE);
+		
+		
+		//学院管理员只能查询自己所在学院的数据,超级管理员可以查看所有学院的数据
+		TSUser curUser = ResourceUtil.getSessionUser();
+		if(!"admin".equals(curUser.getUserKey())){
+			cq.eq("collegeId", curUser.getCollegeId());
+		}
+		
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, newsModule, request.getParameterMap());
 		
 		this.newsModuleService.getDataGridReturn(cq, true);

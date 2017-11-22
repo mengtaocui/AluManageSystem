@@ -6,10 +6,8 @@
 	<t:dgCol title="common.id" field="id" hidden="true"></t:dgCol>
 	<t:dgCol title="common.username" sortable="false" field="userName" query="true" width="100"></t:dgCol>
 	<t:dgCol title="common.real.name" field="realName" query="false" width="100"></t:dgCol>
-	<%--<t:dgCol title="common.department" field="TSDepart_id" query="true" replace="${departsReplace}"></t:dgCol>--%>
-	<t:dgCol title="common.department" sortable="false" field="userOrgList.tsDepart.departname" query="false" width="100"></t:dgCol>
-	<t:dgCol title="common.role" field="userKey" width="100"></t:dgCol>
-	<t:dgCol title="common.createby" field="createBy" hidden="true" width="100"></t:dgCol>
+	<t:dgCol title="学院" sortable="false" field="collegeId" dictionary="t_college,id,name" query="true" width="100"></t:dgCol>
+	<t:dgCol title="common.createby" field="createBy"  hidden="true" width="100"></t:dgCol>
 	<t:dgCol title="common.createtime" field="createDate" formatter="yyyy-MM-dd" hidden="false"></t:dgCol>
 	<t:dgCol title="common.updateby" field="updateBy" hidden="true"></t:dgCol>
 	<t:dgCol title="common.updatetime" field="updateDate" formatter="yyyy-MM-dd" hidden="true"></t:dgCol>
@@ -24,9 +22,6 @@
 	<t:dgToolBar title="common.password.reset" icon="icon-edit" url="userController.do?changepasswordforuser" funname="update"></t:dgToolBar>
 	<t:dgToolBar title="common.lock.user" icon="icon-edit" url="userController.do?lock&lockvalue=0" funname="lockObj"></t:dgToolBar>
 	<t:dgToolBar title="common.unlock.user" icon="icon-edit" url="userController.do?lock&lockvalue=1" funname="unlockObj"></t:dgToolBar>
-	<t:dgToolBar title="excelImport" icon="icon-put" funname="ImportXls"></t:dgToolBar>
-	<t:dgToolBar title="excelOutput" icon="icon-putout" funname="ExportXls"></t:dgToolBar>
-	<t:dgToolBar title="templateDownload" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>
 </t:datagrid>
 <script>
     $(function() {
@@ -37,7 +32,7 @@
         $("#tempSearchColums").html('');
 	});
 </script>
-<div id="realNameSearchColums" style="display: none;">
+<%-- <div id="realNameSearchColums" style="display: none;">
 	<div name="searchColumsRealName">
 		<t:userSelect hasLabel="true" selectedNamesInputId="realName" windowWidth="1000px" windowHeight="600px" title="用户名称"></t:userSelect>
 	</div>
@@ -46,7 +41,7 @@
     <div name="searchColums">
        <t:departSelect hasLabel="true" selectedNamesInputId="orgNames"></t:departSelect>
     </div>
-</div>
+</div> --%>
 <script type="text/javascript">
 function deleteDialog(id){
 	var url = "userController.do?deleteDialog&id=" + id
@@ -102,21 +97,10 @@ function lockuploadify(url, id) {
 		}
 	});
 }
-</script>
 
-<script type="text/javascript">
-	//导入
-	function ImportXls() {
-		openuploadwin('Excel导入', 'userController.do?upload', "userList");
-	}
+function saveObj() {
+	$('#collegeName', iframe.document).val($('#collegeId', iframe.document).find('option:selected').text());
+	$('#btn_sub', iframe.document).click();
+}
 
-	//导出
-	function ExportXls() {
-		JeecgExcelExport("userController.do?exportXls", "userList");
-	}
-
-	//模板下载
-	function ExportXlsByT() {
-		JeecgExcelExport("userController.do?exportXlsByT", "userList");
-	}
 </script>

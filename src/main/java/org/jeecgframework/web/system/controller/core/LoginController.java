@@ -133,25 +133,9 @@ public class LoginController extends BaseController{
 				return j;
 			}
 			if (u != null && u.getStatus() != 0) {
-				// 处理用户有多个组织机构的情况，以弹出框的形式让用户选择
 				Map<String, Object> attrMap = new HashMap<String, Object>();
 				j.setAttributes(attrMap);
-
-				String orgId = req.getParameter("orgId");
-				if (oConvertUtils.isEmpty(orgId)) {
-					// 没有传组织机构参数，则获取当前用户的组织机构
-					Long orgNum = systemService.getCountForJdbc("select count(1) from t_s_user_org where user_id = '" + u.getId() + "'");
-					if (orgNum > 1) {
-						attrMap.put("orgNum", orgNum);
-						attrMap.put("user", u);
-					} else {
-						Map<String, Object> userOrgMap = systemService.findOneForJdbc("select org_id as orgId from t_s_user_org where user_id=?", u.getId());
-						saveLoginSuccessInfo(req, u, (String) userOrgMap.get("orgId"));
-					}
-				} else {
-					attrMap.put("orgNum", 1);
-					saveLoginSuccessInfo(req, u, orgId);
-				}
+				saveLoginSuccessInfo(req, u);
 			} else {
 
 				j.setMsg(mutiLangService.getLang("common.lock.user"));
@@ -177,12 +161,9 @@ public class LoginController extends BaseController{
 	public AjaxJson changeDefaultOrg(TSUser user, HttpServletRequest req) {
 		AjaxJson j = new AjaxJson();
 		Map<String, Object> attrMap = new HashMap<String, Object>();
-		String orgId = req.getParameter("orgId");
 		TSUser u = userService.checkUserExits(user);
-		if (oConvertUtils.isNotEmpty(orgId)) {
-			attrMap.put("orgNum", 1);
-			saveLoginSuccessInfo(req, u, orgId);
-		}
+		attrMap.put("orgNum", 1);
+		saveLoginSuccessInfo(req, u);
 		return j;
 	}
 
@@ -192,17 +173,14 @@ public class LoginController extends BaseController{
      * @param user 当前登录用户
      * @param orgId 组织主键
      */
-    private void saveLoginSuccessInfo(HttpServletRequest req, TSUser user, String orgId) {
+    private void saveLoginSuccessInfo(HttpServletRequest req, TSUser user) {
     	String message = null;
-        TSDepart currentDepart = systemService.get(TSDepart.class, orgId);
-        user.setCurrentDepart(currentDepart);
 
         HttpSession session = ContextHolderUtils.getSession();
 
-		user.setDepartid(orgId);
 
 		session.setAttribute(ResourceUtil.LOCAL_CLINET_USER, user);
-        message = mutiLangService.getLang("common.user") + ": " + user.getUserName() + "["+ currentDepart.getDepartname() + "]" + mutiLangService.getLang("common.login.success");
+        message = mutiLangService.getLang("common.user") + ": " + user.getUserName() + "["+ user.getCollegeName() + "]" + mutiLangService.getLang("common.login.success");
 
         String browserType = "";
         Cookie[] cookies = req.getCookies();

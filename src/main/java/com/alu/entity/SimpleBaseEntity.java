@@ -7,12 +7,8 @@ import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.GenericGenerator;
 @MappedSuperclass
-public abstract class BaseEntity {
+public abstract class SimpleBaseEntity {
 	private String id;
-	/**学院id*/
-	private String collegeId;
-	/**学院名称*/
-	private String collegeName;
 	/**创建人id*/
 	private java.lang.String crtBy;
 	/**创建人登录账号*/
@@ -37,23 +33,6 @@ public abstract class BaseEntity {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-	@Column(name ="COLLEGE_ID",nullable=true,length=100)
-	public String getCollegeId() {
-		return collegeId;
-	}
-
-	public void setCollegeId(String collegeId) {
-		this.collegeId = collegeId;
-	}
-
-	@Column(name ="COLLEGE_NAME",nullable=true,length=100)
-	public String getCollegeName() {
-		return collegeName;
-	}
-
-	public void setCollegeName(String collegeName) {
-		this.collegeName = collegeName;
 	}
 	/**
 	 *方法: 取得java.lang.String

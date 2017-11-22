@@ -20,7 +20,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicUpdate(true)
 @DynamicInsert(true)
 @SuppressWarnings("serial")
-public class NewsTypeEntity extends BaseEntity implements java.io.Serializable {
+public class NewsTypeEntity extends SimpleBaseEntity implements java.io.Serializable {
 	/**类型名称*/
 	private java.lang.String name;
 	/**简介*/

@@ -120,6 +120,12 @@ public class ActivitySpaceController extends BaseController {
 		cq.setOrder(map);
 		//过滤掉删除的
 		cq.eq("deleteFlag", Constant.UN_DELETE);
+		
+		//学院管理员只能查询自己所在学院的数据,超级管理员可以查看所有学院的数据
+		TSUser curUser = ResourceUtil.getSessionUser();
+		if(!"admin".equals(curUser.getUserKey())){
+			cq.eq("collegeId", curUser.getCollegeId());
+		}
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, activitySpace, request.getParameterMap());
 		this.activitySpaceService.getDataGridReturn(cq, true);
 		TagUtil.datagrid(response, dataGrid);
@@ -197,7 +203,8 @@ public class ActivitySpaceController extends BaseController {
            
            TSUser curUser = ResourceUtil.getSessionUser();
            ActivitySpaceEntity activitySpace = new ActivitySpaceEntity();
-           
+           activitySpace.setCollegeId(curUser.getCollegeId());
+           activitySpace.setCollegeName(curUser.getCollegeName());
            activitySpace.setActivityId(activityId);
            activitySpace.setActivityName(new String(activityName.getBytes("iso-8859-1"), "utf-8"));
            activitySpace.setCheckStatus(Constant.APPLY_WAIT);

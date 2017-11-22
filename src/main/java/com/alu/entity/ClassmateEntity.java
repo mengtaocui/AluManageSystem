@@ -30,9 +30,6 @@ import javax.persistence.SequenceGenerator;
 @DynamicInsert(true)
 @SuppressWarnings("serial")
 public class ClassmateEntity extends BaseEntity implements java.io.Serializable {
-	/**学院id*/
-	private String collegeId;
-	private String collegeName;
 	private String yearPeriod;
 	/**班级id*/
 	private java.lang.String gradeId;
@@ -188,23 +185,6 @@ public class ClassmateEntity extends BaseEntity implements java.io.Serializable 
 	 */
 	public void setHeadPortrait(java.lang.String headPortrait){
 		this.headPortrait = headPortrait;
-	}
-	@Column(name ="COLLEGE_ID",nullable=true,length=100)
-	public String getCollegeId() {
-		return collegeId;
-	}
-
-	public void setCollegeId(String collegeId) {
-		this.collegeId = collegeId;
-	}
-
-	@Column(name ="COLLEGE_NAME",nullable=true,length=100)
-	public String getCollegeName() {
-		return collegeName;
-	}
-
-	public void setCollegeName(String collegeName) {
-		this.collegeName = collegeName;
 	}
 	@Column(name ="GRADE_NAME",nullable=true,length=100)
 	public java.lang.String getGradeName() {

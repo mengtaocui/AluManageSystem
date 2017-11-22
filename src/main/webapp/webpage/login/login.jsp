@@ -281,7 +281,7 @@
   }
 
   //登录处理函数
-  function newLogin(orgId) {
+  function newLogin() {
     setCookie();
 
     var actionurl="loginController.do?login";//提交路径
@@ -291,7 +291,6 @@
     var data=$(":input").each(function() {
       formData[this.name] =$("#"+this.name ).val();
     });
-    formData['orgId'] = orgId ? orgId : "";
     //语言
     formData['langCode']=$("#langCode").val();
     formData['langCode'] = $("#langCode option:selected").val();
@@ -330,9 +329,7 @@
                 focus : true,
                 callback : function() {
                   iframe = this.iframe.contentWindow;
-                  var orgId = $('#orgId', iframe.document).val();
 
-                  formData['orgId'] = orgId ? orgId : "";
                   $.ajax({
               		async : false,
               		cache : false,

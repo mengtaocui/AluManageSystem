@@ -31,7 +31,10 @@ import javax.persistence.SequenceGenerator;
 @DynamicInsert(true)
 @SuppressWarnings("serial")
 public class ActivitySpaceEntity extends IdEntity implements java.io.Serializable {
-
+	/**学院id*/
+	private String collegeId;
+	/**学院名称*/
+	private String collegeName;
 	/**活动id*/
 	private java.lang.String activityId;
 	private String activityName;
@@ -47,7 +50,23 @@ public class ActivitySpaceEntity extends IdEntity implements java.io.Serializabl
 	private java.lang.String checkByUserName;
 	/**0未删除，1已删除*/
 	private java.lang.Integer deleteFlag;
-	
+	@Column(name ="COLLEGE_ID",nullable=true,length=100)
+	public String getCollegeId() {
+		return collegeId;
+	}
+
+	public void setCollegeId(String collegeId) {
+		this.collegeId = collegeId;
+	}
+
+	@Column(name ="COLLEGE_NAME",nullable=true,length=100)
+	public String getCollegeName() {
+		return collegeName;
+	}
+
+	public void setCollegeName(String collegeName) {
+		this.collegeName = collegeName;
+	}
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  活动id

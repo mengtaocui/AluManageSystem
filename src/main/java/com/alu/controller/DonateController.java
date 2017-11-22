@@ -128,6 +128,12 @@ public class DonateController extends BaseController {
 		cq.setOrder(map);
 		//过滤掉删除的
 		cq.eq("deleteFlag", Constant.UN_DELETE);
+		
+		//学院管理员只能查询自己所在学院的数据,超级管理员可以查看所有学院的数据
+		TSUser curUser = ResourceUtil.getSessionUser();
+		if(!"admin".equals(curUser.getUserKey())){
+			cq.eq("collegeId", curUser.getCollegeId());
+		}
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, donate, request.getParameterMap());
 		this.donateService.getDataGridReturn(cq, true);
 		TagUtil.datagrid(response, dataGrid);
@@ -182,6 +188,8 @@ public class DonateController extends BaseController {
 			}
 		} else {
 			message = "捐赠添加成功";
+			donate.setCollegeId(curUser.getCollegeId());
+			donate.setCollegeName(curUser.getCollegeName());
 			donate.setCrtBy(curUser.getId());
 			donate.setCrtByUserName(curUser.getUserName());
 			donate.setCrtTime(DateUtils.formatDateTime());

@@ -75,11 +75,11 @@ a:hover {
 		<table style="width: 100%;height: 100%;">
             <tr>
                 <td><div class="panel-title">校友管理系统  1.0</div></td>
-                <td width="150px">
+                <td width="260px" style="text-align: right">
                     <span style="color: #CC33FF"><t:mutiLang langKey="common.user"/>:</span>
-                    <span style="color: #666633">${userName }</span>
+                    <span style="color: #666633">${LOCAL_CLINET_USER.userName}</span>
                     <span style="color: #CC33FF"><t:mutiLang langKey="common.role"/>:</span>
-                    <span style="color: #666633">${roleName }</span>
+                    <span style="color: #666633">${LOCAL_CLINET_USER.collegeName}管理员</span>
                 </td>
                 <td width="180px" style="position: relative;">
                 	<div style="position: absolute; right: 0px; bottom: 0px;">

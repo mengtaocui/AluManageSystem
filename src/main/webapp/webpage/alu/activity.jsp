@@ -15,6 +15,17 @@
   <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="activityController.do?save">
 			<input id="id" name="id" type="hidden" value="${activityPage.id }">
 			<table style="width: 100%;" cellpadding="0" cellspacing="1" class="formtable">
+				<c:if test="${ empty LOCAL_CLINET_USER.collegeName  }">
+					<tr>
+						<td align="right"><label class="Validform_label">学院: </label></td>
+						<td class="value">
+			               <t:dictSelect field="collegeId" id="collegeId"  extendJson="{datatype:'*'}" dictTable="t_college" dictField="id" 
+									dictText="name" dictCondition=" where delete_flag=0" defaultVal="${classmatePage.collegeId}"  hasLabel="false"></t:dictSelect>
+						    <input type="hidden" id="collegeName" name="collegeName"   value="${classmatePage.collegeName}" />
+			                <span class="Validform_checktip"></span>
+			            </td>
+					</tr>
+				</c:if>
 				<tr>
 					<td align="right">
 						<label class="Validform_label">

@@ -124,8 +124,17 @@
                     
                     <li class="dropdown" onfocus="bindFrameClick()">
                     	<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                <span ><strong class="font-bold">${userName }</strong></span>
-                                <span >${roleName }<b class="caret"></b></span>
+                                <span >用户:</span>
+                                <span ><strong class="font-bold">${LOCAL_CLINET_USER.userName}</strong></span>
+                                <span >角色:</span>
+                                <span >
+                                <c:if test="${ not empty LOCAL_CLINET_USER.collegeName }">
+                                	${LOCAL_CLINET_USER.collegeName}管理员<b class="caret"></b>
+                                </c:if> 
+                                 <c:if test="${ empty LOCAL_CLINET_USER.collegeName }">
+                                	超级管理员<b class="caret"></b>
+                                </c:if> 
+                                </span>
                         </a>
                         <ul class="dropdown-menu dropdown-alerts">
                             <li>

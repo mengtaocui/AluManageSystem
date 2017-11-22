@@ -21,7 +21,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicUpdate(true)
 @DynamicInsert(true)
 @SuppressWarnings("serial")
-public class ActivityEntity extends BaseEntity implements java.io.Serializable {
+public class ActivityEntity extends BaseEntity  implements java.io.Serializable {
 	/**活动名称*/
 	private java.lang.String name;
 	/**活动地点*/

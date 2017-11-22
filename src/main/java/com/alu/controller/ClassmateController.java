@@ -126,6 +126,11 @@ public class ClassmateController extends BaseController {
 		//过滤掉删除的
 		cq.eq("deleteFlag", Constant.UN_DELETE);
 		
+		//学院管理员只能查询自己所在学院的数据,超级管理员可以查看所有学院的数据
+		TSUser curUser = ResourceUtil.getSessionUser();
+		if(!"admin".equals(curUser.getUserKey())){
+			cq.eq("collegeId", curUser.getCollegeId());
+		}		
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, classmate, request.getParameterMap());
 		this.classmateService.getDataGridReturn(cq, true);
 		TagUtil.datagrid(response, dataGrid);
@@ -180,6 +185,8 @@ public class ClassmateController extends BaseController {
 			}
 		} else {
 			message = "校友添加成功";
+			classmate.setCollegeId(curUser.getCollegeId());
+			classmate.setCollegeName(curUser.getCollegeName());
 			classmate.setCrtBy(curUser.getId());
 			classmate.setCrtByUserName(curUser.getUserName());
 			classmate.setCrtTime(DateUtils.formatDateTime());

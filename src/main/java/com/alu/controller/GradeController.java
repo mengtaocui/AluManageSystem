@@ -119,6 +119,12 @@ public class GradeController extends BaseController {
 		cq.setOrder(map);
 		//过滤掉删除的
 		cq.eq("deleteFlag", Constant.UN_DELETE);
+		
+		//学院管理员只能查询自己所在学院的数据,超级管理员可以查看所有学院的数据
+		TSUser curUser = ResourceUtil.getSessionUser();
+		if(!"admin".equals(curUser.getUserKey())){
+			cq.eq("collegeId", curUser.getCollegeId());
+		}
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, grade, request.getParameterMap());
 		this.gradeService.getDataGridReturn(cq, true);
 		TagUtil.datagrid(response, dataGrid);
@@ -173,6 +179,8 @@ public class GradeController extends BaseController {
 			}
 		} else {
 			message = "班级添加成功";
+			grade.setCollegeId(curUser.getCollegeId());
+			grade.setCollegeName(curUser.getCollegeName());
 			grade.setCrtBy(curUser.getId());
 			grade.setCrtByUserName(curUser.getUserName());
 			grade.setCrtTime(DateUtils.formatDateTime());
