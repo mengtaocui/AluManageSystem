@@ -649,5 +649,16 @@ public class DateUtils extends PropertyEditorSupport {
 	    calendar.setTime(getDate());
 	    return calendar.get(Calendar.YEAR);
 	  }
-
+	
+	public static String getBefore2Date(){
+		GregorianCalendar calendar=new GregorianCalendar();
+	    calendar.setTime(getDate());
+	    calendar.get(Calendar.YEAR);
+		return calendar.get(Calendar.YEAR)+"-"+
+		(calendar.get(Calendar.MONTH)+1)+"-"+(calendar.get(Calendar.DAY_OF_MONTH)-2);
+	}
+	
+	public static void main(String[] args){
+		
+	}
 }

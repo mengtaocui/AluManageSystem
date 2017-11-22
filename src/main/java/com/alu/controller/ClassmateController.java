@@ -35,6 +35,7 @@ import com.alu.common.Constant;
 import com.alu.entity.ClassmateEntity;
 import com.alu.entity.NewsModuleEntity;
 import com.alu.service.ClassmateServiceI;
+import com.alu.service.GradeServiceI;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -81,7 +82,8 @@ public class ClassmateController extends BaseController {
 	private SystemService systemService;
 	@Autowired
 	private Validator validator;
-	
+	@Autowired
+	private GradeServiceI gradeService;
 
 
 	/**
@@ -128,7 +130,7 @@ public class ClassmateController extends BaseController {
 		
 		//学院管理员只能查询自己所在学院的数据,超级管理员可以查看所有学院的数据
 		TSUser curUser = ResourceUtil.getSessionUser();
-		if(!"admin".equals(curUser.getUserKey())){
+		if(!"admin".equals(curUser.getUserRoleCode())){
 			cq.eq("collegeId", curUser.getCollegeId());
 		}		
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, classmate, request.getParameterMap());
@@ -150,6 +152,8 @@ public class ClassmateController extends BaseController {
 		message = "校友删除成功";
 		classmate.setDeleteFlag(Constant.IS_DELETE);
 		classmateService.updateEntitie(classmate);
+		//减少班级人数
+		gradeService.setGradePersonnelCount(-1, classmate.getGradeId());
 		systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
 		
 		j.setMsg(message);
@@ -185,13 +189,18 @@ public class ClassmateController extends BaseController {
 			}
 		} else {
 			message = "校友添加成功";
-			classmate.setCollegeId(curUser.getCollegeId());
-			classmate.setCollegeName(curUser.getCollegeName());
+			if(StringUtil.isNotEmpty(curUser.getCollegeId())){
+				classmate.setCollegeId(curUser.getCollegeId());
+				classmate.setCollegeName(curUser.getCollegeName());
+			}
 			classmate.setCrtBy(curUser.getId());
 			classmate.setCrtByUserName(curUser.getUserName());
 			classmate.setCrtTime(DateUtils.formatDateTime());
 			classmate.setDeleteFlag(Constant.UN_DELETE);
 			classmateService.save(classmate);
+			
+			//增加班级人数
+			gradeService.setGradePersonnelCount(1, classmate.getGradeId());
 			systemService.addLog(message, Globals.Log_Type_INSERT, Globals.Log_Leavel_INFO);
 		}
 		j.setMsg(message);

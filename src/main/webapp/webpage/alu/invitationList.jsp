@@ -3,8 +3,9 @@
 <t:base type="jquery,easyui,tools,DatePicker"></t:base>
 <div class="easyui-layout" fit="true">
   <div region="center" style="padding:0px;border:0px">
-  <t:datagrid name="invitationList" title="帖子" actionUrl="invitationController.do?datagrid" queryMode="group" idField="id" fit="true">
+  <t:datagrid name="invitationList" title="帖子" actionUrl="invitationController.do?datagrid" queryMode="group" idField="id" fit="true" onLoadSuccess="loadSuccess">
    <t:dgCol title="编号" field="id" hidden="true"></t:dgCol>
+   <t:dgCol title="学院" field="collegeId"  dictionary="t_college,id,name" query="true"></t:dgCol>
    <t:dgCol title="帖子标题" field="title"   width="120" query="true"></t:dgCol>
    <t:dgCol title="浏览次数" field="browseCount"   width="120"></t:dgCol>
    <t:dgCol title="审核状态" field="checkStatus" replace="等待审核_0,已通过_1,被拒绝_2"   width="120" query="true"></t:dgCol>
@@ -24,9 +25,23 @@
   </div>
  </div>
  <script>
+	 function loadSuccess(){
+	 	if('${LOCAL_CLINET_USER.collegeName }'){
+	 		$($('#invitationListForm').find('span')[0]).hide();
+		   	 	$('td').each(function(){
+		   	    	if($(this).attr('field') == 'collegeId')
+		   	    		$(this).remove();
+		   	    	
+		   	    	console.log(1);
+		   	   });
+		   	   $(window).resize();  
+	 	}
+	 }
 	 function saveObj() {
-			$('#content', iframe.document).click();
-			$('#btn_sub', iframe.document).click();
+		 if(!'${LOCAL_CLINET_USER.collegeName }')
+	 			$('#collegeName', iframe.document).val($('#collegeId', iframe.document).find('option:selected').text());
+		 $('#content', iframe.document).click();
+		 $('#btn_sub', iframe.document).click();
 	 }
 	 function handleApplyPass(id){
 			handleApply(id, 1, '通过');

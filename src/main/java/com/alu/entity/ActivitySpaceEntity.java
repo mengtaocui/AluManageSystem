@@ -88,7 +88,7 @@ public class ActivitySpaceEntity extends IdEntity implements java.io.Serializabl
 	 *方法: 取得java.lang.Integer
 	 *@return: java.lang.Integer  0未审核，1通过审核，未通过
 	 */
-	@Column(name ="CHECK_STATUS",nullable=true,precision=3,scale=0)
+	@Column(name ="CHECKSTATUS",nullable=true,precision=3,scale=0)
 	public java.lang.Integer getCheckStatus(){
 		return this.checkStatus;
 	}

@@ -117,6 +117,7 @@
 						dictText="name" dictCondition=" where delete_flag=0" defaultVal="${classmatePage.collegeId}"  hasLabel="false"></t:dictSelect>
 						<input type="hidden" id="collegeName" name="collegeName"   value="${classmatePage.collegeName}" />
                 <input id="roleid" name="roleid" type="hidden" value="8a8ab0b246dc81120146dc81818b0051">
+                <input id="userRoleCode" name="userRoleCode" type="hidden" value="manager">
                 <span class="Validform_checktip"></span>
             </td>
 		</tr>

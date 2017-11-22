@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50631
 File Encoding         : 65001
 
-Date: 2017-11-21 17:24:35
+Date: 2017-11-22 17:50:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -134,13 +134,17 @@ CREATE TABLE `t_activity` (
   `check_by` varchar(32) DEFAULT NULL COMMENT '审核人',
   `check_by_user_name` varchar(255) DEFAULT NULL,
   `delete_flag` tinyint(255) DEFAULT NULL COMMENT '0未删除，1已删除',
+  `college_id` varchar(32) DEFAULT NULL COMMENT '学院ID',
+  `college_name` varchar(255) DEFAULT NULL COMMENT '学院名称',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of t_activity
 -- ----------------------------
-INSERT INTO `t_activity` VALUES ('402881bf5fbecfaf015fbeeda0990002', '郊游', '上海', '<html>\r\n<head>\r\n	<title></title>\r\n</head>\r\n<body>&nbsp;</body>\r\n</html>\r\n', '2017-11-17 17:05:42', '2017-11-30 17:05:50', '2017-11-20 17:05:56', null, '1', '8a8ab0b246dc81120146dc8181950052', '2017-11-15 17:06:05', 'admin', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '0');
+INSERT INTO `t_activity` VALUES ('402881bf5fbecfaf015fbeeda0990002', '郊游', '上海', '<html>\r\n<head>\r\n	<title></title>\r\n</head>\r\n<body>&nbsp;</body>\r\n</html>\r\n', '2017-11-17 17:05:42', '2017-11-30 17:05:50', '2017-11-20 17:05:56', null, '1', '8a8ab0b246dc81120146dc8181950052', '2017-11-15 17:06:05', 'admin', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '0', null, null);
+INSERT INTO `t_activity` VALUES ('402881bf5fe235f0015fe23735a80001', '来我们学院玩吧', '学院中心广场', '<html>\r\n<head>\r\n	<title></title>\r\n</head>\r\n<body>&nbsp;</body>\r\n</html>\r\n', '2017-11-24 13:32:49', '2017-11-25 13:32:56', '2017-11-23 13:33:04', null, '0', '8a8ab0b246dc81120146dc8181950052', '2017-11-22 13:33:09', 'admin', null, null, null, null, null, '0', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ');
+INSERT INTO `t_activity` VALUES ('402881bf5fe235f0015fe238d0a70005', '开学典礼', '学校大礼堂', '<html>\r\n<head>\r\n	<title></title>\r\n</head>\r\n<body>&nbsp;</body>\r\n</html>\r\n', '2017-11-28 13:34:37', '2017-11-29 13:34:45', '2017-11-27 13:34:51', null, '0', '402881bf5fde0ad8015fde10c6aa0005', '2017-11-22 13:34:55', 'cuimengtao', null, null, null, null, null, '0', '402881bf5fbdb432015fbdb52d750001', '计算机学院 ');
 
 -- ----------------------------
 -- Table structure for t_activity_space
@@ -151,7 +155,7 @@ CREATE TABLE `t_activity_space` (
   `activity_id` varchar(32) DEFAULT NULL COMMENT '活动id',
   `activity_name` varchar(255) DEFAULT NULL,
   `file_path` text COMMENT '附件id',
-  `check_status` tinyint(4) DEFAULT NULL COMMENT '0未审核，1通过审核，未通过',
+  `checkStatus` tinyint(4) DEFAULT NULL COMMENT '0未审核，1通过审核，未通过',
   `crt_time` varchar(255) DEFAULT NULL,
   `crt_by` varchar(32) DEFAULT NULL,
   `crt_by_user_name` varchar(255) DEFAULT NULL COMMENT '创建者账号',
@@ -159,15 +163,17 @@ CREATE TABLE `t_activity_space` (
   `check_by` varchar(32) DEFAULT NULL COMMENT '审核人',
   `check_by_user_name` varchar(255) DEFAULT NULL,
   `delete_flag` tinyint(255) DEFAULT NULL COMMENT '0未删除，1已删除',
+  `college_id` varchar(32) DEFAULT NULL COMMENT '学院ID',
+  `college_name` varchar(255) DEFAULT NULL COMMENT '学院名称',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of t_activity_space
 -- ----------------------------
-INSERT INTO `t_activity_space` VALUES ('402881bf5fc2d2e8015fc2d398770002', '402881bf5fbecfaf015fbeeda0990002', '郊游', 'sysController/readPic.do?picPath=402881bf5fc2d398015fc2d398710000gif.gif', '1', '2017-11-16 11:16:07', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-16', '8a8ab0b246dc81120146dc8181950052', 'admin', '0');
-INSERT INTO `t_activity_space` VALUES ('402881bf5fc2d4a8015fc2d535dc0002', '402881bf5fbecfaf015fbeeda0990002', '郊游', 'sysController/readPic.do?picPath=402881bf5fc2d535015fc2d535d70000gif.gif', '2', '2017-11-16 11:17:53', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-16', '8a8ab0b246dc81120146dc8181950052', 'admin', '0');
-INSERT INTO `t_activity_space` VALUES ('402881bf5fc2da5e015fc2db2e900001', '402881bf5fbecfaf015fbeeda0990002', '郊游', 'sysController/readPic.do?picPath=402881bf5fc2db2e015fc2db2e7a0000gif.gif', '0', '2017-11-16 11:24:25', '8a8ab0b246dc81120146dc8181950052', 'admin', null, null, null, '0');
+INSERT INTO `t_activity_space` VALUES ('402881bf5fc2d2e8015fc2d398770002', '402881bf5fbecfaf015fbeeda0990002', '郊游', 'sysController/readPic.do?picPath=402881bf5fc2d398015fc2d398710000gif.gif', '1', '2017-11-16 11:16:07', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-16', '8a8ab0b246dc81120146dc8181950052', 'admin', '0', null, null);
+INSERT INTO `t_activity_space` VALUES ('402881bf5fc2d4a8015fc2d535dc0002', '402881bf5fbecfaf015fbeeda0990002', '郊游', 'sysController/readPic.do?picPath=402881bf5fc2d535015fc2d535d70000gif.gif', '2', '2017-11-16 11:17:53', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-16', '8a8ab0b246dc81120146dc8181950052', 'admin', '0', null, null);
+INSERT INTO `t_activity_space` VALUES ('402881bf5fc2da5e015fc2db2e900001', '402881bf5fbecfaf015fbeeda0990002', '郊游', 'sysController/readPic.do?picPath=402881bf5fc2db2e015fc2db2e7a0000gif.gif', '0', '2017-11-16 11:24:25', '8a8ab0b246dc81120146dc8181950052', 'admin', null, null, null, '0', null, null);
 
 -- ----------------------------
 -- Table structure for t_classmate
@@ -175,8 +181,8 @@ INSERT INTO `t_activity_space` VALUES ('402881bf5fc2da5e015fc2db2e900001', '4028
 DROP TABLE IF EXISTS `t_classmate`;
 CREATE TABLE `t_classmate` (
   `ID` varchar(32) NOT NULL,
-  `college_id` varchar(32) DEFAULT NULL,
-  `college_name` varchar(255) DEFAULT NULL,
+  `college_id` varchar(32) DEFAULT NULL COMMENT '学院ID',
+  `college_name` varchar(255) DEFAULT NULL COMMENT '学院名称',
   `year_period` varchar(50) DEFAULT NULL COMMENT '年届',
   `grade_id` varchar(32) DEFAULT NULL COMMENT '班级id',
   `grade_name` varchar(255) DEFAULT NULL,
@@ -216,20 +222,20 @@ INSERT INTO `t_classmate` VALUES ('15', '402881bf5fbdabe0015fbdb1b0a60007', '公
 INSERT INTO `t_classmate` VALUES ('16', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '28', '1990届公共卫生学院预防医学2班', '李建腾', '0', '13700013', '13993356265', '15', '江西省 ', '163', '新余市 ', '甘肃省兰州市永登县产业孵化大厦', 'syqy', 'dz', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:18:02', '0');
 INSERT INTO `t_classmate` VALUES ('17', '402881bf5fbdb432015fbdb52d750001', '计算机学院 ', '1990', '402881bf5fbe80af015fbeae7f98000d', '90年1班', '张三丰', '0', '13700014', '13993356265', '14', '福建省 ', '152', '莆田市 ', '甘肃省兰州市永登县产业孵化大厦', 'sydw', 'bsyjs', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:18:19', '0');
 INSERT INTO `t_classmate` VALUES ('18', '402881bf5fbdb432015fbdb52d750001', '计算机学院 ', '1990', '402881bf5fbe80af015fbeae7f98000d', '90年1班', '张无忌', '1', '13700015', '13993356265', '13', '安徽省 ', '136', '淮南市 ', '甘肃省兰州市永登县产业孵化大厦', 'syqy', 'ssyjs', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:18:37', '0');
-INSERT INTO `t_classmate` VALUES ('19', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '1', '1990届公共卫生学院预防医学1班', '王老五', '0', '13700016', '13993356265', '11', '江苏省 ', '110', '无锡市 ', '甘肃省兰州市永登县产业孵化大厦', 'gykgqy', 'ssyjs', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:18:51', '0');
+INSERT INTO `t_classmate` VALUES ('19', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '1', '1990届公共卫生学院预防医学1班', '王老五', '0', '13700016', '13993356265', '11', '江苏省 ', '110', '无锡市 ', '甘肃省兰州市永登县产业孵化大厦', 'gykgqy', 'ssyjs', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:18:51', '1');
 INSERT INTO `t_classmate` VALUES ('20', '402881bf5fbdb432015fbdb52d750001', '计算机学院 ', '1990', '402881bf5fbe80af015fbeae7f98000d', '90年1班', '王三四', '1', '13700017', '13993356265', '11', '江苏省 ', '111', '徐州市 ', '甘肃省兰州市永登县产业孵化大厦', 'gykgqy', 'bk', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:19:14', '0');
-INSERT INTO `t_classmate` VALUES ('21', '402881bf5fbdb432015fbdb5639d0003', '生物工程学院 ', '1994', '402881bf5fdcf8ac015fdd046b940032', '94年2班', '王柳柳', '0', '13700018', '13993356265', '16', '山东省 ', '173', '枣庄市 ', '甘肃省兰州市永登县产业孵化大厦', 'wzqy', 'bsyjs', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:20:26', '0');
+INSERT INTO `t_classmate` VALUES ('21', '402881bf5fbdb432015fbdb5639d0003', '生物工程学院 ', '1994', '402881bf5fdcf8ac015fdd046b940032', '94年2班', '王柳柳', '0', '13700018', '13993356265', '16', '山东省 ', '173', '枣庄市 ', '甘肃省兰州市永登县产业孵化大厦', 'wzqy', 'bsyjs', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:20:26', '1');
 INSERT INTO `t_classmate` VALUES ('22', '402881bf5fbdb432015fbdb52d750001', '计算机学院 ', '1990', '402881bf5fbe80af015fbeae7f98000d', '90年1班', '张大大', '0', '13700019', '13993356265', '14', '福建省 ', '152', '莆田市 ', '甘肃省兰州市永登县产业孵化大厦', 'gyqy', 'dz', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:20:44', '0');
 INSERT INTO `t_classmate` VALUES ('23', '402881bf5fbdb432015fbdb52d750001', '计算机学院 ', '1990', '402881bf5fbe80af015fbeae7f98000d', '90年1班', '张老三', '0', '13700020', '13993356265', '14', '福建省 ', '151', '厦门市 ', '甘肃省兰州市永登县产业孵化大厦', 'hzqy', 'ssyjs', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:21:04', '0');
 INSERT INTO `t_classmate` VALUES ('24', '402881bf5fbdb432015fbdb52d750001', '计算机学院 ', '1990', '402881bf5fbe80af015fbeae7f98000d', '90年1班', '李四光', '0', '13700021', '13993356265', '12', '浙江省 ', '126', '湖州市 ', '甘肃省兰州市永登县产业孵化大厦', 'gykgqy', 'ssyjs', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:21:30', '0');
 INSERT INTO `t_classmate` VALUES ('25', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1991', '41', '1991届公共卫生学院预防医学2班', '刘虎祥', '0', '13700022', '13993356265', '11', '江苏省 ', '112', '常州市 ', '甘肃省兰州市永登县产业孵化大厦', 'hzqy', 'bsyjs', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:21:44', '0');
-INSERT INTO `t_classmate` VALUES ('26', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '1', '1990届公共卫生学院预防医学1班', '王思聪', '0', '13700023', '13993356265', '10', '上海市 ', '107', '市辖区 ', '甘肃省兰州市永登县产业孵化大厦', 'hzqy', 'ssyjs', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:22:02', '0');
-INSERT INTO `t_classmate` VALUES ('27', '402881bf5fbdb432015fbdb5639d0003', '生物工程学院 ', '1994', '402881bf5fdcf8ac015fdd046b940032', '94年2班', '王健林', '0', '13700024', '13993356265', '13', '安徽省 ', '136', '淮南市 ', '甘肃省兰州市永登县产业孵化大厦', 'wzqy', 'bsyjs', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:22:24', '0');
+INSERT INTO `t_classmate` VALUES ('26', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '1', '1990届公共卫生学院预防医学1班', '王思聪', '0', '13700023', '13993356265', '10', '上海市 ', '107', '市辖区 ', '甘肃省兰州市永登县产业孵化大厦', 'hzqy', 'ssyjs', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:22:02', '1');
+INSERT INTO `t_classmate` VALUES ('27', '402881bf5fbdb432015fbdb5639d0003', '生物工程学院 ', '1994', '402881bf5fdcf8ac015fdd046b940032', '94年2班', '王健林', '0', '13700024', '13993356265', '13', '安徽省 ', '136', '淮南市 ', '甘肃省兰州市永登县产业孵化大厦', 'wzqy', 'bsyjs', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:22:24', '1');
 INSERT INTO `t_classmate` VALUES ('4', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '1', '1990届公共卫生学院预防医学1班', '刘小星', '0', '13700002', '13993356265', '15', '江西省 ', '162', '九江市 ', '甘肃省兰州市永登县产业孵化大厦', 'gyqy', 'bk', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'sysController/readPic.do?picPath=402881bf5fc2a7d9015fc2a7d92b0000gif.gif', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 11:33:26', '0');
-INSERT INTO `t_classmate` VALUES ('6', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '1', '1990届公共卫生学院预防医学1班', '颉小强', '0', '13700003', '13993356265', '15', '江西省 ', '164', '鹰潭市 ', '甘肃省兰州市永登县产业孵化大厦', 'wzqy', 'dz', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'sysController/readPic.do?picPath=402881bf5fbef20d015fbef7f9b20003gif.gif', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:13:08', '0');
-INSERT INTO `t_classmate` VALUES ('63', '402881bf5fbdb432015fbdb5639d0003', '生物工程学院 ', '1994', '402881bf5fdcf8ac015fdd046b940032', '94年2班', '朱钰飒', '0', '1370001908', '15193133963', '16', '山东省 ', '172', '淄博市 ', '甘肃省兰州市永登县产业孵化大厦', 'syqy', 'bk', '139933656265@163.com', '我是朱飒大家好！我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:22:44', '0');
+INSERT INTO `t_classmate` VALUES ('6', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '1', '1990届公共卫生学院预防医学1班', '颉小强', '0', '13700003', '13993356265', '15', '江西省 ', '164', '鹰潭市 ', '甘肃省兰州市永登县产业孵化大厦', 'wzqy', 'dz', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'sysController/readPic.do?picPath=402881bf5fbef20d015fbef7f9b20003gif.gif', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:13:08', '1');
+INSERT INTO `t_classmate` VALUES ('63', '402881bf5fbdb432015fbdb5639d0003', '生物工程学院 ', '1994', '402881bf5fdcf8ac015fdd046b940032', '94年2班', '朱钰飒', '0', '1370001908', '15193133963', '16', '山东省 ', '172', '淄博市 ', '甘肃省兰州市永登县产业孵化大厦', 'syqy', 'bk', '139933656265@163.com', '我是朱飒大家好！我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:22:44', '1');
 INSERT INTO `t_classmate` VALUES ('7', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '28', '1990届公共卫生学院预防医学2班', '常小明', '0', '13700004', '13993356265', '11', '江苏省 ', '112', '常州市 ', '甘肃省兰州市永登县产业孵化大厦', 'zf', 'ssyjs', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:13:55', '0');
-INSERT INTO `t_classmate` VALUES ('8', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '1', '1990届公共卫生学院预防医学1班', '刘作贤', '0', '13700005', '13993356265', '11', '江苏省 ', '110', '无锡市 ', '甘肃省兰州市永登县产业孵化大厦', 'wzqy', 'bsyjs', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:14:11', '0');
+INSERT INTO `t_classmate` VALUES ('8', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '1', '1990届公共卫生学院预防医学1班', '刘作贤', '0', '13700005', '13993356265', '11', '江苏省 ', '110', '无锡市 ', '甘肃省兰州市永登县产业孵化大厦', 'wzqy', 'bsyjs', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:14:11', '1');
 INSERT INTO `t_classmate` VALUES ('9', '402881bf5fbdb432015fbdb52d750001', '计算机学院 ', '1990', '402881bf5fbe80af015fbeae7f98000d', '90年1班', '岳文燕', '0', '13700006', '13993356265', '14', '福建省 ', '153', '三明市 ', '甘肃省兰州市永登县产业孵化大厦', 'syqy', 'dz', '13993356265@163.com', '大家好！我叫朱峰，我是1990届公共卫生学院预防医学1班的班长.', 'img/adminImg.png', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:15:36', '0');
 
 -- ----------------------------
@@ -300,13 +306,15 @@ CREATE TABLE `t_donate` (
   `check_by` varchar(32) DEFAULT NULL COMMENT '审核人',
   `check_by_user_name` varchar(255) DEFAULT NULL,
   `delete_flag` tinyint(255) DEFAULT NULL COMMENT '0未删除，1已删除',
+  `college_id` varchar(32) DEFAULT NULL COMMENT '学院ID',
+  `college_name` varchar(255) DEFAULT NULL COMMENT '学院名称',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of t_donate
 -- ----------------------------
-INSERT INTO `t_donate` VALUES ('2', '四维空间', '四维空间1号室', '<html>\r\n<head>\r\n	<title></title>\r\n</head>\r\n<body>兰州新区fadsasdf<img alt=\"\" src=\"sysController/readPic.do?picPath=402881bf5fbf1482015fbf1482f80000gif.gif\" style=\"width: 200px; height: 200px;\" /><img alt=\"\" src=\"sysController/readPic.do?picPath=402881bf5fc7c76f015fc7c76f5e0000gif.gif\" style=\"width: 300px; height: 202px;\" /></body>\r\n</html>\r\n', '2017-11-01 00:00:00', '2017-11-01 00:00:00', '2017-11-01 00:00:00', '2', '0', 'admintest', null, '2017-11-01 11:10:16', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-17 10:20:59', null, null, '0');
+INSERT INTO `t_donate` VALUES ('2', '四维空间', '四维空间1号室', '<html>\r\n<head>\r\n	<title></title>\r\n</head>\r\n<body>兰州新区fadsasdf<img alt=\"\" src=\"sysController/readPic.do?picPath=402881bf5fbf1482015fbf1482f80000gif.gif\" style=\"width: 200px; height: 200px;\" /><img alt=\"\" src=\"sysController/readPic.do?picPath=402881bf5fc7c76f015fc7c76f5e0000gif.gif\" style=\"width: 300px; height: 202px;\" /></body>\r\n</html>\r\n', '2017-11-01 00:00:00', '2017-11-01 00:00:00', '2017-11-01 00:00:00', '2', '0', 'admintest', null, '2017-11-01 11:10:16', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-17 10:20:59', null, null, '0', null, null);
 
 -- ----------------------------
 -- Table structure for t_donate_record
@@ -326,14 +334,16 @@ CREATE TABLE `t_donate_record` (
   `last_update_by_user_name` varchar(255) DEFAULT NULL,
   `last_update_time` varchar(255) DEFAULT NULL COMMENT '最近一次修改时间',
   `delete_flag` tinyint(255) DEFAULT NULL COMMENT '0未删除，1已删除',
+  `college_id` varchar(32) DEFAULT NULL COMMENT '学院ID',
+  `college_name` varchar(255) DEFAULT NULL COMMENT '学院名称',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of t_donate_record
 -- ----------------------------
-INSERT INTO `t_donate_record` VALUES ('2', '四维空间', null, null, null, null, 'admintest', null, '2017-11-01 11:10:16', '2017-11-01 11:10:16', null, '0', null);
-INSERT INTO `t_donate_record` VALUES ('402881bf5fc26aa1015fc26f4bd40001', '2', '四维空间 ', '刘小星', '13993356265', '捐了好多钱', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-16 09:26:34', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-16 10:28:52', '0');
+INSERT INTO `t_donate_record` VALUES ('2', '四维空间', null, null, null, null, 'admintest', null, '2017-11-01 11:10:16', '2017-11-01 11:10:16', null, '0', null, null, null);
+INSERT INTO `t_donate_record` VALUES ('402881bf5fc26aa1015fc26f4bd40001', '2', '四维空间 ', '刘小星', '13993356265', '捐了好多钱', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-16 09:26:34', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-16 10:28:52', '0', null, null);
 
 -- ----------------------------
 -- Table structure for t_grade
@@ -363,14 +373,14 @@ CREATE TABLE `t_grade` (
 -- ----------------------------
 -- Records of t_grade
 -- ----------------------------
-INSERT INTO `t_grade` VALUES ('1', '1990届公共卫生学院预防医学1班', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '2038104071', null, '0', null, null, '2017-10-15 13:50:06', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 14:23:30', null, null, '0');
-INSERT INTO `t_grade` VALUES ('28', '1990届公共卫生学院预防医学2班', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '2038104076', null, '1', null, null, '2017-09-15 13:50:06', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 14:23:39', '8a8ab0b246dc81120146dc8181950052', 'admin', '0');
-INSERT INTO `t_grade` VALUES ('40', '1991届公共卫生学院预防医学1班', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1991', '260060549', null, '2', null, null, '2017-10-25 13:50:06', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 14:23:47', '8a8ab0b246dc81120146dc8181950052', 'admin', '0');
-INSERT INTO `t_grade` VALUES ('402881bf5fbe2817015fbe3a35e30006', 'S201', '402881bf5fbdb432015fbdb52d750001', '', '1991', '', null, '2', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-18 13:50:06', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '1');
-INSERT INTO `t_grade` VALUES ('402881bf5fbe80af015fbeae7f98000d', '90年1班', '402881bf5fbdb432015fbdb52d750001', '计算机学院 ', '1990', '', null, '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 15:57:07', null, null, null, null, null, '0');
-INSERT INTO `t_grade` VALUES ('402881bf5fdcf8ac015fdd046b940032', '94年2班', '402881bf5fbdb432015fbdb5639d0003', '生物工程学院 ', '1994', '1978154033', null, '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:19:35', null, null, null, null, null, '0');
-INSERT INTO `t_grade` VALUES ('402881bf5fdcf8ac015fdd04c2720034', '96年2班', '402881bf5fbdb432015fbdb5639d0003', '生物工程学院 ', '1996', '', null, '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:19:57', null, null, null, null, null, '0');
-INSERT INTO `t_grade` VALUES ('41', '1991届公共卫生学院预防医学2班', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1991', '2038104076', null, '0', null, null, '2017-11-15 13:50:06', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 14:23:57', null, null, '0');
+INSERT INTO `t_grade` VALUES ('1', '1990届公共卫生学院预防医学1班', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '2038104071', '10', '0', null, null, '2017-10-15 13:50:06', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 14:23:30', null, null, '0');
+INSERT INTO `t_grade` VALUES ('28', '1990届公共卫生学院预防医学2班', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1990', '2038104076', '11', '1', null, null, '2017-09-15 13:50:06', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 14:23:39', '8a8ab0b246dc81120146dc8181950052', 'admin', '0');
+INSERT INTO `t_grade` VALUES ('40', '1991届公共卫生学院预防医学1班', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1991', '260060549', '11', '2', null, null, '2017-10-25 13:50:06', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 14:23:47', '8a8ab0b246dc81120146dc8181950052', 'admin', '0');
+INSERT INTO `t_grade` VALUES ('402881bf5fbe2817015fbe3a35e30006', 'S201', '402881bf5fbdb432015fbdb52d750001', '', '1991', '', '11', '2', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-18 13:50:06', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '1');
+INSERT INTO `t_grade` VALUES ('402881bf5fbe80af015fbeae7f98000d', '90年1班', '402881bf5fbdb432015fbdb52d750001', '计算机学院 ', '1990', '', '11', '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 15:57:07', null, null, null, null, null, '0');
+INSERT INTO `t_grade` VALUES ('402881bf5fdcf8ac015fdd046b940032', '94年2班', '402881bf5fbdb432015fbdb5639d0003', '生物工程学院 ', '1994', '1978154033', '11', '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:19:35', null, null, null, null, null, '0');
+INSERT INTO `t_grade` VALUES ('402881bf5fdcf8ac015fdd04c2720034', '96年2班', '402881bf5fbdb432015fbdb5639d0003', '生物工程学院 ', '1996', '', '11', '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-21 13:19:57', null, null, null, null, null, '0');
+INSERT INTO `t_grade` VALUES ('41', '1991届公共卫生学院预防医学2班', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '1991', '2038104076', '11', '0', null, null, '2017-11-15 13:50:06', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 14:23:57', null, null, '0');
 
 -- ----------------------------
 -- Table structure for t_invitation
@@ -391,13 +401,15 @@ CREATE TABLE `t_invitation` (
   `check_by` varchar(32) DEFAULT NULL COMMENT '审核人',
   `check_by_user_name` varchar(255) DEFAULT NULL,
   `delete_flag` tinyint(4) DEFAULT NULL COMMENT '0未删除，1已删除',
+  `college_id` varchar(32) DEFAULT NULL COMMENT '学院ID',
+  `college_name` varchar(255) DEFAULT NULL COMMENT '学院名称',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of t_invitation
 -- ----------------------------
-INSERT INTO `t_invitation` VALUES ('402881bf5fc34aaf015fc353face000b', 'fasdf', '<html>\r\n<head>\r\n	<title></title>\r\n</head>\r\n<body>阿斯顿发生</body>\r\n</html>\r\n', null, '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-16 13:36:21', null, null, null, null, null, '0');
+INSERT INTO `t_invitation` VALUES ('402881bf5fc34aaf015fc353face000b', 'fasdf', '<html>\r\n<head>\r\n	<title></title>\r\n</head>\r\n<body>阿斯顿发生</body>\r\n</html>\r\n', null, '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-16 13:36:21', null, null, null, null, null, '0', null, null);
 
 -- ----------------------------
 -- Table structure for t_news
@@ -422,14 +434,16 @@ CREATE TABLE `t_news` (
   `check_by` varchar(32) DEFAULT NULL COMMENT '审核人',
   `check_by_user_name` varchar(255) DEFAULT NULL,
   `delete_flag` tinyint(4) DEFAULT NULL COMMENT '0未删除，1已删除',
+  `college_id` varchar(32) DEFAULT NULL COMMENT '学院ID',
+  `college_name` varchar(255) DEFAULT NULL COMMENT '学院名称',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of t_news
 -- ----------------------------
-INSERT INTO `t_news` VALUES ('402881bf5fa38f68015fa3ea30950024', '402881bf5fa38f68015fa3e2e8920001', '校史概况 ', '402881bf5fa38f68015fa3e46f2a0013', '历史 ', '学院历史', '<html>\r\n<head>\r\n	<title></title>\r\n</head>\r\n<body><span style=\"color: rgb(34, 34, 34); font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 18px; text-indent: 28px; background-color: rgb(255, 255, 255);\">&nbsp; &nbsp; &nbsp; <img alt=\"\" src=\"sysController/readPic.do?picPath=402881bf5fa3e8e1015fa3e8e10a0000jpg.jpg\" style=\"width: 840px; height: 472px;\" /><br />\r\n&nbsp; &nbsp; &nbsp; &nbsp;新中国成立后，为了学习和借鉴苏联社会主义建设的经验，在急需大批俄语人才的情况下，由时任上海市市长陈毅同志倡导，经中共中央华东局、上海市委决定，以华东人民革命大学第四部为基础，在上海创办一所培养俄语人才的学校，&ldquo;华东人民革命大学附设上海俄文学校&rdquo;由此于1949年12月宣告成立，这是新中国成立伊始兴办的第一所高等外语学校。上海市委任命多年从事俄语新闻和文学翻译出版工作、在文化界颇有知名度的时代出版社社长姜椿芳同志为第一任校长，最初校舍位于宝山路（原暨南大学二院）。&nbsp;当时的上海俄文学校还只是一所专业结构单一、以学习俄语和俄罗斯苏联文学为主的外语类高校，培养的学生主要是俄语口笔译人员和俄语教学师资。<br />\r\n<img alt=\"\" src=\"sysController/readPic.do?picPath=402881bf5fa3e8e1015fa3e9d3490001jpg.jpg\" style=\"width: 840px; height: 472px;\" />&nbsp; &nbsp; &nbsp; 陈毅市长对我校十分关心，多次亲临指导，要求我校领导把眼光放远一些，除俄语外，还要培养其他语种专业人才。根据陈毅同志的指示，为配合国家外交外贸工作需要，学校于1950年增设英语班，更名为&ldquo;华东人民革命大学附设外文专修学校&rdquo;，校址迁至东体育会路（原暨南大学一院），即现虹口校区校址。1951年4月，学校又建立东方语言文学系，增设缅甸语、越南语和印尼语专业。1952年3月，南京华东军区政治部附设外文专修学校学员150余人并入我校。至1952年8月，学校已初具规模，设俄语、英语、缅甸语、越南语和印度尼西亚语5个语种。</span></body>\r\n</html>\r\n', null, '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:12:34', null, null, null, null, null, '0');
-INSERT INTO `t_news` VALUES ('402881bf5fc26aa1015fc286c0920005', '', '', null, '', '', '', null, '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-16 09:52:11', null, null, null, null, null, '1');
+INSERT INTO `t_news` VALUES ('402881bf5fa38f68015fa3ea30950024', '402881bf5fa38f68015fa3e2e8920001', '校史概况 ', '402881bf5fa38f68015fa3e46f2a0013', '历史 ', '学院历史', '<html>\r\n<head>\r\n	<title></title>\r\n</head>\r\n<body><span style=\"color: rgb(34, 34, 34); font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 18px; text-indent: 28px; background-color: rgb(255, 255, 255);\">&nbsp; &nbsp; &nbsp; <img alt=\"\" src=\"sysController/readPic.do?picPath=402881bf5fa3e8e1015fa3e8e10a0000jpg.jpg\" style=\"width: 840px; height: 472px;\" /><br />\r\n&nbsp; &nbsp; &nbsp; &nbsp;新中国成立后，为了学习和借鉴苏联社会主义建设的经验，在急需大批俄语人才的情况下，由时任上海市市长陈毅同志倡导，经中共中央华东局、上海市委决定，以华东人民革命大学第四部为基础，在上海创办一所培养俄语人才的学校，&ldquo;华东人民革命大学附设上海俄文学校&rdquo;由此于1949年12月宣告成立，这是新中国成立伊始兴办的第一所高等外语学校。上海市委任命多年从事俄语新闻和文学翻译出版工作、在文化界颇有知名度的时代出版社社长姜椿芳同志为第一任校长，最初校舍位于宝山路（原暨南大学二院）。&nbsp;当时的上海俄文学校还只是一所专业结构单一、以学习俄语和俄罗斯苏联文学为主的外语类高校，培养的学生主要是俄语口笔译人员和俄语教学师资。<br />\r\n<img alt=\"\" src=\"sysController/readPic.do?picPath=402881bf5fa3e8e1015fa3e9d3490001jpg.jpg\" style=\"width: 840px; height: 472px;\" />&nbsp; &nbsp; &nbsp; 陈毅市长对我校十分关心，多次亲临指导，要求我校领导把眼光放远一些，除俄语外，还要培养其他语种专业人才。根据陈毅同志的指示，为配合国家外交外贸工作需要，学校于1950年增设英语班，更名为&ldquo;华东人民革命大学附设外文专修学校&rdquo;，校址迁至东体育会路（原暨南大学一院），即现虹口校区校址。1951年4月，学校又建立东方语言文学系，增设缅甸语、越南语和印尼语专业。1952年3月，南京华东军区政治部附设外文专修学校学员150余人并入我校。至1952年8月，学校已初具规模，设俄语、英语、缅甸语、越南语和印度尼西亚语5个语种。</span></body>\r\n</html>\r\n', null, '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:12:34', null, null, null, null, null, '0', null, null);
+INSERT INTO `t_news` VALUES ('402881bf5fc26aa1015fc286c0920005', '', '', null, '', '', '', null, '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-16 09:52:11', null, null, null, null, null, '1', null, null);
 
 -- ----------------------------
 -- Table structure for t_news_module
@@ -447,17 +461,19 @@ CREATE TABLE `t_news_module` (
   `last_update_by_user_name` varchar(255) DEFAULT NULL COMMENT '修改者账号',
   `last_update_time` varchar(500) DEFAULT NULL COMMENT '最近一次修改时间',
   `delete_flag` tinyint(4) DEFAULT NULL COMMENT '0未删除，1已删除',
+  `college_id` varchar(32) DEFAULT NULL COMMENT '学院ID',
+  `college_name` varchar(255) DEFAULT NULL COMMENT '学院名称',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of t_news_module
 -- ----------------------------
-INSERT INTO `t_news_module` VALUES ('402881bf5fa38f68015fa3e46f2a0013', '402881bf5fa38f68015fa3e2e8920001', '校史概况 ', '历史', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:06:17', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:07:07', '0');
-INSERT INTO `t_news_module` VALUES ('402881bf5fa38f68015fa3e49e6f0015', '402881bf5fa38f68015fa3e39f0b000b', '学校新闻 ', '新闻', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:06:29', null, null, null, '0');
-INSERT INTO `t_news_module` VALUES ('402881bf5fa38f68015fa3e4c76d0017', '402881bf5fa38f68015fa3e338fc0005', '学子风采 ', '人物', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:06:40', null, null, null, '0');
-INSERT INTO `t_news_module` VALUES ('402881bf5fa38f68015fa3e4e6c80019', '402881bf5fa38f68015fa3e3c314000d', '校园旧事 ', '旧忆', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:06:48', null, null, null, '0');
-INSERT INTO `t_news_module` VALUES ('402881bf5fa38f68015fa3e50c74001b', '402881bf5fa38f68015fa3e313030003', '行业精英 ', '荣誉', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:06:58', null, null, null, '0');
+INSERT INTO `t_news_module` VALUES ('402881bf5fa38f68015fa3e46f2a0013', '402881bf5fa38f68015fa3e2e8920001', '校史概况 ', '历史', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:06:17', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:07:07', '0', null, null);
+INSERT INTO `t_news_module` VALUES ('402881bf5fa38f68015fa3e49e6f0015', '402881bf5fa38f68015fa3e39f0b000b', '学校新闻 ', '新闻', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:06:29', null, null, null, '0', null, null);
+INSERT INTO `t_news_module` VALUES ('402881bf5fa38f68015fa3e4c76d0017', '402881bf5fa38f68015fa3e338fc0005', '学子风采 ', '人物', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:06:40', null, null, null, '0', null, null);
+INSERT INTO `t_news_module` VALUES ('402881bf5fa38f68015fa3e4e6c80019', '402881bf5fa38f68015fa3e3c314000d', '校园旧事 ', '旧忆', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:06:48', null, null, null, '0', null, null);
+INSERT INTO `t_news_module` VALUES ('402881bf5fa38f68015fa3e50c74001b', '402881bf5fa38f68015fa3e313030003', '行业精英 ', '荣誉', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:06:58', null, null, null, '0', null, null);
 
 -- ----------------------------
 -- Table structure for t_news_type
@@ -474,20 +490,22 @@ CREATE TABLE `t_news_type` (
   `last_update_by_user_name` varchar(255) DEFAULT NULL COMMENT '修改者账号',
   `last_update_time` varchar(255) DEFAULT NULL COMMENT '最近一次修改时间',
   `delete_flag` tinyint(4) DEFAULT NULL COMMENT '0未删除，1已删除',
+  `college_id` varchar(32) DEFAULT NULL COMMENT '学院ID',
+  `college_name` varchar(255) DEFAULT NULL COMMENT '学院名称',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of t_news_type
 -- ----------------------------
-INSERT INTO `t_news_type` VALUES ('402881bf5fa38f68015fa3e2e8920001', '校史概况', '校史概况。。。', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:04:37', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:05:54', '0');
-INSERT INTO `t_news_type` VALUES ('402881bf5fa38f68015fa3e313030003', '行业精英', '行业精英。。。', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:04:48', null, null, null, '0');
-INSERT INTO `t_news_type` VALUES ('402881bf5fa38f68015fa3e338fc0005', '学子风采', '学子风采。。。', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:04:58', null, null, null, '0');
-INSERT INTO `t_news_type` VALUES ('402881bf5fa38f68015fa3e360950007', '校友动态', '校友动态。。。', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:05:08', null, null, null, '0');
-INSERT INTO `t_news_type` VALUES ('402881bf5fa38f68015fa3e3830d0009', '人物访谈', '人物访谈。。。', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:05:17', null, null, null, '0');
-INSERT INTO `t_news_type` VALUES ('402881bf5fa38f68015fa3e39f0b000b', '学校新闻', '学校新闻。。。', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:05:24', null, null, null, '0');
-INSERT INTO `t_news_type` VALUES ('402881bf5fa38f68015fa3e3c314000d', '校园旧事', '校园旧事。。。', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:05:33', null, null, null, '0');
-INSERT INTO `t_news_type` VALUES ('402881bf5fa38f68015fa3e3e883000f', ' 捐赠新闻', '捐赠新闻。。。', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:05:43', null, null, null, '0');
+INSERT INTO `t_news_type` VALUES ('402881bf5fa38f68015fa3e2e8920001', '校史概况', '校史概况。。。', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:04:37', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:05:54', '0', null, null);
+INSERT INTO `t_news_type` VALUES ('402881bf5fa38f68015fa3e313030003', '行业精英', '行业精英。。。', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:04:48', null, null, null, '0', null, null);
+INSERT INTO `t_news_type` VALUES ('402881bf5fa38f68015fa3e338fc0005', '学子风采', '学子风采。。。', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:04:58', null, null, null, '0', null, null);
+INSERT INTO `t_news_type` VALUES ('402881bf5fa38f68015fa3e360950007', '校友动态', '校友动态。。。', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:05:08', null, null, null, '0', null, null);
+INSERT INTO `t_news_type` VALUES ('402881bf5fa38f68015fa3e3830d0009', '人物访谈', '人物访谈。。。', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:05:17', null, null, null, '0', null, null);
+INSERT INTO `t_news_type` VALUES ('402881bf5fa38f68015fa3e39f0b000b', '学校新闻', '学校新闻。。。', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:05:24', null, null, null, '0', null, null);
+INSERT INTO `t_news_type` VALUES ('402881bf5fa38f68015fa3e3c314000d', '校园旧事', '校园旧事。。。', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:05:33', null, null, null, '0', null, null);
+INSERT INTO `t_news_type` VALUES ('402881bf5fa38f68015fa3e3e883000f', ' 捐赠新闻', '捐赠新闻。。。', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:05:43', null, null, null, '0', null, null);
 
 -- ----------------------------
 -- Table structure for t_notices
@@ -509,14 +527,16 @@ CREATE TABLE `t_notices` (
   `check_by` varchar(32) DEFAULT NULL COMMENT '审核人',
   `check_by_user_name` varchar(255) DEFAULT NULL,
   `delete_flag` tinyint(4) DEFAULT NULL COMMENT '0未删除，1已删除',
+  `college_id` varchar(32) DEFAULT NULL COMMENT '学院ID',
+  `college_name` varchar(255) DEFAULT NULL COMMENT '学院名称',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of t_notices
 -- ----------------------------
-INSERT INTO `t_notices` VALUES ('402881bf5fa38f68015fa3e60027001f', '系统维护', '系统将在本月10号 早上8点到9点进行系统维护', null, '2017-11-10 11:07:25', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:08:00', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '0');
-INSERT INTO `t_notices` VALUES ('402881bf5fa38f68015fa3e6d46c0022', '校友生日', '王哥在本月20号，过生日，大家来为他庆祝吧', null, '2017-11-24 11:08:29', '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:08:54', null, null, null, null, null, '0');
+INSERT INTO `t_notices` VALUES ('402881bf5fa38f68015fa3e60027001f', '系统维护', '系统将在本月10号 早上8点到9点进行系统维护', null, '2017-11-10 11:07:25', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:08:00', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '0', null, null);
+INSERT INTO `t_notices` VALUES ('402881bf5fa38f68015fa3e6d46c0022', '校友生日', '王哥在本月20号，过生日，大家来为他庆祝吧', null, '2017-11-24 11:08:29', '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-10 11:08:54', null, null, null, null, null, '0', null, null);
 
 -- ----------------------------
 -- Table structure for t_s_attachment
@@ -656,6 +676,7 @@ CREATE TABLE `t_s_base_user` (
   `username` varchar(10) NOT NULL COMMENT '用户账号',
   `departid` varchar(32) DEFAULT NULL COMMENT '部门ID',
   `delete_flag` smallint(6) DEFAULT NULL COMMENT '删除状态',
+  `userRoleCode` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_15jh1g4iem1857546ggor42et` (`departid`) USING BTREE,
   KEY `index_login` (`password`,`username`) USING BTREE,
@@ -666,16 +687,8 @@ CREATE TABLE `t_s_base_user` (
 -- ----------------------------
 -- Records of t_s_base_user
 -- ----------------------------
-INSERT INTO `t_s_base_user` VALUES ('402880e74d75c4dd014d75d44af30005', null, null, 'c44b01947c9e6e3f', 'demo1', null, '1', 'demo', 'demo1', '402880e6487e661a01487e6b504e0001', '0');
-INSERT INTO `t_s_base_user` VALUES ('402881875988e889015988ec36770001', null, null, 'f68bb6f881b0ebe0', '7777', null, '1', 'demo', '777', null, '1');
-INSERT INTO `t_s_base_user` VALUES ('402881bf5fa38f68015fa3fbdde20037', null, null, 'deec3ebf23191eee', 'demo', null, '1', null, 'demo', '8a8ab0b246dc81120146dc8180a20016', '0');
-INSERT INTO `t_s_base_user` VALUES ('4028ef81538330cd01538333b7bc0001', null, null, 'fa83c6e9a2006c62', '李四', null, '1', '经理角色', 'lisi', '402880e447e9a9570147e9b762e30009', '0');
-INSERT INTO `t_s_base_user` VALUES ('4028ef81563ae5be01563ae92d7f0002', null, null, 'bff95c03433b66af', '999', null, '1', 'demo', '999', null, '1');
-INSERT INTO `t_s_base_user` VALUES ('8a8ab0b246dc81120146dc8181950052', null, null, 'c44b01947c9e6e3f', '管理员', null, '1', '超级管理员', 'admin', '8a8ab0b246dc81120146dc8180ba0017', '0');
-INSERT INTO `t_s_base_user` VALUES ('8a8ab0b246dc81120146dc81819d0053', null, null, 'd47ca58189979651', '张代浩', null, '1', '普通用户', 'scott', '402880e6487e661a01487e6b504e0001', '0');
-INSERT INTO `t_s_base_user` VALUES ('8a8ab0b246dc81120146dc8181a10054', null, null, 'f2322ec2fb9f40d1', '采购员', null, '1', '管理员', 'cgy', '8a8ab0b246dc81120146dc8180a20016', '1');
-INSERT INTO `t_s_base_user` VALUES ('8a8ab0b246dc81120146dc8181a60055', null, null, 'a324509dc1a3089a', '采购审批员', null, '1', '超级管理员', 'cgspy', '8a8ab0b246dc81120146dc8180a20016', '0');
-INSERT INTO `t_s_base_user` VALUES ('8a8c82a35de421ab015de4228d400003', null, null, 'a1e81ebd9408df3b', 'qinfeng', null, '1', '经理角色', 'qinfeng', '8a8ab0b246dc81120146dc8180ba0017', '0');
+INSERT INTO `t_s_base_user` VALUES ('402881bf5fe2da62015fe2db755f0003', null, null, 'e974c4dd0a6a0120b345faeba5d5fcaa', '崔梦', null, '1', null, 'cuimengtao', null, '0', 'manager');
+INSERT INTO `t_s_base_user` VALUES ('8a8ab0b246dc81120146dc8181950052', null, null, 'c44b01947c9e6e3f', '管理员', null, '1', '超级管理员', 'admin', '8a8ab0b246dc81120146dc8180ba0017', '0', 'admin');
 
 -- ----------------------------
 -- Table structure for t_s_black_list
@@ -873,16 +886,11 @@ CREATE TABLE `t_s_depart` (
 -- Records of t_s_depart
 -- ----------------------------
 INSERT INTO `t_s_depart` VALUES ('402880e447e99cf10147e9a03b320003', '北京国炬软件', '', null, 'A01', '1', '', '', '', '1');
-INSERT INTO `t_s_depart` VALUES ('402880e447e9a9570147e9b677320003', '软件信息部', '', '402880e447e99cf10147e9a03b320003', 'A01A01', '2', null, null, null, '0');
 INSERT INTO `t_s_depart` VALUES ('402880e447e9a9570147e9b6a3be0005', '销售部门', '', '402880e447e99cf10147e9a03b320003', 'A01A02', '2', null, null, null, '0');
-INSERT INTO `t_s_depart` VALUES ('402880e447e9a9570147e9b710d20007', '人力资源部', '', '402880e447e99cf10147e9a03b320003', 'A01A03', '2', null, null, null, '0');
 INSERT INTO `t_s_depart` VALUES ('402880e447e9a9570147e9b762e30009', '销售经理', '', '402880e447e9a9570147e9b6a3be0005', 'A01A02A01', '2', null, null, null, '0');
-INSERT INTO `t_s_depart` VALUES ('402880e447e9ba550147e9c53b2e0013', '财务', '', '8a8ab0b246dc81120146dc8180ba0017', 'A03A02', '2', null, null, null, '0');
 INSERT INTO `t_s_depart` VALUES ('402880e6487e661a01487e6b504e0001', '销售人员', '销售人员', '402880e447e9a9570147e9b762e30009', 'A01A02A01A01', '3', null, null, null, '0');
-INSERT INTO `t_s_depart` VALUES ('402880f15986303c0159864816180002', '部门经理', '', '8a8ab0b246dc81120146dc8180a20016', 'A02A01', '2', '', '', '', null);
 INSERT INTO `t_s_depart` VALUES ('8a8ab0b246dc81120146dc8180a20016', '中国人寿总公司', '1111', null, 'A02', '1', '', '', '', null);
 INSERT INTO `t_s_depart` VALUES ('8a8ab0b246dc81120146dc8180ba0017', 'JEECG开源社区', '', null, 'A03', '1', '', '', '', '2');
-INSERT INTO `t_s_depart` VALUES ('8a8ab0b246dc81120146dc8180bd0018', '软件开发部', '研发技术难题', '8a8ab0b246dc81120146dc8180ba0017', 'A03A01', '2', null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for t_s_document
@@ -2210,6 +2218,160 @@ INSERT INTO `t_s_log` VALUES ('402881bf5fddb9dd015fddba3f5d0000', 'Chrome', '用
 INSERT INTO `t_s_log` VALUES ('402881bf5fddc4a1015fddc501ba0000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-21 16:49:57', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
 INSERT INTO `t_s_log` VALUES ('402881bf5fddc65a015fddc69dfe0000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-21 16:51:42', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
 INSERT INTO `t_s_log` VALUES ('402881bf5fddd646015fddd688060000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-21 17:09:05', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fdded9f015fddedda120000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-21 17:34:33', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fdded9f015fddeeacf20001', 'Chrome', '组织机构删除成功', '4', '本地', '2017-11-21 17:35:27', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fdded9f015fddeec58b0002', 'Chrome', '组织机构删除成功', '4', '本地', '2017-11-21 17:35:34', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fdded9f015fddef01230003', 'Chrome', '组织机构删除成功', '4', '本地', '2017-11-21 17:35:49', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fdded9f015fddef96130004', 'Chrome', '组织机构删除成功', '4', '本地', '2017-11-21 17:36:27', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fdded9f015fddf00ab60005', 'Chrome', '组织机构删除成功', '4', '本地', '2017-11-21 17:36:57', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fdded9f015fddf11f400008', 'Chrome', '用户: demo1更新成功', '5', '本地', '2017-11-21 17:38:08', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fddf45d015fddf5efe10000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-21 17:43:23', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fddf45d015fddf9510d0002', 'Chrome', '错误异常: MySQLIntegrityConstraintViolationException,错误描述：Column \'dev_flag\' cannot be null', '6', '本地', '2017-11-21 17:47:05', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fddfae9015fddfb59510000', 'Chrome', '用户: admin[JEECG开源社区]common.login.success', '1', '本地', '2017-11-21 17:49:18', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fddfae9015fddfc588a0002', 'Chrome', '用户: cuimengtao添加成功', '3', '本地', '2017-11-21 17:50:23', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fddfae9015fddff4ec70003', 'Chrome', '用户：demo锁定成功!', '5', '本地', '2017-11-21 17:53:37', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fddfae9015fde00545d0004', 'Chrome', 'admin', '2', '本地', '2017-11-21 17:54:44', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde0b12410000', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-21 18:06:28', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde0b7b4a0001', 'Chrome', 'admin', '2', '本地', '2017-11-21 18:06:55', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde0b98910002', 'Chrome', '用户: cuimengtao[公共卫生学院 ]common.login.success', '1', '本地', '2017-11-21 18:07:03', '1', '402881bf5fddfae9015fddfc585d0001', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde0bbc8c0003', 'Chrome', 'cuimengtao', '2', '本地', '2017-11-21 18:07:12', '1', '402881bf5fddfae9015fddfc585d0001', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde0bd1bd0004', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-21 18:07:17', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde10c7120007', 'Chrome', '用户: cuimengtao添加成功', '3', '本地', '2017-11-21 18:12:42', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde10d7220008', 'Chrome', 'admin', '2', '本地', '2017-11-21 18:12:46', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde11281d0009', 'Chrome', '用户: cuimengtao[计算机学院 ]common.login.success', '1', '本地', '2017-11-21 18:13:07', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde1143af000a', 'Chrome', 'cuimengtao', '2', '本地', '2017-11-21 18:13:14', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde115c20000b', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-21 18:13:21', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde11efc10023', 'Chrome', 'admin', '2', '本地', '2017-11-21 18:13:58', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde12358c0024', 'Chrome', '用户: cuimengtao[计算机学院 ]common.login.success', '1', '本地', '2017-11-21 18:14:16', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde1878bf0025', 'Chrome', 'cuimengtao', '2', '本地', '2017-11-21 18:21:07', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde18cdca0026', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-21 18:21:28', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde190aae0027', 'Chrome', 'admin', '2', '本地', '2017-11-21 18:21:44', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde19d2740028', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-21 18:22:35', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde19e4340029', 'Chrome', 'admin', '2', '本地', '2017-11-21 18:22:40', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde1ad168002a', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-21 18:23:40', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde1aee24002b', 'Chrome', 'admin', '2', '本地', '2017-11-21 18:23:48', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde1b1841002c', 'Chrome', '用户: cuimengtao[计算机学院 ]common.login.success', '1', '本地', '2017-11-21 18:23:59', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde1b6f7c002d', 'Chrome', 'cuimengtao', '2', '本地', '2017-11-21 18:24:21', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde1bdda2002e', 'Chrome', '用户: cuimengtao[计算机学院 ]common.login.success', '1', '本地', '2017-11-21 18:24:49', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde1c6cdd002f', 'Chrome', 'cuimengtao', '2', '本地', '2017-11-21 18:25:26', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde1c97650030', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-21 18:25:37', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde1cd3980031', 'Chrome', 'admin', '2', '本地', '2017-11-21 18:25:52', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde1d25920032', 'Chrome', '用户: cuimengtao[计算机学院 ]common.login.success', '1', '本地', '2017-11-21 18:26:13', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde1dd5140033', 'Chrome', 'cuimengtao', '2', '本地', '2017-11-21 18:26:58', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fde0ad8015fde1ea12c0034', 'Chrome', '用户: cuimengtao[计算机学院 ]common.login.success', '1', '本地', '2017-11-21 18:27:50', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe13cee015fe13f3edb0000', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 09:02:19', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe13cee015fe13fe8fa0001', 'Chrome', 'admin', '2', '本地', '2017-11-22 09:03:03', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe13cee015fe14010800002', 'Chrome', '用户: cuimengtao[计算机学院 ]common.login.success', '1', '本地', '2017-11-22 09:03:13', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe13cee015fe14900a90003', 'Chrome', 'cuimengtao', '2', '本地', '2017-11-22 09:12:59', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe13cee015fe14912c10004', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 09:13:03', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe13cee015fe14922db0005', 'Chrome', 'admin', '2', '本地', '2017-11-22 09:13:08', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe13cee015fe1496a410006', 'Chrome', '用户: cuimengtao[计算机学院 ]common.login.success', '1', '本地', '2017-11-22 09:13:26', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe22d08015fe22dbe4d0000', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 13:22:50', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe235f0015fe2362eed0000', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 13:32:03', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe235f0015fe23735d20002', 'Chrome', '活动添加成功', '3', '本地', '2017-11-22 13:33:10', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe235f0015fe23791280003', 'Chrome', 'admin', '2', '本地', '2017-11-22 13:33:33', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe235f0015fe237fab40004', 'Chrome', '用户: cuimengtao[计算机学院 ]common.login.success', '1', '本地', '2017-11-22 13:34:00', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe235f0015fe238d0cf0006', 'Chrome', '活动添加成功', '3', '本地', '2017-11-22 13:34:55', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe235f0015fe2392a370007', 'Chrome', 'cuimengtao', '2', '本地', '2017-11-22 13:35:18', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe235f0015fe2393dd90008', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 13:35:23', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe235f0015fe267a6030009', 'Chrome', 'admin', '2', '本地', '2017-11-22 14:26:04', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe235f0015fe267c36c000a', 'Chrome', '用户: cuimengtao[计算机学院 ]common.login.success', '1', '本地', '2017-11-22 14:26:12', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe26ef2015fe26f624a0000', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 14:34:31', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe26ef2015fe26f7fe60001', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 14:34:39', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe26ef2015fe26f7fe80002', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 14:34:39', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe26ef2015fe2700fad0003', 'Chrome', 'admin', '2', '本地', '2017-11-22 14:35:16', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe26ef2015fe270302b0004', 'Chrome', '用户: cuimengtao[计算机学院 ]common.login.success', '1', '本地', '2017-11-22 14:35:24', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe26ef2015fe2721a690005', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 14:37:30', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe26ef2015fe2722fb80006', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 14:37:35', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe26ef2015fe2722fcb0007', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 14:37:35', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe26ef2015fe27360710008', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 14:38:53', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe26ef2015fe273607e0009', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 14:38:53', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe26ef2015fe273958e000a', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 14:39:07', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe26ef2015fe273958f000b', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 14:39:07', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe26ef2015fe2752b01000c', 'Chrome', 'admin', '2', '本地', '2017-11-22 14:40:50', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe26ef2015fe27554cd000d', 'Chrome', '用户: cuimengtao[计算机学院 ]common.login.success', '1', '本地', '2017-11-22 14:41:01', '1', '402881bf5fde0ad8015fde10c6aa0005', 'cuimengtao', '崔梦涛');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe29255fd0000', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 15:12:42', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe292afb80001', 'Chrome', '角色: 学院管理员被更新成功', '5', '本地', '2017-11-22 15:13:05', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe29f7e350003', 'Chrome', '角色: 经理角色被删除成功', '4', '本地', '2017-11-22 15:27:04', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2a2bbfc0004', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 15:30:37', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2a39ba80005', 'Chrome', '角色: demo被删除成功', '4', '本地', '2017-11-22 15:31:34', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2a5d9ed0006', 'Chrome', 'admin', '2', '本地', '2017-11-22 15:34:01', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2a5ea7d0007', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 15:34:05', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2a67176000a', 'Chrome', '用户: cuimengtao添加成功', '3', '本地', '2017-11-22 15:34:40', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2a69315000b', 'Chrome', 'admin', '2', '本地', '2017-11-22 15:34:48', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2a6b02e000c', 'Chrome', '用户: cuimengtao[公共卫生学院 ]common.login.success', '1', '本地', '2017-11-22 15:34:56', '1', '402881bf5fe290df015fe2a6712a0008', 'cuimengtao', '崔梦');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2a6d5de000d', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 15:35:05', '3', '402881bf5fe290df015fe2a6712a0008', 'cuimengtao', '崔梦');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2a6d5f1000e', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 15:35:05', '3', '402881bf5fe290df015fe2a6712a0008', 'cuimengtao', '崔梦');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2a6d818000f', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 15:35:06', '3', '402881bf5fe290df015fe2a6712a0008', 'cuimengtao', '崔梦');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2a7c5950010', 'Chrome', 'cuimengtao', '2', '本地', '2017-11-22 15:36:07', '1', '402881bf5fe290df015fe2a6712a0008', 'cuimengtao', '崔梦');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2a7d51d0011', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 15:36:11', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2a816b30012', 'Chrome', 'admin', '2', '本地', '2017-11-22 15:36:28', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2a8376f0013', 'Chrome', '用户: cuimengtao[公共卫生学院 ]common.login.success', '1', '本地', '2017-11-22 15:36:36', '1', '402881bf5fe290df015fe2a6712a0008', 'cuimengtao', '崔梦');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2a847580014', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 15:36:40', '3', '402881bf5fe290df015fe2a6712a0008', 'cuimengtao', '崔梦');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2a8476c0015', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 15:36:40', '3', '402881bf5fe290df015fe2a6712a0008', 'cuimengtao', '崔梦');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2adefd20016', 'Chrome', 'cuimengtao', '2', '本地', '2017-11-22 15:42:51', '1', '402881bf5fe290df015fe2a6712a0008', 'cuimengtao', '崔梦');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2ae12d70017', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 15:43:00', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2ae23670018', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 15:43:04', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2ae23780019', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 15:43:04', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2ae2641001a', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 15:43:05', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2ae26a3001b', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 15:43:05', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2ae7877001c', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 15:43:26', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2ae7877001d', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 15:43:26', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2aeac6d001e', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 15:43:39', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2aeac70001f', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 15:43:39', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe290df015fe2aeac710020', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 15:43:39', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2cb16015fe2cc024b0000', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 16:15:42', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2cb16015fe2cc3c160001', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:15:56', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2cb16015fe2cc3c160002', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:15:56', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2cb16015fe2ccb3640003', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:16:27', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2cb16015fe2ccb3670004', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:16:27', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2cb16015fe2d191c30006', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:21:46', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2cb16015fe2d191c30005', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:21:46', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2cb16015fe2d633380009', 'Chrome', '用户: mengtaocui添加成功', '3', '本地', '2017-11-22 16:26:50', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2da62015fe2da9c930000', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 16:31:39', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2da62015fe2dac5120001', 'Chrome', '用户：cuimengtao删除成功', '4', '192.168.1.63', '2017-11-22 16:31:49', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2da62015fe2dace970002', 'Chrome', '用户：mengtaocui删除成功', '4', '192.168.1.63', '2017-11-22 16:31:51', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2da62015fe2db83bc0005', 'Chrome', '用户: cuimengtao添加成功', '3', '本地', '2017-11-22 16:32:38', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2da62015fe2dbbeba0006', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:32:53', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2da62015fe2dbbec50007', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:32:53', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2da62015fe2dc153f0008', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:33:15', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2da62015fe2dc154b0009', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:33:15', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2da62015fe2dca87b000a', 'Chrome', '错误异常: ArrayIndexOutOfBoundsException,错误描述：0', '6', '本地', '2017-11-22 16:33:53', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2da62015fe2dd4a56000b', 'Chrome', '错误异常: ArrayIndexOutOfBoundsException,错误描述：0', '6', '本地', '2017-11-22 16:34:34', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2df09015fe2df717e0000', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 16:36:55', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2df09015fe2df97c50001', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:37:05', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2df09015fe2df97df0002', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:37:05', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2df09015fe2dfe98f0003', 'Chrome', '错误异常: SQLException,错误描述：Parameter index out of range (1 > number of parameters, which is 0).', '6', '本地', '2017-11-22 16:37:26', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e1ea015fe2e254820000', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 16:40:04', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e1ea015fe2e26bb10001', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:40:10', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e1ea015fe2e26bc10002', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:40:10', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e1ea015fe2e27f1b0003', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:40:15', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e1ea015fe2e301c10004', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:40:49', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e1ea015fe2e301cc0005', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:40:49', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e1ea015fe2e30c8c0006', 'Chrome', '错误异常: SQLException,错误描述：Parameter index out of range (1 > number of parameters, which is 0).', '6', '本地', '2017-11-22 16:40:52', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e1ea015fe2e30e7c0008', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:40:52', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e1ea015fe2e30e770007', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:40:52', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e52a015fe2e56ff90000', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 16:43:28', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e52a015fe2e58cec0001', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:43:36', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e52a015fe2e58ced0002', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:43:36', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e52a015fe2e5c8b50003', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:43:51', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e52a015fe2e5c8b90004', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:43:51', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e52a015fe2e5d13d0005', 'Chrome', '错误异常: SQLException,错误描述：Parameter index out of range (1 > number of parameters, which is 0).', '6', '本地', '2017-11-22 16:43:53', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e52a015fe2e5d2ee0006', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:43:53', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e52a015fe2e5d2f40007', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:43:53', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e52a015fe2e6d02c0008', 'Chrome', '错误异常: SQLException,错误描述：Parameter index out of range (1 > number of parameters, which is 0).', '6', '本地', '2017-11-22 16:44:58', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e52a015fe2e6d1d50009', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:44:59', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e8aa015fe2e8e2a90000', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 16:47:14', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e8aa015fe2e8fde10001', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:47:21', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e8aa015fe2e91a080002', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:47:28', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e8aa015fe2e92ee90003', 'Chrome', '校友删除成功', '4', '本地', '2017-11-22 16:47:34', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe2e8aa015fe2e930770004', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-22 16:47:34', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe31ad6015fe31b20d30000', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 17:42:07', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe31ad6015fe31b7a550001', 'Chrome', '错误异常: MySQLSyntaxErrorException,错误描述：You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'checkStatus =0 and delete_flag=0\' at line 1', '6', '本地', '2017-11-22 17:42:30', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe31d20015fe31d64240000', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 17:44:35', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe32025015fe320764e0000', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 17:47:56', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe32025015fe320ae0e0001', 'Chrome', 'admin', '2', '本地', '2017-11-22 17:48:11', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe32025015fe320c7ed0002', 'Chrome', '用户: cuimengtao[公共卫生学院 ]common.login.success', '1', '本地', '2017-11-22 17:48:17', '1', '402881bf5fe2da62015fe2db755f0003', 'cuimengtao', '崔梦');
 
 -- ----------------------------
 -- Table structure for t_s_muti_lang
@@ -6992,10 +7154,8 @@ CREATE TABLE `t_s_role` (
 -- ----------------------------
 -- Records of t_s_role
 -- ----------------------------
-INSERT INTO `t_s_role` VALUES ('402880e74d75c4dd014d75d3c5f40001', 'demo', 'demo', '管理员', '2017-03-01 21:54:06', 'admin', null, null, null);
-INSERT INTO `t_s_role` VALUES ('402881875b19f141015b19fb1d490019', 'dep_jingli', '经理角色', null, null, null, '管理员', '2017-03-29 20:12:19', 'admin');
 INSERT INTO `t_s_role` VALUES ('8a8ab0b246dc81120146dc8181870050', 'admin', '超级管理员', '管理员', '2017-11-07 17:32:17', 'admin', null, null, null);
-INSERT INTO `t_s_role` VALUES ('8a8ab0b246dc81120146dc81818b0051', 'manager', '普通用户', '管理员', '2016-05-29 17:42:19', 'admin', null, null, null);
+INSERT INTO `t_s_role` VALUES ('8a8ab0b246dc81120146dc81818b0051', 'manager', '学院管理员', '管理员', '2017-11-22 15:13:05', 'admin', null, null, null);
 
 -- ----------------------------
 -- Table structure for t_s_role_function
@@ -7023,7 +7183,6 @@ INSERT INTO `t_s_role_function` VALUES ('402880ef5aff3ede015aff442313000e', null
 INSERT INTO `t_s_role_function` VALUES ('402880ef5aff3ede015aff4423130011', null, '8a8ab0b246dc81120146dc8180f60028', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402880ef5aff3ede015aff4423140016', null, '402881c746de1ea60146de207d770001', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402880f35b6686ba015b6693c3e90001', null, '8a8ab0b246dc81120146dc8180f30027', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('402880f95e54d7aa015e54ddac040018', null, '8a8ab0b246dc81120146dc8180d2001a', '402881875b19f141015b19fb1d490019', null);
 INSERT INTO `t_s_role_function` VALUES ('402881855afb59f7015afc6123c7000e', null, '8a8ab0b246dc81120146dc8180d2001a', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881855afbcdf7015afc6123c7000e', null, '8a8ab0b246dc81120146dc8180e30021', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881855c1c1c38015c1c2096780005', null, '40284a815c1bac76015c1bc02abe0003', '8a8ab0b246dc81120146dc8181870050', null);
@@ -7034,13 +7193,6 @@ INSERT INTO `t_s_role_function` VALUES ('402881bf5f9a4ee9015f9a506f5d0003', null
 INSERT INTO `t_s_role_function` VALUES ('402881bf5f9ae82c015f9b11dbfe000c', null, '402881bf5f9ae82c015f9b11a5a4000a', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5f9eaf97015f9ebc0ea20010', null, '402881bf5f9eaf97015f9ebbe3d6000e', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5f9eaf97015f9ebc0ea70011', null, '402881bf5f9eaf97015f9ebb133c000c', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('402881bf5fa38f68015fa3f441fa0026', null, '402881bf5f9eaf97015f9ebb133c000c', '402880e74d75c4dd014d75d3c5f40001', null);
-INSERT INTO `t_s_role_function` VALUES ('402881bf5fa38f68015fa3f441fe0027', null, '402881bf5f9eaf97015f9ebbe3d6000e', '402880e74d75c4dd014d75d3c5f40001', null);
-INSERT INTO `t_s_role_function` VALUES ('402881bf5fa38f68015fa3f441fe0028', null, '402881bf5f9a4ee9015f9a5030b40001', '402880e74d75c4dd014d75d3c5f40001', null);
-INSERT INTO `t_s_role_function` VALUES ('402881bf5fa38f68015fa3f441fe0029', null, '402881bf5f95cd47015f95cf64330001', '402880e74d75c4dd014d75d3c5f40001', null);
-INSERT INTO `t_s_role_function` VALUES ('402881bf5fa38f68015fa3f441fe002a', null, '402881bf5f9ae82c015f9b11a5a4000a', '402880e74d75c4dd014d75d3c5f40001', null);
-INSERT INTO `t_s_role_function` VALUES ('402881bf5fa38f68015fa3f441fe002b', null, '402881bf5f95cd47015f95d110b10004', '402880e74d75c4dd014d75d3c5f40001', null);
-INSERT INTO `t_s_role_function` VALUES ('402881bf5fa38f68015fa3f441fe002c', null, '402881bf5f994a01015f994fb0c80003', '402880e74d75c4dd014d75d3c5f40001', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fbd5ecd015fbd8e5381000b', null, '402881bf5fbd5ecd015fbd8dd3d40007', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fbd5ecd015fbd8e5385000c', null, '402881bf5fbd5ecd015fbd8dacc10005', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fbd5ecd015fbd8e5385000d', null, '402881bf5fbd5ecd015fbd8ceb510002', '8a8ab0b246dc81120146dc8181870050', null);
@@ -7060,7 +7212,26 @@ INSERT INTO `t_s_role_function` VALUES ('402881bf5fd71472015fd71c40b4000d', null
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fd71472015fd71c40b8000e', null, '402881bf5fd71472015fd7199f2d0001', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fd71472015fd71c40b8000f', null, '402881bf5fd71472015fd71b77cd0007', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fd71472015fd71c40b80010', null, '402881bf5fd71472015fd71adde20003', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('402881e45e5bc4e3015e5bc767790010', null, '8a8ab0b246dc81120146dc8180d2001a', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e12c000c', null, '402881bf5fd71472015fd71b77cd0007', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e130000d', null, '402881bf5f9eaf97015f9ebbe3d6000e', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e130000e', null, '8a8ab0b246dc81120146dc8180d4001b', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e130000f', null, '402881bf5fbd5ecd015fbd96f7840023', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1300010', null, '402881bf5fbd5ecd015fbd949c55001d', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1300011', null, '402881bf5fbd5ecd015fbd8dd3d40007', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1300012', null, '402881bf5f9a4ee9015f9a5030b40001', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1300013', null, '402881bf5fd71472015fd71adde20003', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1300014', null, '402881bf5f9ae82c015f9b11a5a4000a', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1300017', null, '402881bf5fbd5ecd015fbd92960c0019', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1300019', null, '402881bf5fd71472015fd71b31f50005', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e131001a', null, '402881bf5f9eaf97015f9ebb133c000c', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e131001b', null, '402881bf5fbd5ecd015fbd963ff10021', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e131001c', null, '402881bf5fbd5ecd015fbd8ceb510002', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e131001d', null, '402881bf5f95cd47015f95cf64330001', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e131001e', null, '402881bf5fbd5ecd015fbd93fd9e001b', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e131001f', null, '402881bf5fbd5ecd015fbd9231490017', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1320020', null, '402881bf5fbd5ecd015fbd8e190d0009', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1320021', null, '402881bf5fbd5ecd015fbd94f8e9001f', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1320022', null, '402881bf5fd71472015fd7199f2d0001', '8a8ab0b246dc81120146dc81818b0051', null);
 
 -- ----------------------------
 -- Table structure for t_s_role_org
@@ -7095,16 +7266,8 @@ CREATE TABLE `t_s_role_user` (
 -- ----------------------------
 -- Records of t_s_role_user
 -- ----------------------------
-INSERT INTO `t_s_role_user` VALUES ('402880ec5d78d2cc015d78d6d4260006', '402880e74d75c4dd014d75d3c5f40001', '402880e74d75c4dd014d75d44af30005');
-INSERT INTO `t_s_role_user` VALUES ('402880f35a4121cf015a4122dd410002', '8a8ab0b246dc81120146dc8181870050', '8a8ab0b246dc81120146dc8181a60055');
 INSERT INTO `t_s_role_user` VALUES ('402881855c1c4ab8015c1c4d36ca0002', '8a8ab0b246dc81120146dc8181870050', '8a8ab0b246dc81120146dc8181950052');
-INSERT INTO `t_s_role_user` VALUES ('402881855c1c4ab8015c1c4d512f0005', '8a8ab0b246dc81120146dc81818b0051', '8a8ab0b246dc81120146dc81819d0053');
-INSERT INTO `t_s_role_user` VALUES ('402881875988e889015988ec36940003', '402880e74d75c4dd014d75d3c5f40001', '402881875988e889015988ec36770001');
-INSERT INTO `t_s_role_user` VALUES ('402881875b19f141015b19fe80f8002d', '402881875b19f141015b19fb1d490019', '4028ef81538330cd01538333b7bc0001');
-INSERT INTO `t_s_role_user` VALUES ('402881bf5fa38f68015fa3fbde880039', '402880e74d75c4dd014d75d3c5f40001', '402881bf5fa38f68015fa3fbdde20037');
-INSERT INTO `t_s_role_user` VALUES ('4028ef815500fa15015500fbc3c50002', '8a8ab0b246dc81120146dc8181870050', '8a8ab0b246dc81120146dc8181a10054');
-INSERT INTO `t_s_role_user` VALUES ('4028ef81563ae5be01563ae92de10004', '402880e74d75c4dd014d75d3c5f40001', '4028ef81563ae5be01563ae92d7f0002');
-INSERT INTO `t_s_role_user` VALUES ('8a8c82a35de421ab015de4228d5c0005', '402881875b19f141015b19fb1d490019', '8a8c82a35de421ab015de4228d400003');
+INSERT INTO `t_s_role_user` VALUES ('402881bf5fe2da62015fe2db83a30004', '8a8ab0b246dc81120146dc81818b0051', '402881bf5fe2da62015fe2db755f0003');
 
 -- ----------------------------
 -- Table structure for t_s_type
@@ -7307,6 +7470,8 @@ INSERT INTO `t_s_typegroup` VALUES ('f852d85d47ed64a40147ed70894c0003', 'rulecon
 DROP TABLE IF EXISTS `t_s_user`;
 CREATE TABLE `t_s_user` (
   `id` varchar(32) NOT NULL COMMENT 'id',
+  `COLLEGEID` varchar(32) DEFAULT NULL,
+  `COLLEGEName` varchar(255) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL COMMENT '邮箱',
   `mobilePhone` varchar(30) DEFAULT NULL COMMENT '手机号',
   `officePhone` varchar(20) DEFAULT NULL COMMENT '办公座机',
@@ -7319,26 +7484,16 @@ CREATE TABLE `t_s_user` (
   `create_by` varchar(32) DEFAULT NULL COMMENT '创建人id',
   `portrait` varchar(100) DEFAULT NULL,
   `imsign` varchar(255) DEFAULT NULL,
-  `dev_flag` varchar(2) NOT NULL DEFAULT '0' COMMENT '开发权限标志',
   PRIMARY KEY (`id`),
   KEY `FK_2cuji5h6yorrxgsr8ojndlmal` (`id`) USING BTREE,
-  KEY `index_dev_flag` (`dev_flag`) USING BTREE,
   CONSTRAINT `t_s_user_ibfk_1` FOREIGN KEY (`id`) REFERENCES `t_s_base_user` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='InnoDB free: 587776 kB; (`id`) REFER `jeecg/t_s_base_user`(`';
 
 -- ----------------------------
 -- Records of t_s_user
 -- ----------------------------
-INSERT INTO `t_s_user` VALUES ('402880e74d75c4dd014d75d44af30005', '', '', '', null, '管理员', '2017-07-25 16:22:11', 'admin', '管理员', '2015-05-21 17:35:56', 'admin', '20170502\\4afbfbedab64034f9015f1bca8c379310b551dab.jpg', null, '0');
-INSERT INTO `t_s_user` VALUES ('402881875988e889015988ec36770001', '', '', '', null, '管理员', '2017-01-10 23:08:33', 'admin', '管理员', '2017-01-10 23:08:18', 'admin', null, null, '0');
-INSERT INTO `t_s_user` VALUES ('402881bf5fa38f68015fa3fbdde20037', '', '', '', null, null, null, null, '管理员', '2017-11-10 11:31:53', 'admin', null, null, '0');
-INSERT INTO `t_s_user` VALUES ('4028ef81538330cd01538333b7bc0001', 'zhangdaiscott@163.com', '13426432323', '991', null, '管理员', '2017-03-29 20:16:01', 'admin', '管理员', '2016-03-17 14:11:58', 'admin', null, null, '0');
-INSERT INTO `t_s_user` VALUES ('4028ef81563ae5be01563ae92d7f0002', '', '', '', null, '管理员', '2016-07-30 16:26:20', 'admin', '管理员', '2016-07-30 16:26:15', 'admin', null, null, '0');
-INSERT INTO `t_s_user` VALUES ('8a8ab0b246dc81120146dc8181950052', '', '', '', 'images/renfang/qm/licf.gif', '管理员', '2017-11-07 17:34:38', 'admin', null, '2016-07-20 16:26:15', null, 'upload/files\\20170612\\e1fe9925bc315c60addea1b98eb1cb1349547719.jpg', '这家伙很你好', '1');
-INSERT INTO `t_s_user` VALUES ('8a8ab0b246dc81120146dc81819d0053', 'zhangdaiscott@163.com', '13426430000', '7496661', null, '管理员', '2017-05-19 00:04:08', 'admin', null, '2016-03-17 14:11:58', null, null, null, '1');
-INSERT INTO `t_s_user` VALUES ('8a8ab0b246dc81120146dc8181a10054', '', '', '', null, '管理员', '2016-06-01 15:07:57', 'admin', null, '2016-07-10 16:26:15', null, null, null, '0');
-INSERT INTO `t_s_user` VALUES ('8a8ab0b246dc81120146dc8181a60055', '', '', '', null, '管理员', '2017-11-07 17:34:39', 'admin', null, '2016-09-30 16:26:15', null, null, null, '0');
-INSERT INTO `t_s_user` VALUES ('8a8c82a35de421ab015de4228d400003', '', '', '', null, '管理员', '2017-09-06 09:45:02', 'admin', '管理员', '2017-08-15 12:24:15', 'admin', null, null, '0');
+INSERT INTO `t_s_user` VALUES ('402881bf5fe2da62015fe2db755f0003', '402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院 ', '', '13127673365', '', null, null, null, null, '管理员', '2017-11-22 16:32:34', 'admin', null, null);
+INSERT INTO `t_s_user` VALUES ('8a8ab0b246dc81120146dc8181950052', null, null, '', '', '', 'images/renfang/qm/licf.gif', '管理员', '2017-11-07 17:34:38', 'admin', null, '2016-07-20 16:26:15', null, 'upload/files\\20170612\\e1fe9925bc315c60addea1b98eb1cb1349547719.jpg', '这家伙很你好');
 
 -- ----------------------------
 -- Table structure for t_s_user_org
@@ -7356,18 +7511,7 @@ CREATE TABLE `t_s_user_org` (
 -- ----------------------------
 -- Records of t_s_user_org
 -- ----------------------------
-INSERT INTO `t_s_user_org` VALUES ('402880ec5d78d2cc015d78d6d3f10004', '402880e74d75c4dd014d75d44af30005', '402880e6487e661a01487e6b504e0001');
-INSERT INTO `t_s_user_org` VALUES ('402880ec5d78d2cc015d78d6d3f40005', '402880e74d75c4dd014d75d44af30005', '402880f15986303c0159864816180002');
-INSERT INTO `t_s_user_org` VALUES ('402880f35a4121cf015a4122dd1b0001', '8a8ab0b246dc81120146dc8181a60055', '8a8ab0b246dc81120146dc8180a20016');
 INSERT INTO `t_s_user_org` VALUES ('402881855c1c4ab8015c1c4d36a30001', '8a8ab0b246dc81120146dc8181950052', '8a8ab0b246dc81120146dc8180ba0017');
-INSERT INTO `t_s_user_org` VALUES ('402881855c1c4ab8015c1c4d51140004', '8a8ab0b246dc81120146dc81819d0053', '402880e6487e661a01487e6b504e0001');
-INSERT INTO `t_s_user_org` VALUES ('402881875988e889015988ec36880002', '402881875988e889015988ec36770001', '8a8ab0b246dc81120146dc8180ba0017');
-INSERT INTO `t_s_user_org` VALUES ('402881875988e889015988ec64590005', '402881875988e889015988ec36770001', '8a8ab0b246dc81120146dc8180a20016');
-INSERT INTO `t_s_user_org` VALUES ('402881875b19f141015b19fe80e5002c', '4028ef81538330cd01538333b7bc0001', '402880e447e9a9570147e9b762e30009');
-INSERT INTO `t_s_user_org` VALUES ('402881bf5fa38f68015fa3fbde740038', '402881bf5fa38f68015fa3fbdde20037', '8a8ab0b246dc81120146dc8180a20016');
-INSERT INTO `t_s_user_org` VALUES ('4028ef815500fa15015500fbc3290001', '8a8ab0b246dc81120146dc8181a10054', '8a8ab0b246dc81120146dc8180a20016');
-INSERT INTO `t_s_user_org` VALUES ('4028ef81563ae5be01563ae92dc20003', '4028ef81563ae5be01563ae92d7f0002', '8a8ab0b246dc81120146dc8180a20016');
-INSERT INTO `t_s_user_org` VALUES ('8a8c82a35de421ab015de4228d520004', '8a8c82a35de421ab015de4228d400003', '8a8ab0b246dc81120146dc8180ba0017');
 
 -- ----------------------------
 -- View structure for t_news_type_view

@@ -3,7 +3,7 @@
 <t:base type="jquery,easyui,tools,DatePicker"></t:base>
 <div class="easyui-layout" fit="true">
   <div region="center" style="padding:0px;border:0px">
-  <t:datagrid name="gradeList" title="班级" actionUrl="gradeController.do?datagrid" idField="id" fit="true" queryMode="group">
+  <t:datagrid name="gradeList" title="班级" actionUrl="gradeController.do?datagrid" idField="id" fit="true" queryMode="group" onLoadSuccess="loadSuccess">
    <t:dgCol title="编号" field="id" hidden="true"></t:dgCol>
    <t:dgCol title="学院" field="collegeId" dictionary="t_college,id,name"  width="120" query="true"></t:dgCol>
    <t:dgCol title="年届" field="yearPeriod" dictionary="nianJie"   width="50" query="true"></t:dgCol>
@@ -27,8 +27,21 @@
   </div>
  </div>
   <script>
+   function loadSuccess(){
+   	if('${LOCAL_CLINET_USER.collegeName }'){
+  		$($('#gradeListForm').find('span')[0]).hide();
+ 	   	 	$('td').each(function(){
+ 	   	    	if($(this).attr('field') == 'collegeId')
+ 	   	    		$(this).remove();
+ 	   	    	
+ 	   	    	console.log(1);
+ 	   	   });
+ 	   	   $(window).resize();  
+  	 }
+   }
    function saveObj() {
-		$('#collegeName', iframe.document).val($('#collegeId', iframe.document).find('option:selected').text());
+	    if(!'${LOCAL_CLINET_USER.collegeName }')
+			$('#collegeName', iframe.document).val($('#collegeId', iframe.document).find('option:selected').text());
 		$('#btn_sub', iframe.document).click();
 	}
  	function handleApplyPass(id){

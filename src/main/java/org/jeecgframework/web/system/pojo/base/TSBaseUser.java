@@ -24,7 +24,7 @@ public class TSBaseUser extends IdEntity implements java.io.Serializable {
 	private String realName;// 真实姓名
 	private String browser;// 用户使用浏览器类型
 	@Excel(name = "角色编码(多个角色编码用逗号分隔，非必填)",width =50)
-
+	private String userRoleCode;// 用户验证唯一标示
 	private String userKey;// 用户验证唯一标示
 	private String password;//用户密码
 	private Short activitiSync;//是否同步工作流引擎
@@ -156,5 +156,11 @@ public class TSBaseUser extends IdEntity implements java.io.Serializable {
 	public Short getDeleteFlag() {
 		return deleteFlag;
 	}
-
+	@Column(name = "userRoleCode")
+	public String getUserRoleCode() {
+		return userRoleCode;
+	}
+	public void setUserRoleCode(String userRoleCode) {
+		this.userRoleCode = userRoleCode;
+	}
 }

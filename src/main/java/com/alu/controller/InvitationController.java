@@ -121,7 +121,7 @@ public class InvitationController extends BaseController {
 		
 		//学院管理员只能查询自己所在学院的数据,超级管理员可以查看所有学院的数据
 		TSUser curUser = ResourceUtil.getSessionUser();
-		if(!"admin".equals(curUser.getUserKey())){
+		if(!"admin".equals(curUser.getUserRoleCode())){
 			cq.eq("collegeId", curUser.getCollegeId());
 		}
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, invitation, request.getParameterMap());
@@ -178,8 +178,10 @@ public class InvitationController extends BaseController {
 			}
 		} else {
 			message = "帖子添加成功";
-			invitation.setCollegeId(curUser.getCollegeId());
-			invitation.setCollegeName(curUser.getCollegeName());
+			if(StringUtil.isNotEmpty(curUser.getCollegeId())){
+				invitation.setCollegeId(curUser.getCollegeId());
+				invitation.setCollegeName(curUser.getCollegeName());
+			}
 			invitation.setCrtBy(curUser.getId());
 			invitation.setCrtByUserName(curUser.getUserName());
 			invitation.setCrtTime(DateUtils.formatDateTime());

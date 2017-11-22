@@ -123,7 +123,7 @@ public class StatisticsController extends BaseController {
 	@ResponseBody
 	public List getStatisticsByYearPeriodData() {
 		TSUser curUser = ResourceUtil.getSessionUser();
-		if(!"admin".equals(curUser.getUserKey()))
+		if(!"admin".equals(curUser.getUserRoleCode()))
 			return statisticsService.getStatisticsByYearPeriodData(curUser.getCollegeId());
 		return statisticsService.getStatisticsByYearPeriodData(null);
 	}
@@ -136,7 +136,7 @@ public class StatisticsController extends BaseController {
 	@ResponseBody
 	public List getStatisticsByProvinceData() {
 		TSUser curUser = ResourceUtil.getSessionUser();
-		if(!"admin".equals(curUser.getUserKey()))
+		if(!"admin".equals(curUser.getUserRoleCode()))
 			return statisticsService.getStatisticsByProvinceData(curUser.getCollegeId());
 		return statisticsService.getStatisticsByProvinceData(null);
 	}
@@ -149,7 +149,7 @@ public class StatisticsController extends BaseController {
 	@ResponseBody
 	public List getStatisticsByCompanyNatureData() {
 		TSUser curUser = ResourceUtil.getSessionUser();
-		if(!"admin".equals(curUser.getUserKey()))
+		if(!"admin".equals(curUser.getUserRoleCode()))
 			return statisticsService.getStatisticsByCompanyNatureData(curUser.getCollegeId());
 		return statisticsService.getStatisticsByCompanyNatureData(null);
 	}
@@ -162,8 +162,32 @@ public class StatisticsController extends BaseController {
 	@ResponseBody
 	public List getStatisticsByEducationStageData() {
 		TSUser curUser = ResourceUtil.getSessionUser();
-		if(!"admin".equals(curUser.getUserKey()))
+		if(!"admin".equals(curUser.getUserRoleCode()))
 			return statisticsService.getStatisticsByEducationStageData(curUser.getCollegeId());
 		return statisticsService.getStatisticsByEducationStageData(null);
+	}
+	
+	/**
+	 * 获取待审核的信息
+	 * @return
+	 */
+	@RequestMapping(params = "getAwaitInfo", method = RequestMethod.GET)
+	@ResponseBody
+	public Map getAwaitInfo() {
+		TSUser curUser = ResourceUtil.getSessionUser();
+		String collegeId = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(!"admin".equals(curUser.getUserRoleCode())){
+			collegeId = curUser.getCollegeId();
+		}else{
+			map.put("college", statisticsService.getAwaitHandCount("t_college", collegeId));
+		}
+		map.put("activity", statisticsService.getAwaitHandCount("t_activity", collegeId));
+		map.put("invitation", statisticsService.getAwaitHandCount("t_invitation", collegeId));
+		map.put("news", statisticsService.getAwaitHandCount("t_news", collegeId));
+		map.put("notices", statisticsService.getAwaitHandCount("t_notices", collegeId));
+		map.put("activitySpace", statisticsService.getAwaitHandCount("t_activity_space", collegeId));
+		map.put("grade", statisticsService.getAwaitHandCount("t_grade", collegeId));
+		return map;
 	}
 }

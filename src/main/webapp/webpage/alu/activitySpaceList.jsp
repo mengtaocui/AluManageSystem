@@ -3,9 +3,10 @@
 <t:base type="jquery,easyui,tools,DatePicker"></t:base>
 <div class="easyui-layout" fit="true">
   <div region="center" style="padding:0px;border:0px">
-  <t:datagrid name="activitySpaceList" title="活动空间" actionUrl="activitySpaceController.do?datagrid" idField="id" fit="true" queryMode="group">
+  <t:datagrid name="activitySpaceList" title="活动空间" actionUrl="activitySpaceController.do?datagrid" idField="id" fit="true" queryMode="group" onLoadSuccess="loadSuccess">
    <t:dgCol title="编号" field="id" hidden="true"></t:dgCol>
    <t:dgCol title="活动ID" field="activityId"   hidden="true"></t:dgCol>
+   <t:dgCol title="学院" field="collegeId"  dictionary="t_college,id,name" query="true"></t:dgCol>
    <t:dgCol title="活动" query="true" url="activityController.do?addorupdate&load=detail&id={activityId}&_=1510794388831" field="activityName"   width="120"></t:dgCol>
    <t:dgCol title="照片" field="filePath" image="true"   width="120" imageSize="60,60"></t:dgCol>
    <t:dgCol title="审核状态" query="true" field="checkStatus" replace="等待审核_0,已通过_1,被拒绝_2"   width="120"></t:dgCol>
@@ -20,6 +21,18 @@
   </div>
  </div>
  <script>
+ function loadSuccess(){
+ 	if('${LOCAL_CLINET_USER.collegeName }'){
+ 		$($('#activitySpaceListForm').find('span')[0]).hide();
+	   	 	$('td').each(function(){
+	   	    	if($(this).attr('field') == 'collegeId')
+	   	    		$(this).remove();
+	   	    	
+	   	    	console.log(1);
+	   	   });
+	   	   $(window).resize();  
+ 	}
+ }
  function handleApplyPass(id){
 		handleApply(id, 1, '通过');
 	}

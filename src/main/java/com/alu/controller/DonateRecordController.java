@@ -126,7 +126,7 @@ public class DonateRecordController extends BaseController {
 		
 		//学院管理员只能查询自己所在学院的数据,超级管理员可以查看所有学院的数据
 		TSUser curUser = ResourceUtil.getSessionUser();
-		if(!"admin".equals(curUser.getUserKey())){
+		if(!"admin".equals(curUser.getUserRoleCode())){
 			cq.eq("collegeId", curUser.getCollegeId());
 		}
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, donateRecord, request.getParameterMap());
@@ -183,8 +183,10 @@ public class DonateRecordController extends BaseController {
 			}
 		} else {
 			message = "捐赠记录添加成功";
-			donateRecord.setCollegeId(curUser.getCollegeId());
-			donateRecord.setCollegeName(curUser.getCollegeName());
+			if(StringUtil.isNotEmpty(curUser.getCollegeId())){
+				donateRecord.setCollegeId(curUser.getCollegeId());
+				donateRecord.setCollegeName(curUser.getCollegeName());
+			}
 			donateRecord.setCrtBy(curUser.getId());
 			donateRecord.setCrtByUserName(curUser.getUserName());
 			donateRecord.setCrtTime(DateUtils.formatDateTime());
