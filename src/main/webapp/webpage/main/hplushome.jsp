@@ -12,37 +12,23 @@
 			}
 			.table-wrap>table{
 			    width: 100%;
-			}
-			.title{
-				position: absolute;
-			    left: 50%;
-			    top: -13px;
-			    margin-left: -51px;
-			    background: #FFFFFF;
-			    padding: 0px 20px;
-			    font-family: "微软雅黑","Microsoft YaHei","Microsoft YaHei UI","Hiragino Sans GB W3","Segoe UI", Arial, Verdana, Sans-Serif, sans-serif;
-				font-size: 17px;
-    			font-weight: 300;
-    			line-height: 1.42857143;
-   				color: #333;
+			    border-spacing: 20
 			}
 			.table-wrap{
 			    position:relative;
 				width:95%;
 				margin: 0px auto;
-				border: 1px solid #e2e2e2;
-				padding: 90px 20px 60px 20px;
+				margin-top: 8%;
 			}
 			.item-wrap{
-			    display:inline-block;
+			    width:100%;
 				border: none;
 			    border-radius: 2px;
 			    background: #f2f2f2;
-			    margin: 0px 15px 20px 15px;
 			}
 			.symbol{
 				width: 40%;
-    			padding: 25px 0px;
+    			padding: 35px 0px;
     			text-align: center;
     			border-radius: 4px 0px 0px 4px;
 			}
@@ -71,65 +57,15 @@
 				color: #fff;
     			font-size: 50px;
 			}
-		    /*@media screen and (max-width: 1920px) {
-			   .table-wrap{
-			   		margin-top:100px;
-			   }
-			   .item-wrap{
-					width: 22.89%;
-				}
-			}
-			@media screen and (max-width: 1600px) {
-			   .table-wrap{
-			   		margin-top:100px;
-			   }
-			   .item-wrap{
-					width: 22.4%;
-				}
-			}
-			@media screen and (max-width: 1366px) {
-			   .table-wrap {
-				    margin-top: 60px;
-				    padding: 60px 20px 40px 20px;
-				}
-			   .item-wrap{
-					width: 21.9%;
-				}
-			}
-			@media screen and (max-width: 1280px) {
-			   .table-wrap {
-				    margin-top: 160px;
-				    padding: 60px 20px 40px 20px;
-				}
-			   .item-wrap{
-					width: 21.6%;
-				}
-				.value{
-					width: 57%;
-				}
-			}
-			@media screen and (max-width: 1152px) {
-			   .table-wrap {
-				    margin-top: 80px;
-				    padding: 60px 20px 40px 20px;
-				}
-			   .item-wrap{
-					width: 21.1%;
-				}
-				.value{
-					width: 57%;
-				}
-			}*/
         </style>
     </head>
     <!-- 管理员登录成功后跳转的页面 -->
 	<body>
         <div  class="table-wrap">
-            <p class="title">待审核</p>
             <table>
                 <tr>
-                	<td>
-                		<div class="item-wrap">
+                    <td>
+                    	<div class="item-wrap">
                 			<div class="symbol" style="background: #54ade8;"> 
                 				<i class="fa fa-university"></i>
 							</div>
@@ -140,7 +76,9 @@
 								</a>
 							</div>
                 		</div>
-                		<div class="item-wrap">
+                    </td>
+                    <td>
+                    	<div class="item-wrap">
                 			<div class="symbol" style="background: #FF5722;"> 
                 				<i class="fa fa-users"></i>
 							</div>
@@ -151,7 +89,10 @@
 								</a>
 							</div>
                 		</div>
-                		<div class="item-wrap">
+                    </td>
+                    
+                    <td>
+                    	<div class="item-wrap">
                 			<div class="symbol" style="background: #009688;"> 
                 				<i class="fa fa-cutlery"></i>
 							</div>
@@ -162,6 +103,8 @@
 								</a>
 							</div>
                 		</div>
+                    </td>
+                	<td>
                 		<div class="item-wrap">
                 			<div class="symbol" style="background: #2F4056;"> 
                 				<i class="fa fa-file-audio-o"></i>
@@ -173,7 +116,10 @@
 								</a>
 							</div>
                 		</div>
-                		
+                	</td>
+                </tr>
+                <tr>
+                	<td>
                 		<div class="item-wrap">
                 			<div class="symbol" style="background: #337ab7;"> 
                 				<i class="fa fa-tasks"></i>
@@ -185,6 +131,8 @@
 								</a>
 							</div>
                 		</div>
+                	</td>
+                	<td>
                 		<div class="item-wrap">
                 			<div class="symbol" style="background: #f0ad4e;"> 
                 				<i class="fa fa-bullhorn"></i>
@@ -196,14 +144,29 @@
 								</a>
 							</div>
                 		</div>
+                	</td>
+                	<td>
                 		<div class="item-wrap">
                 			<div class="symbol" style="background: #d9534f;"> 
                 				<i class="fa fa-camera-retro"></i>
 							</div>
                 			<div class="value">
 								<a href="javascript:addOneTab('资料管理', 'activitySpaceController.do?list', null);">
-									<h1 class="count1" id="activity">10</h1>
+									<h1 class="count1" id="activitySpace">10</h1>
 									<p>资料</p>
+								</a>
+							</div>
+                		</div>
+                	</td>
+                	<td>
+                		<div class="item-wrap">
+                			<div class="symbol" style="background: #d9534f;"> 
+                				<i class="fa fa-camera-retro"></i>
+							</div>
+                			<div class="value">
+								<a href="javascript:addOneTab('捐赠项目管理', 'activitySpaceController.do?list', null);">
+									<h1 class="count1" id="activitySpace">10</h1>
+									<p>捐赠项目</p>
 								</a>
 							</div>
                 		</div>
@@ -218,46 +181,46 @@
 		    	initDomSize();
 		    	
 		    	initCount();
-		    	setInterval(function(){
+		    	/* setInterval(function(){
 					initCount();
-				}, 5000);
+				}, 5000); */
 		    })
 		    
 		   function initDomSize(){
 		    	
 		    	if ((screen.width == 1920) && (screen.height == 1080)) {
 		    		
-		    		$('.item-wrap').width('372.64');
+		    		/* $('.item-wrap').width('372.64');
 		    		$('.symbol').width('147.5');
-		    		$('.value').width('213.88');
+		    		$('.value').width('213.88'); */
 		    		$('.table-wrap').css({'margin-top':100});
                 	
 	            } else if ((screen.width == 1600) && (screen.height == 900)) {
 	            	
-	            	$('.item-wrap').width('297.4');
+	            	/* $('.item-wrap').width('297.4');
 	            	$('.symbol').width('117.09');
-		    		$('.value').width('169.8');
+		    		$('.value').width('169.8'); */
 		    		$('.table-wrap').css({'margin-top':100});
                 	
 	            } else if ((screen.width == 1366) && (screen.height == 768)) {
 	            	
-	            	$('.item-wrap').width('241.71');
+	            /* 	$('.item-wrap').width('241.71');
 	            	$('.symbol').width('93.73');
-		    		$('.value').width('133.58');
+		    		$('.value').width('133.58'); */
 		    		$('.table-wrap').css({'margin-top':60,'padding':'60px 20px 40px 20px'});
                 	
 	            } else if ((screen.width == 1280) && (screen.height == 1024)) {
 	            	
-	            	$('.item-wrap').width('221.27');
+	            /* 	$('.item-wrap').width('221.27');
 	            	$('.symbol').width('86.08');
-		    		$('.value').width('122.67');
+		    		$('.value').width('122.67'); */
 		    		$('.table-wrap').css({'margin-top':160,'padding':'60px 20px 40px 20px'});
                 	
 	            } else if ((screen.width == 1152) && (screen.height == 864)) {
 	            	
-	            	$('.item-wrap').width('189.5');
+	            	/* $('.item-wrap').width('189.5');
 	            	$('.symbol').width('74.44');
-		    		$('.value').width('106.06');
+		    		$('.value').width('106.06'); */
 		    		$('.table-wrap').css({'margin-top':80,'padding':'60px 20px 40px 20px'});
 	                
 	            }
@@ -271,7 +234,7 @@
 					success: function(data){
 						if(data){
 							$('#college').html(data.college);
-							$('#news').html(news.news);
+							$('#news').html(data.news);
 							$('#notices').html(data.notices);
 							$('#activity').html(data.activity);
 							$('#activitySpace').html(data.activitySpace);

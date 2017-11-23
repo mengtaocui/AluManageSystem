@@ -84,7 +84,7 @@
 							</div>
                 			<div class="value">
 								<a href="javascript:addOneTab('资料管理', 'activitySpaceController.do?list', null);">
-									<h1 class="count1" id="activity">10</h1>
+									<h1 class="count1" id="activitySpace">10</h1>
 									<p>资料</p>
 								</a>
 							</div>
@@ -153,7 +153,7 @@
 					success: function(data){
 						if(data){
 							$('#college').html(data.college);
-							$('#news').html(news.news);
+							$('#news').html(data.news);
 							$('#notices').html(data.notices);
 							$('#activity').html(data.activity);
 							$('#activitySpace').html(data.activitySpace);

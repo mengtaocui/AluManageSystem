@@ -40,17 +40,6 @@
 				<tr>
 					<td align="right">
 						<label class="Validform_label">
-							活动地点:
-						</label>
-					</td>
-					<td class="value">
-						<input class="inputxt" id="places" name="places"   value="${activityPage.places}" />
-						<span class="Validform_checktip"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<label class="Validform_label">
 							开始时间:
 						</label>
 					</td>
@@ -78,6 +67,17 @@
 					</td>
 					<td class="value">
 						<input class="inputxt easyui-datetimebox" id="applyEndTime" name="applyEndTime" required="required"  value="${activityPage.applyEndTime}" />
+						<span class="Validform_checktip"></span>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							活动地点:
+						</label>
+					</td>
+					<td class="value">
+						<textarea  class="inputxt" id="places" style="width:400px;height:80px" name="places" ignore="ignore" >${activityPage.places}</textarea>
 						<span class="Validform_checktip"></span>
 					</td>
 				</tr>

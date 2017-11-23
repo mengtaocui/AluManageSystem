@@ -7,14 +7,14 @@
    <t:dgCol title="编号" field="id" hidden="true"></t:dgCol>
    <t:dgCol title="学院" field="collegeId"  dictionary="t_college,id,name" query="true"></t:dgCol>
    <t:dgCol title="活动名称" field="name"   width="120" query="true"></t:dgCol>
-   <t:dgCol title="活动地点" field="places"   width="120"></t:dgCol>
+   <t:dgCol title="活动地点" field="places" hidden="true"  width="120"></t:dgCol>
    <t:dgCol title="开始时间" field="startTime"   width="120" formatter="yyyy-MM-dd hh:mm:ss" query="true" queryMode="group"></t:dgCol>
    <t:dgCol title="结束时间" field="endTime"   width="120"></t:dgCol>
-   <t:dgCol title="报名截止时间" field="applyEndTime"   width="120" formatter="yyyy-MM-dd hh:mm:ss" query="true" queryMode="group"></t:dgCol>
+   <t:dgCol title="报名截止时间" field="applyEndTime" hidden="true"  width="120" formatter="yyyy-MM-dd hh:mm:ss" query="true" queryMode="group"></t:dgCol>
    <t:dgCol title="浏览次数" field="browseCount"   width="60"></t:dgCol>
    <t:dgCol title="审核状态" field="checkStatus" replace="等待审核_0,已通过_1,被拒绝_2"  query="true" width="70"></t:dgCol>
    <t:dgCol title="创建人" field="crtByUserName"   width="100"></t:dgCol>
-   <t:dgCol title="创建时间" field="crtTime"   width="120"></t:dgCol>
+   <t:dgCol title="创建时间" field="crtTime" hidden="true"	  width="120"></t:dgCol>
    <t:dgCol title="审核人" field="checkByUserName"   width="100"></t:dgCol>
    <t:dgCol title="操作" field="opt" width="130"></t:dgCol>
    <t:dgFunOpt funname="lookPhoto(id,name)"  exp="checkStatus#eq#1" title="查看相册" urlStyle="background-color: #269abc;" urlclass="ace_button"  urlfont="fa-check"></t:dgFunOpt>

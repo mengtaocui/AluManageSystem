@@ -39,7 +39,7 @@
 						</label>
 					</td>
 					<td class="value">
-						<textarea  class="inputxt" id="name" style="width:400px;height:80px" name="name" datatype="*" >${gradePage.name}</textarea>
+						<input class="inputxt" id="name" name="name" datatype="*"  value="${gradePage.name}" />
 						<span class="Validform_checktip"></span>
 					</td>
 				</tr>
