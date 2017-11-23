@@ -710,7 +710,7 @@
 
 	$(document).ready(function(){
 		//加载公告
-		var url = "noticeController.do?getNoticeList";
+		/* var url = "noticeController.do?getNoticeList";
 		$.ajax({
     		url:url,
     		type:"GET",
@@ -750,10 +750,10 @@
     			}
     		}
     	});
-		
+		 */
 		
 		//加载消息
-		var url = "tSSmsController.do?getMessageList";
+		/* var url = "tSSmsController.do?getMessageList";
 		$.ajax({
     		url:url,
     		type:"GET",
@@ -797,7 +797,7 @@
     				$("#messageFooter").html(messageSeeAll);
     			}
     		}
-    	});
+    	}); */
 		
 	});
 

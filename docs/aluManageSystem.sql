@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50631
 File Encoding         : 65001
 
-Date: 2017-11-22 17:50:10
+Date: 2017-11-23 15:49:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -261,7 +261,7 @@ CREATE TABLE `t_college` (
 -- ----------------------------
 -- Records of t_college
 -- ----------------------------
-INSERT INTO `t_college` VALUES ('402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院', '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-12 11:20:59', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 11:21:10', null, null, '0');
+INSERT INTO `t_college` VALUES ('402881bf5fbdabe0015fbdb1b0a60007', '公共卫生学院', '2', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-12 11:20:59', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 11:21:10', '8a8ab0b246dc81120146dc8181950052', 'admin', '0');
 INSERT INTO `t_college` VALUES ('402881bf5fbdb432015fbdb52d750001', '计算机学院', '2', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-10-15 11:24:48', null, null, null, '8a8ab0b246dc81120146dc8181950052', 'admin', '0');
 INSERT INTO `t_college` VALUES ('402881bf5fbdb432015fbdb5639d0003', '生物工程学院', '0', '8a8ab0b246dc81120146dc8181950052', 'admin', '2017-11-15 11:25:02', null, null, null, null, null, '0');
 
@@ -2372,6 +2372,19 @@ INSERT INTO `t_s_log` VALUES ('402881bf5fe31d20015fe31d64240000', 'Chrome', '用
 INSERT INTO `t_s_log` VALUES ('402881bf5fe32025015fe320764e0000', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-22 17:47:56', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
 INSERT INTO `t_s_log` VALUES ('402881bf5fe32025015fe320ae0e0001', 'Chrome', 'admin', '2', '本地', '2017-11-22 17:48:11', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
 INSERT INTO `t_s_log` VALUES ('402881bf5fe32025015fe320c7ed0002', 'Chrome', '用户: cuimengtao[公共卫生学院 ]common.login.success', '1', '本地', '2017-11-22 17:48:17', '1', '402881bf5fe2da62015fe2db755f0003', 'cuimengtao', '崔梦');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe66909015fe669e2260000', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-23 09:07:00', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe69c9e015fe6a01b240000', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-23 10:06:13', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe69c9e015fe7469c220001', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-23 13:08:05', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe69c9e015fe758a25f0002', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-23 13:27:47', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe69c9e015fe758a2640004', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-23 13:27:47', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe69c9e015fe758a2630003', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-23 13:27:47', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe69c9e015fe758c2bf0005', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-23 13:27:55', '3', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe69c9e015fe75b95860006', 'Chrome', '审核学院：公共卫生学院', '4', '本地', '2017-11-23 13:31:00', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe69c9e015fe7844bc50007', 'rv:11.0', '用户: admin[null]common.login.success', '1', '本地', '2017-11-23 14:15:28', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe69c9e015fe78b0cbd0008', 'Chrome', '用户: admin[null]common.login.success', '1', '本地', '2017-11-23 14:22:51', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe69c9e015fe799d4fc0009', 'rv:11.0', '用户: admin[null]common.login.success', '1', '本地', '2017-11-23 14:38:59', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe69c9e015fe7a0eab2000a', 'MSIE 7.0', '用户: admin[null]common.login.success', '1', '本地', '2017-11-23 14:46:44', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
+INSERT INTO `t_s_log` VALUES ('402881bf5fe69c9e015fe7d280ce000b', 'rv:11.0', '用户: admin[null]common.login.success', '1', '本地', '2017-11-23 15:40:53', '1', '8a8ab0b246dc81120146dc8181950052', 'admin', '管理员');
 
 -- ----------------------------
 -- Table structure for t_s_muti_lang

@@ -678,7 +678,7 @@
 
 	$(document).ready(function(){
 		//加载公告
-		var url = "noticeController.do?getNoticeList";
+		/* var url = "noticeController.do?getNoticeList";
 		jQuery.ajax({
     		url:url,
     		type:"GET",
@@ -719,11 +719,11 @@
     				$("#noticeFooter").html(noticeSeeAll);
     			}
     		}
-    	});
+    	}); */
 		
 		
 		//加载消息
-		var url = "tSSmsController.do?getMessageList";
+		/* var url = "tSSmsController.do?getMessageList";
 		$.ajax({
     		url:url,
     		type:"GET",
@@ -767,7 +767,7 @@
     				$("#messageFooter").html(messageSeeAll);
     			}
     		}
-    	});
+    	}); */
 		
 	});
 

@@ -70,63 +70,10 @@
                 
                 
                 <ul class="nav navbar-top-links navbar-right">
-                <!-- update-start--Author: chenj Date:20160812 for: TASK #1269 【ace h+】风格无用的右上角功能隐藏，暂时注释掉 -->
-                   <%--  <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-envelope"></i> <span class="label label-warning">0</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-alerts">
-                            <li>
-                                <a>
-                                    <div>
-                                        <i class="fa fa-envelope fa-fw"></i> 您有0条未读消息
-                                        <span class="pull-right text-muted small">4分钟前</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="text-center link-block">
-                                    <a class="" href="javascript:goAllNotice();">
-                                        <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell"></i> <span class="label label-primary">0</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-alerts">
-                            <li>
-                                <a>
-                                    <div>
-                                        <i class="fa fa-envelope fa-fw"></i> 您有0条未读消息
-                                        <span class="pull-right text-muted small">4分钟前</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="text-center link-block">
-                                    <a class="" href="javascript:goAllMessage();">
-                                        <strong>查看所有 </strong>
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li> --%>
-                    <!-- update-end--Author: chenj Date:20160812 for: TASK #1269 【ace h+】风格无用的右上角功能隐藏，暂时注释掉 -->
-                    
-                    <!-- //update-start--Author: chenj Date:20160726 for: TASK #1207 [改造]h+风格下，去掉logo下面的内容，迁移位置到右上角，主题位置 -->
                     
                     <li class="dropdown" onfocus="bindFrameClick()">
                     	<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                <span >用户:</span>
                                 <span ><strong class="font-bold">${LOCAL_CLINET_USER.userName}</strong></span>
-                                <span >角色:</span>
                                 <span >
                                 <c:if test="${ not empty LOCAL_CLINET_USER.collegeName }">
                                 	${LOCAL_CLINET_USER.collegeName}管理员<b class="caret"></b>
@@ -146,23 +93,9 @@
                             <%-- <li><a href="javascript:openwindow('<t:mutiLang langKey="common.ssms.getSysInfos"/>','tSSmsController.do?getSysInfos')"><t:mutiLang langKey="common.ssms.getSysInfos"/></a></li> --%>
                             <li><a href="javascript:add('<t:mutiLang langKey="common.change.style"/>','userController.do?changestyle','',550,250)"><t:mutiLang langKey="common.my.style"/></a></li>
                             <li><a href="javascript:clearLocalstorage()"><t:mutiLang langKey="common.clear.localstorage"/></a></li>
-                           <!--  <li><a href="javascript:toJeecgYun()">云应用中心</a></li> -->
-                            <!-- update-start--Author: chenj Date:20160812 for: TASK #1269 【ace h+】风格无用的右上角功能隐藏，暂时注释掉 -->
-                            <!-- <li><a href="http://yun.jeecg.org" target="_blank">云应用中心</li> -->
-                           <!--  <li class="divider"></li>
-                            <li><a href="javascript:logout()">注销</a></li> -->
-                            <!-- update-end--Author: chenj Date:20160812 for: TASK #1269 【ace h+】风格无用的右上角功能隐藏，暂时注释掉 -->
                         </ul>
                     </li>
-                    <!-- //update-end--Author: chenj Date:20160726 for: TASK #1207 [改造]h+风格下，去掉logo下面的内容，迁移位置到右上角，主题位置 -->
                     
-                     
-                    <!-- <li class="dropdown hidden-xs">
-                        <a class="right-sidebar-toggle" aria-expanded="false">
-                            <i class="fa fa-tasks"></i> 主题
-                        </a>
-                    </li> -->
-                   <!-- //update-begin--Author: chenj Date:20160729 for: TASK #1207 [改造]h+风格下，修改 退出 按钮的位置 -->
                       <li class="dropdown">
                      <a href="javascript:logout()" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
                      </li>
@@ -194,11 +127,7 @@
                 </ul>
             </div>
             
-            <!-- 
-            <a href="javascript:logout()" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
-             -->
         </div>
-        <!-- update-begin--Author:zhoujf  Date:20170710 for：TASK #2003 【UI改进】列表加载慢的时候会出现白板  -->
         <style type="text/css">  
 		<!--  
 		.proccess{display:none;background-color:#f2f2f2;border:0px solid;border-color:#009900;height:100%;line-height:600px;width:100%;text-align:center;margin:100;position:absolute;top:0;left:0;}  
@@ -215,29 +144,11 @@
             <div class="pull-right">&copy; 1.0 <a href="javascript:void(0);" target="_blank">小熊猫科技工作室</a>
             </div>
         </div>        
-		<!-- update-end--Author:xuelin  Date:20170611 for：TASK #2100 【列表样式美化】【样式专题】Jeecg平台任务 --1下面这条线，变明朗点----------------------  -->
     </div>
     <!--右侧部分结束-->
     <!--右侧边栏开始-->
     <div id="right-sidebar">
         <div class="sidebar-container">
-
-            <!-- <ul class="nav nav-tabs navs-3">
-
-                <li class="active">
-                    <a data-toggle="tab" href="#tab-1">
-                        <i class="fa fa-gear"></i> 主题
-                    </a>
-                </li>
-               <li class=""><a data-toggle="tab" href="#tab-2">
-                   <i class="fa fa-comments-o" aria-hidden="true"></i>通知
-                </a>
-                </li>
-                <li><a data-toggle="tab" href="#tab-3">
-                    <i class="fa fa-info-circle" aria-hidden="true"></i>公告
-                </a>
-                </li>
-            </ul> -->
 
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane active">
@@ -349,100 +260,6 @@
 
         </div>
     </div>
-    <!--右侧边栏结束-->
-    <!--mini聊天窗口开始-->
-    <%--<div class="small-chat-box fadeInRight animated">
-
-        <div class="heading" draggable="true">
-            <small class="chat-date pull-right">
-                2015.9.1
-            </small> 与 Beau-zihan 聊天中
-        </div>
-
-        <div class="content">
-
-            <div class="left">
-                <div class="author-name">
-                    Beau-zihan <small class="chat-date">
-                    10:02
-                </small>
-                </div>
-                <div class="chat-message active">
-                    你好
-                </div>
-
-            </div>
-            <div class="right">
-                <div class="author-name">
-                    游客
-                    <small class="chat-date">
-                        11:24
-                    </small>
-                </div>
-                <div class="chat-message">
-                    你好，请问H+有帮助文档吗？
-                </div>
-            </div>
-            <div class="left">
-                <div class="author-name">
-                    Beau-zihan
-                    <small class="chat-date">
-                        08:45
-                    </small>
-                </div>
-                <div class="chat-message active">
-                    有，购买的H+源码包中有帮助文档，位于docs文件夹下
-                </div>
-            </div>
-            <div class="right">
-                <div class="author-name">
-                    游客
-                    <small class="chat-date">
-                        11:24
-                    </small>
-                </div>
-                <div class="chat-message">
-                    那除了帮助文档还提供什么样的服务？
-                </div>
-            </div>
-            <div class="left">
-                <div class="author-name">
-                    Beau-zihan
-                    <small class="chat-date">
-                        08:45
-                    </small>
-                </div>
-                <div class="chat-message active">
-                    1.所有源码(未压缩、带注释版本)；
-                    <br> 2.说明文档；
-                    <br> 3.终身免费升级服务；
-                    <br> 4.必要的技术支持；
-                    <br> 5.付费二次开发服务；
-                    <br> 6.授权许可；
-                    <br> ……
-                    <br>
-                </div>
-            </div>
-
-
-        </div>
-        <div class="form-chat">
-            <div class="input-group input-group-sm">
-                <input type="text" class="form-control"> <span class="input-group-btn"> <button
-                    class="btn btn-primary" type="button">发送
-            </button> </span>
-            </div>
-        </div>
-
-    </div>--%>
-    <%--<div id="small-chat">
-        <span class="badge badge-warning pull-right">5</span>
-        <a class="open-small-chat">
-            <i class="fa fa-comments"></i>
-
-        </a>
-    </div>--%>
-    <!--mini聊天窗口结束-->
 </div>
 
 <!-- 全局js -->
@@ -469,29 +286,6 @@
 <!-- 在线聊天 -->
 <script>
     function logout(){
-        /*bootbox.confirm("<t:mutiLang langKey="common.exit.confirm"/>", function(result) {
-            if(result)
-                location.href="loginController.do?logout";
-        });*/
-        /*swal({
-            title: "您确定要注销吗？",
-            text: "注销后需要重新登录！",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "确定",
-            cancelButtonText: "取消",
-            closeOnConfirm: false,
-            closeOnCancel: true
-        },
-        function (isConfirm) {
-            if (isConfirm) {
-                //swal("注销成功！", "您已经成功注销。", "success");
-                location.href="loginController.do?logout";
-            } else {
-                return false;
-            }
-        });*/
         layer.confirm('您确定要注销吗？', {
             btn: ['确定','取消'], //按钮
             shade: false //不显示遮罩
@@ -515,7 +309,7 @@
 
     $(document).ready(function(){
         //加载公告
-        var url = "noticeController.do?getNoticeList";
+        /* var url = "noticeController.do?getNoticeList";
         jQuery.ajax({
             url:url,
             type:"GET",
@@ -603,7 +397,7 @@
                     $("#messageFooter").html(messageSeeAll);
                 }
             }
-        });
+        }); */
 
     });
 

@@ -1,0 +1,117 @@
+home_body{
+	background: #FFFFFF;
+}
+.table-wrap>table{
+    width: 100%;
+}
+.title{
+	position: absolute;
+    left: 50%;
+    top: -30px;
+    margin-left: -51px;
+    background: #FFFFFF;
+    padding: 0px 20px;
+    font-family: "微软雅黑","Microsoft YaHei","Microsoft YaHei UI","Hiragino Sans GB W3","Segoe UI", Arial, Verdana, Sans-Serif, sans-serif;
+	font-size: 17px;
+ 			font-weight: 300;
+ 			line-height: 1.42857143;
+				color: #333;
+}
+.table-wrap{
+    position:relative;
+	width:95%;
+	margin: 0px auto;
+	border: 1px solid #e2e2e2;
+	padding: 90px 20px 60px 20px;
+}
+.item-wrap{
+    height: 100px;
+    display:inline-block;
+	border: none;
+    border-radius: 2px;
+    background: #f2f2f2;
+    margin: 0px 15px 20px 15px;
+}
+.symbol{
+	width: 40%;
+ 			padding: 25px 0px;
+ 			text-align: center;
+ 			border-radius: 4px 0px 0px 4px;
+ 			vertical-align: top;
+}
+.value{
+	width: 58%;
+    height: 100%;
+    padding-top: 18px;
+    text-align: center;
+}
+.value>a>p{
+	font-size: 12px;
+	color: #333;
+ 			font-family: Arial,Helvetica,sans-serif;
+ 			margin:0px;
+}
+.count1{
+    line-height: 1;
+	font-size: 36px;
+    font-weight: 300;
+    color: #333;
+    font-family: Arial,Helvetica,sans-serif;
+    margin:0px;
+}
+.symbol,.value{
+	display: inline-block;
+}
+.symbol>i{
+	color: #fff;
+ 			font-size: 50px;
+}
+@media screen and (max-width: 1920px) {
+   .table-wrap{
+   		margin-top:100px;
+   }
+   .item-wrap{
+		width: 22.89%;
+	}
+}
+@media screen and (max-width: 1600px) {
+   .table-wrap{
+   		margin-top:100px;
+   }
+   .item-wrap{
+		width: 22.4%;
+	}
+}
+@media screen and (max-width: 1366px) {
+   .table-wrap {
+	    margin-top: 60px;
+	    padding: 60px 20px 40px 20px;
+	}
+   .item-wrap{
+		width: 21.9%;
+	}
+}
+@media screen and (max-width: 1280px) {
+   .table-wrap {
+	    margin-top: 160px;
+	    padding: 60px 20px 40px 20px;
+	}
+   .item-wrap{
+		width: 21.6%;
+	}
+	.value{
+		width: 57%;
+	}
+}
+@media screen and (max-width: 1152px) {
+   .table-wrap {
+	    margin-top: 80px;
+	    padding: 60px 20px 40px 20px;
+	}
+   .item-wrap{
+		width: 21.1%;
+	}
+	.value{
+		width: 57%;
+	}
+}

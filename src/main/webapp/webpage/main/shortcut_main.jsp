@@ -63,7 +63,7 @@ a:hover {
     }
 	
 	$(document).ready(function(){
-		var url = "noticeController.do?getNoticeList";
+		/* var url = "noticeController.do?getNoticeList";
 		var roll = false;
 		$.ajax({
     		url:url,
@@ -90,7 +90,7 @@ a:hover {
     				}
     			}
     		}
-    	});
+    	}); */
 	});
     
     function goNotice(id){
