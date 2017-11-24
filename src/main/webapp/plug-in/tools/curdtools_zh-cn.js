@@ -1510,11 +1510,11 @@ function tipImg(obj){
 				var height = obj.naturalHeight;
 				//alert(width+"--"+height);
 				bigImgIndex = layer.open({
-					content:[src,'no'],
-					type:2,
-					offset:[y+"px",x+"px"],
+					content:'<img  src="'+src+'"   style="max-width:100%;max-height:100%"  />',
+					type:1,
+					offset:["152px","107px"],
 					title:false,
-					area:["320px","230px"],
+					area:["142px","142px"],
 					shade:0,
 					closeBtn:0
 				});

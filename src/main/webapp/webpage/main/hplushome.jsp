@@ -33,7 +33,7 @@
     			border-radius: 4px 0px 0px 4px;
 			}
 			.value{
-				width: 58%;
+				width: 57%;
 			    height: 100%;
 			    padding-top: 5px;
 			    text-align: center;
@@ -70,7 +70,18 @@
                 				<i class="fa fa-university"></i>
 							</div>
                 			<div class="value">
-								<a href="javascript:addOneTab('学院管理', 'collegeController.do?list', null);">
+								<a 
+								
+								<c:if test="${ not empty LOCAL_CLINET_USER.collegeName  }">
+								   href="javascript:void();"
+								</c:if>
+								<c:if test="${ empty LOCAL_CLINET_USER.collegeName  }">
+								   href="javascript:addOneTab('学院管理', 'collegeController.do?list', null);"
+								</c:if>
+								
+								
+								
+								>
 									<h1 class="count1" id="college">0</h1>
 									<p>学院</p>
 								</a>
