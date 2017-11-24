@@ -450,48 +450,7 @@ public class CommonDao extends GenericBaseCommonDao implements ICommonDao, IGene
 		}
 	}
 
-	/**
-	 * 根据模型生成JSON
-	 * 
-	 * @param all
-	 *            全部对象
-	 * @param in
-	 *            已拥有的对象
-	 * @param comboBox
-	 *            模型
-	 * @return
-	 */
-	public List<ComboTree> comTree(List<TSDepart> all, ComboTree comboTree) {
-		List<ComboTree> trees = new ArrayList<ComboTree>();
-		for (TSDepart depart : all) {
-			trees.add(tree(depart, true));
-		}
-		return trees;
 
-	}
-
-	@SuppressWarnings("unchecked")
-	public ComboTree tree(TSDepart depart, boolean recursive) {
-		ComboTree tree = new ComboTree();
-		tree.setId(oConvertUtils.getString(depart.getId()));
-		tree.setText(depart.getDepartname());
-		List<TSDepart> departsList = findByProperty(TSDepart.class, "TSPDepart.id", depart.getId());
-		if (departsList != null && departsList.size() > 0) {
-			tree.setState("closed");
-			tree.setChecked(false);
-			if (recursive) {// 递归查询子节点
-				List<TSDepart> departList = new ArrayList<TSDepart>(departsList);
-				//Collections.sort(departList, new SetListSort());// 排序
-				List<ComboTree> children = new ArrayList<ComboTree>();
-				for (TSDepart d : departList) {
-					ComboTree t = tree(d, true);
-					children.add(t);
-				}
-				tree.setChildren(children);
-			}
-		}
-		return tree;
-	}
 
 	public List<ComboTree> ComboTree(List all, ComboTreeModel comboTreeModel, List in, boolean recursive) {
 		List<ComboTree> trees = new ArrayList<ComboTree>();
@@ -664,5 +623,9 @@ public class CommonDao extends GenericBaseCommonDao implements ICommonDao, IGene
 			treegrid.add(tg);
 		}
 		return treegrid;
+	}
+	
+	public static void main(String[] args){
+		System.err.println(PasswordUtil.encrypt("admin", "123456", PasswordUtil.getStaticSalt()));
 	}
 }

@@ -46,12 +46,10 @@ import org.jeecgframework.tag.core.easyui.TagUtil;
 import org.jeecgframework.tag.vo.easyui.ComboTreeModel;
 import org.jeecgframework.tag.vo.easyui.TreeGridModel;
 import org.jeecgframework.web.system.pojo.base.TSDataRule;
-import org.jeecgframework.web.system.pojo.base.TSDepart;
 import org.jeecgframework.web.system.pojo.base.TSFunction;
 import org.jeecgframework.web.system.pojo.base.TSOperation;
 import org.jeecgframework.web.system.pojo.base.TSRole;
 import org.jeecgframework.web.system.pojo.base.TSRoleFunction;
-import org.jeecgframework.web.system.pojo.base.TSRoleOrg;
 import org.jeecgframework.web.system.pojo.base.TSRoleUser;
 import org.jeecgframework.web.system.pojo.base.TSUser;
 import org.jeecgframework.web.system.service.SystemService;
@@ -393,45 +391,7 @@ public class RoleController extends BaseController {
 		return comboTrees;
 	}
 
-	/**
-	 * 更新 组织机构的角色列表
-	 * 
-	 * @param request
-	 *            request
-	 * @return 操作结果
-	 */
-	@RequestMapping(params = "updateOrgRole")
-	@ResponseBody
-	public AjaxJson updateOrgRole(HttpServletRequest request) {
-		AjaxJson j = new AjaxJson();
-		try {
-			String orgId = request.getParameter("orgId");
-			String roleIds = request.getParameter("roleIds");
-			List<String> roleIdList = extractIdListByComma(roleIds);
-			systemService.executeSql("delete from t_s_role_org where org_id=?",
-					orgId);
-			if (!roleIdList.isEmpty()) {
-				List<TSRoleOrg> roleOrgList = new ArrayList<TSRoleOrg>();
-				TSDepart depart = new TSDepart();
-				depart.setId(orgId);
-				for (String roleId : roleIdList) {
-					TSRole role = new TSRole();
-					role.setId(roleId);
-
-					TSRoleOrg roleOrg = new TSRoleOrg();
-					roleOrg.setTsRole(role);
-					roleOrg.setTsDepart(depart);
-					roleOrgList.add(roleOrg);
-				}
-				systemService.batchSave(roleOrgList);
-			}
-			j.setMsg("角色更新成功");
-		} catch (Exception e) {
-			logger.error(ExceptionUtil.getExceptionMessage(e));
-			j.setMsg("角色更新失败");
-		}
-		return j;
-	}
+	
 
 
 	/**

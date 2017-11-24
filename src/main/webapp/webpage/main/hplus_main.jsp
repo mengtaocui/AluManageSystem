@@ -89,7 +89,7 @@
                                     <t:mutiLang langKey="common.change.password"/>
                                 </a>
                             </li>
-                            <li><a href="javascript:openwindow('<t:mutiLang langKey="common.profile"/>','userController.do?userinfo')"><t:mutiLang langKey="common.profile"/></a></li>
+                            <li><a href="javascript:openwindow('个人信息查看/修改','userController.do?userinfo','','659','535')"><t:mutiLang langKey="common.profile"/></a></li>
                             <%-- <li><a href="javascript:openwindow('<t:mutiLang langKey="common.ssms.getSysInfos"/>','tSSmsController.do?getSysInfos')"><t:mutiLang langKey="common.ssms.getSysInfos"/></a></li> --%>
                             <li><a href="javascript:add('<t:mutiLang langKey="common.change.style"/>','userController.do?changestyle','',550,250)"><t:mutiLang langKey="common.my.style"/></a></li>
                             <li><a href="javascript:clearLocalstorage()"><t:mutiLang langKey="common.clear.localstorage"/></a></li>

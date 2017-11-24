@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.jeecgframework.web.system.pojo.base.TSDepart;
 import org.jeecgframework.web.system.pojo.base.TSUser;
 
 import org.jeecgframework.core.common.model.common.UploadFile;
@@ -53,7 +52,6 @@ public interface ICommonDao extends IGenericBaseCommonDao{
 	 * @param fileName XML全路径
 	 */
 	public void parserXml(String fileName);
-	public List<ComboTree> comTree(List<TSDepart> all,ComboTree comboTree);
 
 	/**
      * 根据模型生成ComboTree JSON

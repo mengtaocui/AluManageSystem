@@ -33,7 +33,6 @@ import org.jeecgframework.core.util.SysThemesUtil;
 import org.jeecgframework.core.util.oConvertUtils;
 import org.jeecgframework.web.system.manager.ClientManager;
 import org.jeecgframework.web.system.pojo.base.Client;
-import org.jeecgframework.web.system.pojo.base.TSDepart;
 import org.jeecgframework.web.system.pojo.base.TSFunction;
 import org.jeecgframework.web.system.pojo.base.TSRole;
 import org.jeecgframework.web.system.pojo.base.TSRoleFunction;
@@ -50,7 +49,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.baomidou.kisso.SSOConfig;
 import com.baomidou.kisso.SSOHelper;
 import com.baomidou.kisso.SSOToken;
 import com.baomidou.kisso.common.util.HttpUtil;
@@ -240,7 +238,6 @@ public class LoginController extends BaseController{
             modelMap.put("userName", user.getUserName().length()>5?user.getUserName().substring(0, 5)+"...":user.getUserName());
             modelMap.put("portrait", user.getPortrait());
 
-            modelMap.put("currentOrgName", ClientManager.getInstance().getClient().getUser().getCurrentDepart().getDepartname());
 			SysThemesEnum sysTheme = SysThemesUtil.getSysTheme(request);
 			if("ace".equals(sysTheme.getStyle())||"diy".equals(sysTheme.getStyle())||"acele".equals(sysTheme.getStyle())||"hplus".equals(sysTheme.getStyle())){
 				request.setAttribute("menuMap", getFunctionMap(user));
@@ -394,22 +391,12 @@ public class LoginController extends BaseController{
 			Map<String, TSFunction> loginActionlist = new HashMap<String, TSFunction>();
 
 	           StringBuilder hqlsb1=new StringBuilder("select distinct f from TSFunction f,TSRoleFunction rf,TSRoleUser ru  ").append("where ru.TSRole.id=rf.TSRole.id and rf.TSFunction.id=f.id and ru.TSUser.id=? ");
-
-	           StringBuilder hqlsb2=new StringBuilder("select distinct c from TSFunction c,TSRoleFunction rf,TSRoleOrg b,TSUserOrg a ")
-	           							.append("where a.tsDepart.id=b.tsDepart.id and b.tsRole.id=rf.TSRole.id and rf.TSFunction.id=c.id and a.tsUser.id=?");
-
-	           List<TSFunction> list1 = systemService.findHql(hqlsb1.toString(),user.getId());
-	           List<TSFunction> list2 = systemService.findHql(hqlsb2.toString(),user.getId());
+	           List<TSFunction> list1 = systemService.findHql(hqlsb1.toString(), new Object[]{user.getId()});
 	           for(TSFunction function:list1){
-		              loginActionlist.put(function.getId(),function);
-		       }
-	           for(TSFunction function:list2){
 		              loginActionlist.put(function.getId(),function);
 		       }
             client.setFunctions(loginActionlist);
 
-            //清空变量，降低内存使用
-            list2.clear();
             list1.clear();
 
 		}

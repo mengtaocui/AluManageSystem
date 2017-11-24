@@ -22,7 +22,6 @@ import org.jeecgframework.tag.vo.datatable.DataTableReturn;
 import org.jeecgframework.tag.vo.easyui.Autocomplete;
 import org.jeecgframework.tag.vo.easyui.ComboTreeModel;
 import org.jeecgframework.tag.vo.easyui.TreeGridModel;
-import org.jeecgframework.web.system.pojo.base.TSDepart;
 import org.springframework.dao.DataAccessException;
 
 public interface CommonService {
@@ -248,7 +247,6 @@ public interface CommonService {
 	 */
 	public void parserXml(String fileName);
 
-	public List<ComboTree> comTree(List<TSDepart> all, ComboTree comboTree);
 
 	/**
 	 * 根据模型生成JSON

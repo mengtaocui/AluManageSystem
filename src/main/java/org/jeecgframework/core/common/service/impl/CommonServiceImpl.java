@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jeecgframework.web.system.pojo.base.TSDepart;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.jeecgframework.core.common.dao.ICommonDao;
@@ -332,9 +331,6 @@ public class CommonServiceImpl implements CommonService {
 		commonDao.parserXml(fileName);
 	}
 
-	public List<ComboTree> comTree(List<TSDepart> all, ComboTree comboTree) {
-		return commonDao.comTree(all, comboTree);
-	}
 
 	public List<ComboTree> ComboTree(List all, ComboTreeModel comboTreeModel, List in, boolean recursive) {
         return commonDao.ComboTree(all, comboTreeModel, in, recursive);

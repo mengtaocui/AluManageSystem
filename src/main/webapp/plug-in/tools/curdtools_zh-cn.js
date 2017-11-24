@@ -1508,12 +1508,13 @@ function tipImg(obj){
 				var src = obj.src;
 				var width = obj.naturalWidth;
 				var height = obj.naturalHeight;
+				//alert(width+"--"+height);
 				bigImgIndex = layer.open({
 					content:[src,'no'],
 					type:2,
 					offset:[y+"px",x+"px"],
 					title:false,
-					area:[width+"px",height+"px"],
+					area:["320px","230px"],
 					shade:0,
 					closeBtn:0
 				});

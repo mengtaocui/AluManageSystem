@@ -28,6 +28,9 @@
 				</c:if>
 				<tr>
 					<td align="right">
+					    <c:if test="${ not empty LOCAL_CLINET_USER.collegeName  }">
+							<input type="hidden" id="collegeId" name="collegeId" value="${classmatePage.collegeId}"/>
+						</c:if>
 						<label class="Validform_label">
 							标题:
 						</label>

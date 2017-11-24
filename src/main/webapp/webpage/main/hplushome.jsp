@@ -71,7 +71,7 @@
 							</div>
                 			<div class="value">
 								<a href="javascript:addOneTab('学院管理', 'collegeController.do?list', null);">
-									<h1 class="count1" id="college">10</h1>
+									<h1 class="count1" id="college">0</h1>
 									<p>学院</p>
 								</a>
 							</div>
@@ -84,7 +84,7 @@
 							</div>
                 			<div class="value">
 								<a href="javascript:addOneTab('班级管理', 'gradeController.do?list', null);">
-									<h1 class="count1" id="grade">10</h1>
+									<h1 class="count1" id="grade">0</h1>
 									<p>班级</p>
 								</a>
 							</div>
@@ -98,7 +98,7 @@
 							</div>
                 			<div class="value">
 								<a href="javascript:addOneTab('活动管理', 'activityController.do?list', null);">
-									<h1 class="count1" id="activity">10</h1>
+									<h1 class="count1" id="activity">0</h1>
 									<p>活动</p>
 								</a>
 							</div>
@@ -111,7 +111,7 @@
 							</div>
                 			<div class="value">
 								<a href="javascript:addOneTab('帖子管理', 'invitationController.do?list', null);">
-									<h1 class="count1" id="invitation">10</h1>
+									<h1 class="count1" id="invitation">0</h1>
 									<p>帖子</p>
 								</a>
 							</div>
@@ -126,7 +126,7 @@
 							</div>
                 			<div class="value">
 								<a href="javascript:addOneTab('新闻管理', 'newsController.do?list', null);">
-									<h1 class="count1" id="news">10</h1>
+									<h1 class="count1" id="news">0</h1>
 									<p>新闻</p>
 								</a>
 							</div>
@@ -139,7 +139,7 @@
 							</div>
                 			<div class="value">
 								<a href="javascript:addOneTab('公告管理', 'noticesController.do?list', null);">
-									<h1 class="count1" id="notices">10</h1>
+									<h1 class="count1" id="notices">0</h1>
 									<p>公告</p>
 								</a>
 							</div>
@@ -152,7 +152,7 @@
 							</div>
                 			<div class="value">
 								<a href="javascript:addOneTab('资料管理', 'activitySpaceController.do?list', null);">
-									<h1 class="count1" id="activitySpace">10</h1>
+									<h1 class="count1" id="activitySpace">0</h1>
 									<p>资料</p>
 								</a>
 							</div>
@@ -160,12 +160,12 @@
                 	</td>
                 	<td>
                 		<div class="item-wrap">
-                			<div class="symbol" style="background: #d9534f;"> 
-                				<i class="fa fa-camera-retro"></i>
+                			<div class="symbol" style="background: #5cb85c;"> 
+                				<i class="fa  fa-credit-card"></i>
 							</div>
                 			<div class="value">
-								<a href="javascript:addOneTab('捐赠项目管理', 'activitySpaceController.do?list', null);">
-									<h1 class="count1" id="activitySpace">10</h1>
+								<a href="javascript:addOneTab('捐赠项目管理', 'donateController.do?list', null);">
+									<h1 class="count1" id="donate">0</h1>
 									<p>捐赠项目</p>
 								</a>
 							</div>
@@ -179,48 +179,32 @@
 		<script>
 		    $(function(){
 		    	initDomSize();
-		    	
 		    	initCount();
-		    	/* setInterval(function(){
+		    	setInterval(function(){
 					initCount();
-				}, 5000); */
+				}, 5000);
 		    })
 		    
 		   function initDomSize(){
 		    	
 		    	if ((screen.width == 1920) && (screen.height == 1080)) {
+		    	
+		    		$('.table-wrap').css({'margin-top':140});
+	            
+		    	} else if ((screen.width == 1600) && (screen.height == 900)) {
 		    		
-		    		/* $('.item-wrap').width('372.64');
-		    		$('.symbol').width('147.5');
-		    		$('.value').width('213.88'); */
-		    		$('.table-wrap').css({'margin-top':100});
-                	
-	            } else if ((screen.width == 1600) && (screen.height == 900)) {
+		    		$('.table-wrap').css({'margin-top':130});
+	            
+		    	} else if ((screen.width == 1366) && (screen.height == 768)) {
 	            	
-	            	/* $('.item-wrap').width('297.4');
-	            	$('.symbol').width('117.09');
-		    		$('.value').width('169.8'); */
-		    		$('.table-wrap').css({'margin-top':100});
-                	
-	            } else if ((screen.width == 1366) && (screen.height == 768)) {
-	            	
-	            /* 	$('.item-wrap').width('241.71');
-	            	$('.symbol').width('93.73');
-		    		$('.value').width('133.58'); */
 		    		$('.table-wrap').css({'margin-top':60,'padding':'60px 20px 40px 20px'});
                 	
 	            } else if ((screen.width == 1280) && (screen.height == 1024)) {
-	            	
-	            /* 	$('.item-wrap').width('221.27');
-	            	$('.symbol').width('86.08');
-		    		$('.value').width('122.67'); */
-		    		$('.table-wrap').css({'margin-top':160,'padding':'60px 20px 40px 20px'});
+		    		
+	            	$('.table-wrap').css({'margin-top':160,'padding':'60px 20px 40px 20px'});
                 	
 	            } else if ((screen.width == 1152) && (screen.height == 864)) {
 	            	
-	            	/* $('.item-wrap').width('189.5');
-	            	$('.symbol').width('74.44');
-		    		$('.value').width('106.06'); */
 		    		$('.table-wrap').css({'margin-top':80,'padding':'60px 20px 40px 20px'});
 	                
 	            }
@@ -233,13 +217,16 @@
 					dataType: 'json',
 					success: function(data){
 						if(data){
-							$('#college').html(data.college);
+							if(!'${LOCAL_CLINET_USER.collegeName }')
+								$('#college').html(data.college);
+							
 							$('#news').html(data.news);
 							$('#notices').html(data.notices);
 							$('#activity').html(data.activity);
 							$('#activitySpace').html(data.activitySpace);
 							$('#invitation').html(data.invitation);
 							$('#grade').html(data.grade);
+							$('#donate').html(data.donate);
 						}
 					},
 					error: function(data){

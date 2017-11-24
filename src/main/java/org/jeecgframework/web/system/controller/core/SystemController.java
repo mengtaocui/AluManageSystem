@@ -54,7 +54,6 @@ import org.jeecgframework.web.system.manager.ClientSort;
 import org.jeecgframework.web.system.pojo.base.Client;
 import org.jeecgframework.web.system.pojo.base.DataLogDiff;
 import org.jeecgframework.web.system.pojo.base.TSDatalogEntity;
-import org.jeecgframework.web.system.pojo.base.TSDepart;
 import org.jeecgframework.web.system.pojo.base.TSFunction;
 import org.jeecgframework.web.system.pojo.base.TSRole;
 import org.jeecgframework.web.system.pojo.base.TSRoleFunction;
@@ -614,82 +613,8 @@ public class SystemController extends BaseController {
 		return new ModelAndView("system/depart/departList");
 	}
 
-	/**
-	 * easyuiAJAX请求数据
-	 *
-	 * @param request
-	 * @param response
-	 * @param dataGrid
-	 */
 
-	@RequestMapping(params = "datagridDepart")
-	public void datagridDepart(HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
-		CriteriaQuery cq = new CriteriaQuery(TSDepart.class, dataGrid);
-		this.systemService.getDataGridReturn(cq, true);
-		TagUtil.datagrid(response, dataGrid);
-		;
-	}
 
-	/**
-	 * 删除部门
-	 *
-	 * @return
-	 */
-	@RequestMapping(params = "delDepart")
-	@ResponseBody
-	public AjaxJson delDepart(TSDepart depart, HttpServletRequest request) {
-		String message = null;
-		AjaxJson j = new AjaxJson();
-		depart = systemService.getEntity(TSDepart.class, depart.getId());
-		message = "部门: " + depart.getDepartname() + "被删除 成功";
-		systemService.delete(depart);
-		systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
-
-		return j;
-	}
-
-	/**
-	 * 添加部门
-	 *
-	 * @param depart
-	 * @return
-	 */
-	@RequestMapping(params = "saveDepart")
-	@ResponseBody
-	public AjaxJson saveDepart(TSDepart depart, HttpServletRequest request) {
-		String message = null;
-		// 设置上级部门
-		String pid = request.getParameter("TSPDepart.id");
-		if (pid.equals("")) {
-			depart.setTSPDepart(null);
-		}
-		AjaxJson j = new AjaxJson();
-		if (StringUtil.isNotEmpty(depart.getId())) {
-			userService.saveOrUpdate(depart);
-            message = MutiLangUtil.paramUpdSuccess("common.department");
-            systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
-
-		} else {
-
-//			String orgCode = systemService.generateOrgCode(depart.getId(), pid);
-//			depart.setOrgCode(orgCode);
-			if(oConvertUtils.isNotEmpty(pid)){
-				TSDepart paretDept = systemService.findUniqueByProperty(TSDepart.class, "id", pid);
-				String localMaxCode  = getMaxLocalCode(paretDept.getOrgCode());
-				depart.setOrgCode(YouBianCodeUtil.getSubYouBianCode(paretDept.getOrgCode(), localMaxCode));
-			}else{
-				String localMaxCode  = getMaxLocalCode(null);
-				depart.setOrgCode(YouBianCodeUtil.getNextYouBianCode(localMaxCode));
-			}
-
-			userService.save(depart);
-            message = MutiLangUtil.paramAddSuccess("common.department");
-            systemService.addLog(message, Globals.Log_Type_INSERT, Globals.Log_Leavel_INFO);
-
-        }
-		j.setMsg(message);
-		return j;
-	}
 
 	private synchronized String getMaxLocalCode(String parentCode){
 		if(oConvertUtils.isEmpty(parentCode)){
@@ -719,45 +644,6 @@ public class SystemController extends BaseController {
 		return returnCode;
 	}
 
-	/**
-	 * 部门列表页面跳转
-	 *
-	 * @return
-	 */
-	@RequestMapping(params = "addorupdateDepart")
-	public ModelAndView addorupdateDepart(TSDepart depart, HttpServletRequest req) {
-		List<TSDepart> departList = systemService.getList(TSDepart.class);
-		req.setAttribute("departList", departList);
-		if (depart.getId() != null) {
-			depart = systemService.getEntity(TSDepart.class, depart.getId());
-			req.setAttribute("depart", depart);
-		}
-		return new ModelAndView("system/depart/depart");
-	}
-
-	/**
-	 * 父级权限列表
-	 *
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping(params = "setPFunction")
-	@ResponseBody
-	public List<ComboTree> setPFunction(HttpServletRequest request, ComboTree comboTree) {
-		CriteriaQuery cq = new CriteriaQuery(TSDepart.class);
-		if (StringUtil.isNotEmpty(comboTree.getId())) {
-			cq.eq("TSPDepart.id", comboTree.getId());
-		}
-		if (StringUtil.isEmpty(comboTree.getId())) {
-			cq.isNull("TSPDepart.id");
-		}
-		cq.add();
-		List<TSDepart> departsList = systemService.getListByCriteriaQuery(cq, false);
-		List<ComboTree> comboTrees = new ArrayList<ComboTree>();
-		comboTrees = systemService.comTree(departsList, comboTree);
-		return comboTrees;
-
-	}
 
 	/*
 	 * *****************角色管理操作****************************

@@ -188,6 +188,7 @@ public class StatisticsController extends BaseController {
 		map.put("notices", statisticsService.getAwaitHandCount("t_notices", collegeId));
 		map.put("activitySpace", statisticsService.getAwaitHandCount("t_activity_space", collegeId));
 		map.put("grade", statisticsService.getAwaitHandCount("t_grade", collegeId));
+		map.put("donate", statisticsService.getAwaitHandCount("t_donate", collegeId));
 		return map;
 	}
 }

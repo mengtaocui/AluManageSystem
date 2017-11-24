@@ -34,7 +34,6 @@ import org.jeecgframework.p3.core.utils.common.StringUtils;
 import org.jeecgframework.tag.core.easyui.TagUtil;
 import org.jeecgframework.tag.vo.easyui.ComboTreeModel;
 import org.jeecgframework.web.system.pojo.base.TSDataRule;
-import org.jeecgframework.web.system.pojo.base.TSDepart;
 import org.jeecgframework.web.system.pojo.base.TSFunction;
 import org.jeecgframework.web.system.pojo.base.TSFunctionGroupEntity;
 import org.jeecgframework.web.system.pojo.base.TSFunctionGroupRelEntity;
@@ -42,7 +41,6 @@ import org.jeecgframework.web.system.pojo.base.TSFunctionGroupUserEntity;
 import org.jeecgframework.web.system.pojo.base.TSOperation;
 import org.jeecgframework.web.system.pojo.base.TSRoleUser;
 import org.jeecgframework.web.system.pojo.base.TSUser;
-import org.jeecgframework.web.system.pojo.base.TSUserOrg;
 import org.jeecgframework.web.system.service.SystemService;
 import org.jeecgframework.web.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -777,27 +775,7 @@ public class FunctionGroupController extends BaseController {
 	        if(!userName.equals("admin")) {
 	        	StringBuffer hql = new StringBuffer(" from TSDepart t where 1=1 ");
 				hql.append(" and id in (select deptId from TSFunctionGroupEntity where id in (select groupId from TSFunctionGroupUserEntity where userId = ?))");
-	        	List<TSDepart> deptList = this.systemService.findHql(hql.toString(), userName);
 	        	List<String> userLists = new ArrayList<String>();
-	        	//根据获取的部门id查询userid
-	        	for (TSDepart dept : deptList) {
-	        		String orgCodeHql = " from TSDepart where orgCode like '"+dept.getOrgCode()+"%'";
-	        		List<TSDepart> orgCode = this.systemService.findHql(orgCodeHql);
-	        		for (TSDepart code : orgCode) {
-	        			TSDepart tsDept = this.systemService.getEntity(TSDepart.class, code.getId());
-						String deptHql = new String(" from TSUserOrg where tsDepart = ?");
-						List<TSUserOrg> userList = this.systemService.findHql(deptHql, tsDept);
-						if(userList != null && userList.size()>0) {
-							for (TSUserOrg u : userList) {
-								if(u.getTsUser() != null) {
-									if(StringUtils.isNotEmpty(u.getTsUser().getId())) {
-										userLists.add(u.getTsUser().getId());
-									}
-								}
-							}
-						}
-					}
-				}
 	        	String[] userArrays = new String[userLists.size()];
 	        	userLists.toArray(userArrays);
 	        	if(userArrays != null && userArrays.length>0) {
@@ -806,16 +784,7 @@ public class FunctionGroupController extends BaseController {
 	        		cq = null;
 	        	}
 	        }
-	        String orgIds = request.getParameter("orgIds");
-	        List<String> orgIdList = extractIdListByComma(orgIds);
-	        // 获取 当前组织机构的用户信息
-	        if (!CollectionUtils.isEmpty(orgIdList)) {
-	            CriteriaQuery subCq = new CriteriaQuery(TSUserOrg.class);
-	            subCq.setProjection(Property.forName("tsUser.id"));
-	            subCq.in("tsDepart.id", orgIdList.toArray());
-	            subCq.add();
-	            cq.add(Property.forName("id").in(subCq.getDetachedCriteria()));	
-	        }
+	        
 	        if(cq != null) {
 		        cq.add();	        	
 	        }
@@ -982,84 +951,6 @@ public class FunctionGroupController extends BaseController {
 		return j;
 	}
 	
-	/**
-	 * 二级权限组授权显示部门树
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	@RequestMapping(params = "getDepartInfo")
-	@ResponseBody
-	public AjaxJson getDepartInfo(HttpServletRequest request, HttpServletResponse response){
-		AjaxJson j = new AjaxJson();
-		//根据登陆用户判断，二级管理员根据一级权限组查询
-		String userName = ResourceUtil.getSessionUser().getUserName();
-		String orgIds = request.getParameter("orgIds");
-		String[] ids = new String[]{}; 
-		if(StringUtils.isNotBlank(orgIds)){
-			orgIds = orgIds.substring(0, orgIds.length()-1);
-			ids = orgIds.split("\\,");
-		}
-		TSDepart dePart = null;
-		List<TSDepart> tSDeparts = new ArrayList<TSDepart>();
-		String parentid = request.getParameter("parentid");
-		if(userName.equals("admin")) {
-			StringBuffer hql = new StringBuffer(" from TSDepart t where 1=1 ");
-			if(StringUtils.isNotBlank(parentid)){
-				dePart = this.systemService.getEntity(TSDepart.class, parentid);
-				hql.append(" and TSPDepart = ?");
-				tSDeparts = this.systemService.findHql(hql.toString(), dePart);
-			} else {
-				hql.append(" and t.orgType = ?");
-				tSDeparts = this.systemService.findHql(hql.toString(), "1");
-			}
-		} else {
-			StringBuffer hql = new StringBuffer(" from TSDepart t where 1=1 ");
-			hql.append(" and id in (select deptId from TSFunctionGroupEntity where id in (select groupId from TSFunctionGroupUserEntity where userId = '"+userName+"'))");
-			if(StringUtils.isNotBlank(parentid)) {
-				dePart = this.systemService.getEntity(TSDepart.class, parentid);
-				hql = new StringBuffer(" from TSDepart where TSPDepart = ?");
-				tSDeparts = this.systemService.findHql(hql.toString(),dePart);
-			} else {
-				tSDeparts = this.systemService.findHql(hql.toString());
-			}
-		}
-		List<Map<String,Object>> dateList = new ArrayList<Map<String,Object>>();
-		if(tSDeparts.size()>0){
-			Map<String,Object> map = null;
-			String sql = null;
-			 Object[] params = null;
-			for(TSDepart depart:tSDeparts){
-				map = new HashMap<String,Object>();
-				map.put("id", depart.getId());
-				map.put("name", depart.getDepartname());
-				map.put("code",depart.getOrgCode());
-				if(ids.length>0){
-					for(String id:ids){
-						if(id.equals(depart.getId())){
-							map.put("checked", true);
-						}
-					}
-				}
-				if(StringUtils.isNotBlank(parentid)){
-					map.put("pId", parentid);
-				} else{
-					map.put("pId", "1");
-				}
-				//根据id判断是否有子节点
-				sql = "select count(1) from t_s_depart t where t.parentdepartid = ?";
-				params = new Object[]{depart.getId()};
-				long count = this.systemService.getCountForJdbcParam(sql, params);
-				if(count>0){
-					map.put("isParent",true);
-				}
-				dateList.add(map);
-			}
-		}
-		net.sf.json.JSONArray jsonArray = net.sf.json.JSONArray.fromObject(dateList);
-		j.setMsg(jsonArray.toString());
-		return j;
-	}
 	
 	/**
 	 * 授权获取ID,GroupId保存数据

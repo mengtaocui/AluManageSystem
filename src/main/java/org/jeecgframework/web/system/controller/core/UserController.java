@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.Cookie;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.hibernate.criterion.Property;
 import org.jeecgframework.core.common.controller.BaseController;
 import org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery;
 import org.jeecgframework.core.common.model.common.UploadFile;
@@ -24,45 +22,35 @@ import org.jeecgframework.core.common.model.json.DataGrid;
 import org.jeecgframework.core.common.model.json.ValidForm;
 import org.jeecgframework.core.constant.Globals;
 import org.jeecgframework.core.enums.SysThemesEnum;
-import org.jeecgframework.core.util.ExceptionUtil;
+import org.jeecgframework.core.util.DateUtils;
 import org.jeecgframework.core.util.IpUtil;
 import org.jeecgframework.core.util.ListtoMenu;
 import org.jeecgframework.core.util.MyBeanUtils;
 import org.jeecgframework.core.util.PasswordUtil;
 import org.jeecgframework.core.util.ResourceUtil;
-import org.jeecgframework.core.util.RoletoJson;
 import org.jeecgframework.core.util.SetListSort;
 import org.jeecgframework.core.util.StringUtil;
 import org.jeecgframework.core.util.SysThemesUtil;
 import org.jeecgframework.core.util.oConvertUtils;
-import org.jeecgframework.poi.excel.ExcelImportUtil;
-import org.jeecgframework.poi.excel.entity.ExportParams;
-import org.jeecgframework.poi.excel.entity.ImportParams;
-import org.jeecgframework.poi.excel.entity.vo.NormalExcelConstants;
 import org.jeecgframework.tag.core.easyui.TagUtil;
-import org.jeecgframework.tag.vo.datatable.DataTableReturn;
-import org.jeecgframework.tag.vo.datatable.DataTables;
 import org.jeecgframework.web.system.manager.ClientManager;
-import org.jeecgframework.web.system.pojo.base.TSDepart;
 import org.jeecgframework.web.system.pojo.base.TSFunction;
 import org.jeecgframework.web.system.pojo.base.TSRole;
 import org.jeecgframework.web.system.pojo.base.TSRoleFunction;
 import org.jeecgframework.web.system.pojo.base.TSRoleUser;
 import org.jeecgframework.web.system.pojo.base.TSUser;
-import org.jeecgframework.web.system.pojo.base.TSUserOrg;
 import org.jeecgframework.web.system.service.SystemService;
 import org.jeecgframework.web.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.alu.common.Constant;
+import com.alu.entity.ActivityEntity;
 
 
 /**
@@ -156,9 +144,6 @@ public class UserController extends BaseController {
 	@RequestMapping(params = "user")
 	public String user(HttpServletRequest request) {
 		// 给部门查询条件中的下拉框准备数据
-		List<TSDepart> departList = systemService.getList(TSDepart.class);
-		request.setAttribute("departsReplace", RoletoJson.listToReplaceStr(departList, "departname", "id"));
-		departList.clear();
 		return "system/user/userList";
 	}
 
@@ -367,33 +352,6 @@ public class UserController extends BaseController {
 		return comboBoxs;
 	}
 
-	/**
-	 * 得到部门列表
-	 * 
-	 * @return
-	 */
-	@RequestMapping(params = "depart")
-	@ResponseBody
-	public List<ComboBox> depart(HttpServletResponse response, HttpServletRequest request, ComboBox comboBox) {
-		String id = request.getParameter("id");
-		List<ComboBox> comboBoxs = new ArrayList<ComboBox>();
-		List<TSDepart> departs = new ArrayList();
-		if (StringUtil.isNotEmpty(id)) {
-			TSUser user = systemService.get(TSUser.class, id);
-//			if (user.getTSDepart() != null) {
-//				TSDepart depart = systemService.get(TSDepart.class, user.getTSDepart().getId());
-//				departs.add(depart);
-//			}
-            // todo zhanggm 获取指定用户的组织机构列表
-            List<TSDepart[]> resultList = systemService.findHql("from TSDepart d,TSUserOrg uo where d.id=uo.orgId and uo.id=?", id);
-            for (TSDepart[] departArr : resultList) {
-                departs.add(departArr[0]);
-            }
-        }
-		List<TSDepart> departList = systemService.getList(TSDepart.class);
-		comboBoxs = TagUtil.getComboBox(departList, departs, comboBox);
-		return comboBoxs;
-	}
 
 	/**
 	 * easyuiAJAX用户列表请求数据 
@@ -409,19 +367,8 @@ public class UserController extends BaseController {
 
         Short[] userstate = new Short[]{Globals.User_Normal, Globals.User_ADMIN, Globals.User_Forbidden};
         cq.in("status", userstate);
+        cq.notEq("userRoleCode", "admin");
         cq.eq("deleteFlag", Globals.Delete_Normal);
-
-        String orgIds = request.getParameter("orgIds");
-        List<String> orgIdList = extractIdListByComma(orgIds);
-        // 获取 当前组织机构的用户信息
-        if (!CollectionUtils.isEmpty(orgIdList)) {
-            CriteriaQuery subCq = new CriteriaQuery(TSUserOrg.class);
-            subCq.setProjection(Property.forName("tsUser.id"));
-            subCq.in("tsDepart.id", orgIdList.toArray());
-            subCq.add();
-
-            cq.add(Property.forName("id").in(subCq.getDetachedCriteria()));
-        }
 
 
         cq.add();
@@ -628,8 +575,6 @@ public class UserController extends BaseController {
 			users.setMobilePhone(user.getMobilePhone());
 
             systemService.executeSql("delete from t_s_user_org where user_id=?", user.getId());
-            saveUserOrgList(req, user);
-//            users.setTSDepart(user.getTSDepart());
 
 			users.setRealName(user.getRealName());
 			users.setStatus(Globals.User_Normal);
@@ -648,14 +593,9 @@ public class UserController extends BaseController {
 				message = "用户: " + users.getUserName() + "已经存在";
 			} else {
 				user.setPassword(PasswordUtil.encrypt(user.getUserName(), password, PasswordUtil.getStaticSalt()));
-//				if (user.getTSDepart().equals("")) {
-//					user.setTSDepart(null);
-//				}
 				user.setStatus(Globals.User_Normal);
 				user.setDeleteFlag(Globals.Delete_Normal);
 				systemService.save(user);
-                // todo zhanggm 保存多个组织机构
-                saveUserOrgList(req, user);
 				message = "用户: " + user.getUserName() + "添加成功";
 				if (StringUtil.isNotEmpty(roleid)) {
 					saveRoleUser(user, roleid);
@@ -669,31 +609,7 @@ public class UserController extends BaseController {
 		return j;
 	}
 
-    /**
-     * 保存 用户-组织机构 关系信息
-     * @param request request
-     * @param user user
-     */
-    private void saveUserOrgList(HttpServletRequest request, TSUser user) {
-        String orgIds = oConvertUtils.getString(request.getParameter("orgIds"));
-
-        List<TSUserOrg> userOrgList = new ArrayList<TSUserOrg>();
-        List<String> orgIdList = extractIdListByComma(orgIds);
-        for (String orgId : orgIdList) {
-            TSDepart depart = new TSDepart();
-            depart.setId(orgId);
-
-            TSUserOrg userOrg = new TSUserOrg();
-            userOrg.setTsUser(user);
-            userOrg.setTsDepart(depart);
-
-            userOrgList.add(userOrg);
-        }
-        if (!userOrgList.isEmpty()) {
-            systemService.batchSave(userOrgList);
-        }
-    }
-
+    
 
     protected void saveRoleUser(TSUser user, String roleidstr) {
 		String[] roleids = roleidstr.split(",");
@@ -748,52 +664,17 @@ public class UserController extends BaseController {
 	@RequestMapping(params = "addorupdate")
 	public ModelAndView addorupdate(TSUser user, HttpServletRequest req) {
 
-		/*		List<TSDepart> departList = new ArrayList<TSDepart>();
-		String departid = oConvertUtils.getString(req.getParameter("departid"));
-		if(!StringUtil.isEmpty(departid)){
-			departList.add((TSDepart)systemService.getEntity(TSDepart.class,departid));
-		}else {
-			departList.addAll((List)systemService.getList(TSDepart.class));
-		}
-		req.setAttribute("departList", departList);*/
 
         List<String> orgIdList = new ArrayList<String>();
-        TSDepart tsDepart = new TSDepart();
 		if (StringUtil.isNotEmpty(user.getId())) {
 			user = systemService.getEntity(TSUser.class, user.getId());
 			
 			req.setAttribute("user", user);
 			idandname(req, user);
-			getOrgInfos(req, user);
 		}
-		req.setAttribute("tsDepart", tsDepart);
-        //req.setAttribute("orgIdList", JSON.toJSON(orgIdList));
-
-
         return new ModelAndView("system/user/user");
 	}
 
-    /**
-     * 用户的登录后的组织机构选择页面
-     * @param request request
-     * @return 用户选择组织机构页面
-     */
-	@RequestMapping(params = "userOrgSelect")
-	public ModelAndView userOrgSelect(HttpServletRequest request) {
-		List<TSDepart> orgList = new ArrayList<TSDepart>();
-		String userId = oConvertUtils.getString(request.getParameter("userId"));
-
-        List<Object[]> orgArrList = systemService.findHql("from TSDepart d,TSUserOrg uo where d.id=uo.tsDepart.id and uo.tsUser.id=?", new String[]{userId});
-        for (Object[] departs : orgArrList) {
-            orgList.add((TSDepart) departs[0]);
-        }
-        request.setAttribute("orgList", orgList);
-
-        TSUser user = systemService.getEntity(TSUser.class, userId);
-        request.setAttribute("user", user);
-
-		return new ModelAndView("system/user/userOrgSelect");
-    }
 
 
 	public void idandname(HttpServletRequest req, TSUser user) {
@@ -811,20 +692,6 @@ public class UserController extends BaseController {
 
 	}
 	
-	public void getOrgInfos(HttpServletRequest req, TSUser user) {
-		List<TSUserOrg> tSUserOrgs = systemService.findByProperty(TSUserOrg.class, "tsUser.id", user.getId());
-		String orgIds = "";
-		String departname = "";
-		if (tSUserOrgs.size() > 0) {
-			for (TSUserOrg tSUserOrg : tSUserOrgs) {
-				orgIds += tSUserOrg.getTsDepart().getId() + ",";
-				departname += tSUserOrg.getTsDepart().getDepartname() + ",";
-			}
-		}
-		req.setAttribute("orgIds", orgIds);
-		req.setAttribute("departname", departname);
-
-	}
 	
 	/**
 	 * 根据部门和角色选择用户跳转页面
@@ -908,41 +775,6 @@ public class UserController extends BaseController {
 			modelAndView = new ModelAndView("system/membership/departList");
 		}
 		return modelAndView;
-	}
-
-	/**
-	 * 部门和角色选择用户的用户显示列表
-	 * 
-	 * @param request
-	 * @param response
-	 * @param dataGrid
-	 */
-	@RequestMapping(params = "datagridDepart")
-	public void datagridDepart(HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
-		CriteriaQuery cq = new CriteriaQuery(TSDepart.class, dataGrid);
-		systemService.getDataGridReturn(cq, true);
-		TagUtil.datagrid(response, dataGrid);
-	}
-
-	/**
-	 * 测试
-	 * 
-	 * @param user
-	 * @param req
-	 * @return
-	 */
-	@RequestMapping(params = "test")
-	public void test(HttpServletRequest request, HttpServletResponse response) {
-		String jString = request.getParameter("_dt_json");
-		DataTables dataTables = new DataTables(request);
-		CriteriaQuery cq = new CriteriaQuery(TSUser.class, dataTables);
-		String username = request.getParameter("userName");
-		if (username != null) {
-			cq.like("userName", username);
-			cq.add();
-		}
-		DataTableReturn dataTableReturn = systemService.getDataTableReturn(cq, true);
-		TagUtil.datatable(response, dataTableReturn, "id,userName,mobilePhone,TSDepart_departname");
 	}
 
 	/**
@@ -1131,191 +963,31 @@ public class UserController extends BaseController {
 	}
 
 	/**
-	 * 导出excel
-	 *
-	 * @param request
-	 * @param response
+	 * 修改用户信息
+	 * 
+	 * @param ids
+	 * @return
 	 */
-	@RequestMapping(params = "exportXls")
-	public String exportXls(TSUser tsUser,HttpServletRequest request,HttpServletResponse response
-			, DataGrid dataGrid,ModelMap modelMap) {
-		CriteriaQuery cq = new CriteriaQuery(TSUser.class, dataGrid);
-		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tsUser, request.getParameterMap());
-		List<TSUser> tsUsers = this.userService.getListByCriteriaQuery(cq,false);
-		//导出的时候处理一下组织机构编码和角色编码
-		for(int i=0;i<tsUsers.size();i++){
-			TSUser user = tsUsers.get(i);
-			//托管
-			systemService.getSession().evict(user);
-			String id = user.getId();
-			List<TSRole> roles = systemService.getSession().createSQLQuery("select * from t_s_role where id in (select roleid from t_s_role_user where userid=:userid)")
-					.addEntity(TSRole.class).setString("userid",id).list();
-			String roleCodes = "";
-			for(TSRole role:roles){
-				roleCodes += role.getRoleCode()+",";
-			}
-			user.setUserKey(roleCodes.substring(0,roleCodes.length()-1));
-			List<TSDepart> departs = systemService.getSession().createSQLQuery("select * from t_s_depart where id in (select org_id from t_s_user_org where user_id=:userid)")
-					.addEntity(TSDepart.class).setString("userid",id).list();
-			String departCodes = "";
-			for(TSDepart depart:departs){
-				departCodes += depart.getOrgCode()+",";
-			}
-			user.setDepartid(departCodes.substring(0,departCodes.length()-1));
-		}
-		modelMap.put(NormalExcelConstants.FILE_NAME,"用户表");
-		modelMap.put(NormalExcelConstants.CLASS,TSUser.class);
-		modelMap.put(NormalExcelConstants.PARAMS,new ExportParams("用户表列表", "导出人:"+ResourceUtil.getSessionUser().getRealName(),
-				"导出信息"));
-		modelMap.put(NormalExcelConstants.DATA_LIST,tsUsers);
-		return NormalExcelConstants.JEECG_EXCEL_VIEW;
-	}
-
-	/**
-	 * 导出excel 使模板
-	 *
-	 * @param request
-	 * @param response
-	 */
-	@RequestMapping(params = "exportXlsByT")
-	public String exportXlsByT(TSUser tsUser,HttpServletRequest request,HttpServletResponse response
-			, DataGrid dataGrid,ModelMap modelMap) {
-		modelMap.put(NormalExcelConstants.FILE_NAME,"用户表");
-		modelMap.put(NormalExcelConstants.CLASS,TSUser.class);
-		modelMap.put(NormalExcelConstants.PARAMS,new ExportParams("用户表列表", "导出人:"+ResourceUtil.getSessionUser().getRealName(),
-				"导出信息"));
-		modelMap.put(NormalExcelConstants.DATA_LIST,new ArrayList());
-		return NormalExcelConstants.JEECG_EXCEL_VIEW;
-	}
-
-	@SuppressWarnings("unchecked")
-	@RequestMapping(params = "importExcel", method = RequestMethod.POST)
+	@RequestMapping(params = "updateUser")
 	@ResponseBody
-	public AjaxJson importExcel(HttpServletRequest request, HttpServletResponse response) {
+	public AjaxJson updateUser(TSUser user, HttpServletRequest request) {
+		String message = null;
 		AjaxJson j = new AjaxJson();
-
-		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-		for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
-			MultipartFile file = entity.getValue();// 获取上传文件对象
-			ImportParams params = new ImportParams();
-			params.setTitleRows(2);
-			params.setHeadRows(1);
-			params.setNeedSave(true);
+		if (StringUtil.isNotEmpty(user.getId())) {
+			message = "信息修改成功";
+			TSUser t = systemService.get(TSUser.class, user.getId());
 			try {
-				List<TSUser> tsUsers = ExcelImportUtil.importExcel(file.getInputStream(),TSUser.class,params);
-				for (TSUser tsUser : tsUsers) {
-					tsUser.setStatus(new Short("1"));
-					String username = tsUser.getUserName();
-					String roleCodes = tsUser.getUserKey();
-					String deptCodes = tsUser.getDepartid();
-
-					if(username==null||username.equals("")){
-						j.setMsg("用户名为必填字段，导入失败");
-					}else if((roleCodes==null||roleCodes.equals(""))||(deptCodes==null||deptCodes.equals(""))){
-						List<TSUser> users = systemService.findByProperty(TSUser.class,"userName",username);
-						if(users.size()!=0){
-							//用户存在更新
-							TSUser user = users.get(0);
-							MyBeanUtils.copyBeanNotNull2Bean(tsUser,user);
-							user.setDepartid(null);
-							systemService.saveOrUpdate(user);
-						}else{
-							tsUser.setDepartid(null);
-							systemService.save(tsUser);
-						}
-					}else{
-						String[] roles = roleCodes.split(",");
-						String[] depts = deptCodes.split(",");
-						boolean flag = true;
-						//判断组织机构编码和角色编码是否存在，如果不存在，也不能导入
-						for(String roleCode:roles){
-							List<TSRole> roleList = systemService.findByProperty(TSRole.class,"roleCode",roleCode);
-							if(roleList.size()==0){
-								flag = false;
-							}
-						}
-
-						for(String deptCode:depts){
-							List<TSDepart> departList = systemService.findByProperty(TSDepart.class,"orgCode",deptCode);
-							if(departList.size()==0){
-								flag = false;
-							}
-						}
-
-						if(flag){
-							//判断用户是否存在
-							List<TSUser> users = systemService.findByProperty(TSUser.class,"userName",username);
-							if(users.size()!=0){
-								//用户存在更新
-								TSUser user = users.get(0);
-								MyBeanUtils.copyBeanNotNull2Bean(tsUser,user);
-								user.setDepartid(null);
-								systemService.saveOrUpdate(user);
-
-								String id = user.getId();
-								systemService.executeSql("delete from t_s_role_user where userid='"+id+"'");
-								for(String roleCode:roles){
-									//根据角色编码得到roleid
-									List<TSRole> roleList = systemService.findByProperty(TSRole.class,"roleCode",roleCode);
-									TSRoleUser tsRoleUser = new TSRoleUser();
-									tsRoleUser.setTSUser(user);
-									tsRoleUser.setTSRole(roleList.get(0));
-									systemService.save(tsRoleUser);
-								}
-
-								systemService.executeSql("delete from t_s_user_org where user_id='"+id+"'");
-								for(String orgCode:depts){
-									//根据角色编码得到roleid
-									List<TSDepart> departList = systemService.findByProperty(TSDepart.class,"orgCode",orgCode);
-									TSUserOrg tsUserOrg = new TSUserOrg();
-									tsUserOrg.setTsDepart(departList.get(0));
-									tsUserOrg.setTsUser(user);
-									systemService.save(tsUserOrg);
-								}
-							}else{
-								//不存在则保存
-								//TSUser user = users.get(0);
-								tsUser.setDepartid(null);
-								systemService.save(tsUser);
-								for(String roleCode:roles){
-									//根据角色编码得到roleid
-									List<TSRole> roleList = systemService.findByProperty(TSRole.class,"roleCode",roleCode);
-									TSRoleUser tsRoleUser = new TSRoleUser();
-									tsRoleUser.setTSUser(tsUser);
-									tsRoleUser.setTSRole(roleList.get(0));
-									systemService.save(tsRoleUser);
-								}
-
-								for(String orgCode:depts){
-									//根据角色编码得到roleid
-									List<TSDepart> departList = systemService.findByProperty(TSDepart.class,"orgCode",orgCode);
-									TSUserOrg tsUserOrg = new TSUserOrg();
-									tsUserOrg.setTsDepart(departList.get(0));
-									tsUserOrg.setTsUser(tsUser);
-									systemService.save(tsUserOrg);
-								}
-							}
-							j.setMsg("文件导入成功！");
-						}else {
-							j.setMsg("组织机构编码和角色编码不能匹配");
-						}
-					}
-				}
+				MyBeanUtils.copyBeanNotNull2Bean(user, t);
+				systemService.saveOrUpdate(t);
+				systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
 			} catch (Exception e) {
-				j.setMsg("文件导入失败！");
-				logger.error(ExceptionUtil.getExceptionMessage(e));
-			}finally{
-				try {
-					file.getInputStream().close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				e.printStackTrace();
+				message = "信息修改成功";
 			}
 		}
+		j.setMsg(message);
 		return j;
 	}
-
 
 	/**
 	 * 选择用户跳转页面

@@ -114,8 +114,8 @@
 			<td align="right"><label class="Validform_label">学院: </label></td>
 			<td class="value">
                <t:dictSelect field="collegeId" id="collegeId"  extendJson="{datatype:'*'}" dictTable="t_college" dictField="id" 
-						dictText="name" dictCondition=" where delete_flag=0" defaultVal="${classmatePage.collegeId}"  hasLabel="false"></t:dictSelect>
-						<input type="hidden" id="collegeName" name="collegeName"   value="${classmatePage.collegeName}" />
+						dictText="name" dictCondition=" where delete_flag=0" defaultVal="${user.collegeId}"  hasLabel="false"></t:dictSelect>
+						<input type="hidden" id="collegeName" name="collegeName"   value="${user.collegeName}" />
                 <input id="roleid" name="roleid" type="hidden" value="8a8ab0b246dc81120146dc81818b0051">
                 <input id="userRoleCode" name="userRoleCode" type="hidden" value="manager">
                 <span class="Validform_checktip"></span>

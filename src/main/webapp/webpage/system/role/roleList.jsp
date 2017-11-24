@@ -44,7 +44,7 @@ function setfunbyrole(id,roleName) {
 function userListbyrole(id,roleName) {
 	$("#function-panel").panel(
 		{
-			title :roleName+ ':' + '<t:mutiLang langKey="common.user"/>',
+			title :roleName,
 			href:"roleController.do?userList&roleId=" + id
 		}
 	);

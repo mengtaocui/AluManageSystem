@@ -45,12 +45,6 @@ public class TSBaseUser extends IdEntity implements java.io.Serializable {
 	public String getDepartid(){
 		return departid;
 	}
-
-    //	private TSDepart TSDepart = new TSDepart();// 部门
-    private List<TSUserOrg> userOrgList = new ArrayList<TSUserOrg>();
-	private TSDepart currentDepart = new TSDepart();// 当前部门
-
-
 	@Column(name = "signature",length=3000)
 	public byte[] getSignature() {
 		return signature;
@@ -129,24 +123,8 @@ public class TSBaseUser extends IdEntity implements java.io.Serializable {
 		this.realName = realName;
 	}
 
-    @Transient
-    public TSDepart getCurrentDepart() {
-        return currentDepart;
-    }
 
-    public void setCurrentDepart(TSDepart currentDepart) {
-        this.currentDepart = currentDepart;
-    }
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "tsUser")
-    public List<TSUserOrg> getUserOrgList() {
-        return userOrgList;
-    }
-
-    public void setUserOrgList(List<TSUserOrg> userOrgList) {
-        this.userOrgList = userOrgList;
-    }
 
 	public void setDeleteFlag(Short deleteFlag) {
 		this.deleteFlag = deleteFlag;

@@ -8,7 +8,6 @@
 <!-- add-start--Author:jg_renjie  Date:20160315 for：配合首页改造，引入portal依赖的js及css文件 -->
 <script type="text/javascript" src="plug-in/easyui/portal/jquery.portal.js"></script>
 <link rel="stylesheet" type="text/css" href="plug-in/easyui/portal/portal.css">
-<link href="plug-in/home_ie.css" rel="stylesheet" type="text/css"/>
 <!-- add-end--Author:jg_renjie  Date:20160315 for：配合首页改造，引入portal依赖的js及css文件 -->
 <!--add-start--Author:wangkun Date:20160813 for:内部聊天修改-->
 <!--add-end--Author:wangkun Date:20160813 for:内部聊天修改-->
