@@ -33,7 +33,7 @@
     			border-radius: 4px 0px 0px 4px;
 			}
 			.value{
-				width: 58%;
+				width: 57%;
 			    height: 100%;
 			    padding-top: 5px;
 			    text-align: center;
