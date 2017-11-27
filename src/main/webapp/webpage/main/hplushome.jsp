@@ -191,9 +191,9 @@
 		    $(function(){
 		    	initDomSize();
 		    	initCount();
-		    	setInterval(function(){
+		    /* 	setInterval(function(){
 					initCount();
-				}, 5000);
+				}, 5000); */
 		    })
 		    
 		   function initDomSize(){

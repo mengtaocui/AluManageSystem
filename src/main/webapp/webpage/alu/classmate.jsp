@@ -221,7 +221,7 @@
 				<c:if test="${ not empty LOCAL_CLINET_USER.collegeName  }">
 					<tr>
 						<td align="right">
-							<input type="hidden" id="collegeId" name="collegeId" value="${classmatePage.collegeId}"/>
+							<input type="hidden" id="collegeId" name="collegeId" value="${LOCAL_CLINET_USER.collegeId}"/>
 							<label class="Validform_label">
 								头像:
 							</label>

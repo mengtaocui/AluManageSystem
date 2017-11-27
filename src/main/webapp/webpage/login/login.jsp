@@ -130,8 +130,8 @@
 	    <a class="arrow-left" href="#"></a>
  		<a class="arrow-right" href="#"></a>
 	    <div class="swiper-wrapper">
-	        <div class="swiper-slide"><img src="images/s1.jpg" class="banner-img"></div>
-	        <div class="swiper-slide"><img src="images/s2.jpg" class="banner-img"></div>
+	        <!-- <div class="swiper-slide"><img src="images/s1.jpg" class="banner-img"></div>
+	        <div class="swiper-slide"><img src="images/s2.jpg" class="banner-img"></div> -->
 	        <!-- <div class="swiper-slide">Slide 3</div>
 	        <div class="swiper-slide">Slide 4</div>
 	        <div class="swiper-slide">Slide 5</div>
@@ -220,6 +220,24 @@
 <!-- add-end--Author:gengjiajia  Date:20160727 for:TASK #1217 【IE兼容】jeecg h+首页兼容性问题,不兼容的浏览器直接切换套shortcut风格 -->
 <script src="plug-in/swiper3.4.1/idangerous.swiper2.7.6.js"></script>
 <script type="text/javascript">
+  $.ajax({
+		async : false,
+		type : 'GET',
+		dataType:'json',
+		url : 'bannerController.do?getBanners',// 请求的action路径
+		error : function() {// 请求失败处理函数
+		},
+		success : function(data) {
+			if(data){
+				for(var i=0; i<data.length; i++){
+					console.log(data[i].picPath);
+					$('.swiper-wrapper').append('<div class="swiper-slide"><img src="'+data[i].picPath+'" class="banner-img"></div>');
+				}
+			}
+		}
+  });
+	
+	
 	var mySwiper = new Swiper('.swiper-container',{
 		autoplay : 30000,//可选选项，自动滑动
 		loop : true,//可选选项，开启循环

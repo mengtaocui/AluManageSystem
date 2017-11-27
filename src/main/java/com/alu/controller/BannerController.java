@@ -232,11 +232,9 @@ public class BannerController extends BaseController {
 	 * @throws Exception
 	 */
     @RequestMapping(value="/upload")
-    @ResponseBody
-    public AjaxJson upload(HttpServletRequest request,
+    public ModelAndView upload(HttpServletRequest request,
     		HttpServletResponse response,
-            MultipartFile upload) throws Exception {
-    	AjaxJson aj = new AjaxJson();
+    		@RequestParam("upload") MultipartFile upload) throws Exception {
        //如果文件不为空，写入上传路径
        if(!upload.isEmpty()) {
     	   PropertiesUtil pro = new PropertiesUtil("sysConfig.properties");
@@ -254,7 +252,6 @@ public class BannerController extends BaseController {
            }
            //将上传文件保存到一个目标文件当中
            upload.transferTo(new File(path + File.separator + fileName));
-           aj.setMsg(fileName);
            
            TSUser curUser = ResourceUtil.getSessionUser();
            BannerEntity banner = new BannerEntity();
@@ -266,6 +263,6 @@ public class BannerController extends BaseController {
 		   banner.setPicPath("sysController/readPic.do?picPath="+fileName);
 		   bannerService.save(banner);
        }
-       return aj;
+       return new ModelAndView("uploadSuccess");
     }
 }
