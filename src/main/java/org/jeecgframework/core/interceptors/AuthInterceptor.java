@@ -91,7 +91,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 	 * 在controller前拦截
 	 */
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
-
+		
 		//判断是否被注解跳过权限认证  先判断类注解然后方法注解 都没有则走原来逻辑
 		HandlerMethod handlerMethod=(HandlerMethod)object;
 		JAuth jauthType =handlerMethod.getBean().getClass().getAnnotation(JAuth.class);
@@ -115,7 +115,10 @@ public class AuthInterceptor implements HandlerInterceptor {
 		String requestPath = ResourceUtil.getRequestPath(request);// 用户访问的资源地址
 		//logger.info("-----authInterceptor----requestPath------"+requestPath);
 		//步骤一： 判断是否是排除拦截请求，直接返回TRUE
-
+		
+		if(requestPath.indexOf("sysController/readPic.do") != -1)
+			return true;
+		
 		if (requestPath.length()>3&&"api/".equals(requestPath.substring(0,4))) {
 			return true;
 		}
