@@ -21,8 +21,8 @@
 						<td align="right"><label class="Validform_label">学院: </label></td>
 						<td class="value">
 			               <t:dictSelect field="collegeId" id="collegeId"  extendJson="{datatype:'*'}" dictTable="t_college" dictField="id" 
-									dictText="name" dictCondition=" where delete_flag=0" defaultVal="${classmatePage.collegeId}"  hasLabel="false"></t:dictSelect>
-						    <input type="hidden" id="collegeName" name="collegeName"   value="${classmatePage.collegeName}" />
+									dictText="name" dictCondition=" where delete_flag=0" defaultVal="${donateRecordPage.collegeId}"  hasLabel="false"></t:dictSelect>
+						    <input type="hidden" id="collegeName" name="collegeName"   value="${donateRecordPage.collegeName}" />
 			                <span class="Validform_checktip"></span>
 			            </td>
 					</tr>
@@ -30,7 +30,7 @@
 				<tr>
 					<td align="right">
 					    <c:if test="${ not empty LOCAL_CLINET_USER.collegeName  }">
-							<input type="hidden" id="collegeId" name="collegeId" value="${classmatePage.collegeId}"/>
+							<input type="hidden" id="collegeId" name="collegeId" value="${donateRecordPage.collegeId}"/>
 						</c:if>
 						<label class="Validform_label">
 							捐赠项目:
@@ -50,7 +50,7 @@
 						</label>
 					</td>
 					<td class="value">
-						<input class="inputxt" id="donatePersonName" name="donatePersonName" ignore="ignore"  value="${donateRecordPage.donatePersonName}" />
+						<input class="inputxt" id="donatePersonName" name="donatePersonName" datatype="*1-12" value="${donateRecordPage.donatePersonName}" />
 						<span class="Validform_checktip"></span>
 					</td>
 				</tr>

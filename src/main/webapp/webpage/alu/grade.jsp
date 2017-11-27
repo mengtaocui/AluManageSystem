@@ -15,8 +15,8 @@
 						<td align="right"><label class="Validform_label">学院: </label></td>
 						<td class="value">
 			               <t:dictSelect field="collegeId" id="collegeId"  extendJson="{datatype:'*'}" dictTable="t_college" dictField="id" 
-									dictText="name" dictCondition=" where delete_flag=0" defaultVal="${classmatePage.collegeId}"  hasLabel="false"></t:dictSelect>
-						    <input type="hidden" id="collegeName" name="collegeName"   value="${classmatePage.collegeName}" />
+									dictText="name" dictCondition=" where delete_flag=0" defaultVal="${gradePage.collegeId}"  hasLabel="false"></t:dictSelect>
+						    <input type="hidden" id="collegeName" name="collegeName"   value="${gradePage.collegeName}" />
 			                <span class="Validform_checktip"></span>
 			            </td>
 					</tr>
@@ -24,7 +24,7 @@
 				<tr>
 					<td align="right">
 					    <c:if test="${ not empty LOCAL_CLINET_USER.collegeName  }">
-							<input type="hidden" id="collegeId" name="collegeId" value="${classmatePage.collegeId}"/>
+							<input type="hidden" id="collegeId" name="collegeId" value="${gradePage.collegeId}"/>
 						</c:if>
 						<label class="Validform_label">
 							年届:
@@ -42,7 +42,7 @@
 						</label>
 					</td>
 					<td class="value">
-						<input class="inputxt" id="name" name="name" datatype="*"  value="${gradePage.name}" />
+						<input class="inputxt" id="name" name="name" datatype="*1-12"  value="${gradePage.name}" />
 						<span class="Validform_checktip"></span>
 					</td>
 				</tr>

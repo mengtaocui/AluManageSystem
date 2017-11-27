@@ -6,7 +6,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	config.enterMode = CKEDITOR.ENTER_BR;// CKEDITOR.ENTER_P;CKEDITOR.ENTER_DIV
 	config.fullPage= true;
-	config.height = 300;
+	config.height = 220;
 	config.allowedContent= true;
 	config.font_defaultLabel = '宋体';
 	config.fontSize_defaultLabel = '12px';

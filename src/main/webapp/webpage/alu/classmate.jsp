@@ -109,7 +109,7 @@
 							</label>
 						</td>
 						<td class="value">
-							<input class="inputxt" id="name" name="name" datatype="*"  value="${classmatePage.name}" />
+							<input class="inputxt" id="name" name="name" datatype="*1-12"  value="${classmatePage.name}" />
 							<span class="Validform_checktip"></span>
 						</td>
 						<td align="right">

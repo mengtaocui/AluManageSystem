@@ -6,7 +6,7 @@
   <t:datagrid name="newsTypeList" title="新闻类型" actionUrl="newsTypeController.do?datagrid" idField="id" fit="true" queryMode="group">
    <t:dgCol title="编号" field="id" hidden="true"></t:dgCol>
    <t:dgCol title="类型名称" field="name"   width="120" query="true"></t:dgCol>
-   <t:dgCol title="简介" field="detail"   width="120"></t:dgCol>
+   <t:dgCol title="简介" field="detail"  showLen="14"  width="120"></t:dgCol>
    <t:dgCol title="创建人" field="crtByUserName"   width="120"></t:dgCol>
    <t:dgCol title="创建时间" field="crtTime"   width="120" formatter="yyyy-MM-dd hh:mm:ss" query="true" queryMode="group"></t:dgCol>
    <t:dgCol title="最近一次修改人" field="lastUpdateByUserName"   width="120"></t:dgCol>

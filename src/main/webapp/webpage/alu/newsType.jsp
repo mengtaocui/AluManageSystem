@@ -17,7 +17,7 @@
 						</label>
 					</td>
 					<td class="value">
-						<input class="inputxt" id="name" name="name"  value="${newsTypePage.name}" datatype="*"/>
+						<input class="inputxt" id="name" name="name"  value="${newsTypePage.name}" datatype="*1-12"/>
 						<span class="Validform_checktip">请输入类型名称</span>
 					</td>
 				</tr>
@@ -28,7 +28,7 @@
 						</label>
 					</td>
 					<td class="value">
-					    <textarea rows="20" cols="20" class="inputxt" id="detail" name="detail" style="width:292px;height:46px;">${newsTypePage.detail}</textarea>
+					    <textarea rows="20" cols="20" class="inputxt" id="detail" name="detail" style="width:414px;height:111px;">${newsTypePage.detail}</textarea>
 						<span class="Validform_checktip"></span>
 					</td>
 				</tr>

@@ -31,7 +31,7 @@
 						</label>
 					</td>
 					<td class="value">
-						<input class="inputxt" id="name" name="name" datatype="*"  value="${newsModulePage.name}" />
+						<input class="inputxt" id="name" name="name" datatype="*1-12"  value="${newsModulePage.name}" />
 						<span class="Validform_checktip">请输入模块名称</span>
 					</td>
 				</tr>

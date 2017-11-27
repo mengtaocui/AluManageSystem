@@ -17,7 +17,7 @@
 						</label>
 					</td>
 					<td class="value">
-						<input class="inputxt" id="name" name="name" datatype="*"  value="${collegePage.name}" />
+						<input class="inputxt" id="name" name="name" datatype="*1-12"  value="${collegePage.name}" />
 						<span class="Validform_checktip"></span>
 					</td>
 				</tr>

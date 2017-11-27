@@ -16,7 +16,7 @@
    <t:dgFunOpt funname="handleApplyPass(id)" exp="checkStatus#eq#0" title="通过" urlStyle="background-color: #449d44;" urlclass="ace_button"  urlfont="fa-check"></t:dgFunOpt>
    <t:dgFunOpt funname="handleApplyRefuse(id)" exp="checkStatus#eq#0" title="拒绝" urlStyle="background-color: #f0ad4e;" urlclass="ace_button"  urlfont="fa-close"></t:dgFunOpt>
    <t:dgDelOpt title="删除" url="activitySpaceController.do?del&id={id}" urlclass="ace_button" urlStyle="background-color:#ec4758;" urlfont="fa-trash-o"/>
-   <t:dgToolBar title="查看" icon="icon-search" url="activitySpaceController.do?addorupdate" funname="detail"></t:dgToolBar>
+   <%-- <t:dgToolBar title="查看" icon="icon-search" url="activitySpaceController.do?addorupdate" funname="detail"></t:dgToolBar> --%>
   </t:datagrid>
   </div>
  </div>
