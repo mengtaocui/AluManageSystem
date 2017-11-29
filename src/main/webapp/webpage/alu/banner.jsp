@@ -8,21 +8,34 @@
  </head>
  <body style="overflow: hidden" scroll="no">
  
-  <form  enctype="multipart/form-data" method="post" id="bannerForm" action="bannerController/upload.do">
+  <form  enctype="multipart/form-data" method="post" id="bannerForm" >
 			<%-- <input id="id" name="id" type="hidden" value="${bannerPage.id }"> --%>
 			<table style="width: 600px;" cellpadding="0" cellspacing="1" class="formtable">
 				<tr>
 					<td class="value">
-					     <input type="file" name="upload" id="imgFile"/>
+					    <input type="file" name="upload" id="imgFile"/>
 						<span class="Validform_checktip"></span>
 					</td>
 				</tr>
 			</table>
 		</form>
 		<script type="text/javascript">
+		$('#bannerList', window.parent.document).datagrid('reload');
 			function submitForm(){
-				$('#bannerForm').submit();
-				window.close();
+				$('#bannerForm').form('submit',{
+					url: 'bannerController/upload.do',
+					data: $("#bannerForm").serialize(),
+					onSubmit:function(){
+						tip_old('上传中');
+						return true;
+					},
+					success:function(data){
+						data  = $.parseJSON(data);
+					    if(data && data.msg == '上传成功'){
+					    	tip_old('上传成功');
+					    }
+					}
+				});
 			}
 		</script>
  </body>

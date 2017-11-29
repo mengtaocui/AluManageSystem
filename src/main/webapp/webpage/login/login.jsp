@@ -220,8 +220,9 @@
 <!-- add-end--Author:gengjiajia  Date:20160727 for:TASK #1217 【IE兼容】jeecg h+首页兼容性问题,不兼容的浏览器直接切换套shortcut风格 -->
 <script src="plug-in/swiper3.4.1/idangerous.swiper2.7.6.js"></script>
 <script type="text/javascript">
-  $.ajax({
-		async : false,
+$(function(){
+	$.ajax({
+		async : true,
 		type : 'GET',
 		dataType:'json',
 		url : 'bannerController.do?getBanners',// 请求的action路径
@@ -234,25 +235,27 @@
 					$('.swiper-wrapper').append('<div class="swiper-slide"><img src="'+data[i].picPath+'" class="banner-img"></div>');
 				}
 			}
+			
+			var mySwiper = new Swiper('.swiper-container',{
+				autoplay : 30000,//可选选项，自动滑动
+				loop : true,//可选选项，开启循环
+				mousewheelControl : true,
+				pagination : '.pagination',
+				paginationClickable :true
+			});
+			$('.arrow-left').on('click', function(e){
+				e.preventDefault()
+				mySwiper.swipePrev()
+			  });
+			$('.arrow-right').on('click', function(e){
+				e.preventDefault()
+				mySwiper.swipeNext()
+			});
 		}
   });
 	
-	
-	var mySwiper = new Swiper('.swiper-container',{
-		autoplay : 30000,//可选选项，自动滑动
-		loop : true,//可选选项，开启循环
-		mousewheelControl : true,
-		pagination : '.pagination',
-		paginationClickable :true
-	});
-	$('.arrow-left').on('click', function(e){
-		e.preventDefault()
-		mySwiper.swipePrev()
-	  });
-	$('.arrow-right').on('click', function(e){
-		e.preventDefault()
-		mySwiper.swipeNext()
-	});
+})
+  
 	
 	$(function(){
 		optErrMsg();

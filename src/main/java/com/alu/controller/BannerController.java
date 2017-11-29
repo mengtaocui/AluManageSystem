@@ -231,7 +231,7 @@ public class BannerController extends BaseController {
 	 * @param upload
 	 * @throws Exception
 	 */
-    @RequestMapping(value="/upload")
+    /*@RequestMapping(value="/upload")
     public ModelAndView upload(HttpServletRequest request,
     		HttpServletResponse response,
     		@RequestParam("upload") MultipartFile upload) throws Exception {
@@ -264,5 +264,46 @@ public class BannerController extends BaseController {
 		   bannerService.save(banner);
        }
        return new ModelAndView("uploadSuccess");
+    }*/
+	
+	
+	@RequestMapping(value="/upload")
+	@ResponseBody
+    public AjaxJson upload(HttpServletRequest request,
+    		HttpServletResponse response,
+    		MultipartFile upload) throws Exception {
+       //如果文件不为空，写入上传路径
+	   AjaxJson aj = new AjaxJson();
+       if(!upload.isEmpty()) {
+    	   PropertiesUtil pro = new PropertiesUtil("sysConfig.properties");
+           //上传文件路径
+           String path = pro.readProperty("webUploadpath") + "//images//";
+           //文件扩展名
+           String extendName = FileUtils.getExtend(upload.getOriginalFilename());
+           //上传文件名
+           String fileName = UUIDGenerator.generate() + extendName + "." + extendName;
+           
+           File filepath = new File(path,fileName);
+           //判断路径是否存在，如果不存在就创建一个
+           if (!filepath.getParentFile().exists()) { 
+               filepath.getParentFile().mkdirs();
+           }
+           //将上传文件保存到一个目标文件当中
+           upload.transferTo(new File(path + File.separator + fileName));
+           
+           TSUser curUser = ResourceUtil.getSessionUser();
+           BannerEntity banner = new BannerEntity();
+           banner.setCrtBy(curUser.getId());
+		   banner.setCrtByUserName(curUser.getUserName());
+		   banner.setCrtTime(DateUtils.formatDateTime());
+		   banner.setDeleteFlag(Constant.UN_DELETE);
+		   banner.setStatus(0);
+		   banner.setPicPath("sysController/readPic.do?picPath="+fileName);
+		   bannerService.save(banner);
+		   aj.setMsg("上传成功");
+       }else{
+    	   aj.setMsg("上传失败");
+       }
+       return aj;
     }
 }

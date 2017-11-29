@@ -18,25 +18,34 @@
    <%-- <t:dgToolBar title="查看" icon="icon-search" url="bannerController.do?addorupdate" funname="detail"></t:dgToolBar> --%>
   </t:datagrid>
   </div>
-  <div id="keywordShowDiv"></div>  
  </div>
  <script>
  
  function saveObj() {
 	    if($('#imgFile', iframe.document).val()){
-	    	$('#bannerForm', iframe.document).submit();
-			$('#btn_sub', iframe.document).click();
-			tip('添加成功');
-			setTimeout(function(){
-				location.reload();
-			},1000);
+	    	$('#bannerForm', iframe.document).form('submit',{
+				url: 'bannerController/upload.do',
+				data: $('#bannerForm', iframe.document).serialize(),
+				onSubmit:function(){
+					tip_old('上传中');
+					return true;
+				},
+				success:function(data){
+					data  = $.parseJSON(data);
+				    if(data && data.msg == '上传成功'){
+				    	tip_old('上传成功');
+				    	
+				    	setTimeout(function(){
+				    		location.reload();
+				    	},1000);
+				    	
+				    } 
+				}
+			});
 	    }else{
 	    	tip('请选择文件');
 	    }
-	    
 	}
-
- 
  function disableBanner(id){
 		handleApply(id, 1, '禁用');
 	}
