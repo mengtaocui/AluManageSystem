@@ -13,7 +13,7 @@
 			<table style="width: 600px;" cellpadding="0" cellspacing="1" class="formtable">
 				<tr>
 					<td class="value">
-					    <input type="file" name="upload" id="imgFile"/>
+					    <input type="file" name="upload" id="imgFile" accept="image/*"/>
 						<span class="Validform_checktip"></span>
 					</td>
 				</tr>

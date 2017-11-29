@@ -78,7 +78,7 @@
 		 			<img alt="" class="upload_icon" onclick="chooseFile()" src="images/uploadIcon.png">
 		 		</div>  
 		 		<div class="btn-wrap">
-			 		<input type="file" onchange="preview(this)" id="file"/> 
+			 		<input type="file" onchange="preview(this)" id="file" accept="image/*"/> 
 			 		<a href="javascript:chooseFile()" class="ace_button"  style="background-color:#18a689;">  
 			 			<i class=" fa fa-refresh"></i>
 			 			重新选择
