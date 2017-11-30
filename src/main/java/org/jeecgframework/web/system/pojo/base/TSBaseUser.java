@@ -5,6 +5,7 @@ import org.jeecgframework.core.common.entity.IdEntity;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
 import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class TSBaseUser extends IdEntity implements java.io.Serializable {
 	/*@Excel(name = "状态")*/
 	private Short status;// 状态1：在线,2：离线,0：禁用
 	
-	private Short deleteFlag;// 状态: 0:不删除  1：删除
+	private Integer deleteFlag;// 状态: 0:不删除  1：删除
 	
 	private byte[] signature;// 签名文件
 
@@ -126,12 +127,12 @@ public class TSBaseUser extends IdEntity implements java.io.Serializable {
 
 
 
-	public void setDeleteFlag(Short deleteFlag) {
+	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
 	
 	@Column(name = "delete_flag")
-	public Short getDeleteFlag() {
+	public Integer getDeleteFlag() {
 		return deleteFlag;
 	}
 	@Column(name = "userRoleCode")

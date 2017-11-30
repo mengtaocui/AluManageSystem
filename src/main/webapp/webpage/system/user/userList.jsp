@@ -48,7 +48,7 @@
 </div> --%>
 <script type="text/javascript">
 function deleteDialog(id){
-	var url = "userController.do?deleteDialog&id=" + id
+	var url = "userController.do?deleteDialog&id=" + id;
 	createwindow("删除模式", url, 200, 100);
 }
 function lockObj(title,url, id) {

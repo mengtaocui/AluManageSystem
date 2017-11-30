@@ -52,9 +52,9 @@
   <script type="text/javascript">
     var xArr = new Array(), yArr = new Array(), dataObj = null;
   	$(function(){
-  		$('#main_pie').css({'width':($('#pie_td').width()*0.8),'height':$('#line_td').height()*0.8}); 
-  		$('#main_bar').css({'width':($('#pie_td').width()*0.8),'height':$('#line_td').height()*0.8});
-  		$('#main').css({'width':($('#line_td').width()*0.9),'height':$('#line_td').height()*0.7}); 
+  		$('#main_pie').css({'width':($('#pie_td').width()*0.7),'height':$('#line_td').height()*0.7}); 
+  		$('#main_bar').css({'width':($('#pie_td').width()*0.7),'height':$('#line_td').height()*0.7});
+  		$('#main').css({'width':($('#line_td').width()*0.8),'height':$('#line_td').height()*0.6}); 
   		
   		$.ajax({
   			url: 'statisticsController.do?getStatisticsByCompanyNatureData',

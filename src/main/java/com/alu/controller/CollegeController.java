@@ -18,11 +18,11 @@ import org.jeecgframework.core.common.model.json.AjaxJson;
 import org.jeecgframework.core.common.model.json.DataGrid;
 import org.jeecgframework.core.constant.Globals;
 import org.jeecgframework.core.util.DateUtils;
+import org.jeecgframework.core.util.ListUtils;
 import org.jeecgframework.core.util.ResourceUtil;
 import org.jeecgframework.core.util.StringUtil;
 import org.jeecgframework.tag.core.easyui.TagUtil;
 import org.jeecgframework.tag.vo.datatable.SortDirection;
-
 import org.jeecgframework.web.system.pojo.base.TSUser;
 import org.jeecgframework.web.system.service.SystemService;
 import org.jeecgframework.core.util.MyBeanUtils;
@@ -131,6 +131,19 @@ public class CollegeController extends BaseController {
 	public AjaxJson del(CollegeEntity college, HttpServletRequest request) {
 		String message = null;
 		AjaxJson j = new AjaxJson();
+		
+		//查询该学院下，是否有学院管理员、班级管理员、班级、校友、活动、新闻公告、帖子、捐赠相关、资料，如果有就不能删除
+		String[] arr = new String[]{"TSUser", "GradeEntity", 
+				"ClassmateEntity", "ActivityEntity", "ActivitySpaceEntity", 
+				"NewsEntity", "NoticesEntity", "DonateEntity", "DonateRecordEntity"};
+		for(int i=0; i<arr.length; i++){
+			if(!ListUtils.isNullOrEmpty(getResult(arr[i], college.getId()))){
+				message = "该学院下存在关联数据["+arr[i]+"]，删除失败";
+				j.setMsg(message);
+				return j;
+			}
+		}
+		
 		college = systemService.getEntity(CollegeEntity.class, college.getId());
 		message = "学院删除成功";
 		college.setDeleteFlag(Constant.IS_DELETE);
@@ -214,5 +227,10 @@ public class CollegeController extends BaseController {
 		collegeService.updateEntitie(activity);
 		systemService.addLog("审核学院："+activity.getName(), Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
 		return aj;
+	}
+	
+	public List getResult(String enName, String collegeId){
+		String hql1 = "from "+enName+" where collegeId=? and deleteFlag=?";
+		return collegeService.findHql(hql1, collegeId, 0);
 	}
 }

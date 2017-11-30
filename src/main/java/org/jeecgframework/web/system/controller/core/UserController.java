@@ -24,6 +24,7 @@ import org.jeecgframework.core.constant.Globals;
 import org.jeecgframework.core.enums.SysThemesEnum;
 import org.jeecgframework.core.util.DateUtils;
 import org.jeecgframework.core.util.IpUtil;
+import org.jeecgframework.core.util.ListUtils;
 import org.jeecgframework.core.util.ListtoMenu;
 import org.jeecgframework.core.util.MyBeanUtils;
 import org.jeecgframework.core.util.PasswordUtil;
@@ -367,7 +368,7 @@ public class UserController extends BaseController {
 
         Short[] userstate = new Short[]{Globals.User_Normal, Globals.User_ADMIN, Globals.User_Forbidden};
         cq.in("status", userstate);
-        cq.eq("deleteFlag", Globals.Delete_Normal);
+        cq.eq("deleteFlag", 0);
         
         TSUser curUser = ResourceUtil.getSessionUser();
         
@@ -417,13 +418,13 @@ public class UserController extends BaseController {
 	@RequestMapping(params = "delete")
 	@ResponseBody
 	public AjaxJson delete(TSUser user, @RequestParam String deleteType, HttpServletRequest req) {
+		AjaxJson j = new AjaxJson();
 		
 		if (deleteType.equals("delete")) {
 			return this.del(user, req);
 		}else if (deleteType.equals("deleteTrue")) {
 			return this.trueDel(user, req);
 		}else{
-			AjaxJson j = new AjaxJson();
 			
 			j.setMsg("删除逻辑参数异常,请重试.");
 			return j;
@@ -452,7 +453,7 @@ public class UserController extends BaseController {
 //		List<TSRoleUser> roleUser = systemService.findByProperty(TSRoleUser.class, "TSUser.id", user.getId());
 		if (!user.getStatus().equals(Globals.User_ADMIN)) {
 
-			user.setDeleteFlag(Globals.Delete_Forbidden);
+			user.setDeleteFlag(1);
 			userService.updateEntitie(user);
 			message = "用户：" + user.getUserName() + "删除成功";
 			logger.info("["+IpUtil.getIpAddr(req)+"][逻辑删除用户]"+message);
@@ -609,7 +610,7 @@ public class UserController extends BaseController {
 			} else {
 				user.setPassword(PasswordUtil.encrypt(user.getUserName(), password, PasswordUtil.getStaticSalt()));
 				user.setStatus(Globals.User_Normal);
-				user.setDeleteFlag(Globals.Delete_Normal);
+				user.setDeleteFlag(0);
 				systemService.save(user);
 				message = "用户: " + user.getUserName() + "添加成功";
 				if (StringUtil.isNotEmpty(roleid)) {

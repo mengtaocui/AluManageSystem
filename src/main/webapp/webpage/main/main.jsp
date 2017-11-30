@@ -79,7 +79,20 @@ a:hover {
                     <span style="color: #CC33FF"><t:mutiLang langKey="common.user"/>:</span>
                     <span style="color: #666633">${LOCAL_CLINET_USER.userName}</span>
                     <span style="color: #CC33FF"><t:mutiLang langKey="common.role"/>:</span>
-                    <span style="color: #666633">${LOCAL_CLINET_USER.collegeName}管理员</span>
+                    <span style="color: #666633">
+                        <c:if test="${ LOCAL_CLINET_USER.userRoleCode eq 'sch_manage' }">
+                                                                      学校管理员
+                        </c:if> 
+                        <c:if test="${ LOCAL_CLINET_USER.userRoleCode eq 'tea_manage' }">
+                        	班级管理员
+                        </c:if>
+                        <c:if test="${ LOCAL_CLINET_USER.userRoleCode eq 'sys_manage' }">
+                        	系统管理员
+                        </c:if>
+                        <c:if test="${ LOCAL_CLINET_USER.userRoleCode eq 'col_manage' }">
+                        	学院管理员
+                        </c:if>
+                    </span>
                 </td>
                 <td width="180px" style="position: relative;">
                 	<div style="position: absolute; right: 0px; bottom: 0px;">

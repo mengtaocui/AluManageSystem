@@ -22,10 +22,10 @@
 		<tbody>
 			<th>删除策略</th>
 			<tr>
-				<td class="value"><input type="radio" value="delete" name="deleteRadio"  /><span>逻辑删除</span></td>
+				<td class="value"><input type="radio" value="delete" name="deleteRadio"  checked="checked"/><span>逻辑删除</span></td>
 			</tr>
 			<tr>
-				<td class="value"><input type="radio" value="deleteTrue" name="deleteRadio" checked="checked"/> <span>物理删除</span></td>
+				<td class="value"><input type="radio" value="deleteTrue" name="deleteRadio" /> <span>物理删除</span></td>
 			</tr>
 		</tbody>
 	</table>
