@@ -6,6 +6,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
     	<link href="css/layout.css" rel="stylesheet" type="text/css"/>
     	<link href="plug-in/ace/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+    	<script src="plug-in/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+		<script src="plug-in/tools/curdtools_zh-cn.js" type="text/javascript"></script>
+    	
         <style>
 			body{
 				background: #FFFFFF;
@@ -64,137 +67,275 @@
         <div  class="table-wrap">
             <table>
                 <tr>
-                    <td>
-                    	<div class="item-wrap">
-                			<div class="symbol" style="background: #54ade8;"> 
-                				<i class="fa fa-university"></i>
-							</div>
-                			<div class="value">
-								<a 
-								
-								<c:if test="${ not empty LOCAL_CLINET_USER.collegeName  }">
-								   href="javascript:void();"
-								</c:if>
-								<c:if test="${ empty LOCAL_CLINET_USER.collegeName  }">
-								   href="javascript:addOneTab('学院管理', 'collegeController.do?list', null);"
-								</c:if>
-								
-								
-								
-								>
-									<h1 class="count1" id="college">0</h1>
-									<p>学院</p>
-								</a>
-							</div>
-                		</div>
-                    </td>
-                    <td>
-                    	<div class="item-wrap">
-                			<div class="symbol" style="background: #FF5722;"> 
-                				<i class="fa fa-users"></i>
-							</div>
-                			<div class="value">
-								<a href="javascript:addOneTab('班级管理', 'gradeController.do?list', null);">
-									<h1 class="count1" id="grade">0</h1>
-									<p>班级</p>
-								</a>
-							</div>
-                		</div>
-                    </td>
+                    <!-- sys_sys_manage &&  sch_manage begin-->
+                    <c:if test="${ (LOCAL_CLINET_USER.userRoleCode eq 'sys_manage')  || (LOCAL_CLINET_USER.userRoleCode eq 'sch_manage') }">
+                    	<td>
+	                    	<div class="item-wrap">
+	                			<div class="symbol" style="background: #54ade8;"> 
+	                				<i class="fa fa-university"></i>
+								</div>
+	                			<div class="value">
+	                			    <c:if test="${ (LOCAL_CLINET_USER.userRoleCode eq 'sys_manage') }">
+										<a href="javascript:void(0);"
+											<h1 class="count1" id="college">0</h1>
+											<p>学院</p>
+										</a>
+									</c:if>
+									<c:if test="${ (LOCAL_CLINET_USER.userRoleCode eq 'sch_manage') }">
+										<a href="javascript:void(0);"
+											<h1 class="count1" id="college">0</h1>
+											<p>学院</p>
+										</a>
+										<script>
+											$(function(){
+												initCollegeCount();
+						        		    	/* setInterval(function(){
+						        		    		initCollegeCount();
+						        				}, 5000); */
+						        		    })
+										</script>
+									</c:if>
+								</div>
+	                		</div>
+	                    </td>
+	                    <td>
+	                    	<div class="item-wrap">
+	                			<div class="symbol" style="background: #FF5722;"> 
+	                				<i class="fa fa-users"></i>
+								</div>
+	                			<div class="value">
+									<a href="javascript:void(0);">
+										<h1 class="count1" id="grade">0</h1>
+										<p>班级</p>
+									</a>
+								</div>
+	                		</div>
+	                    </td>
+	                    
+	                    <td>
+	                    	<div class="item-wrap">
+	                			<div class="symbol" style="background: #009688;"> 
+	                				<i class="fa fa-cutlery"></i>
+								</div>
+	                			<div class="value">
+									<a href="javascript:void(0);">
+										<h1 class="count1" id="activity">0</h1>
+										<p>活动</p>
+									</a>
+								</div>
+	                		</div>
+	                    </td>
+	                	<td>
+	                		<div class="item-wrap">
+	                			<div class="symbol" style="background: #2F4056;"> 
+	                				<i class="fa fa-file-audio-o"></i>
+								</div>
+	                			<div class="value">
+									<a href="javascript:void(0);">
+										<h1 class="count1" id="invitation">0</h1>
+										<p>帖子</p>
+									</a>
+								</div>
+	                		</div>
+	                	</td>
+	                </tr>
+	                <tr>
+	                	<td>
+	                		<div class="item-wrap">
+	                			<div class="symbol" style="background: #337ab7;"> 
+	                				<i class="fa fa-tasks"></i>
+								</div>
+	                			<div class="value">
+									<a href="javascript:void(0);">
+										<h1 class="count1" id="news">0</h1>
+										<p>新闻</p>
+									</a>
+								</div>
+	                		</div>
+	                	</td>
+	                	<td>
+	                		<div class="item-wrap">
+	                			<div class="symbol" style="background: #f0ad4e;"> 
+	                				<i class="fa fa-bullhorn"></i>
+								</div>
+	                			<div class="value">
+									<a href="javascript:void(0);">
+										<h1 class="count1" id="notices">0</h1>
+										<p>公告</p>
+									</a>
+								</div>
+	                		</div>
+	                	</td>
+	                	<td>
+	                		<div class="item-wrap">
+	                			<div class="symbol" style="background: #d9534f;"> 
+	                				<i class="fa fa-camera-retro"></i>
+								</div>
+	                			<div class="value">
+									<a href="javascript:void(0);">
+										<h1 class="count1" id="activitySpace">0</h1>
+										<p>资料</p>
+									</a>
+								</div>
+	                		</div>
+	                	</td>
+	                	<td>
+	                		<div class="item-wrap">
+	                			<div class="symbol" style="background: #5cb85c;"> 
+	                				<i class="fa  fa-credit-card"></i>
+								</div>
+	                			<div class="value">
+									<a href="javascript:void(0);">
+										<h1 class="count1" id="donate">0</h1>
+										<p>捐赠项目</p>
+									</a>
+								</div>
+	                		</div>
+	                	</td>
+                    </c:if>
+                    <!-- col_manage &&  tea_manage end-->
                     
-                    <td>
-                    	<div class="item-wrap">
-                			<div class="symbol" style="background: #009688;"> 
-                				<i class="fa fa-cutlery"></i>
-							</div>
-                			<div class="value">
-								<a href="javascript:addOneTab('活动管理', 'activityController.do?list', null);">
-									<h1 class="count1" id="activity">0</h1>
-									<p>活动</p>
-								</a>
-							</div>
-                		</div>
-                    </td>
-                	<td>
-                		<div class="item-wrap">
-                			<div class="symbol" style="background: #2F4056;"> 
-                				<i class="fa fa-file-audio-o"></i>
-							</div>
-                			<div class="value">
-								<a href="javascript:addOneTab('帖子管理', 'invitationController.do?list', null);">
-									<h1 class="count1" id="invitation">0</h1>
-									<p>帖子</p>
-								</a>
-							</div>
-                		</div>
-                	</td>
-                </tr>
-                <tr>
-                	<td>
-                		<div class="item-wrap">
-                			<div class="symbol" style="background: #337ab7;"> 
-                				<i class="fa fa-tasks"></i>
-							</div>
-                			<div class="value">
-								<a href="javascript:addOneTab('新闻管理', 'newsController.do?list', null);">
-									<h1 class="count1" id="news">0</h1>
-									<p>新闻</p>
-								</a>
-							</div>
-                		</div>
-                	</td>
-                	<td>
-                		<div class="item-wrap">
-                			<div class="symbol" style="background: #f0ad4e;"> 
-                				<i class="fa fa-bullhorn"></i>
-							</div>
-                			<div class="value">
-								<a href="javascript:addOneTab('公告管理', 'noticesController.do?list', null);">
-									<h1 class="count1" id="notices">0</h1>
-									<p>公告</p>
-								</a>
-							</div>
-                		</div>
-                	</td>
-                	<td>
-                		<div class="item-wrap">
-                			<div class="symbol" style="background: #d9534f;"> 
-                				<i class="fa fa-camera-retro"></i>
-							</div>
-                			<div class="value">
-								<a href="javascript:addOneTab('资料管理', 'activitySpaceController.do?list', null);">
-									<h1 class="count1" id="activitySpace">0</h1>
-									<p>资料</p>
-								</a>
-							</div>
-                		</div>
-                	</td>
-                	<td>
-                		<div class="item-wrap">
-                			<div class="symbol" style="background: #5cb85c;"> 
-                				<i class="fa  fa-credit-card"></i>
-							</div>
-                			<div class="value">
-								<a href="javascript:addOneTab('捐赠项目管理', 'donateController.do?list', null);">
-									<h1 class="count1" id="donate">0</h1>
-									<p>捐赠项目</p>
-								</a>
-							</div>
-                		</div>
-                	</td>
+                    <c:if test="${ (LOCAL_CLINET_USER.userRoleCode eq 'col_manage')  || (LOCAL_CLINET_USER.userRoleCode eq 'tea_manage') }">
+	                    <td>
+	                    	<div class="item-wrap">
+	                			<div class="symbol" style="background: #54ade8;"> 
+	                				<i class="fa fa-university"></i>
+								</div>
+	                			<div class="value">
+									<a href="javascript:addOneTab('学院管理', 'collegeController.do?list', null);"
+										<h1 class="count1" id="college">0</h1>
+										<p>学院</p>
+									</a>
+								</div>
+	                		</div>
+	                    </td>
+	                    <td>
+	                    	<div class="item-wrap">
+	                			<div class="symbol" style="background: #FF5722;"> 
+	                				<i class="fa fa-users"></i>
+								</div>
+	                			<div class="value">
+									<a href="javascript:addOneTab('班级管理', 'gradeController.do?list', null);">
+										<h1 class="count1" id="grade">0</h1>
+										<p>班级</p>
+									</a>
+								</div>
+	                		</div>
+	                    </td>
+	                    
+	                    <td>
+	                    	<div class="item-wrap">
+	                			<div class="symbol" style="background: #009688;"> 
+	                				<i class="fa fa-cutlery"></i>
+								</div>
+	                			<div class="value">
+									<a href="javascript:addOneTab('活动管理', 'activityController.do?list', null);">
+										<h1 class="count1" id="activity">0</h1>
+										<p>活动</p>
+									</a>
+								</div>
+	                		</div>
+	                    </td>
+	                	<td>
+	                		<div class="item-wrap">
+	                			<div class="symbol" style="background: #2F4056;"> 
+	                				<i class="fa fa-file-audio-o"></i>
+								</div>
+	                			<div class="value">
+									<a href="javascript:addOneTab('帖子管理', 'invitationController.do?list', null);">
+										<h1 class="count1" id="invitation">0</h1>
+										<p>帖子</p>
+									</a>
+								</div>
+	                		</div>
+	                	</td>
+	                </tr>
+	                <tr>
+	                	<td>
+	                		<div class="item-wrap">
+	                			<div class="symbol" style="background: #337ab7;"> 
+	                				<i class="fa fa-tasks"></i>
+								</div>
+	                			<div class="value">
+									<a href="javascript:addOneTab('新闻管理', 'newsController.do?list', null);">
+										<h1 class="count1" id="news">0</h1>
+										<p>新闻</p>
+									</a>
+								</div>
+	                		</div>
+	                	</td>
+	                	<td>
+	                		<div class="item-wrap">
+	                			<div class="symbol" style="background: #f0ad4e;"> 
+	                				<i class="fa fa-bullhorn"></i>
+								</div>
+	                			<div class="value">
+									<a href="javascript:addOneTab('公告管理', 'noticesController.do?list', null);">
+										<h1 class="count1" id="notices">0</h1>
+										<p>公告</p>
+									</a>
+								</div>
+	                		</div>
+	                	</td>
+	                	<td>
+	                		<div class="item-wrap">
+	                			<div class="symbol" style="background: #d9534f;"> 
+	                				<i class="fa fa-camera-retro"></i>
+								</div>
+	                			<div class="value">
+									<a href="javascript:addOneTab('资料管理', 'activitySpaceController.do?list', null);">
+										<h1 class="count1" id="activitySpace">0</h1>
+										<p>资料</p>
+									</a>
+								</div>
+	                		</div>
+	                	</td>
+	                	<td>
+	                		<div class="item-wrap">
+	                			<div class="symbol" style="background: #5cb85c;"> 
+	                				<i class="fa  fa-credit-card"></i>
+								</div>
+	                			<div class="value">
+									<a href="javascript:addOneTab('捐赠项目管理', 'donateController.do?list', null);">
+										<h1 class="count1" id="donate">0</h1>
+										<p>捐赠项目</p>
+									</a>
+								</div>
+	                		</div>
+	                	</td>
+	                	<script>
+		                	$(function(){
+		        		    	initCount();
+		        		    	/* setInterval(function(){
+		        					initCount();
+		        				}, 5000); */
+		        		    })
+	                	</script>
+                	</c:if>
+                    <!-- sys_sys_manage &&  sch_manage end-->
                 </tr>
             </table>
 		</div>
-		<script src="plug-in/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
-		<script src="plug-in/tools/curdtools_zh-cn.js" type="text/javascript"></script>
 		<script>
 		    $(function(){
 		    	initDomSize();
-		    	initCount();
-		    	setInterval(function(){
-					initCount();
-				}, 5000);
 		    })
+		    
+		    function initCollegeCount(){
+		    	$.ajax({
+					url: 'statisticsController.do?getAwaitInfo',
+					type: 'GET',
+					dataType: 'json',
+					success: function(data){
+						if(data){
+							$('#college').html(data.college);
+						}
+					},
+					error: function(data){
+						
+					}
+				});
+		    }
 		    
 		   function initDomSize(){
 		    	
@@ -228,9 +369,7 @@
 					dataType: 'json',
 					success: function(data){
 						if(data){
-							if(!'${LOCAL_CLINET_USER.collegeName }')
-								$('#college').html(data.college);
-							
+							$('#college').html(data.college);
 							$('#news').html(data.news);
 							$('#notices').html(data.notices);
 							$('#activity').html(data.activity);

@@ -5,23 +5,23 @@
 <!-- update-end--Author:xuelin  Date:20170331 for：[#1714]【功能】角色分配菜单权限的时候，权限树采用ztree重写，不再采用easyui的树    新增引入ztree插件包---------------------- -->	
 <div class="easyui-layout" fit="true">
 <div region="center" style="padding:0px;border:0px">
-<t:datagrid name="roleList" title="common.role.list" actionUrl="roleController.do?roleGrid" fitColumns="true"  idField="id" sortName="id" sortOrder="desc" queryMode="group" btnCls="bootstrap">
+<t:datagrid name="roleList" title="common.role.list" actionUrl="roleController.do?roleGrid" fitColumns="true"  idField="id" sortName="id" sortOrder="desc"  btnCls="bootstrap">
 	<t:dgCol title="common.code" field="id" hidden="true"></t:dgCol>
 	<t:dgCol title="common.role.code" field="roleCode" width="200"></t:dgCol>
-	<t:dgCol title="common.role.name" field="roleName" query="true" width="200"></t:dgCol>
+	<t:dgCol title="common.role.name" field="roleName"  width="200"></t:dgCol>
 	<t:dgCol title="common.createby" field="createBy" hidden="true"></t:dgCol>
 	<t:dgCol title="common.createtime" field="createDate" formatter="yyyy-MM-dd" hidden="true"></t:dgCol>
 	<t:dgCol title="common.updateby" field="updateBy" hidden="true"></t:dgCol>
 	<t:dgCol title="common.updatetime" field="updateDate" formatter="yyyy-MM-dd" hidden="true"></t:dgCol>
 	<t:dgCol title="common.operation" field="opt" width="300"></t:dgCol>
 	<t:dgFunOpt funname="delRole(id)" title="common.delete" urlclass="ace_button"  urlStyle="background-color:#ec4758;" urlfont="fa-trash-o"></t:dgFunOpt>
-	<t:dgFunOpt funname="userListbyrole(id,roleName)" title="common.user" urlclass="ace_button"  urlfont="fa-user"></t:dgFunOpt>
+	<%-- <t:dgFunOpt funname="userListbyrole(id,roleName)" title="common.user" urlclass="ace_button"  urlfont="fa-user"></t:dgFunOpt> --%>
 	<t:dgFunOpt funname="setfunbyrole(id,roleName)" title="permission.set" urlclass="ace_button" urlStyle="background-color:#18a689;"  urlfont="fa-cog"></t:dgFunOpt>
-	<t:dgToolBar title="common.add.param" langArg="common.role" icon="fa fa-plus" url="roleController.do?addorupdate" funname="add"></t:dgToolBar>
-	<t:dgToolBar title="common.edit.param" langArg="common.role" icon="fa fa-edit" url="roleController.do?addorupdate" funname="update"></t:dgToolBar>
-	<t:dgToolBar title="excelImport" icon="fa fa-arrow-circle-left" funname="ImportXls"></t:dgToolBar>
+	<%-- <t:dgToolBar title="common.add.param" operationCode="add_role" langArg="common.role" icon="fa fa-plus" url="roleController.do?addorupdate" funname="add"></t:dgToolBar>
+	<t:dgToolBar title="common.edit.param" langArg="common.role" operationCode="edit_role" icon="fa fa-edit" url="roleController.do?addorupdate" funname="update"></t:dgToolBar>
+	<t:dgToolBar title="excelImport" icon="fa fa-arrow-circle-left" operationCode="edit_role" funname="ImportXls"></t:dgToolBar>
 	<t:dgToolBar title="excelOutput" icon="fa fa-arrow-circle-right" funname="ExportXls"></t:dgToolBar>
-	<t:dgToolBar title="templateDownload" icon="fa fa-arrow-circle-o-down" funname="ExportXlsByT"></t:dgToolBar>
+	<t:dgToolBar title="templateDownload" icon="fa fa-arrow-circle-o-down" funname="ExportXlsByT"></t:dgToolBar> --%>
 </t:datagrid></div>
 </div>
 <div region="east" style="width: 600px;" split="true">

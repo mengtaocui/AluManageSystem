@@ -75,12 +75,18 @@
                     	<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                                 <span ><strong class="font-bold">${LOCAL_CLINET_USER.userName}</strong></span>
                                 <span >
-                                <c:if test="${ not empty LOCAL_CLINET_USER.collegeName }">
-                                	${LOCAL_CLINET_USER.collegeName}管理员<b class="caret"></b>
+                                <c:if test="${ LOCAL_CLINET_USER.userRoleCode eq 'sch_manage' }">
+                                	学校管理员<b class="caret"></b>
                                 </c:if> 
-                                 <c:if test="${ empty LOCAL_CLINET_USER.collegeName }">
-                                	超级管理员<b class="caret"></b>
-                                </c:if> 
+                                <c:if test="${ LOCAL_CLINET_USER.userRoleCode eq 'tea_manage' }">
+                                	班级管理员<b class="caret"></b>
+                                </c:if>
+                                <c:if test="${ LOCAL_CLINET_USER.userRoleCode eq 'sys_manage' }">
+                                	系统管理员<b class="caret"></b>
+                                </c:if>
+                                <c:if test="${ LOCAL_CLINET_USER.userRoleCode eq 'col_manage' }">
+                                	学院管理员<b class="caret"></b>
+                                </c:if>
                                 </span>
                         </a>
                         <ul class="dropdown-menu dropdown-alerts">

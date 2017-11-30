@@ -367,10 +367,17 @@ public class UserController extends BaseController {
 
         Short[] userstate = new Short[]{Globals.User_Normal, Globals.User_ADMIN, Globals.User_Forbidden};
         cq.in("status", userstate);
-        cq.notEq("userRoleCode", "admin");
         cq.eq("deleteFlag", Globals.Delete_Normal);
-
-
+        
+        TSUser curUser = ResourceUtil.getSessionUser();
+        
+        if("sys_manage".equals(curUser.getUserRoleCode()) || "sch_manage".equals(curUser.getUserRoleCode())){
+            cq.notEq("collegeId", " ");
+            cq.isNull("departid");
+        }else if("col_manage".equals(curUser.getUserRoleCode())){
+        	cq.eq("departid", curUser.getCollegeId());
+        }
+        
         cq.add();
         this.systemService.getDataGridReturn(cq, true);
 
@@ -568,6 +575,14 @@ public class UserController extends BaseController {
 		// 得到用户的角色
 		String roleid = oConvertUtils.getString(req.getParameter("roleid"));
 		String password = oConvertUtils.getString(req.getParameter("password"));
+		
+		TSUser curUser = ResourceUtil.getSessionUser();
+		if("col_manage".equals(curUser.getUserRoleCode())){
+			user.setCollegeId(curUser.getCollegeId());
+			user.setCollegeName(curUser.getCollegeName());
+			user.setDepartid(curUser.getCollegeId());
+		}
+		
 		if (StringUtil.isNotEmpty(user.getId())) {
 			TSUser users = systemService.getEntity(TSUser.class, user.getId());
 			users.setEmail(user.getEmail());

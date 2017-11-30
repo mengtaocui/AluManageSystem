@@ -6,27 +6,6 @@
 <title>用户信息</title>
 <t:base type="jquery,easyui,tools"></t:base>
     <script>
-<%-- //        update-start--Author:zhangguoming  Date:20140826 for：将combobox修改为combotree
-        function setOrgIds() {
-//            var orgIds = $("#orgSelect").combobox("getValues");
-            var orgIds = $("#orgSelect").combotree("getValues");
-            $("#orgIds").val(orgIds);
-        }
-        $(function() {
-            $("#orgSelect").combotree({
-                onChange: function(n, o) {
-                    if($("#orgSelect").combotree("getValues") != "") {
-                        $("#orgSelect option").eq(1).attr("selected", true);
-                    } else {
-                        $("#orgSelect option").eq(1).attr("selected", false);
-                    }
-                }
-            });
-            $("#orgSelect").combobox("setValues", ${orgIdList});
-            $("#orgSelect").combotree("setValues", ${orgIdList});
-        }); --%>
-
-
 		function openDepartmentSelect() {
 			$.dialog.setting.zIndex = getzIndex(); 
 			var orgIds = $("#orgIds").val();
@@ -110,17 +89,32 @@
                 </td>
 			</tr>
 		</c:if>
-		<tr>
-			<td align="right"><label class="Validform_label">学院: </label></td>
-			<td class="value">
-               <t:dictSelect field="collegeId" id="collegeId"  extendJson="{datatype:'*'}" dictTable="t_college" dictField="id" 
-						dictText="name" dictCondition=" where delete_flag=0" defaultVal="${user.collegeId}"  hasLabel="false"></t:dictSelect>
-						<input type="hidden" id="collegeName" name="collegeName"   value="${user.collegeName}" />
-                <input id="roleid" name="roleid" type="hidden" value="8a8ab0b246dc81120146dc81818b0051">
-                <input id="userRoleCode" name="userRoleCode" type="hidden" value="manager">
-                <span class="Validform_checktip"></span>
-            </td>
-		</tr>
+		<c:if test="${ (LOCAL_CLINET_USER.userRoleCode eq 'sch_manage') }">
+			<tr>
+				<td align="right"><label class="Validform_label">学院: </label></td>
+				<td class="value">
+	               <t:dictSelect field="collegeId" id="collegeId"  extendJson="{datatype:'*'}" dictTable="t_college" dictField="id" 
+							dictText="name" dictCondition=" where delete_flag=0" defaultVal="${user.collegeId}"  hasLabel="false"></t:dictSelect>
+							<input type="hidden" id="collegeName" name="collegeName"   value="${user.collegeName}" />
+	                
+		                <input id="roleid" name="roleid" type="hidden" value="8a8ab0b246dc81120146dc81818b0051">
+		                <input id="userRoleCode" name="userRoleCode" type="hidden" value="col_manage">
+	                <span class="Validform_checktip"></span>
+	            </td>
+			</tr>
+		</c:if>
+		<c:if test="${ (LOCAL_CLINET_USER.userRoleCode eq 'col_manage') }">
+		    <tr>
+				<td align="right"><label class="Validform_label">班级: </label></td>
+				<td class="value">
+	               <t:dictSelect field="departid" id="departid"  extendJson="{datatype:'*'}" dictTable="t_grade" dictField="id" 
+							dictText="name" dictCondition=" where delete_flag=0" defaultVal="${user.departid}"  hasLabel="false"></t:dictSelect>
+	                <span class="Validform_checktip"></span>
+	            </td>
+			</tr>
+	        <input id="roleid" name="roleid" type="hidden" value="2c92957b6005e97e016007ce4931000d">
+	        <input id="userRoleCode" name="userRoleCode" type="hidden" value="tea_manage">
+        </c:if>
 		<%-- <tr>
 			<td align="right"><label class="Validform_label"> <t:mutiLang langKey="common.role"/>: </label></td>
 			<td class="value" nowrap>

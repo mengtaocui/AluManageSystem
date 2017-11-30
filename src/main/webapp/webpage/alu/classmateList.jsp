@@ -10,7 +10,7 @@
    <t:dgCol title="电话" field="phone"   width="70"></t:dgCol>
    <t:dgCol title="省份" field="provinceId"  dictionary="t_s_region_view,id,name"  query="true"></t:dgCol>
    <t:dgCol title="城市" field="cityId"  dictionary="t_s_region,id,name"   query="true"></t:dgCol>
-   <t:dgCol title="学院" field="collegeId"  dictionary="t_college,id,name"  width="120" query="true"></t:dgCol>
+   <t:dgCol title="学院" field="collegeId"  dictionary="t_college,id,name"  width="120" hidden="true" ></t:dgCol>
    <t:dgCol title="年届" field="yearPeriod" dictionary="nianJie"   width="50" query="true"></t:dgCol>
    <t:dgCol title="班级" field="gradeId"   dictionary="t_grade,id,name"  width="260" query="true"></t:dgCol>
    <t:dgCol title="姓名" field="name"   width="70" query="true"></t:dgCol>

@@ -123,7 +123,7 @@ public class ActivitySpaceController extends BaseController {
 		
 		//学院管理员只能查询自己所在学院的数据,超级管理员可以查看所有学院的数据
 		TSUser curUser = ResourceUtil.getSessionUser();
-		if(!"admin".equals(curUser.getUserRoleCode())){
+		if(StringUtil.isNotEmpty(curUser.getCollegeId())){
 			cq.eq("collegeId", curUser.getCollegeId());
 		}
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, activitySpace, request.getParameterMap());

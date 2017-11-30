@@ -9,23 +9,11 @@
  <body style="overflow-y: hidden" scroll="no">
   <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="gradeController.do?save">
 			<input id="id" name="id" type="hidden" value="${gradePage.id }">
+			<input type="hidden" id="collegeId" name="collegeId" value="${LOCAL_CLINET_USER.collegeId}"/>
+			<input type="hidden" id="collegeName" name="collegeName" value="${LOCAL_CLINET_USER.collegeName}"/>
 			<table style="width: 600px;" cellpadding="0" cellspacing="1" class="formtable">
-				<c:if test="${ empty LOCAL_CLINET_USER.collegeName  }">
-					<tr>
-						<td align="right"><label class="Validform_label">学院: </label></td>
-						<td class="value">
-			               <t:dictSelect field="collegeId" id="collegeId"  extendJson="{datatype:'*'}" dictTable="t_college" dictField="id" 
-									dictText="name" dictCondition=" where delete_flag=0" defaultVal="${gradePage.collegeId}"  hasLabel="false"></t:dictSelect>
-						    <input type="hidden" id="collegeName" name="collegeName"   value="${gradePage.collegeName}" />
-			                <span class="Validform_checktip"></span>
-			            </td>
-					</tr>
-				</c:if>
 				<tr>
 					<td align="right">
-					    <c:if test="${ not empty LOCAL_CLINET_USER.collegeName  }">
-							<input type="hidden" id="collegeId" name="collegeId" value="${gradePage.collegeId}"/>
-						</c:if>
 						<label class="Validform_label">
 							年届:
 						</label>

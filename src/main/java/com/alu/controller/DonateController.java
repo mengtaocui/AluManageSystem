@@ -131,7 +131,7 @@ public class DonateController extends BaseController {
 		
 		//学院管理员只能查询自己所在学院的数据,超级管理员可以查看所有学院的数据
 		TSUser curUser = ResourceUtil.getSessionUser();
-		if(!"admin".equals(curUser.getUserRoleCode())){
+		if(StringUtil.isNotEmpty(curUser.getCollegeId())){
 			cq.eq("collegeId", curUser.getCollegeId());
 		}
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, donate, request.getParameterMap());
@@ -188,10 +188,6 @@ public class DonateController extends BaseController {
 			}
 		} else {
 			message = "捐赠添加成功";
-			if(StringUtil.isNotEmpty(curUser.getCollegeId())){
-				donate.setCollegeId(curUser.getCollegeId());
-				donate.setCollegeName(curUser.getCollegeName());
-			}
 			donate.setCrtBy(curUser.getId());
 			donate.setCrtByUserName(curUser.getUserName());
 			donate.setCrtTime(DateUtils.formatDateTime());

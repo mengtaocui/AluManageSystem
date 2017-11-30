@@ -3,9 +3,9 @@
 <t:base type="jquery,easyui,tools,DatePicker"></t:base>
 <div class="easyui-layout" fit="true">
   <div region="center" style="padding:0px;border:0px">
-  <t:datagrid name="donateRecordList" title="捐赠记录" actionUrl="donateRecordController.do?datagrid" idField="id" fit="true" queryMode="group" onLoadSuccess="loadSuccess">
+  <t:datagrid name="donateRecordList" title="捐赠记录" actionUrl="donateRecordController.do?datagrid" idField="id" fit="true" queryMode="group" >
    <t:dgCol title="编号" field="id" hidden="true"></t:dgCol>
-   <t:dgCol title="学院" field="collegeId"  dictionary="t_college,id,name" query="true"></t:dgCol>
+   <t:dgCol title="学院" field="collegeId"  dictionary="t_college,id,name" hidden="true"></t:dgCol>
    <t:dgCol title="捐赠项目ID" field="donateId" hidden="true"></t:dgCol>
    <t:dgCol title="捐赠项目" style="color:blue"   url="donateController.do?addorupdate&load=detail&id={donateId}&_=1510794388831" field="donateName"   width="120" query="true"></t:dgCol>
    <t:dgCol title="捐赠人" url="classmateController.do?addorupdate&load=detail&name={donatePersonName}&phone={donatePersonPhone}&_=1510794388831" field="donatePersonName"   width="120" query="true"></t:dgCol>
@@ -23,18 +23,6 @@
   </div>
  </div>
  <script>
- function loadSuccess(){
- 	if('${LOCAL_CLINET_USER.collegeName }'){
- 		$($('#donateRecordListForm').find('span')[0]).hide();
-	   	 	$('td').each(function(){
-	   	    	if($(this).attr('field') == 'collegeId')
-	   	    		$(this).remove();
-	   	    	
-	   	    	console.log(1);
-	   	   });
-	   	   $(window).resize();  
- 	}
- }
  /**
   * 创建不带按钮的窗口
   * 

@@ -34,361 +34,175 @@
   <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="classmateController.do?save">
 			<input id="id" name="id" type="hidden" value="${classmatePage.id }">
 			<table style="width: 100%;height:600px" cellpadding="0" cellspacing="1" class="formtable">
-				<c:if test="${ empty LOCAL_CLINET_USER.collegeName  }">
-					<tr>
-						<td align="right">
-							<label class="Validform_label">
-								学院:
-							</label>
-						</td>
-						<td class="value">
-							<t:dictSelect field="collegeId" id="collegeId"  extendJson="{datatype:'*'}" dictTable="t_college" dictField="id" 
-							dictText="name" dictCondition=" where delete_flag=0" defaultVal="${classmatePage.collegeId}"  hasLabel="false"></t:dictSelect>
-							<input type="hidden" id="collegeName" name="collegeName"   value="${classmatePage.collegeName}" />
-							<span class="Validform_checktip"></span>
-						</td>
-						<td align="right">
-							<label class="Validform_label">
-								年届:
-							</label>
-						</td>
-						<td class="value">
-							<t:dictSelect field="yearPeriod" id="yearPeriod" extendJson="{datatype:'*'}" typeGroupCode="nianJie"   defaultVal="${classmatePage.yearPeriod}"  hasLabel="false"></t:dictSelect>
-							<span class="Validform_checktip"></span>
-						</td>
-					</tr>
-					<tr>
-						<td align="right">
-							<label class="Validform_label">
-								班级:
-							</label>
-						</td>
-						<td class="value">
-							<select name="gradeId" datatype="*" id="gradeId"> 
-								<option value="" selected="selected">---请选择--- </option>
-							</select>
-							<span class="Validform_checktip Validform_wrong"></span>
-							<input type="hidden" id="gradeName" name="gradeName"  value="${classmatePage.gradeName}" />
-						</td>
-						<td align="right">
-							<label class="Validform_label">
-								学号:
-							</label>
-						</td>
-						<td class="value">
-							<input class="inputxt" id="stuNo" name="stuNo" ignore="ignore"  value="${classmatePage.stuNo}" />
-							<span class="Validform_checktip"></span>
-						</td>
-					</tr>
-					<tr>
-						<td align="right">
-							<label class="Validform_label">
-								单位性质:
-							</label>
-						</td>
-						<td class="value">
-							<t:dictSelect field="companyNature" defaultVal="${classmatePage.companyNature}" typeGroupCode="dwxz" hasLabel="false" extendJson="{datatype:'*'}"></t:dictSelect>
-							<%-- <input class="inputxt" id="companyNature" name="companyNature" ignore="ignore"  value="${classmatePage.companyNature}" /> --%>
-							<span class="Validform_checktip"></span>
-						</td>
-						<td align="right">
-							<label class="Validform_label">
-								教育阶段:
-							</label>
-						</td>
-						<td class="value">
-							<t:dictSelect field="educationStage" defaultVal="${classmatePage.educationStage}" typeGroupCode="jyjd" hasLabel="false" extendJson="{datatype:'*'}"></t:dictSelect>
-							<%-- <input class="inputxt" id="educationStage" name="educationStage" ignore="ignore"  value="${classmatePage.companyNature}" /> --%>
-							<span class="Validform_checktip"></span>
-						</td>
-					</tr>
-					<tr>
-					   <td align="right">
-							<label class="Validform_label">
-								姓名:
-							</label>
-						</td>
-						<td class="value">
-							<input class="inputxt" id="name" name="name" datatype="*1-12"  value="${classmatePage.name}" />
-							<span class="Validform_checktip"></span>
-						</td>
-						<td align="right">
-							<label class="Validform_label">
-								性别:
-							</label>
-						</td>
-						<td class="value">
-						    <input type="radio" name="sex" value="0"
-						    	<c:if test="${classmatePage.sex == 0}">checked="checked"</c:if>
-						    />男
-						    <input type="radio" name="sex" value="1"
-						    	<c:if test="${classmatePage.sex == 1}">checked="checked"</c:if>
-						    />女
-						</td>
-					</tr>
-					<tr>
-						<td align="right">
-							<label class="Validform_label">
-								电话:
-							</label>
-						</td>
-						<td class="value">
-							<input class="inputxt" id="phone" name="phone" datatype="m" ignore="ignore"  value="${classmatePage.phone}" />
-							<span class="Validform_checktip"></span>
-						</td>
-						<td align="right">
-							<label class="Validform_label">
-								邮箱:
-							</label>
-						</td>
-						<td class="value">
-							<input class="inputxt" id="email" name="email" datatype="e" ignore="ignore" value="${classmatePage.email}" />
-							<span class="Validform_checktip"></span>
-						</td>
-					</tr>
-					<tr>
-						<td align="right">
-							<label class="Validform_label">
-								头像:
-							</label>
-						</td>
-						<td class="value" colspan="3">
-						    
-					    	<div id="preview"><img alt="" src="${classmatePage.headPortrait}" class="header_img"></div>
-					    	<input type="file" style="display:none" onchange="preview(this)" id="head_file"/>
-					    	<a href="javascript:chooseImg()" class="ace_button" style="background-color:#18a689;">  
-				 				<i class=" fa fa-refresh"></i>
-				 				选择
-				 			</a>
-				 			<a href="javascript:uploadFile()" class="ace_button" style="background-color:#1a7bb9;">  
-					 			<i class=" fa fa-arrow-up"></i>
-					 			上传
-					 		</a>
-							<input type="hidden" id="headPortrait" name="headPortrait" ignore="ignore"  value="${classmatePage.headPortrait}" />
-							<span class="Validform_checktip"></span>
-						</td>
-					</tr>
-					<tr>
-						<td align="right">
-							<label class="Validform_label">
-								所在省份:
-							</label>
-						</td>
-						<td class="value">
-							 <t:dictSelect field="provinceId" id="provinceId"  extendJson="{datatype:'*'}" dictTable="t_s_region" dictField="id" 
-							dictText="name" dictCondition=" where pid=1" defaultVal="${classmatePage.provinceId}"  hasLabel="false"></t:dictSelect>
-							<input type="hidden" id="provinceName" name="provinceName"   value="${classmatePage.provinceName}" />
-							<span class="Validform_checktip"></span>
-						</td>
-						<td align="right">
-							<label class="Validform_label">
-								所在城市:
-							</label>
-						</td>
-						<td class="value">
-							<select name="cityId" datatype="*" id="cityId"> 
-								<option value="" selected="selected">---请选择--- </option>
-							</select>
-							<input type="hidden" id="cityName" name="cityName"   value="${classmatePage.cityName}" />
-							<span class="Validform_checktip"></span>
-						</td>
-					</tr>
-					<tr>
-						<td align="right">
-							<label class="Validform_label">
-								详细地址:
-							</label>
-						</td>
-						<td class="value" colspan="3">
-						    <textarea class="inputxt detail" style="margin-top:10px" id="address" name="address" ignore="ignore">${classmatePage.address}</textarea>
-							<span class="Validform_checktip"></span>
-						</td>
-					</tr>
-					<tr>
-						<td align="right">
-							<label class="Validform_label">
-								简介:
-							</label>
-						</td>
-						<td class="value" colspan="3">
-							<textarea class="inputxt detail" id="descri" name="descri">${classmatePage.descri}</textarea>
-							<span class="Validform_checktip"></span>
-						</td>
-					</tr>
-				</c:if>
-				
-				
-				<c:if test="${ not empty LOCAL_CLINET_USER.collegeName  }">
-					<tr>
-						<td align="right">
-							<input type="hidden" id="collegeId" name="collegeId" value="${LOCAL_CLINET_USER.collegeId}"/>
-							<label class="Validform_label">
-								头像:
-							</label>
-						</td>
-						<td class="value">
-						    
-					    	<div id="preview"><img alt="" src="${classmatePage.headPortrait}" class="header_img"></div>
-					    	<input type="file" style="display:none" onchange="preview(this)" id="head_file"/>
-					    	<a href="javascript:chooseImg()" class="ace_button" style="background-color:#18a689;">  
-				 				<i class=" fa fa-refresh"></i>
-				 				选择
-				 			</a>
-				 			<a href="javascript:uploadFile()" class="ace_button" style="background-color:#1a7bb9;">  
-					 			<i class=" fa fa-arrow-up"></i>
-					 			上传
-					 		</a>
-							<input type="hidden" id="headPortrait" name="headPortrait" ignore="ignore"  value="${classmatePage.headPortrait}" />
-							<span class="Validform_checktip"></span>
-						</td>
-						<td align="right">
-							<label class="Validform_label">
-								年届:
-							</label>
-						</td>
-						<td class="value">
-							<t:dictSelect field="yearPeriod" id="yearPeriod" extendJson="{datatype:'*'}" typeGroupCode="nianJie"   defaultVal="${classmatePage.yearPeriod}"  hasLabel="false"></t:dictSelect>
-							<span class="Validform_checktip"></span>
-						</td>
-					</tr>
-					<tr>
-						<td align="right">
-							<label class="Validform_label">
-								班级:
-							</label>
-						</td>
-						<td class="value">
-							<select name="gradeId" datatype="*" id="gradeId"> 
-								<option value="" selected="selected">---请选择--- </option>
-							</select>
-							<span class="Validform_checktip Validform_wrong"></span>
-							<input type="hidden" id="gradeName" name="gradeName"  value="${classmatePage.gradeName}" />
-						</td>
-						<td align="right">
-							<label class="Validform_label">
-								学号:
-							</label>
-						</td>
-						<td class="value">
-							<input class="inputxt" id="stuNo" name="stuNo" ignore="ignore"  value="${classmatePage.stuNo}" />
-							<span class="Validform_checktip"></span>
-						</td>
-					</tr>
-					<tr>
-						<td align="right">
-							<label class="Validform_label">
-								单位性质:
-							</label>
-						</td>
-						<td class="value">
-							<t:dictSelect field="companyNature" defaultVal="${classmatePage.companyNature}" typeGroupCode="dwxz" hasLabel="false" extendJson="{datatype:'*'}"></t:dictSelect>
-							<%-- <input class="inputxt" id="companyNature" name="companyNature" ignore="ignore"  value="${classmatePage.companyNature}" /> --%>
-							<span class="Validform_checktip"></span>
-						</td>
-						<td align="right">
-							<label class="Validform_label">
-								教育阶段:
-							</label>
-						</td>
-						<td class="value">
-							<t:dictSelect field="educationStage" defaultVal="${classmatePage.educationStage}" typeGroupCode="jyjd" hasLabel="false" extendJson="{datatype:'*'}"></t:dictSelect>
-							<%-- <input class="inputxt" id="educationStage" name="educationStage" ignore="ignore"  value="${classmatePage.companyNature}" /> --%>
-							<span class="Validform_checktip"></span>
-						</td>
-					</tr>
-					<tr>
-					   <td align="right">
-							<label class="Validform_label">
-								姓名:
-							</label>
-						</td>
-						<td class="value">
-							<input class="inputxt" id="name" name="name" datatype="*"  value="${classmatePage.name}" />
-							<span class="Validform_checktip"></span>
-						</td>
-						<td align="right">
-							<label class="Validform_label">
-								性别:
-							</label>
-						</td>
-						<td class="value">
-						    <input type="radio" name="sex" value="0"
-						    	<c:if test="${classmatePage.sex == 0}">checked="checked"</c:if>
-						    />男
-						    <input type="radio" name="sex" value="1"
-						    	<c:if test="${classmatePage.sex == 1}">checked="checked"</c:if>
-						    />女
-						</td>
-					</tr>
-					<tr>
-						<td align="right">
-							<label class="Validform_label">
-								电话:
-							</label>
-						</td>
-						<td class="value">
-							<input class="inputxt" id="phone" name="phone" datatype="m" ignore="ignore"  value="${classmatePage.phone}" />
-							<span class="Validform_checktip"></span>
-						</td>
-						<td align="right">
-							<label class="Validform_label">
-								邮箱:
-							</label>
-						</td>
-						<td class="value">
-							<input class="inputxt" id="email" name="email" datatype="e" ignore="ignore"  value="${classmatePage.email}" />
-							<span class="Validform_checktip"></span>
-						</td>
-					</tr>
-					<tr>
-						<td align="right">
-							<label class="Validform_label">
-								所在省份:
-							</label>
-						</td>
-						<td class="value">
-							 <t:dictSelect field="provinceId" id="provinceId"  extendJson="{datatype:'*'}" dictTable="t_s_region" dictField="id" 
-							dictText="name" dictCondition=" where pid=1" defaultVal="${classmatePage.provinceId}"  hasLabel="false"></t:dictSelect>
-							<input type="hidden" id="provinceName" name="provinceName"   value="${classmatePage.provinceName}" />
-							<span class="Validform_checktip"></span>
-						</td>
-						<td align="right">
-							<label class="Validform_label">
-								所在城市:
-							</label>
-						</td>
-						<td class="value">
-							<select name="cityId" datatype="*" id="cityId"> 
-								<option value="" selected="selected">---请选择--- </option>
-							</select>
-							<input type="hidden" id="cityName" name="cityName"   value="${classmatePage.cityName}" />
-							<span class="Validform_checktip"></span>
-						</td>
-					</tr>
-					<tr>
-						<td align="right">
-							<label class="Validform_label">
-								详细地址:
-							</label>
-						</td>
-						<td class="value" colspan="3">
-						    <textarea class="inputxt detail" style="margin-top:10px" id="address" name="address" ignore="ignore">${classmatePage.address}</textarea>
-							<span class="Validform_checktip"></span>
-						</td>
-					</tr>
-					<tr>
-						<td align="right">
-							<label class="Validform_label">
-								简介:
-							</label>
-						</td>
-						<td class="value" colspan="3">
-							<textarea class="inputxt detail" id="descri" name="descri">${classmatePage.descri}</textarea>
-							<span class="Validform_checktip"></span>
-						</td>
-					</tr>
-				</c:if>
-				
+				<tr>
+					<td align="right">
+						<input type="hidden" id="collegeId" name="collegeId" value="${LOCAL_CLINET_USER.collegeId}"/>
+						<input type="hidden" id="collegeName" name="collegeName" value="${LOCAL_CLINET_USER.collegeName}"/>
+						<label class="Validform_label">
+							头像:
+						</label>
+					</td>
+					<td class="value">
+					    
+				    	<div id="preview"><img alt="" src="${classmatePage.headPortrait}" class="header_img"></div>
+				    	<input type="file" style="display:none" onchange="preview(this)" id="head_file"/>
+				    	<a href="javascript:chooseImg()" class="ace_button" style="background-color:#18a689;">  
+			 				<i class=" fa fa-refresh"></i>
+			 				选择
+			 			</a>
+			 			<a href="javascript:uploadFile()" class="ace_button" style="background-color:#1a7bb9;">  
+				 			<i class=" fa fa-arrow-up"></i>
+				 			上传
+				 		</a>
+						<input type="hidden" id="headPortrait" name="headPortrait" ignore="ignore"  value="${classmatePage.headPortrait}" />
+						<span class="Validform_checktip"></span>
+					</td>
+					<td align="right">
+						<label class="Validform_label">
+							年届:
+						</label>
+					</td>
+					<td class="value">
+						<t:dictSelect field="yearPeriod" id="yearPeriod" extendJson="{datatype:'*'}" typeGroupCode="nianJie"   defaultVal="${classmatePage.yearPeriod}"  hasLabel="false"></t:dictSelect>
+						<span class="Validform_checktip"></span>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							班级:
+						</label>
+					</td>
+					<td class="value">
+						<select name="gradeId" datatype="*" id="gradeId"> 
+							<option value="" selected="selected">---请选择--- </option>
+						</select>
+						<span class="Validform_checktip Validform_wrong"></span>
+						<input type="hidden" id="gradeName" name="gradeName"  value="${classmatePage.gradeName}" />
+					</td>
+					<td align="right">
+						<label class="Validform_label">
+							学号:
+						</label>
+					</td>
+					<td class="value">
+						<input class="inputxt" id="stuNo" name="stuNo" ignore="ignore"  value="${classmatePage.stuNo}" />
+						<span class="Validform_checktip"></span>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							单位性质:
+						</label>
+					</td>
+					<td class="value">
+						<t:dictSelect field="companyNature" defaultVal="${classmatePage.companyNature}" typeGroupCode="dwxz" hasLabel="false" extendJson="{datatype:'*'}"></t:dictSelect>
+						<%-- <input class="inputxt" id="companyNature" name="companyNature" ignore="ignore"  value="${classmatePage.companyNature}" /> --%>
+						<span class="Validform_checktip"></span>
+					</td>
+					<td align="right">
+						<label class="Validform_label">
+							教育阶段:
+						</label>
+					</td>
+					<td class="value">
+						<t:dictSelect field="educationStage" defaultVal="${classmatePage.educationStage}" typeGroupCode="jyjd" hasLabel="false" extendJson="{datatype:'*'}"></t:dictSelect>
+						<%-- <input class="inputxt" id="educationStage" name="educationStage" ignore="ignore"  value="${classmatePage.companyNature}" /> --%>
+						<span class="Validform_checktip"></span>
+					</td>
+				</tr>
+				<tr>
+				   <td align="right">
+						<label class="Validform_label">
+							姓名:
+						</label>
+					</td>
+					<td class="value">
+						<input class="inputxt" id="name" name="name" datatype="*"  value="${classmatePage.name}" />
+						<span class="Validform_checktip"></span>
+					</td>
+					<td align="right">
+						<label class="Validform_label">
+							性别:
+						</label>
+					</td>
+					<td class="value">
+					    <input type="radio" name="sex" value="0"
+					    	<c:if test="${classmatePage.sex == 0}">checked="checked"</c:if>
+					    />男
+					    <input type="radio" name="sex" value="1"
+					    	<c:if test="${classmatePage.sex == 1}">checked="checked"</c:if>
+					    />女
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							电话:
+						</label>
+					</td>
+					<td class="value">
+						<input class="inputxt" id="phone" name="phone" datatype="m" ignore="ignore"  value="${classmatePage.phone}" />
+						<span class="Validform_checktip"></span>
+					</td>
+					<td align="right">
+						<label class="Validform_label">
+							邮箱:
+						</label>
+					</td>
+					<td class="value">
+						<input class="inputxt" id="email" name="email" datatype="e" ignore="ignore"  value="${classmatePage.email}" />
+						<span class="Validform_checktip"></span>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							所在省份:
+						</label>
+					</td>
+					<td class="value">
+						 <t:dictSelect field="provinceId" id="provinceId"  extendJson="{datatype:'*'}" dictTable="t_s_region" dictField="id" 
+						dictText="name" dictCondition=" where pid=1" defaultVal="${classmatePage.provinceId}"  hasLabel="false"></t:dictSelect>
+						<input type="hidden" id="provinceName" name="provinceName"   value="${classmatePage.provinceName}" />
+						<span class="Validform_checktip"></span>
+					</td>
+					<td align="right">
+						<label class="Validform_label">
+							所在城市:
+						</label>
+					</td>
+					<td class="value">
+						<select name="cityId" datatype="*" id="cityId"> 
+							<option value="" selected="selected">---请选择--- </option>
+						</select>
+						<input type="hidden" id="cityName" name="cityName"   value="${classmatePage.cityName}" />
+						<span class="Validform_checktip"></span>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							详细地址:
+						</label>
+					</td>
+					<td class="value" colspan="3">
+					    <textarea class="inputxt detail" style="margin-top:10px" id="address" name="address" ignore="ignore">${classmatePage.address}</textarea>
+						<span class="Validform_checktip"></span>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							简介:
+						</label>
+					</td>
+					<td class="value" colspan="3">
+						<textarea class="inputxt detail" id="descri" name="descri">${classmatePage.descri}</textarea>
+						<span class="Validform_checktip"></span>
+					</td>
+				</tr>
 			</table>
 		</t:formvalid>
   <script>

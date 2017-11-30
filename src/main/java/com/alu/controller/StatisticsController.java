@@ -123,7 +123,7 @@ public class StatisticsController extends BaseController {
 	@ResponseBody
 	public List getStatisticsByYearPeriodData() {
 		TSUser curUser = ResourceUtil.getSessionUser();
-		if(!"admin".equals(curUser.getUserRoleCode()))
+		if(StringUtil.isNotEmpty(curUser.getCollegeId()))
 			return statisticsService.getStatisticsByYearPeriodData(curUser.getCollegeId());
 		return statisticsService.getStatisticsByYearPeriodData(null);
 	}
@@ -136,7 +136,7 @@ public class StatisticsController extends BaseController {
 	@ResponseBody
 	public List getStatisticsByProvinceData() {
 		TSUser curUser = ResourceUtil.getSessionUser();
-		if(!"admin".equals(curUser.getUserRoleCode()))
+		if(StringUtil.isNotEmpty(curUser.getCollegeId()))
 			return statisticsService.getStatisticsByProvinceData(curUser.getCollegeId());
 		return statisticsService.getStatisticsByProvinceData(null);
 	}
@@ -149,7 +149,7 @@ public class StatisticsController extends BaseController {
 	@ResponseBody
 	public List getStatisticsByCompanyNatureData() {
 		TSUser curUser = ResourceUtil.getSessionUser();
-		if(!"admin".equals(curUser.getUserRoleCode()))
+		if(StringUtil.isNotEmpty(curUser.getCollegeId()))
 			return statisticsService.getStatisticsByCompanyNatureData(curUser.getCollegeId());
 		return statisticsService.getStatisticsByCompanyNatureData(null);
 	}
@@ -162,7 +162,7 @@ public class StatisticsController extends BaseController {
 	@ResponseBody
 	public List getStatisticsByEducationStageData() {
 		TSUser curUser = ResourceUtil.getSessionUser();
-		if(!"admin".equals(curUser.getUserRoleCode()))
+		if(StringUtil.isNotEmpty(curUser.getCollegeId()))
 			return statisticsService.getStatisticsByEducationStageData(curUser.getCollegeId());
 		return statisticsService.getStatisticsByEducationStageData(null);
 	}
@@ -177,7 +177,7 @@ public class StatisticsController extends BaseController {
 		TSUser curUser = ResourceUtil.getSessionUser();
 		String collegeId = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		if(!"admin".equals(curUser.getUserRoleCode())){
+		if(StringUtil.isNotEmpty(curUser.getCollegeId())){
 			collegeId = curUser.getCollegeId();
 		}else{
 			map.put("college", statisticsService.getAwaitHandCount("t_college", collegeId));

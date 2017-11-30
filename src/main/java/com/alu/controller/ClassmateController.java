@@ -130,7 +130,7 @@ public class ClassmateController extends BaseController {
 		
 		//学院管理员只能查询自己所在学院的数据,超级管理员可以查看所有学院的数据
 		TSUser curUser = ResourceUtil.getSessionUser();
-		if(!"admin".equals(curUser.getUserRoleCode())){
+		if(StringUtil.isNotEmpty(curUser.getCollegeId())){
 			cq.eq("collegeId", curUser.getCollegeId());
 		}		
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, classmate, request.getParameterMap());
@@ -189,10 +189,6 @@ public class ClassmateController extends BaseController {
 			}
 		} else {
 			message = "校友添加成功";
-			if(StringUtil.isNotEmpty(curUser.getCollegeId())){
-				classmate.setCollegeId(curUser.getCollegeId());
-				classmate.setCollegeName(curUser.getCollegeName());
-			}
 			classmate.setCrtBy(curUser.getId());
 			classmate.setCrtByUserName(curUser.getUserName());
 			classmate.setCrtTime(DateUtils.formatDateTime());

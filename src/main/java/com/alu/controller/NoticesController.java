@@ -120,7 +120,7 @@ public class NoticesController extends BaseController {
 		
 		//学院管理员只能查询自己所在学院的数据,超级管理员可以查看所有学院的数据
 		TSUser curUser = ResourceUtil.getSessionUser();
-		if(!"admin".equals(curUser.getUserRoleCode())){
+		if(StringUtil.isNotEmpty(curUser.getCollegeId())){
 			cq.eq("collegeId", curUser.getCollegeId());
 		}
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, notices, request.getParameterMap());
@@ -177,10 +177,6 @@ public class NoticesController extends BaseController {
 			}
 		} else {
 			message = "公告添加成功";
-			if(StringUtil.isNotEmpty(curUser.getCollegeId())){
-				notices.setCollegeId(curUser.getCollegeId());
-				notices.setCollegeName(curUser.getCollegeName());
-			}
 			notices.setCrtBy(curUser.getId());
 			notices.setCrtByUserName(curUser.getUserName());
 			notices.setCrtTime(DateUtils.formatDateTime());

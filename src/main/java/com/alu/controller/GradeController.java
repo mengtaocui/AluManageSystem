@@ -122,7 +122,7 @@ public class GradeController extends BaseController {
 		
 		//学院管理员只能查询自己所在学院的数据,超级管理员可以查看所有学院的数据
 		TSUser curUser = ResourceUtil.getSessionUser();
-		if(!"admin".equals(curUser.getUserRoleCode())){
+		if(StringUtil.isNotEmpty(curUser.getCollegeId())){
 			cq.eq("collegeId", curUser.getCollegeId());
 		}
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, grade, request.getParameterMap());
@@ -179,10 +179,6 @@ public class GradeController extends BaseController {
 			}
 		} else {
 			message = "班级添加成功";
-			if(StringUtil.isNotEmpty(curUser.getCollegeId())){
-				grade.setCollegeId(curUser.getCollegeId());
-				grade.setCollegeName(curUser.getCollegeName());
-			}
 			grade.setCrtBy(curUser.getId());
 			grade.setCrtByUserName(curUser.getUserName());
 			grade.setCrtTime(DateUtils.formatDateTime());

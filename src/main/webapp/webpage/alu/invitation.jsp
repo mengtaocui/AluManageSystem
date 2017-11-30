@@ -10,22 +10,10 @@
   <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="invitationController.do?save">
 			<input id="id" name="id" type="hidden" value="${invitationPage.id }">
 			<table style="width: 100%;" cellpadding="0" cellspacing="1" class="formtable">
-				<c:if test="${ empty LOCAL_CLINET_USER.collegeName  }">
-					<tr>
-						<td align="right"><label class="Validform_label">学院: </label></td>
-						<td class="value">
-			               <t:dictSelect field="collegeId" id="collegeId"  extendJson="{datatype:'*'}" dictTable="t_college" dictField="id" 
-									dictText="name" dictCondition=" where delete_flag=0" defaultVal="${invitationPage.collegeId}"  hasLabel="false"></t:dictSelect>
-						    <input type="hidden" id="collegeName" name="collegeName"   value="${invitationPage.collegeName}" />
-			                <span class="Validform_checktip"></span>
-			            </td>
-					</tr>
-				</c:if>
+				<input type="hidden" id="collegeId" name="collegeId" value="${LOCAL_CLINET_USER.collegeId}"/>
+				<input type="hidden" id="collegeName" name="collegeName" value="${LOCAL_CLINET_USER.collegeName}"/>
 				<tr>
 					<td align="right">
-						<c:if test="${ not empty LOCAL_CLINET_USER.collegeName  }">
-							<input type="hidden" id="collegeId" name="collegeId" value="${invitationPage.collegeId}"/>
-						</c:if>
 						<label class="Validform_label">
 							帖子标题:
 						</label>

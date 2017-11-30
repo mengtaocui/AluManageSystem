@@ -115,7 +115,7 @@ public class NewsController extends BaseController {
 		
 		//学院管理员只能查询自己所在学院的数据,超级管理员可以查看所有学院的数据
 		TSUser curUser = ResourceUtil.getSessionUser();
-		if(!"admin".equals(curUser.getUserRoleCode())){
+		if(StringUtil.isNotEmpty(curUser.getCollegeId())){
 			cq.eq("collegeId", curUser.getCollegeId());
 		}
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, news, request.getParameterMap());
@@ -172,10 +172,6 @@ public class NewsController extends BaseController {
 			}
 		} else {
 			message = "新闻添加成功";
-			if(StringUtil.isNotEmpty(curUser.getCollegeId())){
-				news.setCollegeId(curUser.getCollegeId());
-				news.setCollegeName(curUser.getCollegeName());
-			}
 			news.setCrtBy(curUser.getId());
 			news.setCrtByUserName(curUser.getUserName());
 			news.setCrtTime(DateUtils.formatDateTime());
