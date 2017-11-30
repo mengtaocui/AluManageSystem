@@ -326,61 +326,11 @@ $(function(){
       success : function(data) {
         var d = $.parseJSON(data);
         if (d.success) {
-          if (d.attributes.orgNum > 1) {
-          	  //用户拥有多个部门，需选择部门进行登录
-        	  var title, okButton;
-              if($("#langCode").val() == 'en') {
-                title = "Please select Org";
-                okButton = "Ok";
-              } else {
-                title = "请选择组织机构";
-                okButton = "确定";
-              }
-            $.dialog({
-              id: 'LHG1976D',
-              title: title,
-              max: false,
-              min: false,
-              drag: false,
-              resize: false,
-              content: 'url:userController.do?userOrgSelect&userId=' + d.attributes.user.id,
-              lock:true,
-              button : [ {
-                name : okButton,
-                focus : true,
-                callback : function() {
-                  iframe = this.iframe.contentWindow;
-
-                  $.ajax({
-              		async : false,
-              		cache : false,
-              		type : 'POST',
-              		url : 'loginController.do?changeDefaultOrg',// 请求的action路径
-              		data : formData,
-              		error : function() {// 请求失败处理函数
-              		},
-              		success : function(data) {
-              			window.location.href = actionurl;
-              		}
-                  });
-
-                  this.close();
-                  return false;
-                }
-              }],
-              close: function(){
-                setTimeout("window.location.href='"+actionurl+"'", 10);
-              }
-            });
-          } else {
             window.location.href = actionurl;
-          }
        } else {
 			showErrorMsg(d.msg);
-
 		  	if(d.msg === "用户名或密码错误" || d.msg === "验证码错误")
 		  		reloadRandCodeImage();
-
         }
       }
     });

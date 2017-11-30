@@ -133,7 +133,7 @@
 							</label>
 						</td>
 						<td class="value">
-							<input class="inputxt" id="phone" name="phone" ignore="ignore"  value="${classmatePage.phone}" />
+							<input class="inputxt" id="phone" name="phone" datatype="m" ignore="ignore"  value="${classmatePage.phone}" />
 							<span class="Validform_checktip"></span>
 						</td>
 						<td align="right">
@@ -142,7 +142,7 @@
 							</label>
 						</td>
 						<td class="value">
-							<input class="inputxt" id="email" name="email" ignore="ignore"  value="${classmatePage.email}" />
+							<input class="inputxt" id="email" name="email" datatype="e" ignore="ignore" value="${classmatePage.email}" />
 							<span class="Validform_checktip"></span>
 						</td>
 					</tr>
@@ -327,7 +327,7 @@
 							</label>
 						</td>
 						<td class="value">
-							<input class="inputxt" id="phone" name="phone" ignore="ignore"  value="${classmatePage.phone}" />
+							<input class="inputxt" id="phone" name="phone" datatype="m" ignore="ignore"  value="${classmatePage.phone}" />
 							<span class="Validform_checktip"></span>
 						</td>
 						<td align="right">
@@ -336,7 +336,7 @@
 							</label>
 						</td>
 						<td class="value">
-							<input class="inputxt" id="email" name="email" ignore="ignore"  value="${classmatePage.email}" />
+							<input class="inputxt" id="email" name="email" datatype="e" ignore="ignore"  value="${classmatePage.email}" />
 							<span class="Validform_checktip"></span>
 						</td>
 					</tr>

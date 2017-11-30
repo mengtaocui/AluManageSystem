@@ -61,7 +61,7 @@
 						</label>
 					</td>
 					<td class="value">
-						<input class="inputxt" id="donatePersonPhone" name="donatePersonPhone" ignore="ignore"  value="${donateRecordPage.donatePersonPhone}" />
+						<input class="inputxt" id="donatePersonPhone" name="donatePersonPhone" datatype="m" ignore="ignore"  value="${donateRecordPage.donatePersonPhone}" />
 						<span class="Validform_checktip"></span>
 					</td>
 				</tr>

@@ -54,7 +54,7 @@
 						</label>
 					</td>
 					<td class="value">
-						<input class="inputxt" id="qq" name="qq" ignore="ignore"  value="${gradePage.qq}" />
+						<input class="inputxt" id="qq" name="qq" datatype="n6-16" ignore="ignore" errormsg="请输入正确信息！"  value="${gradePage.qq}" />
 						<span class="Validform_checktip"></span>
 					</td>
 				</tr>
