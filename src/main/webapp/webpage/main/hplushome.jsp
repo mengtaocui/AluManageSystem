@@ -89,9 +89,9 @@
 										<script>
 											$(function(){
 												initCollegeCount();
-						        		    	/* setInterval(function(){
+						        		    	setInterval(function(){
 						        		    		initCollegeCount();
-						        				}, 5000); */
+						        				}, 5000);
 						        		    })
 										</script>
 									</c:if>
@@ -202,7 +202,7 @@
 	                				<i class="fa fa-university"></i>
 								</div>
 	                			<div class="value">
-									<a href="javascript:addOneTab('学院管理', 'collegeController.do?list', null);"
+									<a href="javascript:void(0);"
 										<h1 class="count1" id="college">0</h1>
 										<p>学院</p>
 									</a>
@@ -306,9 +306,9 @@
 	                	<script>
 		                	$(function(){
 		        		    	initCount();
-		        		    	/* setInterval(function(){
+		        		    	setInterval(function(){
 		        					initCount();
-		        				}, 5000); */
+		        				}, 5000);
 		        		    })
 	                	</script>
                 	</c:if>
@@ -369,7 +369,7 @@
 					dataType: 'json',
 					success: function(data){
 						if(data){
-							$('#college').html(data.college);
+						//	$('#college').html(data.college);
 							$('#news').html(data.news);
 							$('#notices').html(data.notices);
 							$('#activity').html(data.activity);

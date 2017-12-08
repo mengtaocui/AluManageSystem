@@ -104,7 +104,7 @@ a:hover {
 	                    </a>
 	                </div>
 	                <div id="layout_north_kzmbMenu" style="width: 100px; display: none;">
-	                    <div onclick="openwindow('<t:mutiLang langKey="common.profile"/>','userController.do?userinfo')">
+	                    <div onclick="add('<t:mutiLang langKey="common.profile"/>','userController.do?userinfo')">
 	                        <t:mutiLang langKey="common.profile"/>
 	                    </div>
 	                    <div class="menu-sep"></div>

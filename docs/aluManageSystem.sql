@@ -1,16 +1,16 @@
-/*
+﻿/*
 Navicat MySQL Data Transfer
 
-Source Server         : 39.108.128.4_3306
-Source Server Version : 50615
-Source Host           : 39.108.128.4:3306
+Source Server         : localhost_3306
+Source Server Version : 50631
+Source Host           : localhost:3306
 Source Database       : alumanagesystem
 
 Target Server Type    : MYSQL
-Target Server Version : 50615
+Target Server Version : 50631
 File Encoding         : 65001
 
-Date: 2017-11-30 09:32:58
+Date: 2017-12-07 16:39:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -109,10 +109,6 @@ CREATE TABLE `t_banner` (
 -- ----------------------------
 -- Records of t_banner
 -- ----------------------------
-INSERT INTO `t_banner` VALUES ('2c92957b6005e97e0160060699c80001', 'sysController/readPic.do?picPath=2c92957b600606990160060699890000jpg.jpg', '0', '0', '402881bf5fe2da62015fe2db755f0003', '2017-11-29 12:26:24', 'admin', null, null, null);
-INSERT INTO `t_banner` VALUES ('2c92957b6005e97e0160060812100002', 'sysController/readPic.do?picPath=2c92957b6006069901600608120f0001jpg.jpg', '0', '0', '402881bf5fe2da62015fe2db755f0003', '2017-11-29 12:28:00', 'admin', null, null, null);
-INSERT INTO `t_banner` VALUES ('2c92957b6005e97e016006084eb70003', 'sysController/readPic.do?picPath=2c92957b60060699016006084eb70002jpg.jpg', '0', '0', '402881bf5fe2da62015fe2db755f0003', '2017-11-29 12:28:15', 'admin', null, null, null);
-INSERT INTO `t_banner` VALUES ('2c92957b6005e97e0160060897fe0004', 'sysController/readPic.do?picPath=2c92957b600606990160060897f10003jpg.jpg', '0', '0', '402881bf5fe2da62015fe2db755f0003', '2017-11-29 12:28:34', 'admin', null, null, null);
 
 -- ----------------------------
 -- Table structure for t_classmate
@@ -176,7 +172,6 @@ CREATE TABLE `t_college` (
 -- ----------------------------
 -- Records of t_college
 -- ----------------------------
-INSERT INTO `t_college` VALUES ('2c92957b6005e97e01600a6a5c27004c', '信息工程', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', '2017-11-30 08:53:50', null, null, null, '402881bf5fe2da62015fe2db755f0003', 'admin', '0');
 
 -- ----------------------------
 -- Table structure for t_data
@@ -508,7 +503,7 @@ CREATE TABLE `t_s_base_user` (
   `userkey` varchar(200) DEFAULT NULL COMMENT '用户KEY',
   `username` varchar(10) NOT NULL COMMENT '用户账号',
   `departid` varchar(32) DEFAULT NULL COMMENT '部门ID',
-  `delete_flag` smallint(6) DEFAULT NULL COMMENT '删除状态',
+  `delete_flag` tinyint(6) DEFAULT NULL COMMENT '删除状态',
   `userRoleCode` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_15jh1g4iem1857546ggor42et` (`departid`) USING BTREE,
@@ -519,7 +514,8 @@ CREATE TABLE `t_s_base_user` (
 -- ----------------------------
 -- Records of t_s_base_user
 -- ----------------------------
-INSERT INTO `t_s_base_user` VALUES ('402881bf5fe2da62015fe2db755f0003', null, null, 'c44b01947c9e6e3f', 'zhufeng', null, '1', '超级管理员', 'admin', null, '0', 'admin');
+INSERT INTO `t_s_base_user` VALUES ('402881bf5fe2da62015fe2db755f0003', null, null, 'c44b01947c9e6e3f', 'zhufeng', null, '1', '系统管理员', 'admin', null, '0', 'sys_manage');
+INSERT INTO `t_s_base_user` VALUES ('402881bf600ade6001600b63c329000a', null, null, 'b7f76a630126cf307100505c4c1b7b27', 'schadmin', null, '1', '学校管理员', 'schadmin', null, '0', 'sch_manage');
 
 -- ----------------------------
 -- Table structure for t_s_black_list
@@ -609,6 +605,7 @@ INSERT INTO `t_s_data_rule` VALUES ('402880f25b1e2ac7015b1e5fdebc0012', '只能�
 INSERT INTO `t_s_data_rule` VALUES ('4028ab775dca0d1b015dca4183530018', '表名限制', 'isDbSynch', '=', 'Y', null, null, null, '2017-08-14 16:43:45', 'demo', 'demo', '4028ab775dca0d1b015dca3fccb60016');
 INSERT INTO `t_s_data_rule` VALUES ('402880ec5ddec439015ddf9225060038', '复杂关系', '', 'USE_SQL_RULES', 'name like \'%张%\' or age > 10', null, null, null, '2017-08-14 15:10:25', 'demo', 'demo', '40288088481d019401481d2fcebf000d');
 INSERT INTO `t_s_data_rule` VALUES ('402880ec5ddfdd26015ddfe3e0570011', '复杂sql配置', '', 'USE_SQL_RULES', 'table_name like \'%test%\' or is_tree = \'Y\'', null, null, null, '2017-08-14 16:38:55', 'demo', 'demo', '4028ab775dca0d1b015dca3fccb60016');
+INSERT INTO `t_s_data_rule` VALUES ('402881bf600a84b301600ac4de99000b', 'note', 'note', '=', '本地', '2017-11-30 10:32:42', 'admin', 'zhufeng', null, null, null, '8a8ab0b246dc81120146dc81811d0032');
 
 -- ----------------------------
 -- Table structure for t_s_document
@@ -866,6 +863,107 @@ INSERT INTO `t_s_log` VALUES ('2c92957b6005e97e01600a6a5c3a004d', 'Chrome', '学
 INSERT INTO `t_s_log` VALUES ('2c92957b6005e97e01600a6a6adb004e', 'Chrome', '审核学院：信息工程', '4', '42.92.189.244', '2017-11-30 08:53:55', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
 INSERT INTO `t_s_log` VALUES ('2c92957b6005e97e01600a8cd073004f', 'Chrome', '用户: admin[]common.login.success', '1', '101.95.173.122', '2017-11-30 09:31:29', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
 INSERT INTO `t_s_log` VALUES ('2c92957b6005e97e01600a8cd19e0050', 'Chrome', '用户: admin[]common.login.success', '1', '101.95.173.122', '2017-11-30 09:31:29', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600a84b301600a924c400000', 'Chrome', '用户: admin[]common.login.success', '1', '本地', '2017-11-30 09:37:28', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600a84b301600ab46aad0002', 'Chrome', 'admin', '2', '本地', '2017-11-30 10:14:44', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600a84b301600ab47b340003', 'Chrome', '用户: admin[]common.login.success', '1', '本地', '2017-11-30 10:14:48', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600a84b301600ab6e5b40004', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-30 10:17:27', '3', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600a84b301600ab6e5d20005', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-30 10:17:27', '3', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600a84b301600ab6e5ec0006', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-30 10:17:27', '3', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600a84b301600ab6e5ef0007', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-30 10:17:27', '3', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600a84b301600ab87a4c0009', 'Chrome', 'admin', '2', '本地', '2017-11-30 10:19:10', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600a84b301600ab88b03000a', 'Chrome', '用户: admin[]common.login.success', '1', '本地', '2017-11-30 10:19:15', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600a84b301600ac4deb9000c', 'Chrome', '操作 录入成功', '3', '本地', '2017-11-30 10:32:42', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600a84b301600ac699d7000d', 'Chrome', 'admin', '2', '本地', '2017-11-30 10:34:36', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600a84b301600ac6aaa4000e', 'Chrome', '用户: admin[]common.login.success', '1', '本地', '2017-11-30 10:34:40', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600a84b301600ad36f5d000f', 'Chrome', 'admin', '2', '本地', '2017-11-30 10:48:37', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600a84b301600ad383a00010', 'Chrome', '用户: admin[]common.login.success', '1', '本地', '2017-11-30 10:48:42', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600ade6001600ae152bd0000', 'Chrome', '用户: admin[]common.login.success', '1', '本地', '2017-11-30 11:03:47', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600ade6001600b5a943a0001', 'Chrome', '用户: admin[]common.login.success', '1', '本地', '2017-11-30 13:16:14', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600ade6001600b5da7da0003', 'Chrome', '操作 录入成功', '3', '本地', '2017-11-30 13:19:35', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600ade6001600b5dd36a0005', 'Chrome', '操作 录入成功', '3', '本地', '2017-11-30 13:19:47', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600ade6001600b5e15680006', 'Chrome', 'admin', '2', '本地', '2017-11-30 13:20:03', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600ade6001600b5e22a60007', 'Chrome', '用户: admin[]common.login.success', '1', '本地', '2017-11-30 13:20:07', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600ade6001600b5eff780008', 'Chrome', 'admin', '2', '本地', '2017-11-30 13:21:03', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600ade6001600b5f22f00009', 'Chrome', '用户: admin[]common.login.success', '1', '本地', '2017-11-30 13:21:12', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600ade6001600b63c3a3000c', 'Chrome', '用户: schadmin添加成功', '3', '本地', '2017-11-30 13:26:16', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600ade6001600b64fe45000d', 'Chrome', 'admin', '2', '本地', '2017-11-30 13:27:36', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600ade6001600b651dfa000e', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 13:27:44', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600ade6001600b6701b4000f', 'Chrome', 'schadmin', '2', '本地', '2017-11-30 13:29:48', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600ade6001600b671a7d0010', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 13:29:55', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600b6ba901600b6c07520000', 'Chrome', '用户: admin[]common.login.success', '1', '本地', '2017-11-30 13:35:17', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600b6ba901600b6c5a330001', 'Chrome', 'admin', '2', '本地', '2017-11-30 13:35:39', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600b6ba901600b6c742e0002', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 13:35:45', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600b7d4c01600b7e43980000', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 13:55:12', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600b7d4c01600b7fe5b20003', 'Chrome', '用户: xxgc01添加成功', '3', '本地', '2017-11-30 13:56:59', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600b8be001600b8d3a070000', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 14:11:33', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600b8f2f01600b9033820002', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-30 14:14:48', '3', null, 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600b8f2f01600b9033350000', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-30 14:14:48', '3', null, 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600b8f2f01600b90335d0001', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-30 14:14:48', '3', null, 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600b8f2f01600b9033db0003', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-30 14:14:48', '3', null, 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600b8f2f01600b904b700004', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 14:14:54', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600b964c01600b96c82f0000', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 14:21:59', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600b9c8c01600b9cff7e0000', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 14:28:47', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600ba2fe01600ba3736e0000', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 14:35:49', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600ba53801600ba5a8c90000', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 14:38:14', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600ba53801600ba8f4450001', 'Chrome', 'schadmin', '2', '本地', '2017-11-30 14:41:50', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600ba53801600ba914b90002', 'Chrome', '用户: xxgc01[信息工程 ]common.login.success', '1', '本地', '2017-11-30 14:41:58', '1', '402881bf600b7d4c01600b7fe5510001', 'xxgc01', 'xxgc01');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bbb5c890000', 'Chrome', '用户: admin[]common.login.success', '1', '本地', '2017-11-30 15:01:56', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bbb70410001', 'Chrome', 'admin', '2', '本地', '2017-11-30 15:02:02', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bbb87ca0002', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 15:02:08', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bbbd6270003', 'Chrome', 'schadmin', '2', '本地', '2017-11-30 15:02:28', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bbbefe60004', 'Chrome', '用户: xxgc01[信息工程 ]common.login.success', '1', '本地', '2017-11-30 15:02:34', '1', '402881bf600b7d4c01600b7fe5510001', 'xxgc01', 'xxgc01');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bbef7900006', 'Chrome', '班级添加成功', '3', '本地', '2017-11-30 15:05:53', '1', '402881bf600b7d4c01600b7fe5510001', 'xxgc01', 'xxgc01');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bd0f93b0007', 'Chrome', 'xxgc01', '2', '本地', '2017-11-30 15:25:33', '1', '402881bf600b7d4c01600b7fe5510001', 'xxgc01', 'xxgc01');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bd109200008', 'Chrome', '用户: admin[]common.login.success', '1', '本地', '2017-11-30 15:25:37', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bd1999a000a', 'Chrome', '操作 录入成功', '3', '本地', '2017-11-30 15:26:14', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bd1bcea000c', 'Chrome', '操作 录入成功', '3', '本地', '2017-11-30 15:26:23', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bd20c76000e', 'Chrome', '操作 录入成功', '3', '本地', '2017-11-30 15:26:43', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bd22ca70010', 'Chrome', '操作 录入成功', '3', '本地', '2017-11-30 15:26:52', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bd29e970012', 'Chrome', '操作 录入成功', '3', '本地', '2017-11-30 15:27:21', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bd2cf4c0014', 'Chrome', '操作 录入成功', '3', '本地', '2017-11-30 15:27:33', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bd2fdfb0016', 'Chrome', '操作 录入成功', '3', '本地', '2017-11-30 15:27:45', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bd31a010018', 'Chrome', '操作 录入成功', '3', '本地', '2017-11-30 15:27:52', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bd359b5001a', 'Chrome', '操作 录入成功', '3', '本地', '2017-11-30 15:28:09', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bd37913001c', 'Chrome', '操作 录入成功', '3', '本地', '2017-11-30 15:28:17', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bd3bc66001e', 'Chrome', '操作 录入成功', '3', '本地', '2017-11-30 15:28:34', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bd3d7090020', 'Chrome', '操作 录入成功', '3', '本地', '2017-11-30 15:28:41', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bd64caa0021', 'Chrome', 'admin', '2', '本地', '2017-11-30 15:31:22', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600bb7d501600bd6c3460022', 'Chrome', '用户: xxgc01[信息工程 ]common.login.success', '1', '本地', '2017-11-30 15:31:52', '1', '402881bf600b7d4c01600b7fe5510001', 'xxgc01', 'xxgc01');
+INSERT INTO `t_s_log` VALUES ('402881bf600be2a601600be54f6c0000', 'Chrome', '用户: admin[]common.login.success', '1', '本地', '2017-11-30 15:47:46', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600be2a601600be582100001', 'Chrome', 'admin', '2', '本地', '2017-11-30 15:47:59', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600be2a601600be59f780002', 'Chrome', '用户: xxgc01[信息工程 ]common.login.success', '1', '本地', '2017-11-30 15:48:06', '1', '402881bf600b7d4c01600b7fe5510001', 'xxgc01', 'xxgc01');
+INSERT INTO `t_s_log` VALUES ('402881bf600be2a601600be602410003', 'Chrome', 'xxgc01', '2', '本地', '2017-11-30 15:48:31', '1', '402881bf600b7d4c01600b7fe5510001', 'xxgc01', 'xxgc01');
+INSERT INTO `t_s_log` VALUES ('402881bf600be2a601600be617a40004', 'Chrome', '用户: admin[]common.login.success', '1', '本地', '2017-11-30 15:48:37', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600be2a601600be6e2140005', 'Chrome', 'admin', '2', '本地', '2017-11-30 15:49:29', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600be2a601600be6fad80006', 'Chrome', '用户: xxgc01[信息工程 ]common.login.success', '1', '本地', '2017-11-30 15:49:35', '1', '402881bf600b7d4c01600b7fe5510001', 'xxgc01', 'xxgc01');
+INSERT INTO `t_s_log` VALUES ('402881bf600be2a601600be71adf0007', 'Chrome', 'xxgc01', '2', '本地', '2017-11-30 15:49:43', '1', '402881bf600b7d4c01600b7fe5510001', 'xxgc01', 'xxgc01');
+INSERT INTO `t_s_log` VALUES ('402881bf600be2a601600be7270a0008', 'Chrome', '用户: admin[]common.login.success', '1', '本地', '2017-11-30 15:49:46', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600c111501600c11cd620000', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 16:36:21', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c111501600c11f82c0001', 'Chrome', '错误异常: ClassCastException,错误描述：java.lang.Integer cannot be cast to java.lang.Short', '6', '本地', '2017-11-30 16:36:32', '3', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c111501600c132f330002', 'Chrome', '错误异常: ClassCastException,错误描述：java.lang.Integer cannot be cast to java.lang.Short', '6', '本地', '2017-11-30 16:37:52', '3', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c14aa01600c1525a10000', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 16:40:01', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c14aa01600c1526660001', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 16:40:01', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c14aa01600c157de20002', 'Chrome', '错误异常: ClassCastException,错误描述：java.lang.Short cannot be cast to java.lang.Integer', '6', '本地', '2017-11-30 16:40:23', '3', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c14aa01600c1585670003', 'Chrome', '错误异常: ClassCastException,错误描述：java.lang.Short cannot be cast to java.lang.Integer', '6', '本地', '2017-11-30 16:40:25', '3', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c14aa01600c15a8b80004', 'Chrome', '错误异常: ClassCastException,错误描述：java.lang.Short cannot be cast to java.lang.Integer', '6', '本地', '2017-11-30 16:40:34', '3', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c14aa01600c15e0100005', 'Chrome', '错误异常: ClassCastException,错误描述：java.lang.Short cannot be cast to java.lang.Integer', '6', '本地', '2017-11-30 16:40:48', '3', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c191e01600c1c6b090000', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 16:47:57', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c191e01600c1c852b0001', 'Chrome', '错误异常: ClassCastException,错误描述：java.lang.Short cannot be cast to java.lang.Integer', '6', '本地', '2017-11-30 16:48:04', '3', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c1e4a01600c1ec9030000', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 16:50:32', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c291301600c2985ba0000', 'Chrome', '用户: admin[]common.login.success', '1', '本地', '2017-11-30 17:02:16', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600c291301600c29a8980001', 'Chrome', 'admin', '2', '本地', '2017-11-30 17:02:25', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600c291301600c29d6180002', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 17:02:37', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c291301600c2b14620003', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 17:03:58', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c291301600c2c38080004', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 17:05:13', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c291301600c2d8e640005', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-30 17:06:40', '3', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c291301600c2d8e790006', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-30 17:06:40', '3', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c291301600c2d8e8d0008', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-30 17:06:40', '3', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c291301600c2d8e8c0007', 'Chrome', '错误异常: NullPointerException,错误描述：null', '6', '本地', '2017-11-30 17:06:40', '3', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c291301600c2dc25d0009', 'Chrome', '用户: admin[]common.login.success', '1', '本地', '2017-11-30 17:06:54', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600c291301600c2dc267000a', 'Chrome', '用户: admin[]common.login.success', '1', '本地', '2017-11-30 17:06:54', '1', '402881bf5fe2da62015fe2db755f0003', 'admin', 'zhufeng');
+INSERT INTO `t_s_log` VALUES ('402881bf600c291301600c33af5b000b', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 17:13:22', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c3a4201600c3b0b380000', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 17:21:24', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
+INSERT INTO `t_s_log` VALUES ('402881bf600c3dec01600c3e98d70000', 'Chrome', '用户: schadmin[]common.login.success', '1', '本地', '2017-11-30 17:25:17', '1', '402881bf600ade6001600b63c329000a', 'schadmin', 'schadmin');
 
 -- ----------------------------
 -- Table structure for t_s_muti_lang
@@ -2091,6 +2189,20 @@ CREATE TABLE `t_s_operation` (
 -- ----------------------------
 -- Records of t_s_operation
 -- ----------------------------
+INSERT INTO `t_s_operation` VALUES ('402881bf600ade6001600b5da7bd0002', 'add_role', null, '添加角色', '0', '8a8ab0b246dc81120146dc8180e30021', '8a8ab0b246dc81120146dc8180460000', '0');
+INSERT INTO `t_s_operation` VALUES ('402881bf600ade6001600b5dd3530004', 'edit_role', null, '修改角色', '0', '8a8ab0b246dc81120146dc8180e30021', '8a8ab0b246dc81120146dc8180460000', '0');
+INSERT INTO `t_s_operation` VALUES ('402881bf600bb7d501600bd199740009', 'apply', null, '通过', '0', '402881bf5fbd5ecd015fbd8dd3d40007', '8a8ab0b246dc81120146dc8180460000', '0');
+INSERT INTO `t_s_operation` VALUES ('402881bf600bb7d501600bd1bccd000b', 'refuse', null, '拒绝', '0', '402881bf5fbd5ecd015fbd8dd3d40007', '8a8ab0b246dc81120146dc8180460000', '0');
+INSERT INTO `t_s_operation` VALUES ('402881bf600bb7d501600bd20c50000d', 'apply', null, '通过', '0', '402881bf5f9eaf97015f9ebbe3d6000e', '8a8ab0b246dc81120146dc8180460000', '0');
+INSERT INTO `t_s_operation` VALUES ('402881bf600bb7d501600bd22c95000f', 'refuse', null, '拒绝', '0', '402881bf5f9eaf97015f9ebbe3d6000e', '8a8ab0b246dc81120146dc8180460000', '0');
+INSERT INTO `t_s_operation` VALUES ('402881bf600bb7d501600bd29e700011', 'apply', null, '通过', '0', '402881bf5f9a4ee9015f9a5030b40001', '8a8ab0b246dc81120146dc8180460000', '0');
+INSERT INTO `t_s_operation` VALUES ('402881bf600bb7d501600bd2cf1e0013', 'refuse', null, '拒绝', '0', '402881bf5f9a4ee9015f9a5030b40001', '8a8ab0b246dc81120146dc8180460000', '0');
+INSERT INTO `t_s_operation` VALUES ('402881bf600bb7d501600bd2fdd50015', 'apply', null, '通过', '0', '402881bf5f9ae82c015f9b11a5a4000a', '8a8ab0b246dc81120146dc8180460000', '0');
+INSERT INTO `t_s_operation` VALUES ('402881bf600bb7d501600bd319dc0017', 'refuse', null, '拒绝', '0', '402881bf5f9ae82c015f9b11a5a4000a', '8a8ab0b246dc81120146dc8180460000', '0');
+INSERT INTO `t_s_operation` VALUES ('402881bf600bb7d501600bd359840019', 'apply', null, '通过', '0', '402881bf5fbd5ecd015fbd96f7840023', '8a8ab0b246dc81120146dc8180460000', '0');
+INSERT INTO `t_s_operation` VALUES ('402881bf600bb7d501600bd378fe001b', 'refuse', null, '拒绝', '0', '402881bf5fbd5ecd015fbd96f7840023', '8a8ab0b246dc81120146dc8180460000', '0');
+INSERT INTO `t_s_operation` VALUES ('402881bf600bb7d501600bd3bc50001d', 'apply', null, '通过', '0', '402881bf5fbd5ecd015fbd949c55001d', '8a8ab0b246dc81120146dc8180460000', '0');
+INSERT INTO `t_s_operation` VALUES ('402881bf600bb7d501600bd3d6ee001f', 'refuse', null, '拒绝', '0', '402881bf5fbd5ecd015fbd949c55001d', '8a8ab0b246dc81120146dc8180460000', '0');
 
 -- ----------------------------
 -- Table structure for t_s_region
@@ -5675,24 +5787,22 @@ CREATE TABLE `t_s_role_function` (
 -- ----------------------------
 INSERT INTO `t_s_role_function` VALUES ('2c92957b5ffce381015ffce95e940002', null, '402881bf5fe7f8e0015fe7fea2e50001', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced033000f', null, '402881bf5fd71472015fd71b77cd0007', '2c92957b6005e97e016007ce4931000d', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c0010', null, '402881bf5f9eaf97015f9ebbe3d6000e', '2c92957b6005e97e016007ce4931000d', null);
+INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c0010', '', '402881bf5f9eaf97015f9ebbe3d6000e', '2c92957b6005e97e016007ce4931000d', null);
 INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c0011', null, '8a8ab0b246dc81120146dc8180d4001b', '2c92957b6005e97e016007ce4931000d', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c0012', null, '402881bf5fbd5ecd015fbd96f7840023', '2c92957b6005e97e016007ce4931000d', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c0013', null, '402881bf5fbd5ecd015fbd949c55001d', '2c92957b6005e97e016007ce4931000d', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c0014', null, '402881bf5fbd5ecd015fbd8dd3d40007', '2c92957b6005e97e016007ce4931000d', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c0015', null, '402881bf5f9a4ee9015f9a5030b40001', '2c92957b6005e97e016007ce4931000d', null);
+INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c0012', '', '402881bf5fbd5ecd015fbd96f7840023', '2c92957b6005e97e016007ce4931000d', null);
+INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c0013', '', '402881bf5fbd5ecd015fbd949c55001d', '2c92957b6005e97e016007ce4931000d', null);
+INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c0014', '', '402881bf5fbd5ecd015fbd8dd3d40007', '2c92957b6005e97e016007ce4931000d', null);
+INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c0015', '', '402881bf5f9a4ee9015f9a5030b40001', '2c92957b6005e97e016007ce4931000d', null);
 INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c0016', null, '402881bf5fd71472015fd71adde20003', '2c92957b6005e97e016007ce4931000d', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c0017', null, '402881bf5f9ae82c015f9b11a5a4000a', '2c92957b6005e97e016007ce4931000d', null);
+INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c0017', '', '402881bf5f9ae82c015f9b11a5a4000a', '2c92957b6005e97e016007ce4931000d', null);
 INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c0018', null, '402881bf5f95cd47015f95d110b10004', '2c92957b6005e97e016007ce4931000d', null);
 INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c0019', null, '402881bf5f994a01015f994fb0c80003', '2c92957b6005e97e016007ce4931000d', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c001a', null, '402881bf5fbd5ecd015fbd92960c0019', '2c92957b6005e97e016007ce4931000d', null);
 INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c001b', null, '402881bf5fd71472015fd71b31f50005', '2c92957b6005e97e016007ce4931000d', null);
 INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c001c', null, '402881bf5f9eaf97015f9ebb133c000c', '2c92957b6005e97e016007ce4931000d', null);
 INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03c001d', null, '402881bf5fbd5ecd015fbd963ff10021', '2c92957b6005e97e016007ce4931000d', null);
 INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03d001e', null, '402881bf5fbd5ecd015fbd8ceb510002', '2c92957b6005e97e016007ce4931000d', null);
 INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03f001f', null, '402881bf5f95cd47015f95cf64330001', '2c92957b6005e97e016007ce4931000d', null);
 INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03f0020', null, '402881bf5fbd5ecd015fbd93fd9e001b', '2c92957b6005e97e016007ce4931000d', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03f0021', null, '402881bf5fbd5ecd015fbd9231490017', '2c92957b6005e97e016007ce4931000d', null);
 INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03f0022', null, '402881bf5fbd5ecd015fbd8e190d0009', '2c92957b6005e97e016007ce4931000d', null);
 INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03f0023', null, '402881bf5fbd5ecd015fbd94f8e9001f', '2c92957b6005e97e016007ce4931000d', null);
 INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007ced03f0024', null, '402881bf5fd71472015fd7199f2d0001', '2c92957b6005e97e016007ce4931000d', null);
@@ -5709,29 +5819,11 @@ INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007d08124002e', null
 INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007d08124002f', null, '402881bf5fd71472015fd71adde20003', '2c92957b6005e97e016007cde19b000b', null);
 INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007d081240030', null, '8a8ab0b246dc81120146dc8180df001f', '2c92957b6005e97e016007cde19b000b', null);
 INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e016007d081240031', null, '402881bf5fd71472015fd7199f2d0001', '2c92957b6005e97e016007cde19b000b', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e01600a6938030037', null, '402881bf5f9eaf97015f9ebbe3d6000e', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e01600a69380a0038', null, '402881bf5fbd5ecd015fbd8dd3d40007', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e01600a69380b0039', null, '402881bf5fbd5ecd015fbd8dacc10005', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e01600a69380b003a', null, '402881bf5fbd5ecd015fbd8ceb510002', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e01600a69380b003b', null, '402881bf5f95cd47015f95cf64330001', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e01600a69380b003c', null, '402881bf5fbd5ecd015fbd94f8e9001f', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e01600a69380b003d', null, '402881bf5fbd5ecd015fbd96f7840023', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e01600a69380b003e', null, '402881bf5fbd5ecd015fbd949c55001d', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e01600a69380b003f', null, '402881bf5f9a4ee9015f9a5030b40001', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e01600a69380b0040', null, '8a8ab0b246dc81120146dc8180df001f', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e01600a69380b0041', null, '402881bf5f9ae82c015f9b11a5a4000a', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e01600a69380b0042', null, '402881bf5f95cd47015f95d110b10004', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e01600a69380b0043', null, '402881bf5f994a01015f994fb0c80003', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e01600a69380b0044', null, '402881bf5fbd5ecd015fbd92960c0019', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e01600a69380b0045', null, '402881bf5f9eaf97015f9ebb133c000c', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e01600a69380b0046', null, '402881bf5fbd5ecd015fbd963ff10021', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e01600a69380b0047', null, '402881bf5fbd5ecd015fbd93fd9e001b', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e01600a69380b0048', null, '402881bf5fbd5ecd015fbd9231490017', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('2c92957b6005e97e01600a69380b0049', null, '402881bf5fbd5ecd015fbd8e190d0009', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402880ef5aff3ede015aff442313000e', null, '8a8ab0b246dc81120146dc8180ee0025', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881855afb59f7015afc6123c7000e', null, '8a8ab0b246dc81120146dc8180d2001a', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('402881855afbcdf7015afc6123c7000e', null, '8a8ab0b246dc81120146dc8180e30021', '8a8ab0b246dc81120146dc8181870050', null);
-INSERT INTO `t_s_role_function` VALUES ('402881bf5fc34aaf015fc35cfec90015', null, '8a8ab0b246dc81120146dc81811d0032', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881855afbcdf7015afc6123c7000e', '', '8a8ab0b246dc81120146dc8180e30021', '8a8ab0b246dc81120146dc8181870050', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fc34aaf015fc35cfec90015', null, '8a8ab0b246dc81120146dc81811d0032', '8a8ab0b246dc81120146dc8181870050', '402881bf600a84b301600ac4de99000b,');
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fc34aaf015fc35cfecf001a', null, '8a8ab0b246dc81120146dc8180d4001b', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fc34aaf015fc35cfecf001b', null, '8a8ab0b246dc81120146dc8180d9001d', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fd71472015fd71c40b4000d', null, '402881bf5fd71472015fd71b31f50005', '8a8ab0b246dc81120146dc8181870050', null);
@@ -5739,14 +5831,14 @@ INSERT INTO `t_s_role_function` VALUES ('402881bf5fd71472015fd71c40b8000e', null
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fd71472015fd71c40b8000f', null, '402881bf5fd71472015fd71b77cd0007', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fd71472015fd71c40b80010', null, '402881bf5fd71472015fd71adde20003', '8a8ab0b246dc81120146dc8181870050', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e12c000c', null, '402881bf5fd71472015fd71b77cd0007', '8a8ab0b246dc81120146dc81818b0051', null);
-INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e130000d', null, '402881bf5f9eaf97015f9ebbe3d6000e', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e130000d', '402881bf600bb7d501600bd20c50000d,402881bf600bb7d501600bd22c95000f,', '402881bf5f9eaf97015f9ebbe3d6000e', '8a8ab0b246dc81120146dc81818b0051', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e130000e', null, '8a8ab0b246dc81120146dc8180d4001b', '8a8ab0b246dc81120146dc81818b0051', null);
-INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e130000f', null, '402881bf5fbd5ecd015fbd96f7840023', '8a8ab0b246dc81120146dc81818b0051', null);
-INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1300010', null, '402881bf5fbd5ecd015fbd949c55001d', '8a8ab0b246dc81120146dc81818b0051', null);
-INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1300011', null, '402881bf5fbd5ecd015fbd8dd3d40007', '8a8ab0b246dc81120146dc81818b0051', null);
-INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1300012', null, '402881bf5f9a4ee9015f9a5030b40001', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e130000f', '402881bf600bb7d501600bd359840019,402881bf600bb7d501600bd378fe001b,', '402881bf5fbd5ecd015fbd96f7840023', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1300010', '402881bf600bb7d501600bd3bc50001d,402881bf600bb7d501600bd3d6ee001f,', '402881bf5fbd5ecd015fbd949c55001d', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1300011', '402881bf600bb7d501600bd199740009,402881bf600bb7d501600bd1bccd000b,', '402881bf5fbd5ecd015fbd8dd3d40007', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1300012', '402881bf600bb7d501600bd29e700011,402881bf600bb7d501600bd2cf1e0013,', '402881bf5f9a4ee9015f9a5030b40001', '8a8ab0b246dc81120146dc81818b0051', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1300013', null, '402881bf5fd71472015fd71adde20003', '8a8ab0b246dc81120146dc81818b0051', null);
-INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1300014', null, '402881bf5f9ae82c015f9b11a5a4000a', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1300014', '402881bf600bb7d501600bd2fdd50015,402881bf600bb7d501600bd319dc0017,', '402881bf5f9ae82c015f9b11a5a4000a', '8a8ab0b246dc81120146dc81818b0051', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1300017', null, '402881bf5fbd5ecd015fbd92960c0019', '8a8ab0b246dc81120146dc81818b0051', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1300019', null, '402881bf5fd71472015fd71b31f50005', '8a8ab0b246dc81120146dc81818b0051', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e131001a', null, '402881bf5f9eaf97015f9ebb133c000c', '8a8ab0b246dc81120146dc81818b0051', null);
@@ -5758,6 +5850,7 @@ INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e131001f', null
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1320020', null, '402881bf5fbd5ecd015fbd8e190d0009', '8a8ab0b246dc81120146dc81818b0051', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1320021', null, '402881bf5fbd5ecd015fbd94f8e9001f', '8a8ab0b246dc81120146dc81818b0051', null);
 INSERT INTO `t_s_role_function` VALUES ('402881bf5fde0ad8015fde11e1320022', null, '402881bf5fd71472015fd7199f2d0001', '8a8ab0b246dc81120146dc81818b0051', null);
+INSERT INTO `t_s_role_function` VALUES ('402881bf600a84b301600ab815680008', null, '8a8ab0b246dc81120146dc8180e70023', '8a8ab0b246dc81120146dc8181870050', null);
 
 -- ----------------------------
 -- Table structure for t_s_role_user
@@ -5778,6 +5871,7 @@ CREATE TABLE `t_s_role_user` (
 -- Records of t_s_role_user
 -- ----------------------------
 INSERT INTO `t_s_role_user` VALUES ('402881bf5fe2da62015fe2db83a30004', '8a8ab0b246dc81120146dc8181870050', '402881bf5fe2da62015fe2db755f0003');
+INSERT INTO `t_s_role_user` VALUES ('402881bf600ade6001600b63c372000b', '2c92957b6005e97e016007cde19b000b', '402881bf600ade6001600b63c329000a');
 
 -- ----------------------------
 -- Table structure for t_s_type
@@ -5976,16 +6070,17 @@ CREATE TABLE `t_s_user` (
 -- ----------------------------
 -- Records of t_s_user
 -- ----------------------------
-INSERT INTO `t_s_user` VALUES ('402881bf5fe2da62015fe2db755f0003', '', '', '15193133963@139.com', '15193133963', '09318245666', null, 'zhufeng', '2017-11-28 08:57:52', 'admin', '管理员', '2017-11-22 16:32:34', 'admin', null, null);
+INSERT INTO `t_s_user` VALUES ('402881bf5fe2da62015fe2db755f0003', '', '', '15193133963@139.com', '15193133963', '09318245666', null, 'zhufeng', '2017-11-30 13:26:16', 'admin', '管理员', '2017-11-22 16:32:34', 'admin', null, null);
+INSERT INTO `t_s_user` VALUES ('402881bf600ade6001600b63c329000a', '', '', '', '', '', null, 'schadmin', '2017-11-30 14:14:57', 'schadmin', 'zhufeng', '2017-11-30 13:26:16', 'admin', null, null);
 
 -- ----------------------------
 -- View structure for t_news_type_view
 -- ----------------------------
 DROP VIEW IF EXISTS `t_news_type_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`127.0.0.1` SQL SECURITY DEFINER  VIEW `t_news_type_view` AS select `t_news_type`.`id` AS `id`,`t_news_type`.`name` AS `name` from `t_news_type` where (`t_news_type`.`delete_flag` = 0) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`127.0.0.1` SQL SECURITY DEFINER VIEW `t_news_type_view` AS select `t_news_type`.`id` AS `id`,`t_news_type`.`name` AS `name` from `t_news_type` where (`t_news_type`.`delete_flag` = 0) ;
 
 -- ----------------------------
 -- View structure for t_s_region_view
 -- ----------------------------
 DROP VIEW IF EXISTS `t_s_region_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`127.0.0.1` SQL SECURITY DEFINER  VIEW `t_s_region_view` AS select `t_s_region`.`ID` AS `ID`,`t_s_region`.`NAME` AS `NAME` from `t_s_region` where (`t_s_region`.`PID` = 1) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`127.0.0.1` SQL SECURITY DEFINER VIEW `t_s_region_view` AS select `t_s_region`.`ID` AS `ID`,`t_s_region`.`NAME` AS `NAME` from `t_s_region` where (`t_s_region`.`PID` = 1) ;
