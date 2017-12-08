@@ -3,6 +3,7 @@ package org.jeecgframework.web.system.controller.core;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,6 +36,7 @@ import org.jeecgframework.core.util.SysThemesUtil;
 import org.jeecgframework.core.util.oConvertUtils;
 import org.jeecgframework.tag.core.easyui.TagUtil;
 import org.jeecgframework.web.system.manager.ClientManager;
+import org.jeecgframework.web.system.pojo.base.Client;
 import org.jeecgframework.web.system.pojo.base.TSFunction;
 import org.jeecgframework.web.system.pojo.base.TSRole;
 import org.jeecgframework.web.system.pojo.base.TSRoleFunction;
@@ -995,6 +997,14 @@ public class UserController extends BaseController {
 			try {
 				MyBeanUtils.copyBeanNotNull2Bean(user, t);
 				systemService.saveOrUpdate(t);
+				request.getSession().setAttribute(ResourceUtil.LOCAL_CLINET_USER, t);
+				
+				Client client = new Client();
+		        client.setIp(IpUtil.getIpAddr(request));
+		        client.setLogindatetime(new Date());
+		        client.setUser(t);
+		        ClientManager.getInstance().addClinet(request.getSession().getId(), client);
+				
 				systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
 			} catch (Exception e) {
 				e.printStackTrace();

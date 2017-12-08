@@ -81,7 +81,7 @@
             </td>
 		</tr>
 		<tr>
-			<td align="right" width="10%" nowrap><label class="Validform_label"> <t:mutiLang langKey="common.real.name"/>: s</label></td>
+			<td align="right" width="10%" nowrap><label class="Validform_label"> <t:mutiLang langKey="common.real.name"/>: </label></td>
 			<td class="value" width="10%">
                 <input id="realName" class="inputxt" name="realName" value="${user.realName }" datatype="s2-10">
                 <span class="Validform_checktip"><t:mutiLang langKey="fill.realname"/></span>
@@ -97,7 +97,7 @@
 		<tr>
 			<td align="right"><label class="Validform_label"> <t:mutiLang langKey="common.tel"/>: </label></td>
 			<td class="value">
-                <input class="inputxt" name="officePhone" value="${user.officePhone}" datatype="s2-20" errormsg="办公室电话不正确" ignore="ignore">
+                <input class="inputxt" name="officePhone" value="${user.officePhone}" datatype="*" errormsg="办公室电话不正确" ignore="ignore">
                 <span class="Validform_checktip"></span>
             </td>
 		</tr>
